@@ -1,4 +1,1 @@
-import * as BillsnapButtons from './button.jsx';
-
-console.log(BillsnapButtons);
-export BillsnapButtons;
+export * from './button.jsx';
