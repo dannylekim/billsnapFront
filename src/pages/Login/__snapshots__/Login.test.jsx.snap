@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginPage render should match snap shot 1`] = `
+<div
+  className="page__login"
+>
+  <div
+    className="login__container"
+  >
+    <p>
+      Maybe something should go here...
+    </p>
+    <button
+      className="billsnap__generic-btn"
+      onClick={[Function]}
+    >
+      Login button
+    </button>
+  </div>
+</div>
+`;
