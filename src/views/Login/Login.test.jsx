@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginPage from './Login.jsx';
+import LoginPage from './index.js';
 
 describe('LoginPage', () => {
   let wrapper;
@@ -17,14 +17,15 @@ describe('LoginPage', () => {
 
   describe('render', () => {
     it('should match snap shot', () => {
-      matches(<LoginPage />);
+      // matches(<LoginPage />);
+      expect(wrapper).toMatchSnapshot()
     });
   });
 
   describe('functions', () => {
     it('should call handler function when GenericButton is click', () => {
-      console.log(wrapper.instance());
-      wrapper.find('button.billsnap__generic-btn').simulate('click');
+      console.log(wrapper.html());
+      wrapper.find('.billsnap__generic-btn').simulate('click');
       jest.spyOn(wrapper.instance().handleButtonClick).mockImplementation(handleMockFunction);
       expect(handleMockFunction).toHaveBeenCalled();
     });
