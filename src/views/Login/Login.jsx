@@ -7,7 +7,7 @@ import './styles.scss';
 /**
  * @description container component that should be in the middle of the login page
  */
-const LoginContainer = (props) => {
+export const LoginContainer = (props) => {
 
   /**
    * @description handler for button in login container

@@ -1,0 +1,17 @@
+node_js: 'stable'
+install:
+- yarn
+cache:
+  yarn: true
+  directories:
+  - node_modules
+
+matrix:
+  include:
+  - name: 'JavaScript Unit Tests'
+    script: 
+    - yarn run test
+    - codecov
+
+  - name: 'JavaScript Build'
+    script: yarn run build
