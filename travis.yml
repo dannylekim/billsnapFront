@@ -9,7 +9,9 @@ cache:
 matrix:
   include:
   - name: 'JavaScript Unit Tests'
-    script: yarn test
+    script: 
+    - yarn run test
+    - codecov
 
   - name: 'JavaScript Build'
     script: yarn run build
