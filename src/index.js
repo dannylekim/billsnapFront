@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './views/App/App';
 import * as serviceWorker from './serviceWorker';
+import * as Sentry from "@sentry/browser";
+
+//by default, Sentry uses a null DSN, a no-op connection is used and won't attempt to connect or anything, effectively disabling it.
+if(process.env.SENTRY_DSN){
+    Sentry.init({dsn: process.env.SENTRY_DSN});
+}
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
