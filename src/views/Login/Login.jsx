@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import PropType from 'prop-types';
 import { GenericButton } from '../../components/button';
 
