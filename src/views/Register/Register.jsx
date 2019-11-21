@@ -1,17 +1,17 @@
 import React from 'react';
 import PropType from 'prop-types';
-import { GenericButton } from '../../components/button';
+import { Button } from "shards-react";
 
 import './styles.scss';
 
 /**
  * @description container component that should be in the middle of the login page
  */
-export const LoginContainer = ({ handleButtonClick }) => {
+export const RegisterContainer = ({ handleButtonClick }) => {
   return (
-    <div className="login__container">
+    <div className="register__container">
       <p>Maybe something should go here...</p>
-      <GenericButton title="Login button" onClick={handleButtonClick}/>
+      <Button onClick={handleButtonClick}>Register button</Button>
     </div>
   )
 }
@@ -26,12 +26,12 @@ export default (props) => {
   }
 
   return (
-    <div className="page__login">
-      <LoginContainer handleButtonClick={handleButtonClick}/>
+    <div className="page__register">
+      <RegisterContainer handleButtonClick={handleButtonClick}/>
     </div>
   );
 }
 
-LoginContainer.propTypes = {
+RegisterContainer.propTypes = {
   handleButtonClick: PropType.func.isRequired
 };
