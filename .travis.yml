@@ -1,6 +1,8 @@
 node_js: 'stable'
+before_script:
+  - npm install -g codecov
 install:
-- yarn
+  - yarn
 cache:
   yarn: true
   directories:
