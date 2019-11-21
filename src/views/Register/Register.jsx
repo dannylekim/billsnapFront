@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import PropType from 'prop-types';
-import { GenericButton } from '../../components/button';
+import { Button } from "shards-react";
 
 import './styles.scss';
 
@@ -11,7 +11,7 @@ export const RegisterContainer = ({ handleButtonClick }) => {
   return (
     <div className="register__container">
       <p>Maybe something should go here...</p>
-      <GenericButton title="Register button" onClick={handleButtonClick}/>
+      <Button onClick={handleButtonClick}>Register button</Button>
     </div>
   )
 }

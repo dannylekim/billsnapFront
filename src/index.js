@@ -5,6 +5,9 @@ import App from './views/App';
 import * as serviceWorker from './serviceWorker';
 import * as Sentry from "@sentry/browser";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "shards-ui/dist/css/shards.min.css"
+
 //by default, Sentry uses a null DSN, a no-op connection is used and won't attempt to connect or anything, effectively disabling it.
 if(process.env.SENTRY_DSN){
     Sentry.init({dsn: process.env.SENTRY_DSN});
