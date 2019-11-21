@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './views/App/App';
+import App from './views/App';
 import * as serviceWorker from './serviceWorker';
 import * as Sentry from "@sentry/browser";
 
