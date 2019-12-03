@@ -2,6 +2,8 @@ import React from 'react';
 import PropType from 'prop-types';
 import { Button } from "shards-react";
 
+import TitleLogo from "../../components/TitleLogo";
+
 import './styles.scss';
 
 /**
@@ -14,7 +16,7 @@ export const RegisterContainer = ({ handleButtonClick }) => {
       <Button onClick={handleButtonClick}>Register button</Button>
     </div>
   )
-}
+};
 
 export default (props) => {
 
@@ -23,10 +25,11 @@ export default (props) => {
    */
   const handleButtonClick = () => {
     console.log('nice')
-  }
+  };
 
   return (
     <div className="page__register">
+        <div><TitleLogo/></div>
       <RegisterContainer handleButtonClick={handleButtonClick}/>
     </div>
   );
