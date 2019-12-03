@@ -17,7 +17,7 @@ export default (props) => {
       <header className="App-header">
         {appName}
       </header>
-      <RegisterPage />
+        <div className="App__container"><RegisterPage /></div>
     </div>
   );
 }
