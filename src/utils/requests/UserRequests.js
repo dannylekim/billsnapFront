@@ -11,13 +11,12 @@ export const login = async (credentials) => {
         let x = await fetch(URL + "/login", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin":  "*",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(credentials),
-        })
+        });
         checkStatus(x);
-        return response.json();
+        return x.json();
     }
     catch(e){
         return e;
@@ -34,28 +33,26 @@ export const login = async (credentials) => {
  */
 export const register = async (entries) => {
     try { 
-        let x = await fetch(URL + "/register", {
+        const responsePromise = await fetch(URL + "/register", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin":  "*",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(entries),
-        })
-        checkStatus(x);
-        return response.json();
+        });
+        await checkStatus(responsePromise);
+        return await responsePromise.json();
     }
     catch(e){
+        console.error(e);
         return e;
     }
 };
 
-function checkStatus(response) {
+async function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return response;
     } else {
-        let error = new Error(response.statusText);
-        error.response = response;
-        throw error;
+        throw await response.json(); //TODO on how you want to format it
     }
 }
