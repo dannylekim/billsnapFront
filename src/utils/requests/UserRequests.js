@@ -1,4 +1,4 @@
-const { URL } = require("../../../config")
+const { URL } = require("../../config")
 
 /**
  * @function logUser
@@ -14,9 +14,9 @@ export const login = async (credentials) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(credentials),
-        })
+        });
         checkStatus(x);
-        parseJSON(x);
+        return x.json();
     }
     catch(e){
         return e;
@@ -33,31 +33,26 @@ export const login = async (credentials) => {
  */
 export const register = async (entries) => {
     try { 
-        let x = await fetch(URL + "/register", {
+        const responsePromise = await fetch(URL + "/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(entries),
-        })
-        checkStatus(x);
-        parseJSON(x);
+        });
+        await checkStatus(responsePromise);
+        return await responsePromise.json();
     }
     catch(e){
+        console.error(e);
         return e;
     }
 };
 
-function checkStatus(response) {
+async function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return response;
     } else {
-        let error = new Error(response.statusText);
-        error.response = response;
-        throw error;
+        throw await response.json(response.message);
     }
-}
-
-function parseJSON(response) {
-    return response.json();
 }
