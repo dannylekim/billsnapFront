@@ -53,6 +53,6 @@ async function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
         return response;
     } else {
-        throw await response.json(); //TODO on how you want to format it
+        throw await response.json(response.message);
     }
 }
