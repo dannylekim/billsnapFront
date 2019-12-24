@@ -8,17 +8,17 @@ const { URL } = require("../../config")
  */
 export const login = async (credentials) => {
     try { 
-        let x = await fetch(URL + "/login", {
+        let response = await fetch(URL + "/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(credentials),
         });
-        checkStatus(x);
-        return x.json();
-    }
-    catch(e){
+        console.log("RESPONSE", response)
+        checkStatus(response);
+        return response;
+    } catch(e){
         return e;
     }
 };
@@ -33,26 +33,26 @@ export const login = async (credentials) => {
  */
 export const register = async (entries) => {
     try { 
-        const responsePromise = await fetch(URL + "/register", {
+        const response = await fetch(URL + "/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(entries),
         });
-        await checkStatus(responsePromise);
-        return await responsePromise.json();
-    }
-    catch(e){
-        console.error(e);
+
+        checkStatus(response);
+        return response;
+
+    } catch(e){
+        console.log("error", e)
         return e;
     }
 };
 
-async function checkStatus(response) {
-    if (response.status >= 200 && response.status < 300) {
-        return response;
-    } else {
-        throw await response.json(response.message);
+function checkStatus(response) {
+    if (response.status < 200 || response.status >= 300) {
+        console.log("@@check status", response._bodyInit);
+        throw new Error(JSON.parse(response._bodyInit).message);
     }
 }

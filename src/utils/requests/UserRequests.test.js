@@ -31,8 +31,17 @@ sinonStubPromise(sinon)
 fdescribe("UserRequests", () => {
     describe("login", () => {
 
+        let mockObj;
+
+        beforeEach(() => {
+            mockObj = sinon.stub(window, "fetch");
+        });
+
+        afterEach(() => {
+            mockObj.restore();
+        });
+
         it("Should login successfully", async () => {
-            sinon.stub(window, "fetch")
             window.fetch.returns(mockApiResponse(goodLoginResponse));
             let res = await register(loginInput);
             
@@ -40,20 +49,21 @@ fdescribe("UserRequests", () => {
         });
 
         it("Should return error from unsuccesful post", async () => {
-            sinon.stub(window, "fetch")
             window.fetch.returns(mockApiResponse(badLoginResponse));
 
-            let res = await register(loginInput);
+            let res = await login(loginInput);
             
-            assert.equal(res.status, 400);
+            assert.equal(res instanceof Error, true);
+            assert.equal(res.message, badLoginResponse.message);
         });
 
     });
 });
 
-function mockApiResponse(status, body) {
-    return new window.Response(JSON.stringify(body), {
-       status: status,
-       headers: { "Content-type": "application/json" }
+function mockApiResponse(response) {
+    return new window.Response(JSON.stringify(response), {
+       status: response.status,
+       headers: { "Content-type": "application/json" },
+       body: response.body,
     });
 }
