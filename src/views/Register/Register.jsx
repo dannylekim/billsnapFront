@@ -1,7 +1,6 @@
 import React from 'react';
 import PropType from 'prop-types';
 import { Button } from "shards-react";
-import {register} from "../../utils/requests/UserRequests"
 
 import './styles.scss';
 
@@ -23,7 +22,7 @@ export default (props) => {
    * @description handler for button in login container
    */
   const handleButtonClick = async () => {
-    await register({email: "testtesttest@email.com", password: "Password123.", firstName: "test", lastName: "test"});
+    console.log('nice')
   };
 
   return (
