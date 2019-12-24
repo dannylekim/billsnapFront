@@ -3,17 +3,23 @@ import sinonStubPromise from "sinon-stub-promise";
 import sinon from "sinon"
 import assert from "assert";
 
-// import "whatwg-fetch"
 const loginInput = {
     "email":"test@email.com",
     "password":"password",
 };
 
-const goodLoginResponse = {
+const registerInput = {
+    "email":"test@email.com",
+    "password":"password",
+    "firstName":"test",
+    "lastName":"test",
+}
+
+const goodResponse = {
     "status": 200,
 }
 
-const badLoginResponse = {
+const badResponse = {
     "status": 400,
     "timestamp": "a date",
     "message": "error message from server",
@@ -28,7 +34,7 @@ const badLoginResponse = {
 
 sinonStubPromise(sinon)
 
-fdescribe("UserRequests", () => {
+describe("UserRequests", () => {
     describe("login", () => {
 
         let mockObj;
@@ -42,19 +48,49 @@ fdescribe("UserRequests", () => {
         });
 
         it("Should login successfully", async () => {
-            window.fetch.returns(mockApiResponse(goodLoginResponse));
+            window.fetch.returns(mockApiResponse(goodResponse));
             let res = await register(loginInput);
             
-            assert.equal(res.status, 200);
+            assert.equal(res.status, goodResponse.status);
         });
 
-        it("Should return error from unsuccesful post", async () => {
-            window.fetch.returns(mockApiResponse(badLoginResponse));
+        it("Should return error from unsuccesful post when logging", async () => {
+            window.fetch.returns(mockApiResponse(badResponse));
 
             let res = await login(loginInput);
             
             assert.equal(res instanceof Error, true);
-            assert.equal(res.message, badLoginResponse.message);
+            assert.equal(res.message, badResponse.message);
+        });
+
+    });
+
+    describe("register", () => {
+
+        let mockObj;
+
+        beforeEach(() => {
+            mockObj = sinon.stub(window, "fetch");
+        });
+
+        afterEach(() => {
+            mockObj.restore();
+        });
+
+        it("Should register successfully", async () => {
+            window.fetch.returns(mockApiResponse(goodResponse));
+            let res = await register(registerInput);
+            
+            assert.equal(res.status, goodResponse.status);
+        });
+
+        it("Should return error from unsuccesful post when registering", async () => {
+            window.fetch.returns(mockApiResponse(badResponse));
+
+            let res = await register(registerInput);
+            
+            assert.equal(res instanceof Error, true);
+            assert.equal(res.message, badResponse.message);
         });
 
     });

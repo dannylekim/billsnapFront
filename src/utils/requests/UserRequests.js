@@ -15,11 +15,11 @@ export const login = async (credentials) => {
             },
             body: JSON.stringify(credentials),
         });
-        console.log("RESPONSE", response)
-        checkStatus(response);
-        return response;
-    } catch(e){
-        return e;
+
+        return await checkStatus(response);
+
+    } catch(error){
+        return error;
     }
 };
 
@@ -41,18 +41,19 @@ export const register = async (entries) => {
             body: JSON.stringify(entries),
         });
 
-        checkStatus(response);
-        return response;
+        return await checkStatus(response);
 
-    } catch(e){
-        console.log("error", e)
-        return e;
+    } catch(error){
+        return error;
     }
 };
 
-function checkStatus(response) {
+async function checkStatus(response) {
+    let parsedResponse = await response.json();
+
     if (response.status < 200 || response.status >= 300) {
-        console.log("@@check status", response._bodyInit);
-        throw new Error(JSON.parse(response._bodyInit).message);
+        throw new Error(parsedResponse.message);
     }
+
+    return parsedResponse;
 }
