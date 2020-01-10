@@ -49,18 +49,15 @@ describe("UserRequests", () => {
 
         it("Should login successfully", async () => {
             window.fetch.returns(mockApiResponse(goodResponse));
-            let res = await register(loginInput);
+            const res = await register(loginInput);
             
             assert.equal(res.status, goodResponse.status);
         });
 
-        it("Should return error from unsuccesful post when logging", async () => {
+        it("Should throw error from unsuccesful post when logging", async () => {
             window.fetch.returns(mockApiResponse(badResponse));
 
-            let res = await login(loginInput);
-            
-            assert.equal(res instanceof Error, true);
-            assert.equal(res.message, badResponse.message);
+            assert.rejects(async () => await login(loginInput), Error);
         });
 
     });
@@ -79,18 +76,15 @@ describe("UserRequests", () => {
 
         it("Should register successfully", async () => {
             window.fetch.returns(mockApiResponse(goodResponse));
-            let res = await register(registerInput);
+            const res = await register(registerInput);
             
             assert.equal(res.status, goodResponse.status);
         });
 
-        it("Should return error from unsuccesful post when registering", async () => {
+        it("Should throw error from unsuccesful post when registering", async () => {
             window.fetch.returns(mockApiResponse(badResponse));
 
-            let res = await register(registerInput);
-            
-            assert.equal(res instanceof Error, true);
-            assert.equal(res.message, badResponse.message);
+            assert.rejects(async () => await register(registerInput), Error);
         });
 
     });

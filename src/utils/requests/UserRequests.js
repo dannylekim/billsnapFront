@@ -7,20 +7,16 @@ const { URL } = require("../../config")
  * @param {String} credentials.password // no need to encrypt yet
  */
 export const login = async (credentials) => {
-    try { 
-        let response = await fetch(URL + "/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(credentials),
-        });
 
-        return await checkStatus(response);
+    const response = await fetch(URL + "/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(credentials),
+    });
 
-    } catch(error){
-        return error;
-    }
+    return await checkStatus(response);
 };
 
 /**
@@ -32,24 +28,20 @@ export const login = async (credentials) => {
  * @param {String} entries.etc... name, age, ...rest
  */
 export const register = async (entries) => {
-    try { 
-        const response = await fetch(URL + "/register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(entries),
-        });
 
-        return await checkStatus(response);
+    const response = await fetch(URL + "/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(entries),
+    });
 
-    } catch(error){
-        return error;
-    }
+    return await checkStatus(response);
 };
 
 async function checkStatus(response) {
-    let parsedResponse = await response.json();
+    const parsedResponse = await response.json();
 
     if (response.status < 200 || response.status >= 300) {
         throw new Error(parsedResponse.message);
