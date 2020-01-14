@@ -5,6 +5,7 @@ import React from 'react';
  */
 // import LoginPage from '../Login/Login';
 import RegisterPage from '../Register/Register';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
 import './styles.scss';
@@ -17,7 +18,13 @@ export default (props) => {
       <header className="App-header">
         {appName}
       </header>
-      <RegisterPage />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" exact component={RegisterPage}/>
+          <Route path="/dashboard" exact/>
+          <Route path="/" render={() => <div>404</div> }/>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
