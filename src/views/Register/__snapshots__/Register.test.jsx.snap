@@ -30,19 +30,24 @@ exports[`RegisterPage render snapshots 📸 RegisterPage should match snap shot 
         <div
           className="title__title"
         >
-          Billsnap
+          <h1>
+            Billsnap
+          </h1>
         </div>
         <div
           className="title__logo"
         >
-          Image
+          <img
+            alt="Logo"
+            src="http://via.placeholder.com/150x100.png?text=150x100+Logo"
+          />
         </div>
       </div>
       <div
         className="title__row title__text"
       >
         <p>
-          Placeholder paragraph text Placeholder paragraph text Placeholder paragraph text
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque dignissimos eos error quo, repellendus repudiandae sunt. Amet asperiores atque commodi, deleniti dicta expedita ipsa modi nemo, quos rem voluptate voluptates.
         </p>
       </div>
     </div>
