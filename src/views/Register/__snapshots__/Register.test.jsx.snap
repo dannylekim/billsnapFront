@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegisterContainer render snapshots 📸 RegisterContainer should match snap shot 1`] = `
+<div
+  className="register__container"
+>
+  <p>
+    Maybe something should go here...
+  </p>
+  <button
+    className="btn btn-primary"
+    onClick={[Function]}
+  >
+    Register button
+  </button>
+</div>
+`;
+
+exports[`RegisterPage render snapshots 📸 RegisterPage should match snap shot 1`] = `
+<div
+  className="page__register"
+>
+  <div>
+    <div
+      className="title"
+    >
+      <div
+        className="title__row"
+      >
+        <div
+          className="title__title"
+        >
+          Billsnap
+        </div>
+        <div
+          className="title__logo"
+        >
+          Image
+        </div>
+      </div>
+      <div
+        className="title__row title__text"
+      >
+        <p>
+          Placeholder paragraph text Placeholder paragraph text Placeholder paragraph text
+        </p>
+      </div>
+    </div>
+  </div>
+  <div
+    className="register__container"
+  >
+    <p>
+      Maybe something should go here...
+    </p>
+    <button
+      className="btn btn-primary"
+      onClick={[Function]}
+      type="button"
+    >
+      Register button
+    </button>
+  </div>
+</div>
+`;
