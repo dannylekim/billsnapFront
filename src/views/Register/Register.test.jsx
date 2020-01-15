@@ -20,7 +20,7 @@ describe("RegisterPage", () => {
     });
 
     describe("components", () => {
-      test("RegisterPage should contain RegisterContainer and TitleLogo component", () => {
+      test("RegisterPage should contain RegisterContainer component", () => {
         expect(wrapper.find("RegisterContainer")).toHaveLength(1);
       });
     });
