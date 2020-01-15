@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import RegisterPage, { RegisterContainer } from "./Register.jsx";
-import { TitleLogo } from "../../components/TitleLogo";
+import { shallow } from "enzyme";
 
 describe("RegisterPage", () => {
   let wrapper;
@@ -20,10 +20,8 @@ describe("RegisterPage", () => {
     });
 
     describe("components", () => {
-      // some reason enzyme seems to broken in v3
-      test.skip("RegisterPage should contain RegisterContainer and TitleLogo component", () => {
-        expect(wrapper.find("RegisterContainer")).to.have.lengthOf(1);
-        expect(wrapper.find("TitleLogo").to.have.lengthOf(1));
+      test("RegisterPage should contain RegisterContainer and TitleLogo component", () => {
+        expect(wrapper.find("RegisterContainer")).toHaveLength(1);
       });
     });
   });
