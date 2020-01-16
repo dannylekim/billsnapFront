@@ -20,7 +20,7 @@ export default (props) => {
       </header>
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact component={RegisterPage}/>
+          <div className="App__container"><Route path="/" exact component={RegisterPage}/></div>
           <Route path="/dashboard" exact/>
           <Route path="/" render={() => <div>404</div> }/>
         </Switch>
