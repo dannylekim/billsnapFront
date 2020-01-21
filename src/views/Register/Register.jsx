@@ -22,6 +22,7 @@ export default props => {
   /**
    * @description handler for button in login container
    */
+
   const handleButtonClick = () => {
     console.log("nice");
   };
