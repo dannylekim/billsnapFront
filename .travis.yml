@@ -12,6 +12,7 @@ matrix:
   include:
   - name: 'JavaScript Unit Tests'
     script: 
+    - node -v
     - yarn run test
     - codecov
 
