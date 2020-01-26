@@ -7,7 +7,6 @@ import * as Sentry from "@sentry/browser";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
-//add redux and redux persist
 
 //by default, Sentry uses a null DSN, a no-op connection is used and won't attempt to connect or anything, effectively disabling it.
 if(process.env.SENTRY_DSN){

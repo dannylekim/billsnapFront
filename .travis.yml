@@ -1,6 +1,4 @@
-language: node_js
-node_js:
-  - 12
+node_js: 'stable'
 before_script:
   - npm install -g codecov
 install:
@@ -14,7 +12,6 @@ matrix:
   include:
   - name: 'JavaScript Unit Tests'
     script: 
-    - node -v
     - yarn run test
     - codecov
 

@@ -5,17 +5,12 @@ codecov:
 coverage:
   precision: 2
   round: down
-  range: "50...70"
+  range: "70...100"
 
   status:
     project: yes
     patch: yes
     changes: no
-
-  ignore:
-    - "**/index.js"
-    - "src/setupTest.js"
-    - "src/serviceWorker.js"
 
 parsers:
   gcov:
@@ -24,8 +19,6 @@ parsers:
       loop: yes
       method: no
       macro: no
-  javascript:
-    enable_partials: yes
 
 comment:
   layout: "header, diff"
