@@ -27,29 +27,45 @@ export const RegisterForm = ({handleButtonClick ,onChange}) => {
 };
 
 export default (props) => {
-    const [validPassword, setValidPassword] = useState(true); 
-    const [validPasswordFormat, setValidPasswordFormat] = useState(true);  
+    const [validPassword, setValidPassword] = useState(true); //confirmed password is same
+    const [validPasswordFormat, setValidPasswordFormat] = useState(true);
+    const [validFirstName, setValidFirstName] = useState(true);
+    const [validLastName, setValidLastName] = useState(true);
+    const [validEmail, setValidEmail] = useState(true);  
     const [user_credentials, setUserCredential] = useState({}); 
+
+    const nameRegex = new RegExp(/^[_A-z]*((-|\s)*[_A-z])*$/);
+    const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
     const passwordRegex = new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).*/);
     
     const validatePassword = (password, passwordToConfirm) =>  (password === passwordToConfirm);
     
-    //object that checks for valid inputs 
-
-    const onChange = async event => {
-        //set invalid password format
+    /**
+     * 
+     * Object that returns the proper valid input function. 
+     * 
+     * */
+    const getValidationFunction = (name, value) => {
+        const validation = {
+           "firstName" : setValidFirstName(nameRegex.test(value)),
+           "lastName" : setValidLastName(nameRegex.test(value)),
+           "email" : setValidEmail(emailRegex.test(value)),
+           "password" :    setValidPasswordFormat(passwordRegex.test(value)) 
+        };
+        return validation[name];
+    };
+    
+    const onChange = event => {
+        
         const {name, value} = event.target;
-      
+
             if(name !== "confirm_password"){
-                if(name === "password"){
-                    await setValidPasswordFormat(passwordRegex.test(value)); //
-                    
-                }
-                await setUserCredential({...user_credentials, [name] : value});
+                getValidationFunction(name,value);
+                setUserCredential(previousCredential => ({...previousCredential, [name] : value}));
             }else {
                 const {password} = {...user_credentials};
                 const confirm_password = value;
-                await setValidPassword(await !validatePassword(password, confirm_password) ? false : true);
+                setValidPassword( !validatePassword(password, confirm_password) ? false : true); //if password matchs
             };
 
     };
@@ -57,7 +73,7 @@ export default (props) => {
     const handleButtonClick = (e) => {
         // e.preventDefault()
         //remove confirmPassword
-        alert(validPasswordFormat);
+        alert(validFirstName);
         //Call the API... 
 
         // const email = e.target.email.value;
@@ -70,9 +86,8 @@ export default (props) => {
         // }
     }
   
- 
-
     return (
+        //Clean this up
     <div className="regForm">
       <RegisterForm handleButtonClick={handleButtonClick} onChange={onChange}/>
       {/* find a way to map this!!!!  */}
@@ -80,15 +95,32 @@ export default (props) => {
             <Tooltip
                 open={!validPassword }
                 target="#confirm_password">
-            <span id="input_error"> Password does not match</span>
+                <span id="input_error"> Password does not match</span>
             </Tooltip> ||
-        validPasswordFormat === false && user_credentials.password !== "" && 
+        (validPasswordFormat === false && user_credentials.password && user_credentials.password !== "") && 
             <Tooltip
             open={!validPasswordFormat }
             target="#password">
                 <span id="input_error"> {`Invalid password (Must contain at least 1 upper case, lower case, number and symbol.`}</span>
-         </Tooltip>
-      
+            </Tooltip> ||
+        (validFirstName === false && user_credentials.firstName && user_credentials.firstName !== "") && 
+            <Tooltip
+            open={!validFirstName }
+            target="#firstName">
+                <span id="input_error"> {`Invalid First Name, no numbers.`}</span>
+            </Tooltip> ||
+        (validLastName === false && user_credentials.lastName && user_credentials.lastName !== "") && 
+            <Tooltip
+            open={!validLastName }
+            target="#lastName">
+                <span id="input_error"> {`Invalid Last Name, no numbers.`}</span>
+            </Tooltip> ||
+        (validEmail === false && user_credentials.email && user_credentials.email !== "") && 
+            <Tooltip
+            open={!validEmail }
+            target="#email">
+                <span id="input_error"> {`Invalid Email.`}</span>
+            </Tooltip> 
       }
     </div>
     );
