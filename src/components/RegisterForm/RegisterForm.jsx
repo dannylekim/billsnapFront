@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropType from "prop-types";
 import { Button, Form, FormGroup, FormInput, Tooltip } from "shards-react";
 import {registerFormInputs} from "./registerFormConstants";
+import {register} from "../../utils/requests/UserRequests";
 import "./styles.scss";
 
 export const RegisterForm = ({handleButtonClick ,onChange}) => {
@@ -30,13 +31,14 @@ export default (props) => {
     const [validPassword, setValidPassword] = useState(true); //confirmed password is same
     const [validPasswordFormat, setValidPasswordFormat] = useState(true);
     const [validFirstName, setValidFirstName] = useState(true);
+    const [validMiddleName, setValidMiddleName] = useState(true);
     const [validLastName, setValidLastName] = useState(true);
     const [validEmail, setValidEmail] = useState(true);  
     const [user_credentials, setUserCredential] = useState({}); 
 
     const nameRegex = new RegExp(/^[_A-z]*((-|\s)*[_A-z])*$/);
-    const emailRegex = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
-    const passwordRegex = new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).*/);
+    const emailRegex = new RegExp(/[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/);
+    const passwordRegex = new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).*/); //8 and 20 characters!!! 
     
     const validatePassword = (password, passwordToConfirm) =>  (password === passwordToConfirm);
     
@@ -46,82 +48,97 @@ export default (props) => {
      * 
      * */
     const getValidationFunction = (name, value) => {
-        const validation = {
-           "firstName" : setValidFirstName(nameRegex.test(value)),
-           "lastName" : setValidLastName(nameRegex.test(value)),
-           "email" : setValidEmail(emailRegex.test(value)),
-           "password" :    setValidPasswordFormat(passwordRegex.test(value)) 
-        };
-        return validation[name];
+        let validationMap = new Map();
+        (name === "firstName") && validationMap.set("firstName",setValidFirstName(nameRegex.test(value)));
+        (name === "lastName") && validationMap.set("lastName",setValidLastName(nameRegex.test(value)));
+        (name === "email") && validationMap.set("email",setValidEmail(emailRegex.test(value)));
+        (name === "password") && validationMap.set("password",setValidPasswordFormat(passwordRegex.test(value)));
+
+        return validationMap.get([name]);
     };
     
     const onChange = event => {
-        
         const {name, value} = event.target;
 
             if(name !== "confirm_password"){
                 getValidationFunction(name,value);
-                setUserCredential(previousCredential => ({...previousCredential, [name] : value}));
+                setUserCredential({...user_credentials, [name] : value});
             }else {
                 const {password} = {...user_credentials};
                 const confirm_password = value;
                 setValidPassword( !validatePassword(password, confirm_password) ? false : true); //if password matchs
             };
-
     };
 
-    const handleButtonClick = (e) => {
-        // e.preventDefault()
-        //remove confirmPassword
-        alert(validFirstName);
-        //Call the API... 
+    const checkValidity = (boolean_value, checkState, name) =>  (checkState === boolean_value && user_credentials[[name]] && user_credentials[[name]] !== "");
 
-        // const email = e.target.email.value;
-        // const password = e.target.password.value;
-        // const confirm_password = e.target['confirm_password'].value;
+    const handleButtonClick = (e) => {
+        //if it exists and true
+        ( checkValidity(true,validPassword, "password") && 
+            checkValidity(true,validPasswordFormat, "password") && 
+            checkValidity(true,validFirstName, "firstName") && 
+            checkValidity(true,validLastName, "lastName") && 
+            checkValidity(true,validEmail, "email")
+        ) ?        
+        register(user_credentials).then(response => {
+            alert(JSON.stringify(response))
+        }) :  alert("form not validated")
+
+        //Call the API... 
+    };
   
-        // if(!validatePassword(password,confirm_password)) {
-        //     console.log("pass did not match");
-        //     return setValidPassword(false);
-        // }
-    }
-  
+    const conditions = [
+        {
+            condition : (checkValidity(false,validPassword, "password")),
+            tool_tip_info : {
+                open : !validPassword,
+                id: "#confirm_password",
+                error_message: "Password does not match"
+            }
+        },{
+            condition : (checkValidity(false,validPasswordFormat, "password")),
+            tool_tip_info : {
+                open : !validPasswordFormat,
+                id: "#password",
+                error_message: "Invalid password (Must contain at least 1 upper case, lower case, number and symbol, and be between 8-20 characters."
+            }
+        },{
+            condition : (checkValidity(false,validFirstName, "firstName")),
+            tool_tip_info : {
+                open : !validFirstName,
+                id: "#firstName",
+                error_message: "Invalid First Name, no numbers."
+            }
+        },{
+            condition : (checkValidity(false,validLastName, "lastName")),
+            tool_tip_info : {
+                open : !validLastName,
+                id: "#lastName",
+                error_message: "Invalid Last Name, no numbers."
+            }
+        },{
+            condition : (checkValidity(false,validEmail, "email")),
+            tool_tip_info : {
+                open : !validEmail,
+                id: "#email",
+                error_message: "Invalid Email Format."
+            }
+        }
+    ];
+
     return (
         //Clean this up
     <div className="regForm">
       <RegisterForm handleButtonClick={handleButtonClick} onChange={onChange}/>
-      {/* find a way to map this!!!!  */}
-      { (validPassword === false && user_credentials.password !== "") && 
+        { conditions.map(condition => 
+            condition.condition && 
             <Tooltip
-                open={!validPassword }
-                target="#confirm_password">
-                <span id="input_error"> Password does not match</span>
-            </Tooltip> ||
-        (validPasswordFormat === false && user_credentials.password && user_credentials.password !== "") && 
-            <Tooltip
-            open={!validPasswordFormat }
-            target="#password">
-                <span id="input_error"> {`Invalid password (Must contain at least 1 upper case, lower case, number and symbol.`}</span>
-            </Tooltip> ||
-        (validFirstName === false && user_credentials.firstName && user_credentials.firstName !== "") && 
-            <Tooltip
-            open={!validFirstName }
-            target="#firstName">
-                <span id="input_error"> {`Invalid First Name, no numbers.`}</span>
-            </Tooltip> ||
-        (validLastName === false && user_credentials.lastName && user_credentials.lastName !== "") && 
-            <Tooltip
-            open={!validLastName }
-            target="#lastName">
-                <span id="input_error"> {`Invalid Last Name, no numbers.`}</span>
-            </Tooltip> ||
-        (validEmail === false && user_credentials.email && user_credentials.email !== "") && 
-            <Tooltip
-            open={!validEmail }
-            target="#email">
-                <span id="input_error"> {`Invalid Email.`}</span>
-            </Tooltip> 
-      }
+                key={condition.tool_tip_info.id}
+                open={condition.tool_tip_info.open}
+                target={condition.tool_tip_info.id}>
+                <span id="input_error">{condition.tool_tip_info.error_message}</span>
+            </Tooltip> || null
+        )}
     </div>
     );
 };

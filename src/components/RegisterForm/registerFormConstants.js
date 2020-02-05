@@ -7,6 +7,11 @@ export const registerFormInputs = [
     type: "text"
 },
 {
+    placeholder: "Enter your middle name", //should allow null
+    name: "middleName",
+    type: "text"
+},
+{
     placeholder: "Enter your last name",
     name: "lastName",
     type: "text"
@@ -27,3 +32,7 @@ export const registerFormInputs = [
     ...type_password
 }
 ];
+
+/**
+ * Missing middleName, gender (checkbox or select), phoneNumber, birthDate and location (by country?)
+ */
