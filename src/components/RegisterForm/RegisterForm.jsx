@@ -1,29 +1,22 @@
 import React, { useState } from "react";
 import PropType from "prop-types";
-import { Button, Form, FormGroup, FormInput, Tooltip } from "shards-react";
+import {Tooltip } from "shards-react";
 import {registerFormInputs} from "./registerFormConstants";
+import LoginRegisterForm from "../forms/LoginRegisterForm";
 import {register} from "../../utils/requests/UserRequests";
 import "./styles.scss";
 
 export const RegisterForm = ({handleButtonClick ,onChange}) => {
+    const formProps = {
+        type: "register",
+        form_className : "register__form",
+        constants : registerFormInputs,
+        handleButtonClick,
+        onChange,
+        buttonValue: "Submit"
+    };
     return (
-        <div className="register__form">
-            <Form onSubmit={ handleButtonClick }>
-                <div className="form-inputs">
-
-                    {registerFormInputs.map((inputs , key) => (
-                        <FormGroup key={key} onChange={onChange}>
-                            <FormInput type={inputs.type} name={inputs.name} id={inputs.name} placeholder ={inputs.placeholder} />
-                        </FormGroup>
-                    ))}
-                </div>
-                    <FormGroup>
-                        <Button onClick= {handleButtonClick}  name="submit">Submit </Button> 
-                        {/* type='submit' */}
-                    </FormGroup>
-                </Form>
-              
-        </div>
+        <LoginRegisterForm formProps = {formProps}/>
     );
 };
 
