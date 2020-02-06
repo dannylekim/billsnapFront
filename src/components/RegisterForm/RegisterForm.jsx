@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import PropType from "prop-types";
 import {Tooltip } from "shards-react";
-import {registerFormInputs} from "./registerFormConstants";
+import {registerFormInputs,genderSelection} from "./registerFormConstants";
 import LoginRegisterForm from "../forms/LoginRegisterForm";
 import {register} from "../../utils/requests/UserRequests";
 import "./styles.scss";
 
-export const RegisterForm = ({handleButtonClick ,onChange}) => {
+export const RegisterForm = ({handleButtonClick ,onChange,validInputs,user_credentials}) => {
     const formProps = {
         type: "register",
         form_className : "register__form",
         constants : registerFormInputs,
+        genderSelection,
         handleButtonClick,
         onChange,
-        buttonValue: "Submit"
+        validInputs,
+        buttonValue: "Submit",
+        user_credentials
     };
     return (
         <LoginRegisterForm formProps = {formProps}/>
@@ -21,17 +24,37 @@ export const RegisterForm = ({handleButtonClick ,onChange}) => {
 };
 
 export default (props) => {
-    const [validPassword, setValidPassword] = useState(true); //confirmed password is same
-    const [validPasswordFormat, setValidPasswordFormat] = useState(true);
+    //can map this!!! 
     const [validFirstName, setValidFirstName] = useState(true);
     const [validMiddleName, setValidMiddleName] = useState(true);
     const [validLastName, setValidLastName] = useState(true);
+    const [validDOB, setValidDOB] = useState(true); 
+    const [validPhone, setValidPhone] = useState(true);  
     const [validEmail, setValidEmail] = useState(true);  
+    const [validPasswordFormat, setValidPasswordFormat] = useState(true);
+    const [validPassword, setValidPassword] = useState(true); //confirmed password is same
+    
     const [user_credentials, setUserCredential] = useState({}); 
+    const [validLocation, setValidLocation] = useState(true); 
+
+   
+    const validInputs = {
+            "firstName"        : validFirstName, 
+            "middleName"       : validMiddleName, 
+            "lastName"         : validLastName,
+            "birthDate"        : validDOB,
+            //gender
+            "email"            : validEmail,
+            "phoneNumber"      : validPhone,
+            "password"         : validPasswordFormat,
+            "confirm_password" : validPassword,
+            "location"         : validLocation
+    };
 
     const nameRegex = new RegExp(/^[_A-z]*((-|\s)*[_A-z])*$/);
+    const phoneRegex = RegExp(/^[(]?[0-9]{3}[)]?[-\s]?[0-9]{3}[-\s']?[0-9]{4}$/);
     const emailRegex = new RegExp(/[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/);
-    const passwordRegex = new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).*/); //8 and 20 characters!!! 
+    const passwordRegex = new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).{8,20}/); 
     
     const validatePassword = (password, passwordToConfirm) =>  (password === passwordToConfirm);
     
@@ -43,9 +66,12 @@ export default (props) => {
     const getValidationFunction = (name, value) => {
         let validationMap = new Map();
         (name === "firstName") && validationMap.set("firstName",setValidFirstName(nameRegex.test(value)));
+        (name === "middleName") && validationMap.set("middleName",setValidMiddleName(nameRegex.test(value)));
         (name === "lastName") && validationMap.set("lastName",setValidLastName(nameRegex.test(value)));
+        (name === "phoneNumber") && validationMap.set("phoneNumber",setValidPhone(phoneRegex.test(value)));
         (name === "email") && validationMap.set("email",setValidEmail(emailRegex.test(value)));
         (name === "password") && validationMap.set("password",setValidPasswordFormat(passwordRegex.test(value)));
+        (name === "location") && validationMap.set("location",setValidLocation(nameRegex.test(value)));
 
         return validationMap.get([name]);
     };
@@ -122,7 +148,7 @@ export default (props) => {
     return (
         //Clean this up
     <div className="regForm">
-      <RegisterForm handleButtonClick={handleButtonClick} onChange={onChange}/>
+      <RegisterForm handleButtonClick={handleButtonClick} onChange={onChange} validInputs={validInputs} user_credentials = {user_credentials}/>
         { conditions.map(condition => 
             condition.condition && 
             <Tooltip
