@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropType from "prop-types";
 import {Tooltip } from "shards-react";
 import {registerFormInputs} from "./registerFormConstants";
-import LoginRegisterForm from "../forms/LoginRegisterForm";
+import LoginRegisterForm from "../LoginRegisterForm/LoginRegisterForm";
 import {register} from "../../utils/requests/UserRequests";
 import "./styles.scss";
 
