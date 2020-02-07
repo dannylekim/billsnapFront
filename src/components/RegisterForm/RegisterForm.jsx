@@ -23,6 +23,7 @@ export const RegisterForm = ({handleButtonClick ,onChange,validInputs,user_crede
 };
 
 export default (props) => {
+    //validInputs
     const [validFirstName, setValidFirstName] = useState(true);
     const [validMiddleName, setValidMiddleName] = useState(true);
     const [validLastName, setValidLastName] = useState(true);
@@ -95,7 +96,8 @@ export default (props) => {
             checkValidity(true,validPasswordFormat, "password") && 
             checkValidity(true,validFirstName, "firstName") && 
             checkValidity(true,validLastName, "lastName") && 
-            checkValidity(true,validEmail, "email")
+            checkValidity(true,validEmail, "email") &&
+            checkValidity(true,validPhone, "phoneNumber")
         ) ?        
         register(user_credentials).then(response => {
             alert(JSON.stringify(response))
