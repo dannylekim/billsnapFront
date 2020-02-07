@@ -49,7 +49,7 @@ export default (props) => {
 
     const nameRegex = new RegExp(/^[_A-z]*((-|\s)*[_A-z])*$/);
     const phoneRegex = RegExp(/^[(]?[0-9]{3}[)]?[-\s]?[0-9]{3}[-\s']?[0-9]{4}$/);
-    const emailRegex = new RegExp(/[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/);
+    const emailRegex = new RegExp(/[\w-.]+@([\w-]+.)+[\w-]{2,4}/);
     const passwordRegex = new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).{8,20}/); 
     
     const validatePassword = (password, passwordToConfirm) =>  (password === passwordToConfirm);
@@ -177,7 +177,7 @@ export default (props) => {
                 open={condition.tool_tip_info.open}
                 target={condition.tool_tip_info.id}>
                 <span id="input_error">{condition.tool_tip_info.error_message}</span>
-            </Tooltip> || null
+            </Tooltip> 
         )}
     </div>
     );
