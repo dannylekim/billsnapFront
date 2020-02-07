@@ -1,16 +1,5 @@
 const type_password = {type: "password"};
 
-export const genderSelection = [
-    {value      : "default",
-     display    :  "Select your gender"},
-    {value      : "male",
-     display    :  "Male"},
-    {value      : "female",
-     display    :  "Female"},
-    {value      : "notSay",
-     display    :  "Prefer not to say"},
-];
-
 export const registerFormInputs = [
 {
     placeholder: "Enter your first name",
@@ -31,9 +20,6 @@ export const registerFormInputs = [
     placeholder: "Enter your date of birth",
     name: "birthDate",
     type: "date",
-},
-{ //4
-    name: "gender"
 },
 {
     placeholder: "Enter your email",

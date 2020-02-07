@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropType from "prop-types";
 import {Tooltip } from "shards-react";
-import {registerFormInputs,genderSelection} from "./registerFormConstants";
+import {registerFormInputs} from "./registerFormConstants";
 import LoginRegisterForm from "../forms/LoginRegisterForm";
 import {register} from "../../utils/requests/UserRequests";
 import "./styles.scss";
@@ -11,7 +11,6 @@ export const RegisterForm = ({handleButtonClick ,onChange,validInputs,user_crede
         type: "register",
         form_className : "register__form",
         constants : registerFormInputs,
-        genderSelection,
         handleButtonClick,
         onChange,
         validInputs,
@@ -24,26 +23,22 @@ export const RegisterForm = ({handleButtonClick ,onChange,validInputs,user_crede
 };
 
 export default (props) => {
-    //can map this!!! 
     const [validFirstName, setValidFirstName] = useState(true);
     const [validMiddleName, setValidMiddleName] = useState(true);
     const [validLastName, setValidLastName] = useState(true);
-    const [validDOB, setValidDOB] = useState(true); 
+    const [validDOB, setValidDOB] = useState(true); //no future dates
     const [validPhone, setValidPhone] = useState(true);  
     const [validEmail, setValidEmail] = useState(true);  
     const [validPasswordFormat, setValidPasswordFormat] = useState(true);
     const [validPassword, setValidPassword] = useState(true); //confirmed password is same
-    
-    const [user_credentials, setUserCredential] = useState({}); 
     const [validLocation, setValidLocation] = useState(true); 
-
+    const [user_credentials, setUserCredential] = useState({}); 
    
     const validInputs = {
             "firstName"        : validFirstName, 
             "middleName"       : validMiddleName, 
             "lastName"         : validLastName,
             "birthDate"        : validDOB,
-            //gender
             "email"            : validEmail,
             "phoneNumber"      : validPhone,
             "password"         : validPasswordFormat,
@@ -72,13 +67,14 @@ export default (props) => {
         (name === "email") && validationMap.set("email",setValidEmail(emailRegex.test(value)));
         (name === "password") && validationMap.set("password",setValidPasswordFormat(passwordRegex.test(value)));
         (name === "location") && validationMap.set("location",setValidLocation(nameRegex.test(value)));
+        (name === "birthDate") && validationMap.set("birthDate",setValidDOB(new Date(value.split('-')[0], parseInt(value.split('-')[1]) -1 ,value.split('-')[2])  <= new Date()));// "yyyy-mm-dd"
 
         return validationMap.get([name]);
     };
     
     const onChange = event => {
         const {name, value} = event.target;
-
+       
             if(name !== "confirm_password"){
                 getValidationFunction(name,value);
                 setUserCredential({...user_credentials, [name] : value});
@@ -93,7 +89,9 @@ export default (props) => {
 
     const handleButtonClick = (e) => {
         //if it exists and true
-        ( checkValidity(true,validPassword, "password") && 
+        e.preventDefault();
+
+        (   checkValidity(true,validPassword, "password") && 
             checkValidity(true,validPasswordFormat, "password") && 
             checkValidity(true,validFirstName, "firstName") && 
             checkValidity(true,validLastName, "lastName") && 
@@ -126,14 +124,35 @@ export default (props) => {
             tool_tip_info : {
                 open : !validFirstName,
                 id: "#firstName",
-                error_message: "Invalid First Name, no numbers."
+                error_message: "Invalid First Name, no numbers or special characters."
+            }
+        },{
+            condition : (checkValidity(false,validMiddleName, "middleName")),
+            tool_tip_info : {
+                open : !validMiddleName,
+                id: "#middleName",
+                error_message: "Invalid Middle Name, no numbers or special characters."
             }
         },{
             condition : (checkValidity(false,validLastName, "lastName")),
             tool_tip_info : {
                 open : !validLastName,
                 id: "#lastName",
-                error_message: "Invalid Last Name, no numbers."
+                error_message: "Invalid Last Name, no numbers or special characters."
+            }
+        },{
+            condition : (checkValidity(false,validDOB, "birthDate")),
+            tool_tip_info : {
+                open : !validDOB,
+                id: "#birthDate",
+                error_message: "Can't be born in a future date."
+            }
+        },{
+            condition : (checkValidity(false,validPhone, "phoneNumber")),
+            tool_tip_info : {
+                open : !validPhone,
+                id: "#phoneNumber",
+                error_message: "Must be 10 digit numbers (xxx) xxx xxxx (can be seperated by - or space)."
             }
         },{
             condition : (checkValidity(false,validEmail, "email")),
