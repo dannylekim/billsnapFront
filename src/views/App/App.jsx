@@ -5,6 +5,7 @@ import React from 'react';
  */
 // import LoginPage from '../Login/Login';
 import RegisterPage from '../Register/Register';
+import LoginPage from '../Login/Login';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
@@ -16,11 +17,14 @@ export default (props) => {
   return (
     <div className="App">
       <header className="App-header">
-        {appName}
+        <a className="header-name" href= "/">{appName}</a>
       </header>
       <BrowserRouter>
         <Switch>
-          <div className="App__container"><Route path="/" exact component={RegisterPage}/></div>
+          <div className="App__container">
+            <Route path="/" exact component={RegisterPage}/>
+            <Route path="/Login" exact component={LoginPage}/>
+            </div>
           <Route path="/dashboard" exact/>
           <Route path="/" render={() => <div>404</div> }/>
         </Switch>

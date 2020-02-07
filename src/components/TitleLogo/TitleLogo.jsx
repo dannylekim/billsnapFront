@@ -9,7 +9,7 @@ export const TitleLogo = () => {
       </div>
       <div className="title__logo">
         <img
-          src="http://via.placeholder.com/150x100.png?text=150x100+Logo"
+          src="https://via.placeholder.com/150x100.png?text=150x100+Logo"
           alt="Logo"
         />
       </div>
