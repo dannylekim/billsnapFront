@@ -9,15 +9,17 @@ import "./styles.scss";
 /**
  * @description container component that should be in the middle of the login page
  */
-export const RegisterContainer = ({ handleButtonClick }) => {
+export const RegisterLoginContainer = ({ handleButtonClick,formType,setFormType }) => {
   return (
     <div className="register__container">
-       <RegisterForm handleButtonClick = {handleButtonClick} />
+     {formType === "register" ? 
+       <RegisterForm handleButtonClick = {handleButtonClick} setFormType={setFormType} /> :
+       <LoginForm handleButtonClick={handleButtonClick} setFormType={setFormType} />
+      }
     </div>
   );
 };
 
-//need to rename this this to RegisterLogin
 export default props => {
   const [formType, setFormType] =  useState("register");
   /**
@@ -27,33 +29,25 @@ export default props => {
   const handleButtonClick = () => {
     console.log("nice");
   };
-// change the name
   return (
     <div className="page__register"> 
       <div className="title-logo">
         <TitleLogo />
       </div>
       <div className="register__container">
-      {formType === "register" ? 
-      <RegisterContainer handleButtonClick={handleButtonClick} setFormType={setFormType}/> : 
-     
-      <LoginForm handleButtonClick={handleButtonClick} setFormType={(type) => alert(type)} />
-     
-      }
-       <div>
-           <h6> {formType === "login" ? "New to Billsnap? " : "Have an account? "}  
-               <Button className="login-link" onClick={() => setFormType(formType === "login" ? "register" : "login")}>
-                  {formType === "login" ?  "Register an account." : "Login to your account."} </Button>
-                  
-           </h6>
+        <RegisterLoginContainer handleButtonClick={handleButtonClick} formType={formType} setFormType={setFormType}/> 
+        <div>
+            <h6> {formType === "login" ? "New to Billsnap? " : "Have an account? "}  
+                <Button className="login-link" onClick={() => setFormType(formType === "login" ? "register" : "login")}>
+                    {formType === "login" ?  "Register an account." : "Login to your account."} </Button>
+                    
+            </h6>
+        </div>
       </div>
-      </div>
-
-      
     </div>
   );
 };
 
-RegisterContainer.propTypes = {
+RegisterLoginContainer.propTypes = {
   handleButtonClick: PropType.func.isRequired
 };

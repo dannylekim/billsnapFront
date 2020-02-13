@@ -4,8 +4,7 @@ import React from 'react';
  * Load you page components here. We will render them via routes
  */
 // import LoginPage from '../Login/Login';
-import RegisterPage from '../Register/Register';
-import LoginPage from '../Login/Login';
+import LandingPage from '../LandingPage/LandingPage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
@@ -22,8 +21,7 @@ export default (props) => {
       <BrowserRouter>
         <Switch>
           <div className="App__container">
-            <Route path="/" exact component={RegisterPage}/>
-            <Route path="/Login" exact component={LoginPage}/>
+            <Route path="/" exact component={LandingPage}/>
             </div>
           <Route path="/dashboard" exact/>
           <Route path="/" render={() => <div>404</div> }/>

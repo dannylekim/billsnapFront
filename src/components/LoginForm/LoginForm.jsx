@@ -59,7 +59,7 @@ export default (props) => {
    const handleResponse = (response) => {
 
         if(response.status === "BAD_REQUEST"){
-            const errors = response.errors;
+            let errors = response.errors;
             errors.map(error => (
                 setHasErrors({...hasErrors, [error.field]: {...hasErrors[error.field], hasError: true , message: error.message}}) 
             ))
@@ -74,15 +74,19 @@ export default (props) => {
 
     const handleButtonClick = (event) => {
         event.preventDefault();
-        setHasErrors({...defaultErrors});
+        setHasErrors(defaultErrors);
         login(user_credentials).then(response => {
             if(!response.token) { 
                 triggerAlert();
-                alert(JSON.stringify(response))//set error message 
+                //alert(JSON.stringify(response))//set error message 
                 handleResponse(response);
-                
-            
-            }//else redirect
+            }else {
+                localStorage.setItem("token", response.token);
+                //set the redux state here 
+                //redirect to home page, not sure how. I only know windows.location.href
+                alert(response.message)
+
+            }
         
         });  
     };

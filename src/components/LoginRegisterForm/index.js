@@ -1,3 +1,3 @@
 import LoginRegisterForm from "./LoginRegisterForm";
-export * from "./LoginRegisterForm.jsx";
+export * from "./LoginRegisterForm.jsx.js";
 export default LoginRegisterForm;

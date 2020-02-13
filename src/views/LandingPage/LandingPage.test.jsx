@@ -1,40 +1,40 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import RegisterPage, { RegisterContainer } from "./Register.jsx";
+import LandingPage, { RegisterLoginContainer } from "./LandingPage.jsx";
 import { shallow } from "enzyme";
 
-describe("RegisterPage", () => {
+describe("LandingPage", () => {
   let wrapper;
   let handleMockFunction;
 
   beforeEach(() => {
     handleMockFunction = jest.fn();
-    wrapper = shallow(<RegisterPage />);
+    wrapper = shallow(<LandingPage />);
   });
 
   describe("render", () => {
     describe("snapshots 📸", () => {
-      it("RegisterPage should match snap shot", () => {
-        matches(<RegisterPage />);
+      it("LandingPage should match snap shot", () => {
+        matches(<LandingPage/>);
       });
     });
 
     describe("components", () => {
-      test("RegisterPage should contain RegisterContainer component", () => {
-        expect(wrapper.find("RegisterContainer")).toHaveLength(1);
+      test("LandingPage should contain RegisterLoginContainer component", () => {
+        expect(wrapper.find("RegisterLoginContainer")).toHaveLength(1);
       });
     });
   });
 });
 
-describe("RegisterContainer", () => {
+describe("RegisterLoginContainer", () => {
   let wrapper;
   let handleMockFunction;
 
   beforeEach(() => {
     handleMockFunction = jest.fn();
     wrapper = shallow(
-      <RegisterContainer handleButtonClick={handleMockFunction} />
+      <RegisterLoginContainer handleButtonClick={handleMockFunction} />
     );
   });
 
@@ -44,8 +44,8 @@ describe("RegisterContainer", () => {
 
   describe("render", () => {
     describe("snapshots 📸", () => {
-      it("RegisterContainer should match snap shot", () => {
-        matches(<RegisterContainer />);
+      it("RegisterLoginContainer should match snap shot", () => {
+        matches(<RegisterLoginContainer formType = {"register"} />);
       });
     });
 

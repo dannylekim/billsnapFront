@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropType from "prop-types";
-import {Tooltip } from "shards-react";
+import {Tooltip,Alert } from "shards-react";
 import {registerFormInputs} from "./registerFormConstants";
 import LoginRegisterForm from "../LoginRegisterForm/LoginRegisterForm";
 import {register} from "../../utils/requests/UserRequests";
@@ -34,6 +34,7 @@ export default (props) => {
     const [validPassword, setValidPassword] = useState(true); //confirmed password is same
     const [validLocation, setValidLocation] = useState(true); 
     const [user_credentials, setUserCredential] = useState({}); 
+    const [alertMessage, setAlertMessage] = useState(false);
    
     const validInputs = {
             "firstName"        : validFirstName, 
@@ -53,7 +54,10 @@ export default (props) => {
     const passwordRegex = new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).{8,20}/); 
     
     const validatePassword = (password, passwordToConfirm) =>  (password === passwordToConfirm);
-    
+   
+    const triggerAlert = () => {
+        setAlertMessage(!alertMessage);
+    };
     /**
      * 
      * Object that returns the proper valid input function. 
@@ -100,10 +104,8 @@ export default (props) => {
             checkValidity(true,validPhone, "phoneNumber")
         ) ?        
         register(user_credentials).then(response => {
-            alert(JSON.stringify(response))
-        }) :  alert("form not validated")
-
-        //Call the API... 
+            alert(JSON.stringify(response)) //should redirect!!! 
+        }) :  triggerAlert();
     };
   
     const conditions = [
@@ -169,6 +171,9 @@ export default (props) => {
     return (
         //Clean this up
     <div className="regForm">
+         <Alert dismissible={triggerAlert} open={alertMessage} className="mb-3" theme="danger">
+            {"Form not validated."}
+        </Alert>
       <RegisterForm handleButtonClick={handleButtonClick} onChange={onChange} validInputs={validInputs} user_credentials = {user_credentials}/>
         { conditions.map(condition => 
             condition.condition && 
