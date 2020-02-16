@@ -10,7 +10,7 @@ import renderer  from 'react-test-renderer';
 
 configure({ adapter: new Adapter() });
 
-export const matches = children => expect(
+const matches = children => expect(
     renderer.create(children).toJSON()
   ).toMatchSnapshot();
 

@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { TitleLogo } from "../TitleLogo.jsx";
-import {matches} from "../../../setupTests";
 
 describe("TitleLogo", () => {
   describe("render", () => {

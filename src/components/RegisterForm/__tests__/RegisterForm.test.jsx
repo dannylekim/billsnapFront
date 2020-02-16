@@ -1,7 +1,6 @@
 import React from 'react';
 import { RegisterForm } from '../RegisterForm.jsx';
 import { shallow } from "enzyme";
-import {matches} from "../../../setupTests";
 
 describe('RegisterForm', () => {
     let wrapper;
@@ -21,7 +20,7 @@ describe('RegisterForm', () => {
     describe("render", () => {
       describe("snapshots 📸", () => {
         it("Register should match snap shot", () => {
-          matches(<RegisterForm handleButtonClick={handleMockFunction} validInvalidByName={handleMockFunction}/>);
+          matches(<RegisterForm handleButtonClick={handleMockFunction} validInvalidByName={handleMockFunction}/>);//matches come from setuptest
         });
       });
   

@@ -1,7 +1,6 @@
 import React from 'react';
 import { LoginForm } from '../LoginForm.jsx';
 import { shallow } from "enzyme";
-import {matches} from "../../../setupTests";
 
 describe('LoginForm', () => {
     let wrapper;
