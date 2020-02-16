@@ -38,7 +38,7 @@ export const registerFormInputs = [
 },
 {
     placeholder: "Verify password",
-    name: "confirm_password",
+    name: "confirmPassword",
     ...type_password
 },
 {

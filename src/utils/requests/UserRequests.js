@@ -45,7 +45,6 @@ export const register = async (entries) => {
 };
 
 async function checkStatus(response) {
-    console.log("response",response);
     const parsedResponse = await response.json();
   
     if (response.status < 200 || response.status >= 300) {
@@ -53,5 +52,5 @@ async function checkStatus(response) {
         // throw new Error(parsedResponse.errors);
     }
 
-    return parsedResponse;
+    return {...parsedResponse, statusCode: response.status};
 }
