@@ -62,7 +62,7 @@ export default props => {
   const [validPasswordFormat, setValidPasswordFormat] = useState(true);
   const [validPassword, setValidPassword] = useState(true); //confirmed password is same
   const [validLocation, setValidLocation] = useState(true);
-  const [user_credentials, setUserCredential] = useState({});
+  const [userCredentials, setUserCredential] = useState({});
   const [alertNotification, setAlertNotification] = useState({
     isOpen: false,
     alertType: "",
@@ -103,7 +103,7 @@ export default props => {
    * @param {String} type valid or invalid
    */
   const validInvalidByName = (name, type) => {
-    if (user_credentials[[name]] && user_credentials[[name]] !== "")
+    if (userCredentials[[name]] && userCredentials[[name]] !== "")
       return type === "invalid" ? !validInputs[[name]] : validInputs[[name]];
     else return false;
   };
@@ -182,7 +182,7 @@ export default props => {
       getValidationFunction(name, value);
       setUserCredential((prev) => ({ ...prev, [name]: value }));
     } else {
-      const { password } = { ...user_credentials };
+      const { password } = { ...userCredentials };
       const confirmPassword = value;
       setValidPassword(
         !validatePassword(password, confirmPassword) ? false : true
@@ -198,8 +198,8 @@ export default props => {
    */
   const checkValidity = (boolean_value, checkState, name) =>
     checkState === boolean_value &&
-    user_credentials[[name]] &&
-    user_credentials[[name]] !== "";
+    userCredentials[[name]] &&
+    userCredentials[[name]] !== "";
 
   /**
    * Handles form submittion and checks validity of inputs.
@@ -214,7 +214,7 @@ export default props => {
     checkValidity(true, validLastName, "lastName") &&
     checkValidity(true, validEmail, "email") &&
     checkValidity(true, validPhone, "phoneNumber")
-      ? register(user_credentials).then(response => {
+      ? register(userCredentials).then(response => {
           triggerAlert("success"); //TODO should redirect!!!
         })
       : triggerAlert("error");
@@ -305,7 +305,7 @@ export default props => {
         handleButtonClick={handleButtonClick}
         onChange={onChange}
         validInputs={validInputs}
-        user_credentials={user_credentials}
+        userCredentials={userCredentials}
         validInvalidByName={validInvalidByName}
       />
       {conditions.map(

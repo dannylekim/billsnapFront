@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TitleLogo render snapshots 📸 TitleLogo should match snap shot 1`] = `
+<div
+  className="title__row"
+>
+  <div
+    className="title__title"
+  >
+    <h1>
+      Billsnap
+    </h1>
+  </div>
+  <div
+    className="title__logo"
+  >
+    <img
+      alt="Logo"
+      src="https://via.placeholder.com/150x100.png?text=150x100+Logo"
+    />
+  </div>
+</div>
+`;
