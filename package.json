@@ -89,7 +89,7 @@
     ]
   },
   "devDependencies": {
-    "codecov": "^3.6.1",
+    "codecov": "^3.6.5",
     "enzyme": "^3.10.0",
     "redux-devtools": "^3.5.0"
   },
