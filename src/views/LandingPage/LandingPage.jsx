@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-
-import { Button } from "shards-react";
 import TitleLogo from "../../components/TitleLogo";
-import RegisterForm from "../../components/RegisterForm";
-import LoginForm from "../../components/LoginForm";
+import RegisterForm from "../RegisterForm";
+import LoginForm from "../LoginForm";
 import "./styles.scss";
 
 /**
@@ -18,24 +16,9 @@ export default props => {
       <div className="title-logo">
         <TitleLogo />
       </div>
-      <div className="register__container">
-        {formType === "register" ? <RegisterForm /> : <LoginForm />}
-        <div>
-          <h6>
-            {formType === "login" ? "New to Billsnap? " : "Have an account? "}
-            <Button
-              className="login-link"
-              onClick={() =>
-                setFormType(formType === "login" ? "register" : "login")
-              }
-            >
-              {formType === "login"
-                ? "Register an account."
-                : "Login to your account."}{" "}
-            </Button>
-          </h6>
+        <div className="register__form">
+           {formType === "register" ? <RegisterForm setFormType = {setFormType} /> : <LoginForm setFormType = {setFormType}/>}
         </div>
-      </div>
     </div>
   );
 };

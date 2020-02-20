@@ -15,10 +15,10 @@ import "./styles.scss";
 export const RegisterForm = ({
   handleButtonClick,
   onChange,
-  validInvalidByName
+  validInvalidByName,
+  conditions
 }) => {
   return (
-    <div className="register__form">
       <Form>
         <div className="form-inputs">
           {registerFormInputs.map((inputs, key) => (
@@ -46,8 +46,20 @@ export const RegisterForm = ({
             {"Submit"}
           </Button>
         </FormGroup>
+
+        {conditions.map(
+        condition => ( condition.condition && 
+            <Tooltip
+              key={condition.toolTipInfo.id}
+              open={condition.toolTipInfo.open}
+              target={condition.toolTipInfo.id}
+            >
+              <span id="input_error">{condition.toolTipInfo.errorMessage}</span>
+            </Tooltip>
+          )
+      )}
+
       </Form>
-    </div>
   );
 };
 
@@ -113,7 +125,7 @@ export default props => {
    * @param {String} triggerType - type of trigger success or error.
    */
   const triggerAlert = triggerType => {
-    triggerType === "success"
+    triggerType === "error"
       ? setAlertNotification({
           isOpen: !alertNotification.isOpen,
           alertType: "danger",
@@ -215,7 +227,7 @@ export default props => {
     checkValidity(true, validEmail, "email") &&
     checkValidity(true, validPhone, "phoneNumber")
       ? register(userCredentials).then(response => {
-          triggerAlert("success"); //TODO should redirect!!!
+          triggerAlert("success"); //TODO should redirect this.props.history.push("/dashboard");!!!
         })
       : triggerAlert("error");
   };
@@ -291,7 +303,7 @@ export default props => {
   ];
 
   return (
-    <div className="regForm">
+    <div className="register__container">
       <Alert
         dismissible={triggerAlert}
         open={alertNotification.isOpen}
@@ -307,19 +319,20 @@ export default props => {
         validInputs={validInputs}
         userCredentials={userCredentials}
         validInvalidByName={validInvalidByName}
+        conditions={conditions}
       />
-      {conditions.map(
-        condition =>
-          condition.condition && (
-            <Tooltip
-              key={condition.toolTipInfo.id}
-              open={condition.toolTipInfo.open}
-              target={condition.toolTipInfo.id}
+
+      <div>
+          <h6>
+            Have an account? 
+            <Button
+              className="login-link"
+              onClick={() => props.setFormType("login")}
             >
-              <span id="input_error">{condition.toolTipInfo.errorMessage}</span>
-            </Tooltip>
-          )
-      )}
+              Login to your account.
+            </Button>
+          </h6>
+      </div>
     </div>
   );
 };

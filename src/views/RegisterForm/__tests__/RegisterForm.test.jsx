@@ -9,7 +9,7 @@ describe('RegisterForm', () => {
     beforeEach(() => {
       handleMockFunction = jest.fn();
       wrapper = shallow(
-        <RegisterForm handleButtonClick={handleMockFunction} validInvalidByName={handleMockFunction}/>
+        <RegisterForm handleButtonClick={handleMockFunction} validInvalidByName={handleMockFunction} conditions={[{condition: false}]}/>
       );
     });
   
@@ -20,7 +20,7 @@ describe('RegisterForm', () => {
     describe("render", () => {
       describe("snapshots 📸", () => {
         it("Register should match snap shot", () => {
-          matches(<RegisterForm handleButtonClick={handleMockFunction} validInvalidByName={handleMockFunction}/>);//matches come from setuptest
+          matches(<RegisterForm handleButtonClick={handleMockFunction} validInvalidByName={handleMockFunction} conditions={[{condition: false}]}/>);//matches come from setuptest
         });
       });
   
