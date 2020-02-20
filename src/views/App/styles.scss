@@ -11,11 +11,18 @@
 .App-header {
   background-color: $secondary-color;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+
+  .App__name {
+
+  }
+  .App__logo {
+    padding-left: 5px;
+  }
 }
 
 .App-link {
