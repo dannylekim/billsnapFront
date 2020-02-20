@@ -43,7 +43,7 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors }) => {
       </Form>
 
      { ["email", "password"].map((field, key) => (
-       document.getElementById(field) && //If not test fails No DOM elements were found for #email.
+       document.getElementById(field) && document.getElementById(field)!== ""  && //If not test fails No DOM elements were found for #email.
         <Tooltip
           key={key}
           open={hasErrors[field].hasError}
