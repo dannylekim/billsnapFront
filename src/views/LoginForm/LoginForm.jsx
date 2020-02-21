@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropType from "prop-types";
-import { loginFormInputs } from "./loginFormConstants";
+import * as data from "./loginFormConstants.json";
 import { login } from "../../utils/requests/UserRequests";
 import {
   Alert,
@@ -17,7 +17,7 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors }) => {
     <div className="login__form">
       <Form>
         <div className="form-inputs">
-          {loginFormInputs.map((inputs, key) => (
+          {data.loginFormInputs.map((inputs, key) => (
             <FormGroup key={key} onChange={onChange}>
               <FormInput
                 className="mb-2"
@@ -37,19 +37,19 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors }) => {
             onClick={event => handleButtonClick(event)}
             name="submit"
           >
-            {"Login"}
+            Login
           </Button>
         </FormGroup>
       </Form>
 
-     { ["email", "password"].map((field, key) => (
-       document.getElementById(field) && document.getElementById(field)!== ""  && //If not test fails No DOM elements were found for #email.
+     { data.loginFormInputs.map((field, key) => (
+       document.getElementById(field.name) && document.getElementById(field.name)!== ""  && //If not test fails No DOM elements were found for #email.
         <Tooltip
           key={key}
-          open={hasErrors[field].hasError}
-          target={`#${field}`}
+          open={hasErrors[field.name].hasError}
+          target={`#${field.name}`}
         >
-          <span id="input_error"> {hasErrors[field].message} </span>
+          <span id="input_error"> {hasErrors[field.name].message} </span>
         </Tooltip>
       ))}
     </div>
@@ -119,15 +119,20 @@ export default props => {
    */
   const handleButtonClick = async event => {
     event.preventDefault();
-    await login(user_credentials).then(response => {
-      if (!response.token) {
-        handleResponse(response);
-      } else {
+    try{
+    const response = await login(user_credentials);
+    if (!response.token) {
+      handleResponse(response);
+    } 
+    else 
+      {
         localStorage.setItem("token", response.token);
         triggerAlert("success"); //temporary TODO: will be redirect to home. this.props.history.push('/dashboard')
         setErrorMessage(response.message); //temporary
       }
-    });
+    } catch (error){
+        throw new Error(error);
+    }
   };
   /**
    * @function onChange

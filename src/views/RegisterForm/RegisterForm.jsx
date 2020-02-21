@@ -8,7 +8,7 @@ import {
   FormGroup,
   FormInput
 } from "shards-react";
-import { registerFormInputs } from "./registerFormConstants";
+import * as data from "./registerFormConstants.json";
 import { register } from "../../utils/requests/UserRequests";
 import "./styles.scss";
 
@@ -21,7 +21,7 @@ export const RegisterForm = ({
   return (
       <Form>
         <div className="form-inputs">
-          {registerFormInputs.map((inputs, key) => (
+          {data.registerFormInputs.map((inputs, key) => (
             <FormGroup key={key} onChange={onChange}>
               <FormInput
                 invalid={validInvalidByName(inputs.name, "invalid")}
@@ -43,7 +43,7 @@ export const RegisterForm = ({
             onClick={event => handleButtonClick(event)}
             name="submit"
           >
-            {"Submit"}
+            Submit
           </Button>
         </FormGroup>
 
@@ -147,40 +147,26 @@ export default props => {
    *
    * */
   const getValidationFunction = (name, value) => {
-    const validationMap = new Map();
-    name === "firstName" &&
-      validationMap.set("firstName", setValidFirstName(nameRegex.test(value)));
-    name === "middleName" &&
-      validationMap.set(
-        "middleName",
-        setValidMiddleName(nameRegex.test(value))
-      );
-    name === "lastName" &&
-      validationMap.set("lastName", setValidLastName(nameRegex.test(value)));
-    name === "phoneNumber" &&
-      validationMap.set("phoneNumber", setValidPhone(phoneRegex.test(value)));
-    name === "email" &&
-      validationMap.set("email", setValidEmail(emailRegex.test(value)));
-    name === "password" &&
-      validationMap.set(
-        "password",
-        setValidPasswordFormat(passwordRegex.test(value))
-      );
-    name === "location" &&
-      validationMap.set("location", setValidLocation(nameRegex.test(value)));
-    name === "birthDate" &&
-      validationMap.set(
-        "birthDate",
-        setValidDOB(
-          new Date(
-            value.split("-")[0],
-            parseInt(value.split("-")[1]) - 1,
-            value.split("-")[2]
-          ) <= new Date()
-        )
-      ); //FORMAT: "yyyy-mm-dd"
-
-    return validationMap.get([name]);
+    switch(name){
+      case "firstName":
+        return setValidFirstName(nameRegex.test(value));
+      case "middleName":
+        return setValidMiddleName(nameRegex.test(value));
+      case "lastName":
+        return setValidLastName(nameRegex.test(value));
+      case "phoneNumber":
+        return setValidPhone(phoneRegex.test(value));
+      case "email":
+        return setValidEmail(emailRegex.test(value));
+      case "password":
+        return setValidPasswordFormat(passwordRegex.test(value));
+      case "location":
+          return setValidLocation(nameRegex.test(value));
+      case "birthDate":
+            return setValidDOB(new Date(value.split("-")[0],parseInt(value.split("-")[1]) - 1,value.split("-")[2]) <= new Date());
+      default:
+        return null;
+    };
   };
 
   /**
@@ -189,17 +175,17 @@ export default props => {
    */
   const onChange = event => {
     const { name, value } = event.target;
-
-    if (name !== "confirmPassword") {
-      getValidationFunction(name, value);
-      setUserCredential((prev) => ({ ...prev, [name]: value }));
-    } else {
+    switch(name) {
+    case "confirmPassword":
       const { password } = { ...userCredentials };
       const confirmPassword = value;
-      setValidPassword(
-        !validatePassword(password, confirmPassword) ? false : true
-      ); //if password matchs
-    }
+      setValidPassword(validatePassword(password, confirmPassword)); //if password matchs
+      break;
+    default:
+      getValidationFunction(name, value);
+      setUserCredential((prev) => ({ ...prev, [name]: value }));
+      break;
+    };
   };
 
   /**
