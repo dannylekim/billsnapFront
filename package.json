@@ -50,6 +50,7 @@
     "react-app-polyfill": "^1.0.4",
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.11.0",
+    "react-icons": "^3.9.0",
     "react-redux": "^7.1.1",
     "react-test-renderer": "^16.11.0",
     "redux": "^4.0.4",
