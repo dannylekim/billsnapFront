@@ -23,7 +23,6 @@ export default (props) => {
                 <Route path="/" exact component={LandingPage}/>
               </div>
                 <Route path="/dashboard" exact/>
-                <Route path="/" render={() => <div>404</div> }/>
           </React.Fragment>
         </Switch>
       </BrowserRouter>

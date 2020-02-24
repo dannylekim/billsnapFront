@@ -2,10 +2,11 @@
 
 exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`] = `
 <div
-  className="page__register"
+  className="page__landing"
 >
   <div
     className="title-logo"
+    id="flex-item"
   >
     <div
       className="title"
@@ -40,6 +41,7 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
   </div>
   <div
     className="register__form"
+    id="flex-item"
   >
     <div
       className="register__container"
@@ -55,6 +57,7 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
             onChange={[Function]}
           >
             <input
+              autoComplete="first-name"
               className="mb-2 form-control"
               id="firstName"
               name="firstName"
@@ -67,18 +70,7 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
             onChange={[Function]}
           >
             <input
-              className="mb-2 form-control"
-              id="middleName"
-              name="middleName"
-              placeholder="Enter your middle name"
-              type="text"
-            />
-          </div>
-          <div
-            className="form-group"
-            onChange={[Function]}
-          >
-            <input
+              autoComplete="last-name"
               className="mb-2 form-control"
               id="lastName"
               name="lastName"
@@ -91,18 +83,7 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
             onChange={[Function]}
           >
             <input
-              className="mb-2 form-control"
-              id="birthDate"
-              name="birthDate"
-              placeholder="Enter your date of birth"
-              type="date"
-            />
-          </div>
-          <div
-            className="form-group"
-            onChange={[Function]}
-          >
-            <input
+              autoComplete="username"
               className="mb-2 form-control"
               id="email"
               name="email"
@@ -115,18 +96,7 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
             onChange={[Function]}
           >
             <input
-              className="mb-2 form-control"
-              id="phoneNumber"
-              name="phoneNumber"
-              placeholder="Enter your phone number"
-              type="tel"
-            />
-          </div>
-          <div
-            className="form-group"
-            onChange={[Function]}
-          >
-            <input
+              autoComplete="new-password"
               className="mb-2 form-control"
               id="password"
               name="password"
@@ -139,23 +109,12 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
             onChange={[Function]}
           >
             <input
+              autoComplete="new-password"
               className="mb-2 form-control"
               id="confirmPassword"
               name="confirmPassword"
               placeholder="Verify password"
               type="password"
-            />
-          </div>
-          <div
-            className="form-group"
-            onChange={[Function]}
-          >
-            <input
-              className="mb-2 form-control"
-              id="location"
-              name="location"
-              placeholder="Enter your location"
-              type="text"
             />
           </div>
         </div>

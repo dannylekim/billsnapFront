@@ -46,6 +46,7 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors }) => {
        document.getElementById(field.name) && document.getElementById(field.name)!== ""  && //If not test fails No DOM elements were found for #email.
         <Tooltip
           key={key}
+          placement="left"
           open={hasErrors[field.name].hasError}
           target={`#${field.name}`}
         >
@@ -58,10 +59,7 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors }) => {
 };
 
 export const defaultErrors = {
-  email: {
-    hasError: false,
-    message: ""
-  },
+  email: { hasError: false, message: ""},
   password: { hasError: false, message: "" }
 };
 
@@ -74,7 +72,17 @@ export default props => {
     visible: false,
     alertType: "danger"
   });
-
+  /**
+   * @function dismissAlert
+   * @description dismisses the alert message. and closes tool tip.
+   */
+  const dismissAlert = () => {
+    setAlertMessageFields(prev => ({
+      ...prev,
+      visible: !alertMessage.visible, 
+    }));
+    setHasErrors(defaultErrors);
+  };
   /**
    * Triggers the error alert banner.
    * !!!! Temporary put a success alert for successfull login.
@@ -82,8 +90,8 @@ export default props => {
    */
   const triggerAlert = alertType => {
     setAlertMessageFields({
-      visible: !alertMessage.visible, //
-      alertType: [alertType]
+      visible: !alertMessage.visible, 
+      alertType
     });
   };
   /**
@@ -95,14 +103,14 @@ export default props => {
     if (response.status === "BAD_REQUEST") {
       const errors = response.errors;
       errors.forEach(error =>
-        setHasErrors({
-          ...hasErrors,
+        setHasErrors(prev => ({
+          ...prev,
           [error.field]: {
-            ...hasErrors[error.field],
+            ...prev[error.field],
             hasError: true,
             message: error.message
           }
-        })
+        }))
       );
     };
 
@@ -147,10 +155,10 @@ export default props => {
   return (
     <div className="register__container">
       <Alert
-        dismissible={triggerAlert}
+        dismissible={dismissAlert}
         open={alertMessage.visible}
         className="mb-3"
-        theme={alertMessage.alertType}
+        theme={alertMessage.alertType}//theme of type array??? 
       >
         {error_message}
       </Alert>

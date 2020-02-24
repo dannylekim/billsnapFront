@@ -19,83 +19,85 @@ export const RegisterForm = ({
   conditions
 }) => {
   return (
-      <Form>
-        <div className="form-inputs">
-          {data.registerFormInputs.map((inputs, key) => (
-            <FormGroup key={key} onChange={onChange}>
-              <FormInput
-                invalid={validInvalidByName(inputs.name, "invalid")}
-                valid={validInvalidByName(inputs.name, "valid")}
-                className="mb-2"
-                type={inputs.type}
-                name={inputs.name}
-                id={inputs.name}
-                placeholder={inputs.placeholder}
-              />
-            </FormGroup>
-          ))}
-        </div>
-        <FormGroup>
-          <Button
-            size="lg"
-            pill
-            theme="dark"
-            onClick={event => handleButtonClick(event)}
-            name="submit"
-          >
-            Submit
-          </Button>
-        </FormGroup>
+    <Form>
+      <div className="form-inputs">
+        {data.registerFormInputs.map((inputs, key) => (
+          <FormGroup key={key} onChange={onChange}>
+            <FormInput
+              invalid={validInvalidByName(inputs.name, "invalid")}
+              valid={validInvalidByName(inputs.name, "valid")}
+              className="mb-2"
+              type={inputs.type}
+              name={inputs.name}
+              id={inputs.name}
+              placeholder={inputs.placeholder}
+              autoComplete={inputs.autoComplete}
+            />
+          </FormGroup>
+        ))}
+      </div>
+      <FormGroup>
+        <Button
+          size="lg"
+          pill
+          theme="dark"
+          onClick={event => handleButtonClick(event)}
+          name="submit"
+        >
+          Submit
+        </Button>
+      </FormGroup>
 
-        {conditions.map(
-        condition => ( condition.condition && 
+      {conditions.map(
+        condition => //document.getElement so that tests pass else DOM not found for id ... 
+          ((condition.condition || condition.condition === false) && (document.getElementById(condition.name) && document.getElementById(condition.name)!== "")) && (
             <Tooltip
-              key={condition.toolTipInfo.id}
+              placement="left"
+              key={`#${condition.name}`}
               open={condition.toolTipInfo.open}
-              target={condition.toolTipInfo.id}
+              target={`#${condition.name}`}
             >
               <span id="input_error">{condition.toolTipInfo.errorMessage}</span>
             </Tooltip>
           )
       )}
-
-      </Form>
+    </Form>
   );
 };
 
 export default props => {
   //validInputs
-  const [validFirstName, setValidFirstName] = useState(true);
-  const [validMiddleName, setValidMiddleName] = useState(true);
-  const [validLastName, setValidLastName] = useState(true);
-  const [validDOB, setValidDOB] = useState(true); //no future dates
-  const [validPhone, setValidPhone] = useState(true);
-  const [validEmail, setValidEmail] = useState(true);
-  const [validPasswordFormat, setValidPasswordFormat] = useState(true);
-  const [validPassword, setValidPassword] = useState(true); //confirmed password is same
-  const [validLocation, setValidLocation] = useState(true);
-  const [userCredentials, setUserCredential] = useState({});
-  const [alertNotification, setAlertNotification] = useState({
+  const defaultError = {
     isOpen: false,
     alertType: "",
     alertMessage: ""
+  };
+  const [validFirstName, setValidFirstName] = useState(true);
+  const [validLastName, setValidLastName] = useState(true);
+  const [validEmail, setValidEmail] = useState(true);
+  const [validPasswordFormat, setValidPasswordFormat] = useState(true);
+  const [validPassword, setValidPassword] = useState(true); //confirmed password is same
+  const [userCredentials, setUserCredential] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
+  const [alertNotification, setAlertNotification] = useState({
+    ...defaultError
   });
 
   const validInputs = {
     firstName: validFirstName,
-    middleName: validMiddleName,
     lastName: validLastName,
-    birthDate: validDOB,
     email: validEmail,
-    phoneNumber: validPhone,
     password: validPasswordFormat,
-    confirmPassword: validPassword,
-    location: validLocation
+    confirmPassword: validPassword
   };
 
   const nameRegex = new RegExp(/^[_A-z]*((-|\s)*[_A-z])*$/);
-  const phoneRegex = RegExp(/^[(]?[0-9]{3}[)]?[-\s]?[0-9]{3}[-\s']?[0-9]{4}$/);
-  const emailRegex = new RegExp(/[\w-.]+@([\w-]+.)+[\w-]{2,4}/);
+  const emailRegex = new RegExp(/[\w-.]+@([\w-]+).+[\w-]{2,4}/); //wrong!!!
   const passwordRegex = new RegExp(
     /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).{8,20}/
   );
@@ -115,27 +117,35 @@ export default props => {
    * @param {String} type valid or invalid
    */
   const validInvalidByName = (name, type) => {
-    if (userCredentials[[name]] && userCredentials[[name]] !== "")
-      return type === "invalid" ? !validInputs[[name]] : validInputs[[name]];
-    else return false;
+    return type === "invalid"
+      ? !validInputs[[name]]
+      : userCredentials[[name]] && userCredentials[[name]] !== ""
+      ? validInputs[[name]]
+      : false;
   };
 
   /**
-   * Sets the alert or turns it off by calling the setter.
+   * @description Sets the alert or turns it off by calling the setter.
    * @param {String} triggerType - type of trigger success or error.
    */
-  const triggerAlert = triggerType => {
+  const triggerAlert = (triggerType, message) => {
     triggerType === "error"
       ? setAlertNotification({
-          isOpen: !alertNotification.isOpen,
+          isOpen: true,
           alertType: "danger",
-          alertMessage: "Form Not Validated"
+          alertMessage: message
         })
       : setAlertNotification({
-          isOpen: !alertNotification.isOpen,
+          isOpen: true,
           alertType: "success",
-          alertMessage: "Registration Successful!"
+          alertMessage: message
         });
+  };
+  /**
+   * @description dismiss the alert. Sets the alert states back to default.
+   */
+  const dismissAlert = () => {
+    setAlertNotification(defaultError);
   };
   /**
    * Returns the value of the key given from the map.
@@ -144,146 +154,131 @@ export default props => {
    * Lots of if statements.
    * @param {String} name - the input name.
    * @param {String} value - the value of the input field.
-   *
    * */
   const getValidationFunction = (name, value) => {
-    switch(name){
+    switch (name) {
       case "firstName":
         return setValidFirstName(nameRegex.test(value));
-      case "middleName":
-        return setValidMiddleName(nameRegex.test(value));
       case "lastName":
         return setValidLastName(nameRegex.test(value));
-      case "phoneNumber":
-        return setValidPhone(phoneRegex.test(value));
       case "email":
         return setValidEmail(emailRegex.test(value));
       case "password":
         return setValidPasswordFormat(passwordRegex.test(value));
-      case "location":
-          return setValidLocation(nameRegex.test(value));
-      case "birthDate":
-            return setValidDOB(new Date(value.split("-")[0],parseInt(value.split("-")[1]) - 1,value.split("-")[2]) <= new Date());
+      case "confirmPassword":
+        const { password } = { ...userCredentials };
+        return setValidPassword(validatePassword(password, value));
       default:
         return null;
-    };
+    }
   };
-
   /**
-   * Handles on change events of the form.
+   * @description Handles on change events of the form. closes alert
    * @param {Event} event
    */
   const onChange = event => {
     const { name, value } = event.target;
-    switch(name) {
-    case "confirmPassword":
-      const { password } = { ...userCredentials };
-      const confirmPassword = value;
-      setValidPassword(validatePassword(password, confirmPassword)); //if password matchs
-      break;
-    default:
-      getValidationFunction(name, value);
-      setUserCredential((prev) => ({ ...prev, [name]: value }));
-      break;
-    };
+    getValidationFunction(name, value);
+    setUserCredential(prev => ({ ...prev, [name]: value }));
+    setAlertNotification(defaultError);
   };
-
   /**
-   * Check if condition is true or false. Shortcut to writting full condition.
+   * @description Check if condition is true or false. Shortcut to writting full condition.
+   * document.getElementById is used when the form is already submitted but an error happened.
+   * Since the confirmPassword is removed, it will no longer be in the userCredentials.
    * @param {Boolean} boolean_value check if true or false.
    * @param {Object} checkState the state to check against.
    * @param {String} name the name of the input field.
    */
-  const checkValidity = (boolean_value, checkState, name) =>
-    checkState === boolean_value &&
-    userCredentials[[name]] &&
-    userCredentials[[name]] !== "";
-
+  const checkValidity = (boolean_value, checkState, name) => {
+    const inputField =
+      name === "confirmPassword"
+        ? document.getElementById("confirmPassword")
+        : userCredentials[[name]];
+    if (checkState === boolean_value && inputField && inputField !== "")
+      return true;
+    else {
+      return false;
+    }
+  };
   /**
-   * Handles form submittion and checks validity of inputs.
+   * @description Handles form submittion and checks validity of inputs.
    * @param {Event} e The event after clicking on the button.
    */
-  const handleButtonClick = e => {
+  const handleButtonClick = async e => {
     e.preventDefault();
-
-    checkValidity(true, validPassword, "password") &&
-    checkValidity(true, validPasswordFormat, "password") &&
-    checkValidity(true, validFirstName, "firstName") &&
-    checkValidity(true, validLastName, "lastName") &&
-    checkValidity(true, validEmail, "email") &&
-    checkValidity(true, validPhone, "phoneNumber")
-      ? register(userCredentials).then(response => {
-          triggerAlert("success"); //TODO should redirect this.props.history.push("/dashboard");!!!
-        })
-      : triggerAlert("error");
+    if (
+      checkValidity(true, validPassword, "confirmPassword") &&
+      checkValidity(true, validPasswordFormat, "password") &&
+      checkValidity(true, validFirstName, "firstName") &&
+      checkValidity(true, validLastName, "lastName") &&
+      checkValidity(true, validEmail, "email")
+    ) {
+      delete userCredentials["confirmPassword"]; //remove confirm password
+      const response = await register(userCredentials);
+      if (response.statusCode === 201)
+        triggerAlert("success", "Registration Successful!");
+      //TODO should redirect this.props.history.push("/dashboard");!!!
+      //if user already exists
+      else triggerAlert("error", response.message);
+    } else {//blank inputs
+      data.registerFormInputs.forEach(error => {
+        if (userCredentials[error.name] === "")
+          getValidationFunction(error.name, -1);
+      });
+      triggerAlert("error", "Form Not Validated"); //handle response
+    }
   };
-
-  //list of error messages / information for the Tool Tip component. 
+  //list of error messages / information for the Tool Tip component.
   const conditions = [
     {
-      condition: checkValidity(false, validPassword, "password"),
+      name:"confirmPassword",
+      condition: checkValidity(false, validPassword, "confirmPassword"),
       toolTipInfo: {
         open: !validPassword,
-        id: "#confirmPassword",
-        errorMessage: "Password does not match"
+        errorMessage: !userCredentials.confirmPassword
+          ? "Cannot be blank!"
+          : "Password does not match"
       }
     },
     {
+      name:"password",
       condition: checkValidity(false, validPasswordFormat, "password"),
       toolTipInfo: {
         open: !validPasswordFormat,
-        id: "#password",
-        errorMessage:
-          "Invalid password (Must contain at least 1 upper case, lower case, number and symbol, and be between 8-20 characters."
+        errorMessage: !userCredentials.password
+          ? "Cannot be blank!"
+          : "Must contain at least 1 upper case, lower case, number and symbol, and be between 8-20 characters."
       }
     },
     {
+      name:"firstName",
       condition: checkValidity(false, validFirstName, "firstName"),
       toolTipInfo: {
         open: !validFirstName,
-        id: "#firstName",
-        errorMessage: "Invalid First Name, no numbers or special characters."
+        errorMessage: !userCredentials.firstName
+          ? "Cannot be blank!"
+          : "No numbers or special characters."
       }
     },
     {
-      condition: checkValidity(false, validMiddleName, "middleName"),
-      toolTipInfo: {
-        open: !validMiddleName,
-        id: "#middleName",
-        errorMessage: "Invalid Middle Name, no numbers or special characters."
-      }
-    },
-    {
+      name:"lastName",
       condition: checkValidity(false, validLastName, "lastName"),
       toolTipInfo: {
         open: !validLastName,
-        id: "#lastName",
-        errorMessage: "Invalid Last Name, no numbers or special characters."
+        errorMessage: !userCredentials.lastName
+          ? "Cannot be blank!"
+          : "No numbers or special characters."
       }
     },
     {
-      condition: checkValidity(false, validDOB, "birthDate"),
-      toolTipInfo: {
-        open: !validDOB,
-        id: "#birthDate",
-        errorMessage: "Can't be born in a future date."
-      }
-    },
-    {
-      condition: checkValidity(false, validPhone, "phoneNumber"),
-      toolTipInfo: {
-        open: !validPhone,
-        id: "#phoneNumber",
-        errorMessage:
-          "Must be 10 digit numbers (xxx) xxx xxxx (can be seperated by - or space)."
-      }
-    },
-    {
+      name:"email",
       condition: checkValidity(false, validEmail, "email"),
       toolTipInfo: {
         open: !validEmail,
-        id: "#email",
-        errorMessage: "Invalid Email Format."
+        errorMessage: !userCredentials.email
+          ? "Cannot be blank!"
+          : "Invalid Email Format."
       }
     }
   ];
@@ -291,7 +286,7 @@ export default props => {
   return (
     <div className="register__container">
       <Alert
-        dismissible={triggerAlert}
+        dismissible={dismissAlert}
         open={alertNotification.isOpen}
         className="mb-3"
         theme={alertNotification.alertType}
@@ -305,19 +300,18 @@ export default props => {
         validInputs={validInputs}
         userCredentials={userCredentials}
         validInvalidByName={validInvalidByName}
-        conditions={conditions}
+        conditions={[...conditions]}
       />
-
       <div>
-          <h6>
-            Have an account? 
-            <Button
-              className="login-link"
-              onClick={() => props.setFormType("login")}
-            >
-              Login to your account.
-            </Button>
-          </h6>
+        <h6>
+          Have an account?
+          <Button
+            className="login-link"
+            onClick={() => props.setFormType("login")}
+          >
+            Login to your account.
+          </Button>
+        </h6>
       </div>
     </div>
   );
