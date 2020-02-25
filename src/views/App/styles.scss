@@ -4,10 +4,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
 .App-header {
   background-color: $secondary-color;
   display: flex;
@@ -17,11 +13,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
 
-  .App__name {
-
-  }
-  .App__logo {
-    padding-left: 5px;
+  .App-logo {
+    padding: 5px;
   }
 }
 
