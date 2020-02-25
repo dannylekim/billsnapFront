@@ -11,7 +11,7 @@ coverage:
     project: yes
     patch: yes
     changes: no
-  
+
   ignore:
     - "**/index.js"
     - "src/setupTest.js"
