@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropType from "prop-types";
-import * as data from "./loginFormConstants.json";
+import loginFormInputs from "./loginFormConstants.json";
 import { login } from "../../utils/requests/UserRequests";
 import {
   Alert,
@@ -17,7 +17,7 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors }) => {
     <div className="login__form">
       <Form>
         <div className="form-inputs">
-          {data.loginFormInputs.map((inputs, key) => (
+          {loginFormInputs.map((inputs, key) => (
             <FormGroup key={key} onChange={onChange}>
               <FormInput
                 className="mb-2"
@@ -42,7 +42,7 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors }) => {
         </FormGroup>
       </Form>
 
-     { data.loginFormInputs.map((field, key) => (
+     { loginFormInputs.map((field, key) => (
        document.getElementById(field.name) && document.getElementById(field.name)!== ""  && //If not test fails No DOM elements were found for #email.
         <Tooltip
           key={key}
@@ -64,7 +64,6 @@ export const defaultErrors = {
 };
 
 export default props => {
-
   const [user_credentials, setUserCredential] = useState({});
   const [error_message, setErrorMessage] = useState("");
   const [hasErrors, setHasErrors] = useState(defaultErrors);
@@ -79,21 +78,23 @@ export default props => {
   const dismissAlert = () => {
     setAlertMessageFields(prev => ({
       ...prev,
-      visible: !alertMessage.visible, 
+      visible: false, 
     }));
     setHasErrors(defaultErrors);
   };
-  /**
-   * Triggers the error alert banner.
-   * !!!! Temporary put a success alert for successfull login.
-   * @param {String} alertType the alert type success or error.
-   */
-  const triggerAlert = alertType => {
-    setAlertMessageFields({
-      visible: !alertMessage.visible, 
-      alertType
-    });
-  };
+  
+  // /**
+  //  * Triggers the error alert banner.
+  //  * !!!! Temporary put a success alert for successfull login.
+  //  * @param {String} alertType the alert type success or error.
+  //  */
+  // const triggerAlert = alertType => {
+  //   setAlertMessageFields({
+  //     visible: true, 
+  //     alertType
+  //   });
+  // };
+
   /**
    * @function handleResponse
    * @description filters the error type and setting the erro message and form tip error.
@@ -135,8 +136,9 @@ export default props => {
     else 
       {
         localStorage.setItem("token", response.token);
-        triggerAlert("success"); //temporary TODO: will be redirect to home. this.props.history.push('/dashboard')
-        setErrorMessage(response.message); //temporary
+        props.history.push('/dashboard');
+        // triggerAlert("success"); //temporary TODO: will be redirect to home. 
+        // setErrorMessage(response.message); //temporary
       }
     } catch (error){
         throw new Error(error);

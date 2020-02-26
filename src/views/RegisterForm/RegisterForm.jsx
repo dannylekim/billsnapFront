@@ -8,7 +8,7 @@ import {
   FormGroup,
   FormInput
 } from "shards-react";
-import * as data from "./registerFormConstants.json";
+import registerFormInputs from "./registerFormConstants.json";
 import { register } from "../../utils/requests/UserRequests";
 import "./styles.scss";
 
@@ -21,7 +21,7 @@ export const RegisterForm = ({
   return (
     <Form>
       <div className="form-inputs">
-        {data.registerFormInputs.map((inputs, key) => (
+        {registerFormInputs.map((inputs, key) => (
           <FormGroup key={key} onChange={onChange}>
             <FormInput
               invalid={validInvalidByName(inputs.name, "invalid")}
@@ -76,7 +76,7 @@ export default props => {
   const [validLastName, setValidLastName] = useState(true);
   const [validEmail, setValidEmail] = useState(true);
   const [validPasswordFormat, setValidPasswordFormat] = useState(true);
-  const [validPassword, setValidPassword] = useState(true); //confirmed password is same
+  const [validPassword, setValidPassword] = useState(true); 
   const [userCredentials, setUserCredential] = useState({
     firstName: "",
     lastName: "",
@@ -97,7 +97,7 @@ export default props => {
   };
 
   const nameRegex = new RegExp(/^[_A-z]*((-|\s)*[_A-z])*$/);
-  const emailRegex = new RegExp(/[\w-.]+@([\w-]+).+[\w-]{2,4}/); //wrong!!!
+  const emailRegex = new RegExp(/^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); 
   const passwordRegex = new RegExp(
     /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).{8,20}/
   );
@@ -112,7 +112,6 @@ export default props => {
 
   /**
    * This function aids the react-shard valid and invalid prop to display the errors.
-   * Won't change the color of confirm password, since confirmPassword isn't part of user credential.
    * @param {String} name className
    * @param {String} type valid or invalid
    */
@@ -184,17 +183,12 @@ export default props => {
   };
   /**
    * @description Check if condition is true or false. Shortcut to writting full condition.
-   * document.getElementById is used when the form is already submitted but an error happened.
-   * Since the confirmPassword is removed, it will no longer be in the userCredentials.
    * @param {Boolean} boolean_value check if true or false.
    * @param {Object} checkState the state to check against.
    * @param {String} name the name of the input field.
    */
   const checkValidity = (boolean_value, checkState, name) => {
-    const inputField =
-      name === "confirmPassword"
-        ? document.getElementById("confirmPassword")
-        : userCredentials[[name]];
+    const inputField = userCredentials[[name]];
     if (checkState === boolean_value && inputField && inputField !== "")
       return true;
     else {
@@ -214,15 +208,22 @@ export default props => {
       checkValidity(true, validLastName, "lastName") &&
       checkValidity(true, validEmail, "email")
     ) {
-      delete userCredentials["confirmPassword"]; //remove confirm password
-      const response = await register(userCredentials);
-      if (response.statusCode === 201)
-        triggerAlert("success", "Registration Successful!");
-      //TODO should redirect this.props.history.push("/dashboard");!!!
-      //if user already exists
-      else triggerAlert("error", response.message);
+      const dataToSend = {  firstName: userCredentials.firstName,
+                            lastName: userCredentials.lastName,
+                            email: userCredentials.email,
+                            password: userCredentials.password};
+      try{
+        const response = await register(dataToSend);
+        if (response.statusCode === 201)
+          props.history.push('/dashboard');
+        //if user already exists
+        else triggerAlert("error", response.message);
+      }
+      catch (error){
+        throw new Error(error);
+    }
     } else {//blank inputs
-      data.registerFormInputs.forEach(error => {
+      registerFormInputs.forEach(error => {
         if (userCredentials[error.name] === "")
           getValidationFunction(error.name, -1);
       });

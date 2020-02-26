@@ -1,3 +1,4 @@
 import LoginForm from "./LoginForm";
+import { withRouter } from 'react-router-dom';
 export * from "./LoginForm.jsx";
-export default LoginForm;
+export default withRouter(LoginForm);

@@ -4,8 +4,6 @@ import React from 'react';
  */
 import LandingPage from '../LandingPage/LandingPage';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
-
 import './styles.scss';
 
 export default (props) => {
@@ -21,8 +19,8 @@ export default (props) => {
           <React.Fragment>
               <div className="App__container">
                 <Route path="/" exact component={LandingPage}/>
-              </div>
                 <Route path="/dashboard" exact/>
+              </div>  
           </React.Fragment>
         </Switch>
       </BrowserRouter>

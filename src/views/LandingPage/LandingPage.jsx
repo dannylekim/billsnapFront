@@ -10,14 +10,14 @@ import "./styles.scss";
 
 export default props => {
   const [formType, setFormType] = useState("register");
-
+ 
   return (
     <div className="page__landing">
       <div className="title-logo" id="flex-item">
         <TitleLogo />
       </div>
         <div className="register__form" id="flex-item">
-           {formType === "register" ? <RegisterForm setFormType = {setFormType} /> : <LoginForm setFormType = {setFormType}/>}
+           {formType === "register" ? <RegisterForm setFormType = {setFormType}/> : <LoginForm setFormType = {setFormType}/>}
         </div>
     </div>
   );
