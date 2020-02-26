@@ -4,7 +4,7 @@ import Dashboard from "../Dashboard";
 describe("Dashboard", () => {
    describe("render", () => {
        describe("snapshots 📸", () => {
-           it("LandingPage should match snap shot", () => {
+           it("Dashboard should match snap shot", () => {
                matches(<Dashboard/>);
            });
        });

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render snapshots 📸 Logo should match snap shot 1`] = `
+<picture>
+  <source
+    media="(min-width: 768px)"
+    srcSet="https://via.placeholder.com/60x60.png?text=60x60+Logo"
+  />
+  <source
+    media="(min-width: 1024px)"
+    srcSet="https://via.placeholder.com/80x80.png?text=80x80+Logo"
+  />
+  <img
+    alt="Small logo"
+    src="https://via.placeholder.com/40x40.png?text=40x40+Logo"
+  />
+</picture>
+`;

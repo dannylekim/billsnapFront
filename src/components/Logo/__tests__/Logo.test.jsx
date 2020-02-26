@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Logo } from '../Logo.jsx';
+import {Logo} from '../Logo.jsx';
 
-describe('Logo', () =>{
+describe('Logo', () => {
     describe('render', () => {
         it('renders without crashing', () => {
             const div = document.createElement('div');
-            ReactDOM.render(<Logo />, div);
+            ReactDOM.render(<Logo/>, div);
             ReactDOM.unmountComponentAtNode(div);
+        });
+    });
+});
+
+describe('render', () => {
+    describe('snapshots 📸', () => {
+        it('Logo should match snap shot', () => {
+            matches(<Logo/>);
         });
     });
 });
