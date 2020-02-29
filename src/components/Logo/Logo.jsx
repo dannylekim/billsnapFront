@@ -22,7 +22,7 @@ export const Logo = (prop) => {
             default:
                 setImgSrc(logoSmall);
         }
-    }, []); // Empty array ensures that effect is only run on mount and unmount
+    }, [prop.size]); // Empty array ensures that effect is only run on mount and unmount
 
     return (
         <img src={imgSrc} alt="Logo"/>
