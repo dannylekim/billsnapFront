@@ -1,21 +1,24 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {Logo} from '../Logo.jsx';
 
 describe('Logo', () => {
     describe('render', () => {
-        it('renders without crashing', () => {
-            const div = document.createElement('div');
-            ReactDOM.render(<Logo/>, div);
-            ReactDOM.unmountComponentAtNode(div);
-        });
-    });
-});
+        describe('snapshots 📸', () => {
+            it('Logo default should match snap shot', () => {
+                matches(<Logo/>);
+            });
 
-describe('render', () => {
-    describe('snapshots 📸', () => {
-        it('Logo should match snap shot', () => {
-            matches(<Logo/>);
+            it('Logo size large should match snap shot', () => {
+                matches(<Logo size='large' />);
+            });
+
+            it('Logo size medium should match snap shot', () => {
+                matches(<Logo size='medium' />);
+            });
+
+            it('Logo size undefined option should match snap shot', () => {
+                matches(<Logo size='gibberish' />);
+            });
         });
     });
 });

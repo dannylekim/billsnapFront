@@ -1,13 +1,34 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import PropType from 'prop-types';
 import './styles.scss';
 
-export const Logo = () => {
+//TODO: replace logo consts with 'src/assets/logo' images
+const logoSmall = "https://via.placeholder.com/30x30.png?text=30x30+Logo";
+const logoMed = "https://via.placeholder.com/60x60.png?text=60x60+Logo";
+const logoLarge = "https://via.placeholder.com/100x100.png?text=100x100+Logo";
+
+export const Logo = (prop) => {
+
+    const [imgSrc, setImgSrc] = useState(logoSmall);
+
+    useEffect(() => {
+        switch (prop.size) {
+            case 'medium':
+                setImgSrc(logoMed);
+                break;
+            case 'large':
+                setImgSrc(logoLarge);
+                break;
+            default:
+                setImgSrc(logoSmall);
+        }
+    }, []); // Empty array ensures that effect is only run on mount and unmount
+
     return (
-        //TODO: change srcSet urls to 'src/assets/logos' image assets
-        <picture>
-            <source media="(min-width: 768px)" srcSet='https://via.placeholder.com/60x60.png?text=60x60+Logo'/>
-            <source media="(min-width: 1024px)" srcSet='https://via.placeholder.com/80x80.png?text=80x80+Logo'/>
-            <img src="https://via.placeholder.com/40x40.png?text=40x40+Logo" alt="Small logo"/>
-        </picture>
+        <img src={imgSrc} alt="Logo"/>
     )
+};
+
+Logo.propTypes = {
+    size: PropType.string // options: small by default, 'medium', 'large'
 };
