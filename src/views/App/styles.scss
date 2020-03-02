@@ -4,18 +4,18 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
 .App-header {
   background-color: $secondary-color;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+
+  .App-logo {
+    padding: 5px;
+  }
 }
 
 .App-link {
