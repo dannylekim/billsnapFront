@@ -1,20 +1,21 @@
 .title {
-  max-width: 500px;
+  width: 500px;
 }
 
-.title__row {
+div.title__row {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 
   &.title__text {
 
   }
 
-  .title__title {
-
+  h1.title__title {
+   
   }
 
-  .title__logo {
+  img.title__logo {
 
   }
 }

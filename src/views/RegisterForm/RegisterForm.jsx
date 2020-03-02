@@ -16,67 +16,97 @@ export const RegisterForm = ({
   handleButtonClick,
   onChange,
   validInvalidByName,
-  conditions
+  conditions,
+  alertNotification,
+  dismissAlert,
+  setFormType,
+  apiIsLoading
 }) => {
   return (
-    <Form>
-      <div className="form-inputs">
-        {registerFormInputs.map((inputs, key) => (
-          <FormGroup key={key} onChange={onChange}>
-            <FormInput
-              invalid={validInvalidByName(inputs.name, "invalid")}
-              valid={validInvalidByName(inputs.name, "valid")}
-              className="mb-2"
-              type={inputs.type}
-              name={inputs.name}
-              id={inputs.name}
-              placeholder={inputs.placeholder}
-              autoComplete={inputs.autoComplete}
-            />
-          </FormGroup>
-        ))}
-      </div>
-      <FormGroup>
-        <Button
-          size="lg"
-          pill
-          theme="dark"
-          onClick={event => handleButtonClick(event)}
-          name="submit"
+    <div className="register__container">
+      {alertNotification.isOpen === true ? (
+        <Alert
+          dismissible={dismissAlert}
+          open={alertNotification.isOpen}
+          className="mb-3"
+          theme={alertNotification.alertType}
         >
-          Submit
-        </Button>
-      </FormGroup>
-
-      {conditions.map(
-        condition => //document.getElement so that tests pass else DOM not found for id ... 
-          ((condition.condition || condition.condition === false) && (document.getElementById(condition.name) && document.getElementById(condition.name)!== "")) && (
-            <Tooltip
-              placement="left"
-              key={`#${condition.name}`}
-              open={condition.toolTipInfo.open}
-              target={`#${condition.name}`}
-            >
-              <span id="input_error">{condition.toolTipInfo.errorMessage}</span>
-            </Tooltip>
-          )
+          {alertNotification.alertMessage}
+        </Alert>
+      ) : (
+        <div className="hidden__div"></div>
       )}
-    </Form>
+
+      <Form>
+        <div className="form__inputs">
+          {registerFormInputs.map((inputs, key) => (
+            <FormGroup key={key} onChange={onChange}>
+              <FormInput
+                invalid={validInvalidByName(inputs.name, "invalid")}
+                valid={validInvalidByName(inputs.name, "valid")}
+                className="mb-2"
+                type={inputs.type}
+                name={inputs.name}
+                id={inputs.name}
+                placeholder={inputs.placeholder}
+                autoComplete={inputs.autoComplete}
+              />
+            </FormGroup>
+          ))}
+        </div>
+        <FormGroup>
+          <Button
+            size="lg"
+            pill
+            theme="dark"
+            onClick={event => handleButtonClick(event)}
+            name="submit"
+          >
+            Submit
+          </Button>
+        </FormGroup>
+
+        {conditions.map((condition, key) => (
+          <Tooltip
+            placement="left"
+            key={key}
+            open={condition.toolTipInfo.open}
+            target={`#${condition.name}`}
+          >
+            <span id="input__error">{condition.toolTipInfo.errorMessage}</span>
+          </Tooltip>
+        ))}
+      </Form>
+
+      <div>
+        <h6>
+          Have an account?
+          <Button
+            className="form__toggle"
+            onClick={setFormType}
+            disabled = {apiIsLoading}
+          >
+            Login to your account.
+          </Button>
+        </h6>
+      </div>
+    </div>
   );
 };
 
+export const defaultError = {
+  isOpen: false,
+  alertType: "",
+  alertMessage: ""
+};
+
 export default props => {
-  //validInputs
-  const defaultError = {
-    isOpen: false,
-    alertType: "",
-    alertMessage: ""
-  };
+  const [apiIsLoading, setApiIsLoading] = useState(false);
   const [validFirstName, setValidFirstName] = useState(true);
   const [validLastName, setValidLastName] = useState(true);
   const [validEmail, setValidEmail] = useState(true);
   const [validPasswordFormat, setValidPasswordFormat] = useState(true);
-  const [validPassword, setValidPassword] = useState(true); 
+  const [validPassword, setValidPassword] = useState(true);
   const [userCredentials, setUserCredential] = useState({
     firstName: "",
     lastName: "",
@@ -97,7 +127,9 @@ export default props => {
   };
 
   const nameRegex = new RegExp(/^[_A-z]*((-|\s)*[_A-z])*$/);
-  const emailRegex = new RegExp(/^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); 
+  const emailRegex = new RegExp(
+    /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
   const passwordRegex = new RegExp(
     /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).{8,20}/
   );
@@ -122,7 +154,6 @@ export default props => {
       ? validInputs[[name]]
       : false;
   };
-
   /**
    * @description Sets the alert or turns it off by calling the setter.
    * @param {String} triggerType - type of trigger success or error.
@@ -208,32 +239,35 @@ export default props => {
       checkValidity(true, validLastName, "lastName") &&
       checkValidity(true, validEmail, "email")
     ) {
-      const dataToSend = {  firstName: userCredentials.firstName,
-                            lastName: userCredentials.lastName,
-                            email: userCredentials.email,
-                            password: userCredentials.password};
-      try{
+      const dataToSend = {
+        firstName: userCredentials.firstName,
+        lastName: userCredentials.lastName,
+        email: userCredentials.email,
+        password: userCredentials.password
+      };
+      try {
+        setApiIsLoading(true);
         const response = await register(dataToSend);
-        if (response.statusCode === 201)
-          props.history.push('/dashboard');
+        if (response.statusCode === 201) props.history.push("/dashboard");
         //if user already exists
         else triggerAlert("error", response.message);
-      }
-      catch (error){
+      } catch (error) {
         throw new Error(error);
-    }
-    } else {//blank inputs
+      }
+    } else {
+      //blank inputs
       registerFormInputs.forEach(error => {
         if (userCredentials[error.name] === "")
           getValidationFunction(error.name, -1);
       });
       triggerAlert("error", "Form Not Validated"); //handle response
     }
+    setApiIsLoading(false);
   };
   //list of error messages / information for the Tool Tip component.
   const conditions = [
     {
-      name:"confirmPassword",
+      name: "confirmPassword",
       condition: checkValidity(false, validPassword, "confirmPassword"),
       toolTipInfo: {
         open: !validPassword,
@@ -243,7 +277,7 @@ export default props => {
       }
     },
     {
-      name:"password",
+      name: "password",
       condition: checkValidity(false, validPasswordFormat, "password"),
       toolTipInfo: {
         open: !validPasswordFormat,
@@ -253,7 +287,7 @@ export default props => {
       }
     },
     {
-      name:"firstName",
+      name: "firstName",
       condition: checkValidity(false, validFirstName, "firstName"),
       toolTipInfo: {
         open: !validFirstName,
@@ -263,7 +297,7 @@ export default props => {
       }
     },
     {
-      name:"lastName",
+      name: "lastName",
       condition: checkValidity(false, validLastName, "lastName"),
       toolTipInfo: {
         open: !validLastName,
@@ -273,7 +307,7 @@ export default props => {
       }
     },
     {
-      name:"email",
+      name: "email",
       condition: checkValidity(false, validEmail, "email"),
       toolTipInfo: {
         open: !validEmail,
@@ -285,16 +319,6 @@ export default props => {
   ];
 
   return (
-    <div className="register__container">
-      <Alert
-        dismissible={dismissAlert}
-        open={alertNotification.isOpen}
-        className="mb-3"
-        theme={alertNotification.alertType}
-      >
-        {alertNotification.alertMessage}
-      </Alert>
-
       <RegisterForm
         handleButtonClick={handleButtonClick}
         onChange={onChange}
@@ -302,19 +326,11 @@ export default props => {
         userCredentials={userCredentials}
         validInvalidByName={validInvalidByName}
         conditions={[...conditions]}
+        dismissAlert={dismissAlert}
+        alertNotification={alertNotification}
+        setFormType = {() => props.setFormType("login")}
+        apiIsLoading={apiIsLoading} //to prevent changing form while sending request. (doing so causes error)
       />
-      <div>
-        <h6>
-          Have an account?
-          <Button
-            className="login-link"
-            onClick={() => props.setFormType("login")}
-          >
-            Login to your account.
-          </Button>
-        </h6>
-      </div>
-    </div>
   );
 };
 

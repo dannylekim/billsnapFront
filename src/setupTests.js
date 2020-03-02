@@ -13,7 +13,7 @@ configure({ adapter: new Adapter() });
 const matches = children => expect(
     renderer.create(children).toJSON()
   ).toMatchSnapshot();
-
+  
 global.shallow = shallow;
 global.render = render;
 global.mount = mount;

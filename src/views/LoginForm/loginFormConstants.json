@@ -2,11 +2,13 @@
     {
         "placeholder": "Enter your email",
         "name": "email",
-        "type": "email"
+        "type": "email",
+        "autoComplete": "username"
     },
     {
         "placeholder": "Enter a password",
         "name": "password",
-        "type": "password"
+        "type": "password",
+        "autoComplete": "new-password"
     }
 ]

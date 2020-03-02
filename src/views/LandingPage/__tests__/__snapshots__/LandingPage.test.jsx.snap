@@ -5,8 +5,8 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
   className="page__landing"
 >
   <div
-    className="title-logo"
-    id="flex-item"
+    className="title__logo"
+    id="flex__item"
   >
     <div
       className="title"
@@ -14,21 +14,16 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
       <div
         className="title__row"
       >
-        <div
+        <h1
           className="title__title"
         >
-          <h1>
-            Billsnap
-          </h1>
-        </div>
-        <div
+          Billsnap
+        </h1>
+        <img
+          alt="Logo"
           className="title__logo"
-        >
-          <img
-            alt="Logo"
-            src="https://via.placeholder.com/150x100.png?text=150x100+Logo"
-          />
-        </div>
+          src="https://via.placeholder.com/150x100.png?text=150x100+Logo"
+        />
       </div>
       <div
         className="title__row title__text"
@@ -40,17 +35,19 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
     </div>
   </div>
   <div
-    className="register__form"
-    id="flex-item"
+    id="flex__item"
   >
     <div
       className="register__container"
     >
+      <div
+        className="hidden__div"
+      />
       <form
         className=""
       >
         <div
-          className="form-inputs"
+          className="form__inputs"
         >
           <div
             className="form-group"
@@ -135,7 +132,8 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
         <h6>
           Have an account?
           <button
-            className="login-link btn btn-primary"
+            className="form__toggle btn btn-primary"
+            disabled={false}
             onClick={[Function]}
             type="button"
           >
