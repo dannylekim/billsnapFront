@@ -7,6 +7,11 @@ cache:
   yarn: true
   directories:
   - node_modules
+addons:
+  sonarcloud:
+    organization: "dannylekim"
+    token:
+      secure: "FffhrC6wDSv2Mm5FxHtyryVYWWMGUj7aqPo+9/apGRsQcL/YKwD8EcIsS4oEGvh0UQCSmjZTdLoyO37DBFbeBaKEFKjqWxFkYw2+5d25YYqIBtStZimM4zg7tLRztk6fevEnvkqaoZkK2nkDtfDVFrhktscvhxZwWPdu4nKHS0eeGZaypZ9Gubp8js5aOXJIlrmS3bF6GpMgz7x4YGpwEU0usog5ianlGpr25ehdWjBd6JfVeX/vOy/efXdDiMDEZa2R4a8WpA4rJ1FO/bwz2oT6tY9EmvSuJykXTlrgZQ0FAYENcy+v9r0v0zHak7Vw/nHMhiqgG3NjgjYAATJkR/iJ5nsFo0uHo1p+2ua6CUetceUiDRSFdp4NEWpSWDum+56RR2Ebn3ID5pWjDsvt722nmjKucvqqJuXN37i4RkQJupN2PlGbsfaJ+SYyx+KabIE0DVcZ3bqUmhzK9igMxUekqj4I/rEnZrnMPkLiBEA+h+yk1JIUbA6ZxgiTwfOEFx5AIXMNvsiCBu974jFqOdtXfvOvkL7RyvQiue74qCuTtJ9Aw9gTHl5bdP1ZHne+fiuw6RfUuyEz4MS/6SmBFhYWLus6yrPmHJeuuRF/0HDBb3kqub4P68GkIzh9yqJtDoqUeT2DWS8yi39M717GMpI6fwIUpGkhM40LGemXq7E="
 
 matrix:
   include:
@@ -14,6 +19,8 @@ matrix:
     script: 
     - yarn run test
     - codecov
-
+  - name: sonarcloud
+    # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+    - sonar-scanner
   - name: 'JavaScript Build'
     script: yarn run build
