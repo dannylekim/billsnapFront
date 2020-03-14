@@ -5,12 +5,17 @@ codecov:
 coverage:
   precision: 2
   round: down
-  range: "40...60"
+  range: "50...70"
 
   status:
     project: yes
     patch: yes
     changes: no
+  
+  ignore:
+    - "**/index.js"
+    - "src/setupTest.js"
+    - "src/serviceWorker.js"
 
 parsers:
   gcov:
