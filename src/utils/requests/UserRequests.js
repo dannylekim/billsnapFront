@@ -13,7 +13,7 @@ export const login = async (credentials) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({...credentials}),
+        body: JSON.stringify(credentials),
     });
 
     return await checkStatus(response);
@@ -38,7 +38,7 @@ export const register = async (entries) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({...entries}),
+        body: JSON.stringify(entries),
     });
 
     return await checkStatus(response);
