@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoginPage render snapshots 📸 LoginPage should match snap shot 1`] = `
+exports[`Navbar render snapshots 📸 Navbar should match snap shot 1`] = `
 <ul
   className="nav nav-tabs"
 >

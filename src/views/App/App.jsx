@@ -5,18 +5,15 @@ import React from 'react';
  */
 // import LoginPage from '../Login/Login';
 import RegisterPage from '../Register/Register';
-
+import Navbar from '../../components/Navbar/Navbar.jsx';
 
 import './styles.scss';
 
 export default (props) => {
-  const appName = process.env.REACT_APP_NAME;
 
   return (
     <div className="App">
-      <header className="App-header">
-        {appName}
-      </header>
+        <Navbar className="App-navbar"/>
       <RegisterPage />
     </div>
   );

@@ -12,7 +12,7 @@ describe('Navbar', () => {
 
     describe('render', () => {
         describe('snapshots 📸', () => {
-            it('LoginPage should match snap shot', () => {
+            it('Navbar should match snap shot', () => {
                 matches(<Navbar/>);
             });
         })
