@@ -5,7 +5,7 @@ codecov:
 coverage:
   precision: 2
   round: down
-  range: "70...100"
+  range: "40...60"
 
   status:
     project: yes
@@ -19,6 +19,8 @@ parsers:
       loop: yes
       method: no
       macro: no
+  javascript:
+    enable_partials: yes
 
 comment:
   layout: "header, diff"
