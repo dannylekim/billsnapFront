@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar.jsx';
 
-describe('LoginPage', () => {
+describe('Navbar', () => {
     let wrapper;
     let handleMockFunction;
 

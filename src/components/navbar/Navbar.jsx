@@ -2,7 +2,6 @@ import React from 'react';
 import './styles.scss';
 import {Nav, NavItem, NavLink} from "shards-react";
 import {FaBars, FaHome, FaMoneyBillWave} from 'react-icons/fa';
-// FaBars FaHome FaMoneyBillWave
 export default () => {
     return (
         <Nav tabs>
