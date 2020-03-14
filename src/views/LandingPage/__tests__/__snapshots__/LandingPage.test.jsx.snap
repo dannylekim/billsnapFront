@@ -133,7 +133,6 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
           Have an account?
           <button
             className="form__toggle btn btn-primary"
-            disabled={false}
             onClick={[Function]}
             type="button"
           >

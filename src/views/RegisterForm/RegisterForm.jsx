@@ -19,8 +19,7 @@ export const RegisterForm = ({
   conditions,
   alertNotification,
   dismissAlert,
-  setFormType,
-  apiIsLoading
+  setFormType
 }) => {
   return (
     <div className="register__container">
@@ -84,7 +83,6 @@ export const RegisterForm = ({
           <Button
             className="form__toggle"
             onClick={setFormType}
-            disabled = {apiIsLoading}
           >
             Login to your account.
           </Button>
@@ -101,7 +99,6 @@ export const defaultError = {
 };
 
 export default props => {
-  const [apiIsLoading, setApiIsLoading] = useState(false);
   const [validFirstName, setValidFirstName] = useState(true);
   const [validLastName, setValidLastName] = useState(true);
   const [validEmail, setValidEmail] = useState(true);
@@ -220,11 +217,7 @@ export default props => {
    */
   const checkValidity = (boolean_value, checkState, name) => {
     const inputField = userCredentials[[name]];
-    if (checkState === boolean_value && inputField && inputField !== "")
-      return true;
-    else {
-      return false;
-    }
+    return (checkState === boolean_value && inputField && inputField !== "");
   };
   /**
    * @description Handles form submittion and checks validity of inputs.
@@ -246,7 +239,6 @@ export default props => {
         password: userCredentials.password
       };
       try {
-        setApiIsLoading(true);
         const response = await register(dataToSend);
         if (response.statusCode === 201) props.history.push("/dashboard");
         //if user already exists
@@ -262,7 +254,6 @@ export default props => {
       });
       triggerAlert("error", "Form Not Validated"); //handle response
     }
-    setApiIsLoading(false);
   };
   //list of error messages / information for the Tool Tip component.
   const conditions = [
@@ -329,7 +320,6 @@ export default props => {
         dismissAlert={dismissAlert}
         alertNotification={alertNotification}
         setFormType = {() => props.setFormType("login")}
-        apiIsLoading={apiIsLoading} //to prevent changing form while sending request. (doing so causes error)
       />
   );
 };

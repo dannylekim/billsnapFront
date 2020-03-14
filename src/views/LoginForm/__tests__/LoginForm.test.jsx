@@ -1,15 +1,24 @@
 import React from 'react';
-import {LoginForm , defaultErrors,defaultAlertMessage } from '../LoginForm.jsx';
-import { shallow } from "enzyme";
+import LoginFormContainer, {LoginForm , defaultErrors,defaultAlertMessage } from '../LoginForm.jsx';
+import { shallow, mount } from "enzyme";
 
 describe('LoginForm', () => {
     let wrapper;
-    let handleMockFunction;
-  
+    let handleMockFunction,mockOnChange,mockDismissAlert,mockHandleResponse,mockHandleButtonClick, mockToggleFormType;
+    let setState,useStateSpy;
+
     beforeEach(() => {
+      setState = jest.fn();
+      useStateSpy = jest.spyOn(React, 'useState').mockImplementation((init) => [init, setState]);
+      mockToggleFormType =  jest.fn();
       handleMockFunction = jest.fn();
+      mockDismissAlert = jest.fn();
+      mockOnChange = jest.fn().mockImplementation(() => useStateSpy);
+      mockHandleResponse = jest.fn();
+      mockHandleButtonClick = jest.fn().mockImplementation(() => mockHandleResponse);
+
       wrapper = shallow(
-        <LoginForm setFormType = {handleMockFunction} handleButtonClick={handleMockFunction} hasErrors={defaultErrors} alertMessage={defaultAlertMessage} error_message = "" dismissAlert={handleMockFunction}/>
+        <LoginForm onChange = {mockOnChange} setFormType = {mockToggleFormType} handleButtonClick={mockHandleButtonClick} hasErrors={defaultErrors} alertMessage={defaultAlertMessage} error_message = "" dismissAlert={mockDismissAlert}/>
       );
     });
   
@@ -29,8 +38,17 @@ describe('LoginForm', () => {
           document.body.appendChild(passwordToolTip)
 
           matches(
-          <LoginForm setFormType = {handleMockFunction} handleButtonClick={handleMockFunction} hasErrors={defaultErrors} alertMessage={defaultAlertMessage} error_message = "" dismissAlert={handleMockFunction}/>);
+          <LoginForm onChange = {mockOnChange} setFormType = {mockToggleFormType} handleButtonClick={handleMockFunction} hasErrors={defaultErrors} alertMessage={defaultAlertMessage} error_message = "" dismissAlert={handleMockFunction}/>);
         });
+
+        it("LoginContainer should match snap shot", () => {
+ 
+          matches(
+          <LoginFormContainer />);
+        });
+
+
+
       });
 
       describe("components", () => {
@@ -59,9 +77,8 @@ describe('LoginForm', () => {
               visible: true,
               alertType: "danger"
             };
-
             wrapper = shallow(
-              <LoginForm setFormType = {handleMockFunction} handleButtonClick={handleMockFunction} hasErrors={error} alertMessage={errorAlertMessage} error_message = "" dismissAlert={handleMockFunction} />
+              <LoginForm onChange = {mockOnChange} setFormType = {mockToggleFormType} handleButtonClick={mockHandleButtonClick} hasErrors={error} alertMessage={errorAlertMessage} error_message = "" dismissAlert={mockDismissAlert} />
             );
            
             expect(wrapper.find('Alert')).toHaveLength(1);
@@ -81,10 +98,47 @@ describe('LoginForm', () => {
     });
   
     describe("functions", () => {
+      it("dismissAlert should close alert message", () => {
+        const error = {
+          email: { hasError: true, message: "email error" },
+          password: { hasError: true, message: "password error" }
+        };
 
-      //test form change button click 
+        const errorAlertMessage = {
+          visible: true,
+          alertType: "danger"
+        };
 
+        wrapper = mount(
+          <LoginForm onChange = {mockOnChange} setFormType = {mockToggleFormType} handleButtonClick={mockHandleButtonClick} hasErrors={error} alertMessage={errorAlertMessage} error_message = "" dismissAlert={mockDismissAlert} />
+          );
+        
+        wrapper.find("button.close").simulate("click");
+        expect(mockDismissAlert).toBeCalledTimes(1);
+      });
 
+    it("handleResponse is called", () => {
+      wrapper = mount(
+        <LoginForm onChange = {mockOnChange} setFormType = {mockToggleFormType} handleButtonClick={mockHandleButtonClick} hasErrors={defaultErrors} alertMessage={defaultAlertMessage} error_message = "" dismissAlert={mockDismissAlert} />
+      );
+      wrapper.find("button.btn.btn-pill").simulate("click");
+      expect(mockHandleButtonClick).toBeCalledTimes(1);
+      expect(mockHandleButtonClick()).toBe(mockHandleResponse);
     });
+
+    it("onChange is called when form input is changed", () => {
+      wrapper = mount(
+        <LoginForm onChange = {mockOnChange} setFormType = {mockToggleFormType} handleButtonClick={mockHandleButtonClick} hasErrors={defaultErrors} alertMessage={defaultAlertMessage} error_message = "" dismissAlert={mockDismissAlert} />
+      );
+      wrapper.find("FormGroup").at(0).props().onChange();
+      expect(mockOnChange).toBeCalledTimes(1);
+      
+    });
+
+    it("click formToggle", () => {
+      wrapper.find(".form__toggle").simulate("click");
+      expect(mockToggleFormType).toBeCalledTimes(1);
+    });
+  });
 });
 

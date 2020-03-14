@@ -1,10 +1,12 @@
 import React from 'react';
-import { RegisterForm, defaultError } from '../RegisterForm.jsx';
+import RegisterFormContainer, { RegisterForm, defaultError } from '../RegisterForm.jsx';
 import { shallow } from "enzyme";
 
 describe('RegisterForm', () => {
     let wrapper;
     let handleMockFunction;
+    let mockToggleFormType;
+    let mockOnChange;
 
     const conditions = [
       {
@@ -51,8 +53,10 @@ describe('RegisterForm', () => {
 
     beforeEach(() => {
       handleMockFunction = jest.fn();
+      mockToggleFormType =  jest.fn();
+      mockOnChange = jest.fn();
       wrapper = shallow(
-        <RegisterForm setFormType = {handleMockFunction} handleButtonClick={handleMockFunction} validInvalidByName={handleMockFunction} conditions={conditions} alertNotification={defaultError}/>
+        <RegisterForm onChange = {mockOnChange} setFormType = {mockToggleFormType} handleButtonClick={handleMockFunction} validInvalidByName={handleMockFunction} conditions={conditions} alertNotification={defaultError}/>
       );
     });
   
@@ -84,12 +88,29 @@ describe('RegisterForm', () => {
           verifyPasswordToolTip.setAttribute("id", "confirmPassword");
           document.body.appendChild(verifyPasswordToolTip);
 
-          matches(<RegisterForm setFormType = {handleMockFunction} handleButtonClick={handleMockFunction} validInvalidByName={handleMockFunction} conditions={conditions}  alertNotification={defaultError}/>);//matches come from setuptest
+          matches(<RegisterForm onChange = {mockOnChange} setFormType = {mockToggleFormType} handleButtonClick={handleMockFunction} validInvalidByName={handleMockFunction} conditions={conditions} alertNotification={defaultError}/>);
         });
+
+        it("RegisterFormContainer should match snap shot", () => {
+          matches(<RegisterFormContainer />)
+        })
       });
   
       describe("components", () => {});
     });
   
-    describe("functions", () => {});
+    describe("functions", () => {
+
+      it("onChange is called when form input is changed", () => {
+        wrapper.find("FormGroup").at(0).props().onChange();
+        expect(mockOnChange).toBeCalledTimes(1);
+      });
+  
+
+      it("click formToggle", () => {
+        wrapper.find(".form__toggle").simulate("click");
+        expect(mockToggleFormType).toBeCalledTimes(1);
+      });
+
+    });
 });
