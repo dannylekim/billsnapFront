@@ -8,7 +8,7 @@ const { URL } = require("../../config")
  */
 export const login = async (credentials) => {
 
-    const response = await fetch(URL + "/login", {
+    const response = await fetch(`${URL}/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -22,14 +22,18 @@ export const login = async (credentials) => {
 /**
  * @function registerUser
  * @description Function used to wrap the register request while simply requiring data for account registration
+ * @param {String} entries.firstName
+ * @param {String} entries.lastName
  * @param {String} entries.email
  * @param {String} entries.password // no need to encrypt yet
- * @param {String} entries.confirmPassword
- * @param {String} entries.etc... name, age, ...rest
  */
+
+/*
+{type: "cors", url: "https://billsnap-development.herokuapp.com/billsnap/register", redirected: false, status: 400, ok: false, …}
+*/
 export const register = async (entries) => {
 
-    const response = await fetch(URL + "/register", {
+    const response = await fetch(`${URL}/register`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -42,10 +46,11 @@ export const register = async (entries) => {
 
 async function checkStatus(response) {
     const parsedResponse = await response.json();
-
+  
     if (response.status < 200 || response.status >= 300) {
-        throw new Error(parsedResponse.message);
+        
+        // throw new Error(parsedResponse.errors);
     }
 
-    return parsedResponse;
+    return {...parsedResponse, statusCode: response.status};
 }

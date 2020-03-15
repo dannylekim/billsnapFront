@@ -1,0 +1,33 @@
+[
+    {
+        "placeholder": "Enter your first name",
+        "name": "firstName",
+        "type": "text",
+        "autoComplete" : "first-name"
+    },
+    {
+        "placeholder": "Enter your last name",
+        "name": "lastName",
+        "type": "text",
+        "autoComplete" : "last-name"
+    },
+    {
+        "placeholder": "Enter your email",
+        "name": "email",
+        "type": "email",
+        "autoComplete" : "username"
+    },
+    {
+        "placeholder": "Enter a password",
+        "name": "password",
+        "type": "password",
+        "autoComplete" : "new-password"
+    },
+    {
+        "placeholder": "Verify password",
+        "name": "confirmPassword",
+        "type": "password",
+        "autoComplete" : "new-password"
+    }
+]
+

@@ -10,3 +10,18 @@ describe("TitleLogo", () => {
     });
   });
 });
+
+describe('TitleLogo', () => {
+
+  describe("render", () => {
+    describe("snapshots 📸", () => {
+      it("TitleLogo should match snap shot", () => {
+        matches(<TitleLogo />);
+      });
+    });
+
+    describe("components", () => {});
+  });
+
+  describe("functions", () => {});
+});

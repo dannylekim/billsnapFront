@@ -4,15 +4,12 @@ import "./styles.scss";
 export const TitleLogo = () => {
   return (
     <div className="title__row">
-      <div className="title__title">
-        <h1>Billsnap</h1>
-      </div>
-      <div className="title__logo">
+        <h1 className="title__title">Billsnap</h1>
         <img
-          src="http://via.placeholder.com/150x100.png?text=150x100+Logo"
+          className="title__logo"
+          src="https://via.placeholder.com/150x100.png?text=150x100+Logo"
           alt="Logo"
         />
-      </div>
     </div>
   );
 };

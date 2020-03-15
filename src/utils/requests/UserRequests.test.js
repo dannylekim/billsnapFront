@@ -8,6 +8,11 @@ const loginInput = {
     "password":"password",
 };
 
+const blankLoginInput = {
+    "email":"",
+    "password":"",
+};
+
 const registerInput = {
     "email":"test@email.com",
     "password":"password",
@@ -18,6 +23,24 @@ const registerInput = {
 const goodResponse = {
     "status": 200,
 }
+
+const blankResponse = {
+    "status": 400,
+    "timestamp": "time",
+    "message": "Invalid Login Inputs. Please fix the following errors",
+    "errors": [
+        {
+            "field": "password",
+            "rejectedValue": "",
+            "message": "must not be blank"
+        },
+        {
+            "field": "email",
+            "rejectedValue": "",
+            "message": "must not be blank"
+        }
+    ]
+};
 
 const badResponse = {
     "status": 400,
@@ -49,7 +72,7 @@ describe("UserRequests", () => {
 
         it("Should login successfully", async () => {
             window.fetch.returns(mockApiResponse(goodResponse));
-            const res = await register(loginInput);
+            const res = await login(loginInput);
             
             assert.equal(res.status, goodResponse.status);
         });
@@ -60,6 +83,14 @@ describe("UserRequests", () => {
             assert.rejects(async () => await login(loginInput), Error);
         });
 
+        it("Should throw error blank inputs, async", async () => {
+            window.fetch.returns(mockApiResponse(blankResponse));
+            const res = await login(blankLoginInput);
+            
+            assert.equal(res.status, blankResponse.status);
+            assert.equal(res.errors[0].message, "must not be blank");
+            assert.equal(res.errors[1].message, "must not be blank");
+        });
     });
 
     describe("register", () => {
