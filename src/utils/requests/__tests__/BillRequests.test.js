@@ -22,5 +22,5 @@ describe("BillRequests", () => {
             expect(res.status).toEqual("UNAUTHORIZED");
             expect(res.message).toEqual("Access is unauthorized!");
         });
-    })
-})
+    });
+});

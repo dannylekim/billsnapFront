@@ -5,15 +5,18 @@ const {URL} = require("../../config");
  * @param {String} token
  */
 export const getBill = async (token) => {
-    const response = await fetch(`${URL}/bills`, { 
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-        }
-    });
-
-    return await response.json();
+    try{
+        const response = await fetch(`${URL}/bills`, { 
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            }
+        });
+        return await response.json();
+    }catch(error){
+        throw(error)
+    };
 };
 
 
