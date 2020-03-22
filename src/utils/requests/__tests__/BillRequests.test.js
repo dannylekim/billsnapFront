@@ -1,4 +1,4 @@
-import { getBill } from "../BillRequestss";
+import { getBill } from "../BillRequests";
 
 describe("BillRequests", () => {
     /** @description Note that these tokens may change. */ 
