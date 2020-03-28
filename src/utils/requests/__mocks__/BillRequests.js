@@ -1,6 +1,6 @@
 const mockGetBill = jest.fn((token) => {
     try{
-        if(token === "good")
+        if(token === "userHasBills")
             return Promise.resolve(
                 [
                     {
@@ -19,7 +19,7 @@ const mockGetBill = jest.fn((token) => {
                     }
                 ]
             );
-        else if (token === "bad")
+        else if (token === "userHasNoBills")
             return Promise.resolve(
                 []
             );
@@ -27,9 +27,7 @@ const mockGetBill = jest.fn((token) => {
             return Promise.resolve(
                 {
                     status: "UNAUTHORIZED",
-                    timestamp: "time",
-                    message: "Access is unauthorized!",
-                    errors: []
+                    message: "Access is unauthorized!"
                 }
             );
     }catch(error){

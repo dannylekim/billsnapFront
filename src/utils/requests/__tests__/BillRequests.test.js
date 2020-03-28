@@ -6,12 +6,12 @@ describe("BillRequests", () => {
     describe("getBill", () => {
 
         it("Should contain no bills", async () => {
-            const res = await mockGetBill("bad");
+            const res = await mockGetBill("userHasNoBills");
             expect(res).toEqual([]);
         });
 
         it("Should contain bills", async () => {
-            const res = await mockGetBill("good");
+            const res = await mockGetBill("userHasBills");
             expect(res.length).toBeGreaterThan(0);
         });
 
