@@ -1,4 +1,4 @@
-export const mockGetBill = (token) => {
+const mockGetBill = jest.fn((token) => {
     try{
         if(token === "good")
             return Promise.resolve(
@@ -35,4 +35,6 @@ export const mockGetBill = (token) => {
     }catch(error){
         throw(error)
     };
-};
+});
+
+export default mockGetBill
