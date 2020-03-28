@@ -1,5 +1,5 @@
-import mockGetBill from "../__mocks__/BillRequestss";
-import {getBill} from "../BillRequestss"; 
+import mockGetBill from "../__mocks__/BillRequests";
+import {getBill} from "../BillRequests"; 
 describe("BillRequests", () => {
     const callGetBill = jest.fn(token => getBill(token));
 
