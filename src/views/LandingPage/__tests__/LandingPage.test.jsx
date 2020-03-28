@@ -7,7 +7,6 @@ describe("LandingPage", () => {
     describe("snapshots 📸", () => {
       it("LandingPage should match snap shot", () => {
         createRegisterFormElements();
-
         matches(<LandingPage />);
       });
     });
