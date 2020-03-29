@@ -13,10 +13,8 @@ export const getBill = async (token) => {
                 "Authorization": `Bearer ${token}`,
             }
         });
-        return await response.json();
+        return await response;
     }catch(error){
         throw(error)
     };
 };
-
-
