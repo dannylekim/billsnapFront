@@ -1,40 +1,89 @@
-import {getBill} from "../BillRequests"; 
+import {getBill} from "../BillRequests";
 
-const unAuthorizedResponse =  { 
-                    status: 401,
-                    statusText: "Unauthorized",
-                    body: {
-                        status: "UNAUTHORIZED",
-                        message: "Access is unauthorized!"
-                    }
-};
+const {URL} = require("../../../config");
 
 describe("BillRequests", () => {
     describe("getBill", () => {
 
-        it("Should return an json object", async () => {
-            const mockRes = mockApiResponse(unAuthorizedResponse); 
-            const res = await getBill("aToken");
-            
-            expect(res.headers.map["content-type"].split(";")[0]).toEqual(mockRes.headers.map["content-type"]); 
+        afterEach(() => {
+            localStorage.clear();
         });
 
-        it("Should throw an unauthorized error", async () => {
-            const mockRes = mockApiResponse(unAuthorizedResponse); 
-            const res = await getBill("invalidToken");
-            const body = await res.json();
-            expect(res.status).toEqual(mockRes.status);
-            expect(res.statusText).toEqual(mockRes.statusText);
-            expect(body.message).toEqual(mockRes._bodyInit.body.message);
-            expect(body.status).toEqual(mockRes._bodyInit.body.status);
+        it("Should return an json object with the right method", async () => {
+
+            fetch = jest.fn((url, options) => {
+
+                if (options.method !== "GET") {
+                    throw new Error("wrong method")
+                }
+
+                return new Promise((resolve) => {
+                    resolve({
+                        data: {}
+                    })
+                });
+            });
+
+            const res = await getBill();
+
+            expect(res.data).toEqual({});
         });
+
+
+        it("Should return an json object if calling with the right url", async () => {
+
+            fetch = jest.fn((url) => {
+
+                if (url !== `${URL}/bills`) {
+                    throw new Error("wrong url")
+                }
+
+                return new Promise((resolve) => {
+                    resolve({
+                        data: {}
+                    })
+                });
+            });
+
+            const res = await getBill();
+
+            expect(res.data).toEqual({});
+        });
+
+        it("Should return an json object if called with Authorization header with bearer token", async () => {
+
+            const token = "token";
+
+            localStorage.setItem("token", token);
+
+            fetch = jest.fn((url, options) => {
+
+                if (options.headers.Authorization !== `Bearer ${token}`) {
+                    throw new Error("missing Authorization header")
+                }
+
+                return new Promise((resolve) => {
+                    resolve({
+                        data: {}
+                    })
+                });
+            });
+
+            const res = await getBill();
+
+            expect(res.data).toEqual({});
+        });
+
+
+        it("Should throw an error if api throws an error", async () => {
+
+            fetch = jest.fn(() => {
+                throw new Error("error")
+            });
+
+            await expect(() => getBill().toThrowError());
+        });
+
+
     });
 });
-
-const mockApiResponse = (response) => new window.Response(response, {
-       status: response.status,
-       statusText:  response.statusText,
-       headers: { "Content-type": "application/json" },
-       body: response.body,
-    }
-);
