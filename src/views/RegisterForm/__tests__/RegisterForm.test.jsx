@@ -1,5 +1,6 @@
 import React from 'react';
 import RegisterFormContainer, { RegisterForm, defaultError } from '../RegisterForm.jsx';
+import {createRegisterFormElements} from "../../../constants/FormElements";
 import { shallow } from "enzyme";
 
 describe('RegisterForm', () => {
@@ -67,26 +68,7 @@ describe('RegisterForm', () => {
     describe("render", () => {
       describe("snapshots 📸", () => {
         it("Register should match snap shot", () => {
-          const firstNameToolTip = document.createElement('div');
-          const lastNameToolTip = document.createElement('div');
-          const emailToolTip = document.createElement('div');
-          const passwordToolTip = document.createElement('div');
-          const verifyPasswordToolTip = document.createElement('div');
-          
-          firstNameToolTip.setAttribute("id", "firstName");
-          document.body.appendChild(firstNameToolTip);
-
-          lastNameToolTip.setAttribute("id", "lastName");
-          document.body.appendChild(lastNameToolTip);
-
-          emailToolTip.setAttribute("id", "email");
-          document.body.appendChild(emailToolTip);
-
-          passwordToolTip.setAttribute("id", "password");
-          document.body.appendChild(passwordToolTip);
-
-          verifyPasswordToolTip.setAttribute("id", "confirmPassword");
-          document.body.appendChild(verifyPasswordToolTip);
+          createRegisterFormElements();
 
           matches(<RegisterForm onChange = {mockOnChange} setFormType = {mockToggleFormType} handleButtonClick={handleMockFunction} validInvalidByName={handleMockFunction} conditions={conditions} alertNotification={defaultError}/>);
         });
