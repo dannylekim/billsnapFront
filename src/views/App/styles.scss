@@ -2,6 +2,7 @@
 
 .App {
   text-align: center;
+  height: 100vh;
 }
 
 .App-logo {
@@ -10,8 +11,8 @@
 
 .App-header {
   background-color: $secondary-color;
+  flex-wrap: wrap;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
@@ -20,4 +21,16 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.App__container {
+  display: flex;
+  align-items: center;
+  height: inherit;
+  justify-content: center;
+}
+
+a.header-name, a.header-name:hover{
+  text-decoration: none;
+  color:white;
 }
