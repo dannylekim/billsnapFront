@@ -1,0 +1,17 @@
+.billSnap-SideBar{
+    transition: 0.3s;
+    position: fixed;
+    height: 100vh;
+    background-color: white;
+    width: 200px;
+
+    &-open {
+        margin-left: 0px;
+        box-shadow: 2px 5px 3px 0px #ccc;
+    }
+
+    &-close { 
+        margin-left: -200px;
+    }
+}
+
