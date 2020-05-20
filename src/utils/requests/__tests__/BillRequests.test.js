@@ -19,7 +19,7 @@ describe("BillRequests", () => {
 
                 return new Promise((resolve) => {
                     resolve({
-                        data: {}
+                        json: () => Promise.resolve({data: {}})
                     })
                 });
             });
@@ -40,7 +40,7 @@ describe("BillRequests", () => {
 
                 return new Promise((resolve) => {
                     resolve({
-                        data: {}
+                        json: () => Promise.resolve({data: {}})
                     })
                 });
             });
@@ -64,7 +64,7 @@ describe("BillRequests", () => {
 
                 return new Promise((resolve) => {
                     resolve({
-                        data: {}
+                        json: () => Promise.resolve({data: {}})
                     })
                 });
             });
