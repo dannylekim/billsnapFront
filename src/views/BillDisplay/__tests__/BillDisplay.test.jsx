@@ -47,13 +47,13 @@ describe('BillDisplay', () => {
                   "balance": 15.000000
               }
             ];
-            wrapper.setState({bills: {
+            wrapper.setState({
                 user:   {   firstName:  "",
                             lastName: ""
                         },
                 bills:  mockBills,
                 billsLoaded: true  
-            }} );
+            } );
             expect(wrapper.find('ul')).toHaveLength(mockBills.length);
             expect(wrapper.find('li')).toHaveLength(mockBills.length * 3);
           });
@@ -74,13 +74,13 @@ describe('BillDisplay', () => {
 
         describe("not loaded", () => {
             it("Should display loader gif", () => {
-              wrapper.setState({bills: {
+              wrapper.setState({
                     user:   {   firstName:  "",
                                 lastName: ""
                             },
                     bills:  [],
                     billsLoaded: false  
-              }} );
+              });
               expect(wrapper.find('img.loading__gif')).toHaveLength(1);
             });
           });
