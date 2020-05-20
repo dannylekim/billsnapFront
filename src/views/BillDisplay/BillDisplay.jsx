@@ -5,13 +5,12 @@ import loading from "./gif/loading.gif" //temp loader gif
 
 class BillDisplay extends PureComponent {
 
-    state = { bills :   {
-                            user:   {   firstName:  "",
-                                        lastName: ""
-                                    },
-                            bills:  [],
-                            billsLoaded: false  
-                        }
+    state = {   user:   { firstName:  "",
+                        lastName: ""
+                },
+                bills:  [],
+                billsLoaded: false  
+                        
     };
 
     /**
@@ -25,7 +24,7 @@ class BillDisplay extends PureComponent {
      */
     fetchBill = async () => {
                             const bills =  await getBill();
-                            this.setState({bills :{...this.state.bills, bills, billsLoaded: true}})
+                            this.setState({...this.state, bills, billsLoaded: true})
     };
 
     componentDidMount = async () => {
@@ -57,19 +56,19 @@ class BillDisplay extends PureComponent {
    
     render = () => {
    
-    const {bills} = this.state;
+    const {bills,billsLoaded} = this.state;
         return (
             <div className="bill__wrapper"> 
-                {bills.billsLoaded === false ? 
+                {billsLoaded === false ? 
                 <div className="bill__loading">
                     <img src= {loading} alt="loading gif" className="loading__gif"/>
                 </div>
                 : 
-                bills.bills.length > 0  ? 
+                bills.length > 0  ? 
                     <section>
                         <h1> Bills </h1>
                         <div className="bill__container">
-                            { bills.bills.map((bill,key) =>
+                            { bills.map((bill,key) =>
                                 <div key={key} className="bill__card card">
                                     <div className="card-body">
                                         <h5 className="card-title">{bill.name}</h5>
