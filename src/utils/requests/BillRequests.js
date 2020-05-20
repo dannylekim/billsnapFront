@@ -6,12 +6,13 @@ const {URL} = require("../../config");
 export const getBill = async () => {
     try{
         const token = localStorage.getItem("token");
-        return await fetch(`${URL}/bills`, {
+        const result =  await fetch(`${URL}/bills`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
             }
         });
+        return result.json();
     }catch(error){
         throw(error)
     }

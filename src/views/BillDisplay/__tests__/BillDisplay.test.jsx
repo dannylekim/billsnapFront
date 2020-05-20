@@ -2,12 +2,20 @@ import React from 'react';
 import BillDisplay from '../BillDisplay.jsx';
 import { shallow } from "enzyme";
 
+jest.mock("../../../utils/requests/BillRequests", () => {
+  return ({
+    getBill: jest.fn().mockResolvedValue(["bill1", "bill2"])
+  })
+});
+
 describe('BillDisplay', () => {
     let wrapper, instance;
+    
     beforeEach(() => {    
         wrapper = shallow(
           <BillDisplay/>
         );
+        
         instance = wrapper.instance(); 
       });
 
@@ -22,23 +30,23 @@ describe('BillDisplay', () => {
     describe("components", () => {
         describe("bill list item", () => {
 
-         const mockBills = [
-            {
-                "id": 1,
-                "name": "BILL MOCK 1",
-                "status": "OPEN",
-                "category": "string",
-                "balance": 12.0000
-            },
-            {
-                "id": 2,
-                "name": "BILL MOCK 2",
-                "status": "OPEN",
-                "category": "string",
-                "balance": 15.000000
-            }
-        ];
           it("Should have 3 list items", () => {
+            const mockBills = [
+              {
+                  "id": 1,
+                  "name": "BILL MOCK 1",
+                  "status": "OPEN",
+                  "category": "string",
+                  "balance": 12.0000
+              },
+              {
+                  "id": 2,
+                  "name": "BILL MOCK 2",
+                  "status": "OPEN",
+                  "category": "string",
+                  "balance": 15.000000
+              }
+            ];
             wrapper.setState({bills: {
                 user:   {   firstName:  "",
                             lastName: ""
@@ -76,18 +84,18 @@ describe('BillDisplay', () => {
               expect(wrapper.find('img.loading__gif')).toHaveLength(1);
             });
           });
-    });
-
-
-    describe("functions", () => {
-        it("fetchBill should be called 1 time", () => {
+        });
+         
+      describe("functions", () => {
+          it("fetchBill should be called 1 time", () => {
             const spy = jest.spyOn(instance, 'fetchBill'); // spy on the fetchBill
+
             instance.componentDidMount();
             expect(spy).toBeCalledTimes(1);
-           
             spy.mockRestore();
-        });
 
+          });
+        
         it("billStatusColor should return appropriate colors", () => {
             jest.spyOn(instance, 'billStatusColor'); // spy on the billStatusColor
             expect(instance.billStatusColor("OPEN")).toBe("success");

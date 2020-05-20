@@ -24,17 +24,15 @@ class BillDisplay extends PureComponent {
      * @description calls the getBill function to get all bills for a user, then sets the bills states.
      */
     fetchBill = async () => {
-                            const response =  await getBill();
-                            const bills = await response.json();
+                            const bills =  await getBill();
                             this.setState({bills :{...this.state.bills, bills, billsLoaded: true}})
     };
 
-    componentDidMount = () => {
-                            window.scrollTo(0, 0);
+    componentDidMount = async () => {
                             localStorage.setItem('user', {  firstName: "Bob",
                                                             lastName: "Smith"});
                             localStorage.setItem('token', this.tempToken);
-                            this.fetchBill();
+                            await this.fetchBill();
     };
 
     billStatusColor = status => {
