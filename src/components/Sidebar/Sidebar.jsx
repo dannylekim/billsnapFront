@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import {FaUserCircle} from 'react-icons/fa';
 
 import './styles.scss';
 
-const SideBar = ({ collapseState }) => {
+const SideBar = ({collapseState}) => {
     return (
-        <div className={`billSnap-SideBar billSnap-SideBar-${collapseState ? 'open' : 'close' }`}>
-            <a href="#" >Home</a>
+        <div className={`billSnap-SideBar billSnap-SideBar-${collapseState ? 'open' : 'close'}`}>
+            <a href="#">
+                <FaUserCircle/>
+            </a>
+            <a href="#">
+                Profile
+            </a>
+            <a href="#">
+                Settings
+            </a>
+            <a href="#">
+                Log Out
+            </a>
         </div>
     )
 }
