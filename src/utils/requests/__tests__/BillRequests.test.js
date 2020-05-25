@@ -19,7 +19,7 @@ describe("BillRequests", () => {
 
                 return new Promise((resolve) => {
                     resolve({
-                        json: () => Promise.resolve({data: {}})
+                        json: jest.fn().mockResolvedValue({data: {}})
                     })
                 });
             });
@@ -40,7 +40,7 @@ describe("BillRequests", () => {
 
                 return new Promise((resolve) => {
                     resolve({
-                        json: () => Promise.resolve({data: {}})
+                        json: jest.fn().mockResolvedValue({data: {}})
                     })
                 });
             });
@@ -64,7 +64,7 @@ describe("BillRequests", () => {
 
                 return new Promise((resolve) => {
                     resolve({
-                        json: () => Promise.resolve({data: {}})
+                        json: jest.fn().mockResolvedValue({data: {}})
                     })
                 });
             });

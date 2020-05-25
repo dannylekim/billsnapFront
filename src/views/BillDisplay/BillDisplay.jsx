@@ -35,54 +35,50 @@ class BillDisplay extends PureComponent {
     };
 
     billStatusColor = status => {
-        let color = "muted"
         switch(status){
             case "OPEN":
-                color = "success";
-                break;
+                return "success";
             case "RESOLVED":
-                color = "primary";
-                break;
+                return "primary";
             case "IN_PROGRESS":
-                color = "warning";
-                break;
+                return "warning";
             default:
-                break;        
+                return "muted";   
         };
-
-        return color;
     };
    
-   
     render = () => {
-   
+        
+    const BillsList = (bills) => (
+        <section>
+            <h1> Bills </h1>
+            <div className="bill__container">
+                { bills.map((bill,key) =>
+                    <div key={key} className="bill__card card">
+                        <div className="card-body">
+                            <h5 className="card-title">{bill.name}</h5>
+                            <ul className="bill__list list-group card-text">
+                                <li className={`bill__list__item list-group-item list-group-item-${this.billStatusColor(bill.status)}` }>Bill Status: {bill.status}</li>
+                                <li className="bill__list__item list-group-item">Bill category: {bill.category}</li>
+                                <li className="bill__list__item list-group-item">Bill balance: ${bill.balance}</li>
+                            </ul>
+                        </div>
+                    </div>)
+                }   
+            </div>
+        </section>
+    );
+
     const {bills,billsLoaded} = this.state;
         return (
             <div className="bill__wrapper"> 
-                {billsLoaded === false ? 
+                {!billsLoaded ? 
                 <div className="bill__loading">
                     <img src= {loading} alt="loading gif" className="loading__gif"/>
                 </div>
                 : 
                 bills.length > 0  ? 
-                    <section>
-                        <h1> Bills </h1>
-                        <div className="bill__container">
-                            { bills.map((bill,key) =>
-                                <div key={key} className="bill__card card">
-                                    <div className="card-body">
-                                        <h5 className="card-title">{bill.name}</h5>
-                                            <ul className="bill__list list-group card-text">
-                                                <li className={`bill__list__item list-group-item list-group-item-${this.billStatusColor(bill.status)}` }>Bill Status: {bill.status}</li>
-                                                <li className="bill__list__item list-group-item">Bill category: {bill.category}</li>
-                                                <li className="bill__list__item list-group-item">Bill balance: ${bill.balance}</li>
-                                            </ul>
-                                    </div>
-                                </div>
-                            )
-                            }   
-                        </div>
-                    </section>
+                    BillsList(bills)
                 :
                     <p> No Bills Found</p>
                 }
