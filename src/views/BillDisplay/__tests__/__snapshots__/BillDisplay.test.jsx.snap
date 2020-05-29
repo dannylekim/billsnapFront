@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BillDisplay render snapshots 📸 BillDisplay should match snap shot 1`] = `
+<div
+  className="bill__wrapper"
+>
+  <div
+    className="bill__loading"
+  >
+    <img
+      alt="loading gif"
+      className="loading__gif"
+      src="loading.gif"
+    />
+  </div>
+</div>
+`;

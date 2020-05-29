@@ -19,7 +19,7 @@ describe("BillRequests", () => {
 
                 return new Promise((resolve) => {
                     resolve({
-                        data: {}
+                        json: jest.fn().mockResolvedValue({data: {}})
                     })
                 });
             });
@@ -40,7 +40,7 @@ describe("BillRequests", () => {
 
                 return new Promise((resolve) => {
                     resolve({
-                        data: {}
+                        json: jest.fn().mockResolvedValue({data: {}})
                     })
                 });
             });
@@ -64,7 +64,7 @@ describe("BillRequests", () => {
 
                 return new Promise((resolve) => {
                     resolve({
-                        data: {}
+                        json: jest.fn().mockResolvedValue({data: {}})
                     })
                 });
             });
@@ -76,14 +76,17 @@ describe("BillRequests", () => {
 
 
         it("Should throw an error if api throws an error", async () => {
-
+           
             fetch = jest.fn(() => {
                 throw new Error("error")
             });
+            
+            try {
+                await getBill();
 
-            await expect(() => getBill().toThrowError());
+            }catch (e) {
+                expect(() => expect(e.message).toBe("error"));
+            }
         });
-
-
     });
 });
