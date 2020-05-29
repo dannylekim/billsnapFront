@@ -2,10 +2,13 @@
 
 .App {
   text-align: center;
+  height: 100vh;
+
 }
 
 .App-header {
   background-color: $secondary-color;
+  flex-wrap: wrap;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -20,4 +23,16 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.App__container {
+  display: flex;
+  align-items: center;
+  height: inherit;
+  justify-content: center;
+}
+
+a.header-name, a.header-name:hover{
+  text-decoration: none;
+  color:white;
 }
