@@ -8,6 +8,11 @@ exports[`LoginForm render snapshots 📸 Login should match snap shot 1`] = `
     <div
       className="hidden__div"
     />
+    <img
+      alt="character logo"
+      className="character__icon__image"
+      src="./billSnapIcon.png"
+    />
     <form
       className=""
     >
@@ -20,10 +25,10 @@ exports[`LoginForm render snapshots 📸 Login should match snap shot 1`] = `
         >
           <input
             autoComplete="username"
-            className="mb-2 form-control"
+            className="login__inputs form-control"
             id="email"
             name="email"
-            placeholder="Enter your email"
+            placeholder="@ Enter your email"
             type="email"
           />
         </div>
@@ -33,10 +38,10 @@ exports[`LoginForm render snapshots 📸 Login should match snap shot 1`] = `
         >
           <input
             autoComplete="new-password"
-            className="mb-2 form-control"
+            className="login__inputs form-control"
             id="password"
             name="password"
-            placeholder="Enter a password"
+            placeholder="🔒 Enter a password"
             type="password"
           />
         </div>
@@ -44,28 +49,47 @@ exports[`LoginForm render snapshots 📸 Login should match snap shot 1`] = `
       <div
         className="form-group"
       >
+        <a
+          className="forgot__password"
+          href="/#"
+        >
+           Forgot Password? 
+        </a>
         <button
-          className="btn btn-dark btn-lg btn-pill"
+          className="login__button btn btn-primary btn-sm btn-pill"
           name="submit"
           onClick={[Function]}
           type="button"
         >
-          Login
+          Log in
         </button>
       </div>
     </form>
   </div>
   <div>
-    <h6>
-      New to Billsnap?
+    <div
+      className="form__seperator"
+    >
+      <hr
+        className="form__horizontal__line"
+      />
+      Or
+      <hr
+        className="form__horizontal__line"
+      />
+    </div>
+    <div>
+      <h6>
+        New to Billsnap?
+      </h6>
       <button
         className="form__toggle btn btn-primary"
         onClick={[Function]}
         type="button"
       >
-        Register an account.
+        👋 Create account.
       </button>
-    </h6>
+    </div>
   </div>
 </div>
 `;
@@ -81,6 +105,11 @@ exports[`LoginForm render snapshots 📸 LoginContainer should match snap shot 1
       <div
         className="hidden__div"
       />
+      <img
+        alt="character logo"
+        className="character__icon__image"
+        src="./billSnapIcon.png"
+      />
       <form
         className=""
       >
@@ -93,10 +122,10 @@ exports[`LoginForm render snapshots 📸 LoginContainer should match snap shot 1
           >
             <input
               autoComplete="username"
-              className="mb-2 form-control"
+              className="login__inputs form-control"
               id="email"
               name="email"
-              placeholder="Enter your email"
+              placeholder="@ Enter your email"
               type="email"
             />
           </div>
@@ -106,10 +135,10 @@ exports[`LoginForm render snapshots 📸 LoginContainer should match snap shot 1
           >
             <input
               autoComplete="new-password"
-              className="mb-2 form-control"
+              className="login__inputs form-control"
               id="password"
               name="password"
-              placeholder="Enter a password"
+              placeholder="🔒 Enter a password"
               type="password"
             />
           </div>
@@ -117,28 +146,47 @@ exports[`LoginForm render snapshots 📸 LoginContainer should match snap shot 1
         <div
           className="form-group"
         >
+          <a
+            className="forgot__password"
+            href="/#"
+          >
+             Forgot Password? 
+          </a>
           <button
-            className="btn btn-dark btn-lg btn-pill"
+            className="login__button btn btn-primary btn-sm btn-pill"
             name="submit"
             onClick={[Function]}
             type="button"
           >
-            Login
+            Log in
           </button>
         </div>
       </form>
     </div>
     <div>
-      <h6>
-        New to Billsnap?
+      <div
+        className="form__seperator"
+      >
+        <hr
+          className="form__horizontal__line"
+        />
+        Or
+        <hr
+          className="form__horizontal__line"
+        />
+      </div>
+      <div>
+        <h6>
+          New to Billsnap?
+        </h6>
         <button
           className="form__toggle btn btn-primary"
           onClick={[Function]}
           type="button"
         >
-          Register an account.
+          👋 Create account.
         </button>
-      </h6>
+      </div>
     </div>
   </div>
 </div>

@@ -21,6 +21,8 @@ div.title__logo{
 
 button.form__toggle {
   margin-left: 15px;
+  box-sizing: border-box;
+  border-radius: 50px;
 }
 
 div.tooltip__inner{
@@ -37,4 +39,8 @@ div.hidden__div{
 
 h6 a.form__toggle{
   color:rgba(165, 199, 245, 0.801);
+}
+
+img.character__icon__image{
+  height:50px;
 }

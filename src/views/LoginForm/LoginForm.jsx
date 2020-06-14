@@ -30,12 +30,14 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors,alertMessage,
           <div className="hidden__div"></div>
         )}
 
+        <img alt="character logo" src="./billSnapIcon.png" className="character__icon__image"/>
+
         <Form>
           <div className="form__inputs">
             {loginFormInputs.map((inputs, key) => (
               <FormGroup key={key} onChange={onChange}>
                 <FormInput
-                  className="mb-2"
+                  className="login__inputs"
                   type={inputs.type}
                   name={inputs.name}
                   id={inputs.name}
@@ -47,14 +49,17 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors,alertMessage,
             ))}
           </div>
           <FormGroup>
+
+            <a href="/#" className="forgot__password"> Forgot Password? </a>
+
             <Button
-              size="lg"
+              size="sm"
               pill
-              theme="dark"
+              className="login__button"
               onClick={event => handleButtonClick(event)}
               name="submit"
             >
-              Login
+              Log in
             </Button>
           </FormGroup>
         </Form>
@@ -74,15 +79,22 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors,alertMessage,
       </div>
 
       <div>
-        <h6>
-          New to Billsnap?
+        <div className="form__seperator">
+          <hr className="form__horizontal__line"></hr>
+          Or
+          <hr className="form__horizontal__line"></hr>
+        </div>
+        <div>
+          <h6>
+            New to Billsnap?
+          </h6>
           <Button
             className="form__toggle"
             onClick={setFormType}
           >
-            Register an account.
+            {"👋 Create account."}
           </Button>
-        </h6>
+        </div>
       </div>
    </div>
   );
