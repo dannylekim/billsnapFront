@@ -1,36 +1,35 @@
 import React from 'react';
 import './styles.scss';
-import { Nav, Navbar,  NavItem, NavLink } from 'shards-react';
-import { FaBars, FaHome, FaMoneyBillWave } from 'react-icons/fa';
+import {Nav, Navbar, NavItem, NavLink} from 'shards-react';
 
-export default ({ toggleSideBar }) => {
+export default ({toggleSideBar}) => {
 
     const handleBurger = (e) => {
         e.preventDefault();
         toggleSideBar();
-    }
+    };
 
-	return (
-		<Navbar type="light" expand="sm">
-			<Nav navbar>
-				<NavItem>
-					<NavLink href="#" onClick={handleBurger}>
-						<FaBars />
-					</NavLink>
-				</NavItem>
-				<NavItem>
+    return (
+        <Navbar type="light" expand="sm">
+            <Nav navbar>
+                <NavItem>
+                    <NavLink href="#" onClick={handleBurger}>
+                        About Us
+                    </NavLink>
+                </NavItem>
+                <NavItem>
                     <NavLink
                         href="#"
                     >
-						<FaHome />
-					</NavLink>
-				</NavItem>
-				<NavItem>
-					<NavLink>
-						<FaMoneyBillWave />
-					</NavLink>
-				</NavItem>
-			</Nav>
-		</Navbar>
-	);
+                        Features
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink>
+                        Contact Us
+                    </NavLink>
+                </NavItem>
+            </Nav>
+        </Navbar>
+    );
 };
