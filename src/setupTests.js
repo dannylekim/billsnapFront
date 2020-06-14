@@ -9,10 +9,11 @@ import Adapter from 'enzyme-adapter-react-16';
 import renderer  from 'react-test-renderer';
 
 configure({ adapter: new Adapter() });
+
 const matches = children => expect(
     renderer.create(children).toJSON()
   ).toMatchSnapshot();
-
+  
 global.shallow = shallow;
 global.render = render;
 global.mount = mount;
