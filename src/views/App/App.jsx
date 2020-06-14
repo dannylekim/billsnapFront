@@ -4,9 +4,12 @@ import React from 'react';
  */
 import NavbarLayer from '../NavbarLayer';
 import LandingPage from '../LandingPage/LandingPage';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import './styles.scss';
+/**
+ * Load you page components here. We will render them via routes
+ */
 
 export default (props) => {
 
