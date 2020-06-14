@@ -50,6 +50,7 @@
     "react-app-polyfill": "^1.0.4",
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.11.0",
+    "react-icons": "^3.9.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-test-renderer": "^16.11.0",
@@ -78,7 +79,23 @@
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": ["react-app", "shared-config"],
+    "rules": {
+      "additional-rule": "warn"
+    },
+    "overrides": [
+      {
+        "files": ["**/*.js?(x)"],
+        "rules": {
+          "additional-typescript-only-rule": "warn",
+          "jsx-a11y/anchor-is-valid": [ "error", {
+            "components": [ "Link" ],
+            "specialLink": [ "hrefLeft", "hrefRight" ],
+            "aspects": [ "noHref", "invalidHref", "preferButton" ]
+          }]
+        }
+      }
+    ]
   },
   "browserslist": {
     "production": [
