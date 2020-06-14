@@ -79,31 +79,7 @@
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app"
-    ],
-    "rules": {
-      "additional-rule": "warn"
-    },
-    "overrides": [
-      {
-        "files": [
-          "**/*.js?(x)"
-        ],
-        "rules": {
-          "additional-typescript-only-rule": "warn",
-          "jsx-a11y/anchor-is-valid": [
-            "error",
-            {
-              "components": [
-                "Link"
-              ],
-            "specialLink": [ "hrefLeft", "hrefRight" ],
-            "aspects": [ "noHref", "invalidHref", "preferButton" ]
-          }]
-        }
-      }
-    ]
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [
