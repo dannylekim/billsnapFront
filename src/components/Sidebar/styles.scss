@@ -1,0 +1,28 @@
+.billSnap-SideBar {
+  transition: 0.3s;
+  position: fixed;
+  height: 100vh;
+  background-color: white;
+  width: 200px;
+
+  &-open {
+    margin-left: 0;
+    box-shadow: 2px 5px 3px 0 #ccc;
+  }
+
+  &-close {
+    margin-left: -200px;
+  }
+}
+
+.billSnap-SideBar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  display: block;
+}
+
+.billSnap-SideBar a:hover {
+  color: #127D69;
+
+}
