@@ -37,7 +37,7 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors,alertMessage,
             {loginFormInputs.map((inputs, key) => (
               <FormGroup key={key} onChange={onChange}>
                 <FormInput
-                  className="login__inputs"
+                  className="register__login__inputs"
                   type={inputs.type}
                   name={inputs.name}
                   id={inputs.name}
@@ -55,7 +55,7 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors,alertMessage,
             <Button
               size="sm"
               pill
-              className="login__button"
+              className="login_register__submit__button"
               onClick={event => handleButtonClick(event)}
               name="submit"
             >

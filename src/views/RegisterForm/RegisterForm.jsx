@@ -35,6 +35,7 @@ export const RegisterForm = ({
       ) : (
         <div className="hidden__div"></div>
       )}
+      <img alt="character logo" src="./billSnapIcon.png" className="character__icon__image"/>
 
       <Form>
         <div className="form__inputs">
@@ -43,7 +44,7 @@ export const RegisterForm = ({
               <FormInput
                 invalid={validInvalidByName(inputs.name, "invalid")}
                 valid={validInvalidByName(inputs.name, "valid")}
-                className="mb-2"
+                className="register__login__inputs"
                 type={inputs.type}
                 name={inputs.name}
                 id={inputs.name}
@@ -55,9 +56,9 @@ export const RegisterForm = ({
         </div>
         <FormGroup>
           <Button
-            size="lg"
+            size="sm"
+            className="login_register__submit__button"
             pill
-            theme="dark"
             onClick={event => handleButtonClick(event)}
             name="submit"
           >
@@ -78,15 +79,22 @@ export const RegisterForm = ({
       </Form>
 
       <div>
-        <h6>
-          Have an account?
+        <div className="form__seperator">
+          <hr className="form__horizontal__line"></hr>
+          Or
+          <hr className="form__horizontal__line"></hr>
+        </div>
+        <div>
+          <h6>
+            Have an account?
+          </h6>
           <Button
             className="form__toggle"
             onClick={setFormType}
           >
-            Login to your account.
+            {"👋 Log in to your account."}
           </Button>
-        </h6>
+        </div>
       </div>
     </div>
   );

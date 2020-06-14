@@ -20,19 +20,6 @@ div.login__form .form-control{
     background-color: white;
 }
 
-input.login__inputs{
-    border: 3px solid #47E5B6;
-    border-radius: 50px;
-}
-
-input.login__inputs:hover {
-    border: 3px solid #C0FFEC;
-}
-
-input.login__inputs:active, input.login__inputs:focus {
-    border: 3px solid #3BD0A3;
-}
-
 a.forgot__password{
     margin-right: 10px;
     font-size: 12px;
@@ -43,28 +30,6 @@ a.forgot__password{
 
 a.forgot__password:hover{
     text-decoration: none;
-}
-
-button.login__button{
-    background: #30E3AE;
-    border: 1px solid #47E5B6;
-    font-size: 12px;
-}
-
-button.login__button:hover{
-    background: #30E3AE;
-    border: 1px solid #47E5B6;
-}
-
-div.form__seperator{
-    display: flex;
-    font-size: 18px;
-    text-align: center;
-}
-
-hr.form__horizontal__line{
-    width: 25%;
-    border: 0.1px solid rgba(0, 0, 0, 0.63);
 }
 
 div.login__container{
