@@ -4,9 +4,12 @@ import React from 'react';
  */
 import NavbarLayer from '../NavbarLayer';
 import LandingPage from '../LandingPage/LandingPage';
+import Dashboard from '../Dashboard/Dashboard';
+
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import './styles.scss';
+
 /**
  * Load you page components here. We will render them via routes
  */
@@ -21,7 +24,7 @@ export default (props) => {
           <React.Fragment>
               <div className="App__container">
                 <Route path="/" exact component={LandingPage}/>
-                <Route path="/dashboard" exact/>
+                <Route path="/dashboard" exact component={Dashboard}/>
               </div>  
           </React.Fragment>
         </Switch>

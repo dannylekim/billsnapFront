@@ -56,7 +56,7 @@ export const RegisterForm = ({
         </div>
         <FormGroup>
           <Button
-            size="sm"
+            size="md"
             className="login_register__submit__button"
             pill
             onClick={event => handleButtonClick(event)}

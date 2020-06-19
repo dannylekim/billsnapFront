@@ -53,7 +53,7 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors,alertMessage,
             <a href="/#" className="forgot__password"> Forgot Password? </a>
 
             <Button
-              size="sm"
+              size="md"
               pill
               className="login_register__submit__button"
               onClick={event => handleButtonClick(event)}
@@ -173,7 +173,7 @@ export default props => {
       if (!response.token) {
         handleResponse(response);
       } else {
-        localStorage.setItem("token", response.token);
+        localStorage.setItem("billSnap_token", response.token);
         props.history.push("/dashboard");
       }
     } catch (error) {

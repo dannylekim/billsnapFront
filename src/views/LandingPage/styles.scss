@@ -27,6 +27,7 @@ div.form__inputs{
 }
 
 input.register__login__inputs{
+  font-size: 15x;
   border: 3px solid #47E5B6;
   border-radius: 50px;
 }
@@ -42,7 +43,7 @@ input.register__login__inputs:active, input.register__login__inputs:focus {
 button.login_register__submit__button{
   background: #30E3AE;
   border: 1px solid #47E5B6;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 button.login_register__submit__button:hover{
