@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TitleContent render snapshots 📸 TitleContent should match snap shot 1`] = `
+<div
+  className="title"
+>
+  <div
+    className="title__row"
+  >
+    <h3
+      className="title__title"
+    >
+      Welcome to Billsnap
+    </h3>
+  </div>
+  <div
+    className="title__row title__text"
+  >
+    <p>
+      BillSnap is all about snapping away full bills into dust. The goal is to facilitate the process of splitting bills with roommates, friends & family.
+    </p>
+  </div>
+  <div
+    className="title__row"
+  >
+    <button
+      className="title__button btn btn-primary btn-md btn-pill"
+      onClick={[Function]}
+    >
+      How it works
+    </button>
+  </div>
+</div>
+`;

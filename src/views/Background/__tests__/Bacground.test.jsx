@@ -1,6 +1,5 @@
 import React from 'react';
 import Background from '../Background.jsx';
-import { shallow } from "enzyme";
 
 describe('Background', () => {
     describe("render", () => {

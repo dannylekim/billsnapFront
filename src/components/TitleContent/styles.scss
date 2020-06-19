@@ -1,0 +1,31 @@
+.title {
+  width: 500px;
+}
+
+div.title__row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+h3.title__title {
+  font-weight: bold;
+  font-size: 45px;
+  line-height: 71px;
+  text-align: center;
+}
+
+div.title__text {
+  font-size: 16px;
+}
+
+button.title__button {
+  background: #3BD0A3;
+  border: 1px solid #47E5B6;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+button.title__button:hover {
+  background: #38B58F;
+  border: 1px solid #47E5B6;
+}
