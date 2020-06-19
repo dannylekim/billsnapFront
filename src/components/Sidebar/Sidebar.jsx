@@ -21,12 +21,12 @@ const SideBar = ({collapseState}) => {
             </a>
         </div>
     )
-}
+};
 
 SideBar.propTypes = {
     // vertical or horizontal
     type: PropTypes.string,
-}
+};
 
 SideBar.defaultProps = {
     type: "horizontal",

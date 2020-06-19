@@ -82,16 +82,12 @@
     "extends": [
       "react-app"
     ],
-    "rules": {
-      "additional-rule": "warn"
-    },
     "overrides": [
       {
         "files": [
           "**/*.js?(x)"
         ],
         "rules": {
-          "additional-typescript-only-rule": "warn",
           "jsx-a11y/anchor-is-valid": [
             "error",
             {
