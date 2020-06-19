@@ -5,7 +5,7 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot 1`] = `
   className="billSnap-SideBar billSnap-SideBar-close"
 >
   <a
-    href="#"
+    href="/dashboard"
   >
     <svg
       fill="currentColor"
@@ -27,17 +27,17 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot 1`] = `
     </svg>
   </a>
   <a
-    href="#"
+    href="/dashboard"
   >
     Profile
   </a>
   <a
-    href="#"
+    href="/dashboard"
   >
     Settings
   </a>
   <a
-    href="#"
+    href="/dashboard"
   >
     Log Out
   </a>

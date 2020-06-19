@@ -7,16 +7,16 @@ import './styles.scss';
 const SideBar = ({collapseState}) => {
     return (
         <div className={`billSnap-SideBar billSnap-SideBar-${collapseState ? 'open' : 'close'}`}>
-            <a href="#">
+            <a href="/dashboard">
                 <FaUserCircle/>
             </a>
-            <a href="#">
+            <a href="/dashboard">
                 Profile
             </a>
-            <a href="#">
+            <a href="/dashboard">
                 Settings
             </a>
-            <a href="#">
+            <a href="/dashboard">
                 Log Out
             </a>
         </div>
