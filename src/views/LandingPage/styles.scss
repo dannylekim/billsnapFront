@@ -4,18 +4,16 @@ div.page__landing {
   display: -webkit-flex;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   width: 80%;
   height:100%;
-
 }
 
-div#flex__item{
+div.page__content {
+  width: 100%;
+  height: 100%;
   display: flex;
-}
-
-div.title__content {
-  font-size: 15px;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 div.form__inputs{
@@ -39,10 +37,12 @@ input.register__login__inputs:active, input.register__login__inputs:focus, input
   border: 3px solid #3BD0A3;
 }
 
-button.login_register__submit__button.btn.btn-primary{
+button.login_register__submit__button.btn.btn-primary {
   background: #30E3AE;
   border: 1px solid #47E5B6;
   font-size: 15px;
+  font-weight: bold;
+  padding: 10px 40px;
 }
 
 button.login_register__submit__button.btn.btn-primary:hover, button.login_register__submit__button.btn.btn-primary:active,
@@ -52,8 +52,8 @@ button.login_register__submit__button.btn.btn-primary:focus:hover,button.login_r
 }
 
 button.form__toggle.btn.btn-primary, button.form__toggle.btn.btn-primary:hover, button.form__toggle.btn.btn-primary:active:focus {
-  background-color: #3BD0A3;
-  border-color: #3BD0A3;
+  background-color: #007BFF;
+  border-color: #007BFF;
   margin-left: 15px;
   box-sizing: border-box;
   border-radius: 50px;
