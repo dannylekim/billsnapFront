@@ -18,11 +18,7 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
           href="#"
           onClick={[Function]}
         >
-          <img
-            alt="Logo"
-            src="https://via.placeholder.com/30x30.png?text=30x30+Logo"
-          />
-           Billsnap Logo
+          Billsnap Logo
         </a>
       </li>
     </ul>
@@ -37,7 +33,7 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
           href="#"
           onClick={[Function]}
         >
-          About Us
+          About us
         </a>
       </li>
       <li
@@ -58,7 +54,7 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
           className="nav-link"
           onClick={[Function]}
         >
-          Contact Us
+          Contact us
         </a>
       </li>
     </ul>

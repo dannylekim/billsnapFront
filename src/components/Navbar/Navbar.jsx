@@ -1,6 +1,5 @@
 import React from 'react';
 import './styles.scss';
-import { Logo } from '../../components/Logo/Logo.jsx';
 import {Nav, Navbar, NavItem, NavLink} from 'shards-react';
 
 export default () => {
@@ -9,14 +8,14 @@ export default () => {
             <Nav navbar>
                 <NavItem>
                     <NavLink href="#">
-                        <Logo /> Billsnap Logo
+                        Billsnap Logo
                     </NavLink>
                 </NavItem>
             </Nav>
             <Nav navbar className="ml-auto">
                 <NavItem>
                     <NavLink href="#">
-                        About Us
+                        About us
                     </NavLink>
                 </NavItem>
                 <NavItem>
@@ -26,7 +25,7 @@ export default () => {
                 </NavItem>
                 <NavItem>
                     <NavLink>
-                        Contact Us
+                        Contact us
                     </NavLink>
                 </NavItem>
             </Nav>
