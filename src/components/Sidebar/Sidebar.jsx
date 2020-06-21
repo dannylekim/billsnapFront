@@ -1,29 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {FaUserCircle} from 'react-icons/fa';
+import {Nav, NavItem, NavLink} from 'shards-react';
 
 import './styles.scss';
 
-const SideBar = ({collapseState}) => {
+const SideBar = () => {
     return (
-        <div className={`billSnap-SideBar billSnap-SideBar-${collapseState ? 'open' : 'close'}`}>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a href="#">
-                <FaUserCircle/>
-            </a>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a href="#">
-                Profile
-            </a>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a href="#">
-                Settings
-            </a>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a href="#">
-                Log Out
-            </a>
-        </div>
+        <Nav className={"billSnap-SideBar"} vertical={true}>
+            <NavItem>
+                <NavLink href="#">
+                    <FaUserCircle/>
+                </NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">
+                    Profile
+                </NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">
+                    Settings
+                </NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href="#">
+                    Log Out
+                </NavLink>
+            </NavItem>
+        </Nav>
     )
 }
 

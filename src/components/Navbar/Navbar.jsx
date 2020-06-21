@@ -1,26 +1,26 @@
 import React from 'react';
 import './styles.scss';
+import { Logo } from '../../components/Logo/Logo.jsx';
 import {Nav, Navbar, NavItem, NavLink} from 'shards-react';
 
-export default ({toggleSideBar}) => {
-
-    const handleBurger = (e) => {
-        e.preventDefault();
-        toggleSideBar();
-    };
-
+export default () => {
     return (
         <Navbar type="light" expand="sm">
             <Nav navbar>
                 <NavItem>
-                    <NavLink href="#" onClick={handleBurger}>
+                    <NavLink href="#">
+                        <Logo /> Billsnap Logo
+                    </NavLink>
+                </NavItem>
+            </Nav>
+            <Nav navbar className="ml-auto">
+                <NavItem>
+                    <NavLink href="#">
                         About Us
                     </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink
-                        href="#"
-                    >
+                    <NavLink href="#">
                         Features
                     </NavLink>
                 </NavItem>
