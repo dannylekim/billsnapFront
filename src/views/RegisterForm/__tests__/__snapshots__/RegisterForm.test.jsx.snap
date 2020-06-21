@@ -118,7 +118,7 @@ exports[`RegisterForm render snapshots 📸 Register should match snap shot 1`] 
         onClick={[Function]}
         type="button"
       >
-        👋 Log in to your account.
+        👋 Log in to your account
       </button>
     </div>
   </div>
@@ -243,7 +243,7 @@ exports[`RegisterForm render snapshots 📸 RegisterFormContainer should match s
         onClick={[Function]}
         type="button"
       >
-        👋 Log in to your account.
+        👋 Log in to your account
       </button>
     </div>
   </div>

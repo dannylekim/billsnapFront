@@ -87,7 +87,7 @@ exports[`LoginForm render snapshots 📸 Login should match snap shot 1`] = `
         onClick={[Function]}
         type="button"
       >
-        👋 Create account.
+        👋 Create account
       </button>
     </div>
   </div>
@@ -184,7 +184,7 @@ exports[`LoginForm render snapshots 📸 LoginContainer should match snap shot 1
           onClick={[Function]}
           type="button"
         >
-          👋 Create account.
+          👋 Create account
         </button>
       </div>
     </div>
