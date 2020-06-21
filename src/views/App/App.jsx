@@ -2,7 +2,7 @@ import React from 'react';
 import NavbarLayer from '../NavbarLayer';
 import LandingPage from '../LandingPage/LandingPage';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-
+import BillSnapBackground from '../Background';
 import './styles.scss';
 /**
  * Load you page components here. We will render them via routes
@@ -16,6 +16,7 @@ export default (props) => {
             {/*<header className="App-header">*/}
             {/*  /!*<a className="header-name" href= "/">{appName}</a>*!/*/}
             {/*</header>*/}
+            <BillSnapBackground showWave/>
             <BrowserRouter>
                 <Switch>
                     <React.Fragment>
