@@ -5,7 +5,7 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
   className="page__landing"
 >
   <div
-    className="title__logo"
+    className="title__content"
     id="flex__item"
   >
     <div
@@ -14,23 +14,28 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
       <div
         className="title__row"
       >
-        <h1
+        <h3
           className="title__title"
         >
-          Billsnap
-        </h1>
-        <img
-          alt="Logo"
-          className="title__logo"
-          src="https://via.placeholder.com/150x100.png?text=150x100+Logo"
-        />
+          Welcome to Billsnap
+        </h3>
       </div>
       <div
         className="title__row title__text"
       >
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque dignissimos eos error quo, repellendus repudiandae sunt. Amet asperiores atque commodi, deleniti dicta expedita ipsa modi nemo, quos rem voluptate voluptates.
+          BillSnap is all about snapping away full bills into dust. The goal is to facilitate the process of splitting bills with roommates, friends & family.
         </p>
+      </div>
+      <div
+        className="title__row"
+      >
+        <button
+          className="title__button btn btn-primary btn-md btn-pill"
+          onClick={[Function]}
+        >
+          How it works
+        </button>
       </div>
     </div>
   </div>

@@ -1,25 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { TitleLogo } from "../TitleLogo.jsx";
+import {TitleContent} from "../TitleContent.jsx";
 
-describe("TitleLogo", () => {
+describe("TitleContent", () => {
   describe("render", () => {
     it("renders without crashing", () => {
       const div = document.createElement("div");
-      ReactDOM.render(<TitleLogo />, div);
+      ReactDOM.render(<TitleContent/>, div);
     });
   });
 });
 
-describe('TitleLogo', () => {
+describe('TitleContent', () => {
   describe("render", () => {
     describe("snapshots 📸", () => {
-      it("TitleLogo should match snap shot", () => {
-        matches(<TitleLogo />);
+      it("TitleContent should match snap shot", () => {
+        matches(<TitleContent/>);
       });
     });
 
-    describe("components", () => {});
+    describe("components", () => {
+    });
   });
 
   describe("functions", () => {});
