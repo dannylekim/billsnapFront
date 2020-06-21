@@ -46,9 +46,6 @@ describe('LoginForm', () => {
           matches(
           <LoginFormContainer />);
         });
-
-
-
       });
 
       describe("components", () => {

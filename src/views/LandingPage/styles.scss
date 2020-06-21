@@ -19,8 +19,45 @@ div.title__content {
   font-size: 15px;
 }
 
-button.form__toggle {
+div.form__inputs{
+  width:70%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input.register__login__inputs{
+  font-size: 15x;
+  border: 3px solid #47E5B6;
+  border-radius: 50px;
+}
+
+input.register__login__inputs:hover {
+  border: 3px solid #C0FFEC;
+}
+
+input.register__login__inputs:active, input.register__login__inputs:focus, input.register__login__inputs:focus:hover {
+  border: 3px solid #3BD0A3;
+}
+
+button.login_register__submit__button.btn.btn-primary{
+  background: #30E3AE;
+  border: 1px solid #47E5B6;
+  font-size: 15px;
+}
+
+button.login_register__submit__button.btn.btn-primary:hover, button.login_register__submit__button.btn.btn-primary:active,
+button.login_register__submit__button.btn.btn-primary:focus:hover,button.login_register__submit__button.btn.btn-primary:active:focus{
+  background: #30E3AE;
+  border: 1px solid #47E5B6;
+}
+
+button.form__toggle.btn.btn-primary, button.form__toggle.btn.btn-primary:hover, button.form__toggle.btn.btn-primary:active:focus {
+  background-color: #3BD0A3;
+  border-color: #3BD0A3;
   margin-left: 15px;
+  box-sizing: border-box;
+  border-radius: 50px;
 }
 
 div.tooltip__inner{
@@ -37,4 +74,19 @@ div.hidden__div{
 
 h6 a.form__toggle{
   color:rgba(165, 199, 245, 0.801);
+}
+
+div.form__seperator{
+  display: flex;
+  font-size: 18px;
+  text-align: center;
+}
+
+hr.form__horizontal__line{
+  width: 25%;
+  border: 0.1px solid rgba(0, 0, 0, 0.63);
+}
+
+img.character__icon__image{
+  height:50px;
 }
