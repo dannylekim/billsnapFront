@@ -7,7 +7,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import Dashboard from '../Dashboard/Dashboard';
 
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-
+import BillSnapBackground from '../Background';
 import './styles.scss';
 
 /**
@@ -15,10 +15,10 @@ import './styles.scss';
  */
 
 export default (props) => {
-
   return (
     <div className="App">
       <NavbarLayer />
+      <BillSnapBackground showWave/>
       <BrowserRouter>
         <Switch>
           <React.Fragment>
