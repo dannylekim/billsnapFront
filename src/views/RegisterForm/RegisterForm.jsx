@@ -92,7 +92,7 @@ export const RegisterForm = ({
             className="form__toggle"
             onClick={setFormType}
           >
-            {"👋 Log in to your account."}
+            {"👋 Log in to your account"}
           </Button>
         </div>
       </div>

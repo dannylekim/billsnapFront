@@ -92,7 +92,7 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors,alertMessage,
             className="form__toggle"
             onClick={setFormType}
           >
-            {"👋 Create account."}
+            {"👋 Create account"}
           </Button>
         </div>
       </div>
