@@ -14,7 +14,7 @@ export default props => {
   const {history} = props;
   return (
       <div className="page__landing">
-          <Navbar />q
+          <Navbar />
           <div className="title__content" id="flex__item">
               <TitleContent/>
           </div>

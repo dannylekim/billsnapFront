@@ -63,7 +63,6 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
       </li>
     </ul>
   </nav>
-  q
   <div
     className="title__content"
     id="flex__item"
