@@ -29,15 +29,4 @@ export default () => {
             </NavItem>
         </Nav>
     )
-}
-
-// SideBar.propTypes = {
-//     // vertical or horizontal
-//     type: PropTypes.string,
-// }
-//
-// SideBar.defaultProps = {
-//     type: "horizontal",
-// };
-
-// export default SideBar;
+};
