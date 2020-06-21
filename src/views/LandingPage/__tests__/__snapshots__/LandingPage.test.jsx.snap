@@ -159,7 +159,7 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
             onClick={[Function]}
             type="button"
           >
-            👋 Log in to your account.
+            👋 Log in to your account
           </button>
         </div>
       </div>
