@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {FaUserCircle} from 'react-icons/fa';
 import {Nav, NavItem, NavLink} from 'shards-react';
 
 import './styles.scss';
 
-const SideBar = () => {
+export default () => {
     return (
         <Nav className={"billSnap-SideBar"} vertical={true}>
             <NavItem>
@@ -32,13 +31,13 @@ const SideBar = () => {
     )
 }
 
-SideBar.propTypes = {
-    // vertical or horizontal
-    type: PropTypes.string,
-}
+// SideBar.propTypes = {
+//     // vertical or horizontal
+//     type: PropTypes.string,
+// }
+//
+// SideBar.defaultProps = {
+//     type: "horizontal",
+// };
 
-SideBar.defaultProps = {
-    type: "horizontal",
-};
-
-export default SideBar;
+// export default SideBar;
