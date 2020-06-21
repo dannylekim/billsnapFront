@@ -21,12 +21,13 @@ div.title__text {
 
 button.title__button.btn.btn-primary {
   background: #3BD0A3;
-  border: 1px solid #47E5B6;
+  border: 1px solid #3BD0A3;
+  box-shadow: 0 2px 0 #17C671;
   font-size: 15px;
   font-weight: bold;
 }
 
 button.title__button.btn.btn-primary:hover {
   background: #38B58F;
-  border: 1px solid #47E5B6;
+  border: 1px solid #38B58F;
 }
