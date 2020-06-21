@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import TitleContent from "../../components/TitleContent";
 import RegisterForm from "../RegisterForm";
 import LoginForm from "../LoginForm";
+import Navbar from "../../components/Navbar";
 import "./styles.scss";
 
 /**
@@ -13,6 +14,7 @@ export default props => {
   const {history} = props;
   return (
       <div className="page__landing">
+          <Navbar />
           <div className="title__content" id="flex__item">
               <TitleContent/>
           </div>

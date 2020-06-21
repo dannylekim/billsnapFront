@@ -4,6 +4,61 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot 1`
 <div
   className="page__landing"
 >
+  <nav
+    className="navbar navbar-expand-sm navbar-light"
+  >
+    <ul
+      className="navbar-nav"
+    >
+      <li
+        className="nav-item"
+      >
+        <a
+          className="nav-link"
+          href="#"
+          onClick={[Function]}
+        >
+          Billsnap Logo
+        </a>
+      </li>
+    </ul>
+    <ul
+      className="ml-auto navbar-nav"
+    >
+      <li
+        className="nav-item"
+      >
+        <a
+          className="nav-link"
+          href="#"
+          onClick={[Function]}
+        >
+          About us
+        </a>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <a
+          className="nav-link"
+          href="#"
+          onClick={[Function]}
+        >
+          Features
+        </a>
+      </li>
+      <li
+        className="nav-item"
+      >
+        <a
+          className="nav-link"
+          onClick={[Function]}
+        >
+          Contact us
+        </a>
+      </li>
+    </ul>
+  </nav>
   <div
     className="title__content"
     id="flex__item"

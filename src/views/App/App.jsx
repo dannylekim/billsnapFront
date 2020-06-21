@@ -2,7 +2,6 @@ import React from 'react';
 /**
  * Load you page components here. We will render them via routes
  */
-import NavbarLayer from '../NavbarLayer';
 import LandingPage from '../LandingPage/LandingPage';
 import Dashboard from '../Dashboard/Dashboard';
 
@@ -17,7 +16,6 @@ import './styles.scss';
 export default (props) => {
   return (
     <div className="App">
-      <NavbarLayer />
       <BillSnapBackground showWave/>
       <BrowserRouter>
         <Switch>
@@ -25,7 +23,7 @@ export default (props) => {
               <div className="App__container">
                 <Route path="/" exact component={LandingPage}/>
                 <Route path="/dashboard" exact component={Dashboard}/>
-              </div>  
+              </div>
           </React.Fragment>
         </Switch>
       </BrowserRouter>
