@@ -5,7 +5,7 @@ const {URL} = require("../../config");
  */
 export const getBill = async () => {
     try{
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("billSnap_token");
         const response =  await fetch(`${URL}/bills`, {
             method: "GET",
             headers: {
