@@ -79,7 +79,13 @@
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "globals": {
+      "shallow": "readonly",
+      "render": "readonly",
+      "mount": "readonly",
+      "matches": "readonly"
+    }
   },
   "browserslist": {
     "production": [
