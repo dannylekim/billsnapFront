@@ -9,7 +9,7 @@ import {
   FormInput
 } from "shards-react";
 import registerFormInputs from "./registerFormConstants.json";
-import { register } from "../../utils/requests/UserRequests";
+import { login, register } from "../../utils/requests/UserRequests";
 import "./styles.scss";
 
 export const RegisterForm = ({
@@ -248,7 +248,13 @@ export default props => {
       };
       try {
         const response = await register(dataToSend);
-        if (response.statusCode === 201) props.history.push("/dashboard");
+        if (response.statusCode === 201) {
+          //login since user now exists, then get that token from login response.
+          const loginResponse = await login({ email: userCredentials.email,
+                                              password: userCredentials.password});
+          localStorage.setItem("billSnap_token", loginResponse.token);
+          props.history.push("/dashboard");
+        }
         //if user already exists
         else triggerAlert("error", response.message);
       } catch (error) {

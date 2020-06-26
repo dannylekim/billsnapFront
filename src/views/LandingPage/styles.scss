@@ -33,6 +33,10 @@ input.register__login__inputs:hover {
   border: 3px solid #C0FFEC;
 }
 
+input.register__login__inputs.is-invalid:active, input.register__login__inputs.is-invalid:focus, input.register__login__inputs.is-invalid:focus:hover {
+  border: 3px solid #c4183c;
+}
+
 input.register__login__inputs:active, input.register__login__inputs:focus, input.register__login__inputs:focus:hover {
   border: 3px solid #3BD0A3;
 }

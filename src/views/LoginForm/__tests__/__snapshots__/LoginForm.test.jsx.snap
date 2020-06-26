@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LoginForm render snapshots 📸 Login should match snap shot 1`] = `
-<div>
+<div
+  className="login__container"
+>
   <div
     className="login__form"
   >
@@ -98,95 +100,93 @@ exports[`LoginForm render snapshots 📸 LoginContainer should match snap shot 1
 <div
   className="login__container"
 >
-  <div>
+  <div
+    className="login__form"
+  >
     <div
-      className="login__form"
+      className="hidden__div"
+    />
+    <img
+      alt="character logo"
+      className="character__icon__image"
+      src="./billSnapIcon.png"
+    />
+    <form
+      className=""
     >
       <div
-        className="hidden__div"
-      />
-      <img
-        alt="character logo"
-        className="character__icon__image"
-        src="./billSnapIcon.png"
-      />
-      <form
-        className=""
+        className="form__inputs"
       >
         <div
-          className="form__inputs"
+          className="form-group"
+          onChange={[Function]}
         >
-          <div
-            className="form-group"
-            onChange={[Function]}
-          >
-            <input
-              autoComplete="username"
-              className="register__login__inputs form-control"
-              id="email"
-              name="email"
-              placeholder="Email"
-              type="email"
-            />
-          </div>
-          <div
-            className="form-group"
-            onChange={[Function]}
-          >
-            <input
-              autoComplete="new-password"
-              className="register__login__inputs form-control"
-              id="password"
-              name="password"
-              placeholder="Password"
-              type="password"
-            />
-          </div>
+          <input
+            autoComplete="username"
+            className="register__login__inputs form-control"
+            id="email"
+            name="email"
+            placeholder="Email"
+            type="email"
+          />
         </div>
         <div
-          className="forgot__password__login"
+          className="form-group"
+          onChange={[Function]}
         >
-          <a
-            className="forgot__password"
-            href="/#"
-          >
-            Forgot Password?
-          </a>
-          <button
-            className="login_register__submit__button btn btn-primary btn-md btn-pill"
-            name="submit"
-            onClick={[Function]}
-            type="button"
-          >
-            Log in
-          </button>
+          <input
+            autoComplete="new-password"
+            className="register__login__inputs form-control"
+            id="password"
+            name="password"
+            placeholder="Password"
+            type="password"
+          />
         </div>
-      </form>
-    </div>
-    <div>
-      <div
-        className="form__seperator"
-      >
-        <hr
-          className="form__horizontal__line"
-        />
-        Or
-        <hr
-          className="form__horizontal__line"
-        />
       </div>
-      <div>
-        <h6>
-          New to Billsnap?
-        </h6>
+      <div
+        className="forgot__password__login"
+      >
+        <a
+          className="forgot__password"
+          href="/#"
+        >
+          Forgot Password?
+        </a>
         <button
-          className="form__toggle btn btn-primary"
+          className="login_register__submit__button btn btn-primary btn-md btn-pill"
+          name="submit"
           onClick={[Function]}
           type="button"
         >
-          👋 Create account
+          Log in
         </button>
       </div>
+    </form>
+  </div>
+  <div>
+    <div
+      className="form__seperator"
+    >
+      <hr
+        className="form__horizontal__line"
+      />
+      Or
+      <hr
+        className="form__horizontal__line"
+      />
+    </div>
+    <div>
+      <h6>
+        New to Billsnap?
+      </h6>
+      <button
+        className="form__toggle btn btn-primary"
+        onClick={[Function]}
+        type="button"
+      >
+        👋 Create account
+      </button>
     </div>
   </div>
 </div>

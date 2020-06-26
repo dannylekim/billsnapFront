@@ -4,6 +4,7 @@ import { shallow, mount } from "enzyme";
 
 describe('LoginForm', () => {
     let wrapper;
+    let wrapper2;
     let handleMockFunction,mockOnChange,mockDismissAlert,mockHandleResponse,mockHandleButtonClick, mockToggleFormType;
     let setState,useStateSpy;
 
@@ -19,6 +20,10 @@ describe('LoginForm', () => {
 
       wrapper = shallow(
         <LoginForm onChange = {mockOnChange} setFormType = {mockToggleFormType} handleButtonClick={mockHandleButtonClick} hasErrors={defaultErrors} alertMessage={defaultAlertMessage} error_message = "" dismissAlert={mockDismissAlert}/>
+      );
+
+      wrapper2 = shallow(
+        <LoginFormContainer setFormType = {mockToggleFormType} />
       );
     });
   
@@ -134,7 +139,8 @@ describe('LoginForm', () => {
 
     it("click formToggle", () => {
       wrapper.find(".form__toggle").simulate("click");
-      expect(mockToggleFormType).toBeCalledTimes(1);
+      wrapper2.props().setFormType();
+      expect(mockToggleFormType).toBeCalledTimes(2);
     });
   });
 });
