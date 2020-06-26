@@ -15,7 +15,7 @@ export const LoginForm = ({
                             setFormType,
                           }) => {
   return (
-      <div>
+      <div className="login__container">
         <div className="login__form">
           {alertMessage.visible === true ? (
               <Alert
@@ -191,7 +191,6 @@ export default (props) => {
     setHasErrors(defaultErrors);
   };
   return (
-    <div className="login__container">
       <LoginForm
           handleButtonClick={handleButtonClick}
           onChange={onChange}
@@ -202,7 +201,6 @@ export default (props) => {
           error_message={error_message}
           setFormType={() => props.setFormType("register")}
       />
-    </div>
   );
 };
 
