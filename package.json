@@ -84,7 +84,8 @@
       "shallow": "readonly",
       "render": "readonly",
       "mount": "readonly",
-      "matches": "readonly"
+      "matches": "readonly",
+      "localStorage": "readonly"
     }
   },
   "browserslist": {
