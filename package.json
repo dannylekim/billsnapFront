@@ -79,35 +79,14 @@
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.js?(x)"
-        ],
-        "rules": {
-          "jsx-a11y/anchor-is-valid": [
-            "error",
-            {
-              "components": [
-                "Link"
-              ],
-              "specialLink": [
-                "hrefLeft",
-                "hrefRight"
-              ],
-              "aspects": [
-                "noHref",
-                "invalidHref",
-                "preferButton"
-              ]
-            }
-          ]
-        }
-      }
-    ]
+    "extends": "react-app",
+    "globals": {
+      "shallow": "readonly",
+      "render": "readonly",
+      "mount": "readonly",
+      "matches": "readonly",
+      "localStorage": "readonly"
+    }
   },
   "browserslist": {
     "production": [

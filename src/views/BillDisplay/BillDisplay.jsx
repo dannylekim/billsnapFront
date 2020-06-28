@@ -14,12 +14,6 @@ class BillDisplay extends PureComponent {
     };
 
     /**
-     * tempToken is a temporary token, that should be passed as cookie from login/register
-     * 
-     */
-    tempToken = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYXNzd29yZEBQYXNzd29yZDEyMy5jb20iLCJleHAiOjExNTg5NzI4MjE5LCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.qw7RgI7FIIliuzrwg67zpCN2fhRbSGCbVGFmlLRsguN3dp9Qndfn47GncvD9CDwSPZSsOK-2mjYNmEIb5-K45A";
-    
-    /**
      * @description calls the getBill function to get all bills for a user, then sets the bills states.
      */
     fetchBill = async () => {
@@ -28,9 +22,6 @@ class BillDisplay extends PureComponent {
     };
 
     componentDidMount = async () => {
-                            localStorage.setItem('user', {  firstName: "Bob",
-                                                            lastName: "Smith"});
-                            localStorage.setItem('token', this.tempToken);
                             await this.fetchBill();
     };
 

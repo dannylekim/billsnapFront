@@ -1,3 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dashboard render snapshots 📸 Dashboard should match snap shot 1`] = `<div />`;
+exports[`Dashboard render snapshots 📸 Dashboard should match snap shot 1`] = `
+<div>
+  <div
+    className="bill__wrapper"
+  >
+    <div
+      className="bill__loading"
+    >
+      <img
+        alt="loading gif"
+        className="loading__gif"
+        src="loading.gif"
+      />
+    </div>
+  </div>
+</div>
+`;

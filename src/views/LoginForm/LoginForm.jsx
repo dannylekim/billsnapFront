@@ -1,28 +1,37 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import PropType from "prop-types";
 import loginFormInputs from "./loginFormConstants.json";
 import { login } from "../../utils/requests/UserRequests";
 import {
   Alert,
-  Tooltip,
   Button,
   Form,
   FormGroup,
-  FormInput
+  FormInput,
+  Tooltip,
 } from "shards-react";
+import Loader from '../../components/Loader';
+
 import "./styles.scss";
 
-export const LoginForm = ({ handleButtonClick, onChange, hasErrors,alertMessage,dismissAlert,error_message,setFormType}) => {
+export const LoginForm = ({
+  handleButtonClick,
+  onChange,
+  hasErrors,
+  alertMessage,
+  dismissAlert,
+  error_message,
+  setFormType,
+}) => {
   return (
     <div>
       <div className="login__form">
-
-      {alertMessage.visible === true ? (
+        {alertMessage.visible === true ? (
           <Alert
             dismissible={dismissAlert}
             open={alertMessage.visible}
             className="mb-3"
-            theme={alertMessage.alertType} 
+            theme={alertMessage.alertType}
           >
             {error_message}
           </Alert>
@@ -30,12 +39,18 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors,alertMessage,
           <div className="hidden__div"></div>
         )}
 
+        <img
+          alt="character logo"
+          src="./billSnapIcon.png"
+          className="character__icon__image"
+        />
+
         <Form>
           <div className="form__inputs">
             {loginFormInputs.map((inputs, key) => (
               <FormGroup key={key} onChange={onChange}>
                 <FormInput
-                  className="mb-2"
+                  className="register__login__inputs"
                   type={inputs.type}
                   name={inputs.name}
                   id={inputs.name}
@@ -46,74 +61,94 @@ export const LoginForm = ({ handleButtonClick, onChange, hasErrors,alertMessage,
               </FormGroup>
             ))}
           </div>
-          <FormGroup>
+          <div className="forgot__password__login">
+            <a href="/#" className="forgot__password">
+              Forgot Password?
+            </a>
+
             <Button
-              size="lg"
+              size="md"
               pill
-              theme="dark"
-              onClick={event => handleButtonClick(event)}
+              className="login_register__submit__button"
+              onClick={(event) => handleButtonClick(event)}
               name="submit"
             >
-              Login
+              Log in
             </Button>
-          </FormGroup>
+          </div>
         </Form>
 
-        {loginFormInputs.map(
-          (field, key) =>
-        (    <Tooltip
-                key={key}
-                placement="left"
-                open={hasErrors[field.name].hasError}
-                target={`#${field.name}`}
-              >
-                <span id="input_error"> {hasErrors[field.name].message} </span>
-              </Tooltip>
-            )
-        )}
+        {loginFormInputs.map((field, key) => (
+          <Tooltip
+            key={key}
+            placement="left"
+            open={hasErrors[field.name].hasError}
+            target={`#${field.name}`}
+          >
+            <span id="input_error"> {hasErrors[field.name].message} </span>
+          </Tooltip>
+        ))}
       </div>
 
       <div>
-        <h6>
-          New to Billsnap?
-          <Button
-            className="form__toggle"
-            onClick={setFormType}
-          >
-            Register an account.
+        <div className="form__seperator">
+          <hr className="form__horizontal__line"></hr>
+          Or
+          <hr className="form__horizontal__line"></hr>
+        </div>
+        <div>
+          <h6>New to Billsnap?</h6>
+          <Button className="form__toggle" onClick={setFormType}>
+            {"👋 Create account"}
           </Button>
-        </h6>
+        </div>
       </div>
-   </div>
+    </div>
   );
 };
 
-export const defaultErrors = {
+export const DEFAULT_ERRORS = {
   email: { hasError: false, message: "" },
-  password: { hasError: false, message: "" }
+  password: { hasError: false, message: "" },
 };
 
-export const defaultAlertMessage = {
+export const DEFAULT_ALERT_MESSAGE = {
   visible: false,
-  alertType: "danger"
+  alertType: "danger",
 };
 
-export default props => {
-  const [user_credentials, setUserCredential] = useState({"email": "", 
-                                                          "password": ""});
-  const [error_message, setErrorMessage] = useState("");
-  const [hasErrors, setHasErrors] = useState(defaultErrors);
-  const [alertMessage, setAlertMessageFields] = useState(defaultAlertMessage);
+class LoginFormContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user_credentials: {
+        email: "",
+        password: "",
+      },
+      error_message: "",
+      hasErrors: DEFAULT_ERRORS,
+      alertMessage: DEFAULT_ALERT_MESSAGE,
+      isLoading: false
+    };
+
+    this.dismissAlert = this.dismissAlert.bind(this);
+    this.handleErrorResponse = this.handleErrorResponse.bind(this);
+    this.handleSubmitClick = this.handleSubmitClick.bind(this);
+    this.onFormChange = this.onFormChange.bind(this);
+  }
+
   /**
    * @function dismissAlert
    * @description dismisses the alert message. and closes tool tip.
    */
-  const dismissAlert = () => {
-    setAlertMessageFields(prev => ({
-      ...prev,
-      visible: false
+  dismissAlert = () => {
+    this.setState((prev) => ({
+      alertMessage: {
+        ...prev.alertMessage,
+        visible: false,
+      },
+      hasErrors: DEFAULT_ERRORS,
     }));
-    setHasErrors(defaultErrors);
   };
 
   /**
@@ -121,79 +156,121 @@ export default props => {
    * @description filters the error type and setting the erro message and form tip error.
    * @param {Object} response the Http response from backend.
    */
-  const handleResponse = response => {
+  handleErrorResponse = (response) => {
     if (response.status === "BAD_REQUEST") {
-      const errors = response.errors;
-      errors.forEach(error =>
-        setHasErrors(prev => ({
-          ...prev,
-          [error.field]: {
-            ...prev[error.field],
-            hasError: true,
-            message: error.message
-          }
-        }))
+      response.errors.forEach(
+        (error) =>
+          this.setState((prev) => ({
+            hasErrors: {
+              ...prev.hasErrors,
+              [error.field]: {
+                hasError: true,
+                message: error.message,
+              },
+            },
+          }))
       );
     }
 
-    if(response.status === "UNAUTHORIZED"){
-      setHasErrors({
-        email: { hasError: true, message: "email might not exist in system." },
-        password: { hasError: true, message: "forgot your password?" }
-      })
+    if (response.status === "UNAUTHORIZED") {
+      this.setState({
+        hasErrors: {
+          email: {
+            hasError: true,
+            message: "email might not exist in system.",
+          },
+          password: { hasError: true, message: "forgot your password?" },
+        },
+      });
     }
 
-    if (response.status === "BAD_REQUEST" || response.status === "UNAUTHORIZED")
-      setAlertMessageFields({ visible: true, alertType: "danger" });
+    if (
+      response.status === "BAD_REQUEST" ||
+      response.status === "UNAUTHORIZED"
+    ) {
+      this.setState({
+        alertMessage: { visible: true, alertType: "danger" },
+      });
+    }
 
-    return setErrorMessage(response.message);
+    return this.setState({
+      error_message: response.message
+    });
   };
+
   /**
-   * @function handleButtonClick
+   * @function handleSubmitClick
    * @description Handles the submission, calls the backend API, through login function.
    * handle the response with handleResponse function.
    * @param {Event} event
    */
-  const handleButtonClick = async event => {
+  handleSubmitClick = async (event) => {
     event.preventDefault();
+    this.dismissAlert();
     try {
-      const response = await login(user_credentials);
+      this.setState({
+        isLoading: true
+      });
+      const response = await login(this.state.user_credentials);
       if (!response.token) {
-        handleResponse(response);
+        this.handleErrorResponse(response);
       } else {
-        localStorage.setItem("token", response.token);
-        props.history.push("/dashboard");
+        localStorage.setItem("billSnap_token", response.token);
+        this.props.history.push("/dashboard");
       }
     } catch (error) {
-      throw new Error(error);
+      this.handleErrorResponse(error);
+    } finally {
+      this.setState({
+        isLoading: false
+      });
     }
   };
+
   /**
-   * @function onChange
+   * @function onFormChange
    * @description event handling function, handles the changes in the input fields.
    * @param {Event} event
    */
-  const onChange = event => {
+  onFormChange = (event) => {
     const { name, value } = event.target;
-    setUserCredential(prev => ({ ...prev, [name]: value }));
-    setHasErrors(defaultErrors);
+    this.setState((prev) => ({
+      user_credentials: {
+        ...prev.user_credentials,
+        [name]: value,
+      },
+      hasError: DEFAULT_ERRORS
+    }));
   };
-  return (
-    <div className="login__container">
-      <LoginForm
-        handleButtonClick={handleButtonClick}
-        onChange={onChange}
-        hasErrors={hasErrors}
-        user_credentials={user_credentials}
-        alertMessage={alertMessage}
-        dismissAlert={dismissAlert}
-        error_message={error_message} 
-        setFormType = {() => props.setFormType("register")}
-      />
-    </div>
-  );
+
+  render() {
+    const {
+      hasErrors,
+      user_credentials,
+      alertMessage,
+      error_message
+    } = this.state;
+
+    return (
+      <div className="login__container">
+        {this.state.isLoading && <Loader />}
+        <LoginForm
+          handleButtonClick={this.handleSubmitClick}
+          onChange={this.onFormChange}
+          hasErrors={hasErrors}
+          user_credentials={user_credentials}
+          alertMessage={alertMessage}
+          dismissAlert={this.dismissAlert}
+          error_message={error_message}
+          setFormType={() => this.props.setFormType("register")}
+        />
+      </div>
+    );
+  }
+}
+
+LoginFormContainer.propTypes = {
+  setFormType: PropType.func.isRequired,
 };
 
-LoginForm.propTypes = {
-  handleButtonClick: PropType.func.isRequired
-};
+export default LoginFormContainer;

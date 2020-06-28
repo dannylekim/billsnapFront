@@ -4,23 +4,63 @@ div.page__landing {
   display: -webkit-flex;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   width: 80%;
   height:100%;
-  margin-top: 100px;
-
 }
 
-div#flex__item{
+div.page__content {
+  width: 100%;
+  height: 100%;
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-div.title__logo{
+div.form__inputs{
+  width:70%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input.register__login__inputs{
   font-size: 15px;
+  border: 3px solid #47E5B6;
+  border-radius: 50px;
 }
 
-button.form__toggle {
+input.register__login__inputs:hover {
+  border: 3px solid #C0FFEC;
+}
+
+input.register__login__inputs.is-invalid:active, input.register__login__inputs.is-invalid:focus, input.register__login__inputs.is-invalid:focus:hover {
+  border: 3px solid #c4183c;
+}
+
+input.register__login__inputs:active, input.register__login__inputs:focus, input.register__login__inputs:focus:hover {
+  border: 3px solid #3BD0A3;
+}
+
+button.login_register__submit__button.btn.btn-primary {
+  background: #30E3AE;
+  border: 1px solid #47E5B6;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px 40px;
+}
+
+button.login_register__submit__button.btn.btn-primary:hover, button.login_register__submit__button.btn.btn-primary:active,
+button.login_register__submit__button.btn.btn-primary:focus:hover,button.login_register__submit__button.btn.btn-primary:active:focus{
+  background: #30E3AE;
+  border: 1px solid #47E5B6;
+}
+
+button.form__toggle.btn.btn-primary, button.form__toggle.btn.btn-primary:hover, button.form__toggle.btn.btn-primary:active:focus {
+  background-color: #007BFF;
+  border-color: #007BFF;
   margin-left: 15px;
+  box-sizing: border-box;
+  border-radius: 50px;
 }
 
 div.tooltip__inner{
@@ -37,4 +77,19 @@ div.hidden__div{
 
 h6 a.form__toggle{
   color:rgba(165, 199, 245, 0.801);
+}
+
+div.form__seperator{
+  display: flex;
+  font-size: 18px;
+  text-align: center;
+}
+
+hr.form__horizontal__line{
+  width: 25%;
+  border: 0.1px solid rgba(0, 0, 0, 0.63);
+}
+
+img.character__icon__image{
+  height:50px;
 }

@@ -1,50 +1,48 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import PropType from "prop-types";
-import {
-  Tooltip,
-  Alert,
-  Button,
-  Form,
-  FormGroup,
-  FormInput
-} from "shards-react";
+import {Alert, Button, Form, FormGroup, FormInput, Tooltip,} from "shards-react";
 import registerFormInputs from "./registerFormConstants.json";
-import { register } from "../../utils/requests/UserRequests";
+import {login, register} from "../../utils/requests/UserRequests";
 import "./styles.scss";
 
 export const RegisterForm = ({
-  handleButtonClick,
-  onChange,
-  validInvalidByName,
-  conditions,
-  alertNotification,
-  dismissAlert,
-  setFormType
-}) => {
+                               handleButtonClick,
+                               onChange,
+                               validInvalidByName,
+                               conditions,
+                               alertNotification,
+                               dismissAlert,
+                               setFormType,
+                             }) => {
   return (
     <div className="register__container">
       {alertNotification.isOpen === true ? (
         <Alert
-          dismissible={dismissAlert}
-          open={alertNotification.isOpen}
-          className="mb-3"
-          theme={alertNotification.alertType}
+            dismissible={dismissAlert}
+            open={alertNotification.isOpen}
+            className="mb-3"
+            theme={alertNotification.alertType}
         >
           {alertNotification.alertMessage}
         </Alert>
       ) : (
-        <div className="hidden__div"></div>
+          <div className="hidden__div"></div>
       )}
+      <img
+          alt="character logo"
+          src="./billSnapIcon.png"
+          className="character__icon__image"
+      />
 
       <Form>
         <div className="form__inputs">
           {registerFormInputs.map((inputs, key) => (
-            <FormGroup key={key} onChange={onChange}>
-              <FormInput
-                invalid={validInvalidByName(inputs.name, "invalid")}
-                valid={validInvalidByName(inputs.name, "valid")}
-                className="mb-2"
-                type={inputs.type}
+              <FormGroup key={key} onChange={onChange}>
+                <FormInput
+                    invalid={validInvalidByName(inputs.name, "invalid")}
+                    valid={validInvalidByName(inputs.name, "valid")}
+                    className="register__login__inputs"
+                    type={inputs.type}
                 name={inputs.name}
                 id={inputs.name}
                 placeholder={inputs.placeholder}
@@ -55,13 +53,13 @@ export const RegisterForm = ({
         </div>
         <FormGroup>
           <Button
-            size="lg"
-            pill
-            theme="dark"
-            onClick={event => handleButtonClick(event)}
-            name="submit"
+              size="md"
+              className="login_register__submit__button"
+              pill
+              onClick={(event) => handleButtonClick(event)}
+              name="submit"
           >
-            Submit
+            Sign Up
           </Button>
         </FormGroup>
 
@@ -78,15 +76,17 @@ export const RegisterForm = ({
       </Form>
 
       <div>
-        <h6>
-          Have an account?
-          <Button
-            className="form__toggle"
-            onClick={setFormType}
-          >
-            Login to your account.
+        <div className="form__seperator">
+          <hr className="form__horizontal__line"></hr>
+          Or
+          <hr className="form__horizontal__line"></hr>
+        </div>
+        <div>
+          <h6>Have an account?</h6>
+          <Button className="form__toggle" onClick={setFormType}>
+            {"👋 Log in to your account"}
           </Button>
-        </h6>
+        </div>
       </div>
     </div>
   );
@@ -95,10 +95,10 @@ export const RegisterForm = ({
 export const defaultError = {
   isOpen: false,
   alertType: "",
-  alertMessage: ""
+  alertMessage: "",
 };
 
-export default props => {
+export default (props) => {
   const [validFirstName, setValidFirstName] = useState(true);
   const [validLastName, setValidLastName] = useState(true);
   const [validEmail, setValidEmail] = useState(true);
@@ -109,10 +109,10 @@ export default props => {
     lastName: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
   const [alertNotification, setAlertNotification] = useState({
-    ...defaultError
+    ...defaultError,
   });
 
   const validInputs = {
@@ -120,7 +120,7 @@ export default props => {
     lastName: validLastName,
     email: validEmail,
     password: validPasswordFormat,
-    confirmPassword: validPassword
+    confirmPassword: validPassword,
   };
 
   const nameRegex = new RegExp(/^[_A-z]*((-|\s)*[_A-z])*$/);
@@ -160,12 +160,12 @@ export default props => {
       ? setAlertNotification({
           isOpen: true,
           alertType: "danger",
-          alertMessage: message
+          alertMessage: message,
         })
       : setAlertNotification({
           isOpen: true,
           alertType: "success",
-          alertMessage: message
+          alertMessage: message,
         });
   };
   /**
@@ -193,7 +193,7 @@ export default props => {
       case "password":
         return setValidPasswordFormat(passwordRegex.test(value));
       case "confirmPassword":
-        const { password } = { ...userCredentials };
+        const {password} = {...userCredentials};
         return setValidPassword(validatePassword(password, value));
       default:
         return null;
@@ -203,10 +203,10 @@ export default props => {
    * @description Handles on change events of the form. closes alert
    * @param {Event} event
    */
-  const onChange = event => {
-    const { name, value } = event.target;
+  const onChange = (event) => {
+    const {name, value} = event.target;
     getValidationFunction(name, value);
-    setUserCredential(prev => ({ ...prev, [name]: value }));
+    setUserCredential((prev) => ({...prev, [name]: value}));
     setAlertNotification(defaultError);
   };
   /**
@@ -217,30 +217,38 @@ export default props => {
    */
   const checkValidity = (boolean_value, checkState, name) => {
     const inputField = userCredentials[[name]];
-    return (checkState === boolean_value && inputField && inputField !== "");
+    return checkState === boolean_value && inputField && inputField !== "";
   };
   /**
    * @description Handles form submittion and checks validity of inputs.
    * @param {Event} e The event after clicking on the button.
    */
-  const handleButtonClick = async e => {
+  const handleButtonClick = async (e) => {
     e.preventDefault();
     if (
-      checkValidity(true, validPassword, "confirmPassword") &&
-      checkValidity(true, validPasswordFormat, "password") &&
-      checkValidity(true, validFirstName, "firstName") &&
-      checkValidity(true, validLastName, "lastName") &&
-      checkValidity(true, validEmail, "email")
+        checkValidity(true, validPassword, "confirmPassword") &&
+        checkValidity(true, validPasswordFormat, "password") &&
+        checkValidity(true, validFirstName, "firstName") &&
+        checkValidity(true, validLastName, "lastName") &&
+        checkValidity(true, validEmail, "email")
     ) {
       const dataToSend = {
         firstName: userCredentials.firstName,
         lastName: userCredentials.lastName,
         email: userCredentials.email,
-        password: userCredentials.password
+        password: userCredentials.password,
       };
       try {
         const response = await register(dataToSend);
-        if (response.statusCode === 201) props.history.push("/dashboard");
+        if (response.statusCode === 201) {
+          //login since user now exists, then get that token from login response.
+          const loginResponse = await login({
+            email: userCredentials.email,
+            password: userCredentials.password,
+          });
+          localStorage.setItem("billSnap_token", loginResponse.token);
+          props.history.push("/dashboard");
+        }
         //if user already exists
         else triggerAlert("error", response.message);
       } catch (error) {
@@ -248,7 +256,7 @@ export default props => {
       }
     } else {
       //blank inputs
-      registerFormInputs.forEach(error => {
+      registerFormInputs.forEach((error) => {
         if (userCredentials[error.name] === "")
           getValidationFunction(error.name, -1);
       });
@@ -263,9 +271,9 @@ export default props => {
       toolTipInfo: {
         open: !validPassword,
         errorMessage: !userCredentials.confirmPassword
-          ? "Cannot be blank!"
-          : "Password does not match"
-      }
+            ? "Cannot be blank!"
+            : "Password does not match",
+      },
     },
     {
       name: "password",
@@ -273,9 +281,9 @@ export default props => {
       toolTipInfo: {
         open: !validPasswordFormat,
         errorMessage: !userCredentials.password
-          ? "Cannot be blank!"
-          : "Must contain at least 1 upper case, lower case, number and symbol, and be between 8-20 characters."
-      }
+            ? "Cannot be blank!"
+            : "Must contain at least 1 upper case, lower case, number and symbol, and be between 8-20 characters.",
+      },
     },
     {
       name: "firstName",
@@ -283,9 +291,9 @@ export default props => {
       toolTipInfo: {
         open: !validFirstName,
         errorMessage: !userCredentials.firstName
-          ? "Cannot be blank!"
-          : "No numbers or special characters."
-      }
+            ? "Cannot be blank!"
+            : "No numbers or special characters.",
+      },
     },
     {
       name: "lastName",
@@ -293,9 +301,9 @@ export default props => {
       toolTipInfo: {
         open: !validLastName,
         errorMessage: !userCredentials.lastName
-          ? "Cannot be blank!"
-          : "No numbers or special characters."
-      }
+            ? "Cannot be blank!"
+            : "No numbers or special characters.",
+      },
     },
     {
       name: "email",
@@ -303,27 +311,27 @@ export default props => {
       toolTipInfo: {
         open: !validEmail,
         errorMessage: !userCredentials.email
-          ? "Cannot be blank!"
-          : "Invalid Email Format."
-      }
-    }
+            ? "Cannot be blank!"
+            : "Invalid Email Format.",
+      },
+    },
   ];
 
   return (
       <RegisterForm
-        handleButtonClick={handleButtonClick}
-        onChange={onChange}
-        validInputs={validInputs}
-        userCredentials={userCredentials}
-        validInvalidByName={validInvalidByName}
-        conditions={[...conditions]}
-        dismissAlert={dismissAlert}
-        alertNotification={alertNotification}
-        setFormType = {() => props.setFormType("login")}
+          handleButtonClick={handleButtonClick}
+          onChange={onChange}
+          validInputs={validInputs}
+          userCredentials={userCredentials}
+          validInvalidByName={validInvalidByName}
+          conditions={[...conditions]}
+          dismissAlert={dismissAlert}
+          alertNotification={alertNotification}
+          setFormType={() => props.setFormType("login")}
       />
   );
 };
 
 RegisterForm.propTypes = {
-  handleButtonClick: PropType.func.isRequired
+  handleButtonClick: PropType.func.isRequired,
 };
