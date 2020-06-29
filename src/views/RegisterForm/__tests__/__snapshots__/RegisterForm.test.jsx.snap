@@ -221,7 +221,7 @@ exports[`RegisterForm render snapshots 📸 RegisterFormContainer should match s
           onClick={[Function]}
           type="button"
         >
-          Submit
+          Sign Up
         </button>
       </div>
     </form>
