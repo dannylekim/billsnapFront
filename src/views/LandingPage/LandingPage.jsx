@@ -10,7 +10,7 @@ import "./styles.scss";
  */
 
 export default (props) => {
-    const [formType, setFormType] = useState("register");
+    const [formType, setFormType] = useState("login");
     const {history} = props;
     return (
         <div className="page__landing">

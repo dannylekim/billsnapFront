@@ -6,6 +6,7 @@ import LoginFormContainer, {
 } from "../LoginForm.jsx";
 import { shallow, mount } from "enzyme";
 import { login } from "../../../utils/requests/UserRequests";
+
 jest.mock("../../../utils/requests/UserRequests");
 
 describe("LoginForm", () => {
@@ -294,7 +295,8 @@ describe("LoginForm", () => {
 
     it.skip("click formToggle", () => {
       wrapper.find(".form__toggle").simulate("click");
-      expect(mockToggleFormType).toBeCalledTimes(1);
+      wrapper2.props().setFormType();
+      expect(mockToggleFormType).toBeCalledTimes(2);
     });
   });
 });

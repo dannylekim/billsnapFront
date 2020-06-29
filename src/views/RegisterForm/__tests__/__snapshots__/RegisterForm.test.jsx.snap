@@ -93,7 +93,7 @@ exports[`RegisterForm render snapshots 📸 Register should match snap shot 1`] 
         onClick={[Function]}
         type="button"
       >
-        Submit
+        Sign Up
       </button>
     </div>
   </form>

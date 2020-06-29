@@ -28,15 +28,15 @@ export const RegisterForm = ({
     <div className="register__container">
       {alertNotification.isOpen === true ? (
         <Alert
-          dismissible={dismissAlert}
-          open={alertNotification.isOpen}
-          className="mb-3"
-          theme={alertNotification.alertType}
+            dismissible={dismissAlert}
+            open={alertNotification.isOpen}
+            className="mb-3"
+            theme={alertNotification.alertType}
         >
           {alertNotification.alertMessage}
         </Alert>
       ) : (
-        <div className="hidden__div"></div>
+          <div className="hidden__div"></div>
       )}
       <img
         alt="character logo"
@@ -69,7 +69,7 @@ export const RegisterForm = ({
             onClick={(event) => handleButtonClick(event)}
             name="submit"
           >
-            Submit
+            Sign Up
           </Button>
         </FormGroup>
 
@@ -421,6 +421,7 @@ class RegisterFormContainer extends Component {
 
 RegisterFormContainer.propTypes = {
   setFormType: PropType.func.isRequired,
+
 };
 
 RegisterForm.propTypes = {
