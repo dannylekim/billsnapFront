@@ -5,8 +5,8 @@ import LoginFormContainer, {
   DEFAULT_ALERT_MESSAGE,
 } from "../LoginForm.jsx";
 import { shallow, mount } from "enzyme";
-jest.mock("../../../utils/requests/UserRequests");
 import { login } from "../../../utils/requests/UserRequests";
+jest.mock("../../../utils/requests/UserRequests");
 
 describe("LoginForm", () => {
   let wrapper;

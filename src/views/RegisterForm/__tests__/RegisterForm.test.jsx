@@ -5,9 +5,9 @@ import RegisterFormContainer, {
 } from "../RegisterForm.jsx";
 import { createRegisterFormElements } from "../../../constants/FormElements";
 import { shallow } from "enzyme";
+import { register, login } from "../../../utils/requests/UserRequests";
 
 jest.mock("../../../utils/requests/UserRequests");
-import { register, login } from "../../../utils/requests/UserRequests";
 
 
 describe("RegisterForm", () => {
