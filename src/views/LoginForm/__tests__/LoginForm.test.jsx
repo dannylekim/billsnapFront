@@ -4,7 +4,7 @@ import LoginFormContainer, {
   DEFAULT_ERRORS,
   DEFAULT_ALERT_MESSAGE,
 } from "../LoginForm.jsx";
-import { shallow  } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { login } from "../../../utils/requests/UserRequests";
 
 jest.mock("../../../utils/requests/UserRequests");

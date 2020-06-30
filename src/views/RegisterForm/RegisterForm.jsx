@@ -1,19 +1,29 @@
-import React, {useState} from "react";
+import React, { Component } from "react";
 import PropType from "prop-types";
-import {Alert, Button, Form, FormGroup, FormInput, Tooltip,} from "shards-react";
+import {
+  Tooltip,
+  Alert,
+  Button,
+  Form,
+  FormGroup,
+  FormInput,
+} from "shards-react";
+import Loader from "../../components/Loader";
+
 import registerFormInputs from "./registerFormConstants.json";
-import {login, register} from "../../utils/requests/UserRequests";
+import { register, login } from "../../utils/requests/UserRequests";
+
 import "./styles.scss";
 
 export const RegisterForm = ({
-                               handleButtonClick,
-                               onChange,
-                               validInvalidByName,
-                               conditions,
-                               alertNotification,
-                               dismissAlert,
-                               setFormType,
-                             }) => {
+  handleButtonClick,
+  onChange,
+  validInvalidByName,
+  conditions,
+  alertNotification,
+  dismissAlert,
+  setFormType,
+}) => {
   return (
     <div className="register__container">
       {alertNotification.isOpen === true ? (
@@ -29,20 +39,20 @@ export const RegisterForm = ({
           <div className="hidden__div"></div>
       )}
       <img
-          alt="character logo"
-          src="./billSnapIcon.png"
-          className="character__icon__image"
+        alt="character logo"
+        src="./billSnapIcon.png"
+        className="character__icon__image"
       />
 
       <Form>
         <div className="form__inputs">
           {registerFormInputs.map((inputs, key) => (
-              <FormGroup key={key} onChange={onChange}>
-                <FormInput
-                    invalid={validInvalidByName(inputs.name, "invalid")}
-                    valid={validInvalidByName(inputs.name, "valid")}
-                    className="register__login__inputs"
-                    type={inputs.type}
+            <FormGroup key={key} onChange={onChange}>
+              <FormInput
+                invalid={validInvalidByName(inputs.name, "invalid")}
+                valid={validInvalidByName(inputs.name, "valid")}
+                className="register__login__inputs"
+                type={inputs.type}
                 name={inputs.name}
                 id={inputs.name}
                 placeholder={inputs.placeholder}
@@ -53,11 +63,11 @@ export const RegisterForm = ({
         </div>
         <FormGroup>
           <Button
-              size="md"
-              className="login_register__submit__button"
-              pill
-              onClick={(event) => handleButtonClick(event)}
-              name="submit"
+            size="md"
+            className="login_register__submit__button"
+            pill
+            onClick={(event) => handleButtonClick(event)}
+            name="submit"
           >
             Sign Up
           </Button>
@@ -92,51 +102,57 @@ export const RegisterForm = ({
   );
 };
 
-export const defaultError = {
+export const DEFAULT_ERRORS = {
   isOpen: false,
   alertType: "",
   alertMessage: "",
 };
 
-export default (props) => {
-  const [validFirstName, setValidFirstName] = useState(true);
-  const [validLastName, setValidLastName] = useState(true);
-  const [validEmail, setValidEmail] = useState(true);
-  const [validPasswordFormat, setValidPasswordFormat] = useState(true);
-  const [validPassword, setValidPassword] = useState(true);
-  const [userCredentials, setUserCredential] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [alertNotification, setAlertNotification] = useState({
-    ...defaultError,
-  });
+const NAME_REGEX = new RegExp(/^[_A-z]*((-|\s)*[_A-z])*$/);
+const EMAIL_REGEX = new RegExp(
+  /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+);
+const PASSWORD_REGEX = new RegExp(
+  /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).{8,20}/
+);
 
-  const validInputs = {
-    firstName: validFirstName,
-    lastName: validLastName,
-    email: validEmail,
-    password: validPasswordFormat,
-    confirmPassword: validPassword,
-  };
+class RegisterFormContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userCredentials: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      },
+      validFields: {
+        firstName: true,
+        lastName: true,
+        email: true,
+        password: true,
+        passwordFormat: true,
+      },
+      alertNotification: DEFAULT_ERRORS,
+      isLoading: false,
+    };
 
-  const nameRegex = new RegExp(/^[_A-z]*((-|\s)*[_A-z])*$/);
-  const emailRegex = new RegExp(
-    /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  );
-  const passwordRegex = new RegExp(
-    /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).{8,20}/
-  );
+    this.validInvalidByName = this.validInvalidByName.bind(this);
+    this.triggerAlert = this.triggerAlert.bind(this);
+    this.dismissAlert = this.dismissAlert.bind(this);
+    this.validateField = this.validateField.bind(this);
+    this.onFormChange = this.onFormChange.bind(this);
+    this.checkValidity = this.checkValidity.bind(this);
+    this.handleSubmitClick = this.handleSubmitClick.bind(this);
+  }
 
   /**
    * Boolean function that returns if password matches.
    * @param {String} password user's password
    * @param {String} passwordToConfirm confirmation password.
    */
-  const validatePassword = (password, passwordToConfirm) =>
+  static validatePassword = (password, passwordToConfirm) =>
     password === passwordToConfirm;
 
   /**
@@ -144,36 +160,45 @@ export default (props) => {
    * @param {String} name className
    * @param {String} type valid or invalid
    */
-  const validInvalidByName = (name, type) => {
-    return type === "invalid"
-      ? !validInputs[[name]]
-      : userCredentials[[name]] && userCredentials[[name]] !== ""
-      ? validInputs[[name]]
-      : false;
+  validInvalidByName = (name, type) => {
+    return (
+      (type === "invalid" ? !this.state.validFields[name] : this.state.validFields[name]) 
+      && this.state.userCredentials[name] !== ""
+      && this.state.validFields[name]
+    );
   };
+
   /**
    * @description Sets the alert or turns it off by calling the setter.
    * @param {String} triggerType - type of trigger success or error.
    */
-  const triggerAlert = (triggerType, message) => {
-    triggerType === "error"
-      ? setAlertNotification({
-          isOpen: true,
-          alertType: "danger",
-          alertMessage: message,
-        })
-      : setAlertNotification({
-          isOpen: true,
-          alertType: "success",
-          alertMessage: message,
-        });
+  triggerAlert = (triggerType, message) => {
+    const alertNotification =
+      triggerType === "error"
+        ? {
+            isOpen: true,
+            alertType: "danger",
+            alertMessage: message,
+          }
+        : {
+            isOpen: true,
+            alertType: "success",
+            alertMessage: message,
+          };
+    return this.setState({
+      alertNotification,
+    });
   };
+
   /**
    * @description dismiss the alert. Sets the alert states back to default.
    */
-  const dismissAlert = () => {
-    setAlertNotification(defaultError);
+  dismissAlert = () => {
+    return this.setState({
+      alertNotification: DEFAULT_ERRORS,
+    });
   };
+
   /**
    * Returns the value of the key given from the map.
    * Map value is the result of the regex.
@@ -182,156 +207,231 @@ export default (props) => {
    * @param {String} name - the input name.
    * @param {String} value - the value of the input field.
    * */
-  const getValidationFunction = (name, value) => {
+  validateField = (name, value) => {
+    const result = {};
     switch (name) {
       case "firstName":
-        return setValidFirstName(nameRegex.test(value));
+        result.firstName = NAME_REGEX.test(value);
+        break;
       case "lastName":
-        return setValidLastName(nameRegex.test(value));
+        result.lastName = NAME_REGEX.test(value);
+        break;
       case "email":
-        return setValidEmail(emailRegex.test(value));
+        result.email = EMAIL_REGEX.test(value);
+        break;
       case "password":
-        return setValidPasswordFormat(passwordRegex.test(value));
+        result.passwordFormat = PASSWORD_REGEX.test(value);
+        break;
       case "confirmPassword":
-        const {password} = {...userCredentials};
-        return setValidPassword(validatePassword(password, value));
+        const { password } = this.state.userCredentials;
+        const passwordMatches = this.constructor.validatePassword(
+          password,
+          value
+        );
+        result.password = passwordMatches;
+        this.setState((prev) => ({
+          userCredentials: {
+            ...prev.userCredentials,
+            confirmPassword: true,
+          },
+        }));
+        break;
       default:
-        return null;
+        break;
     }
+
+    return this.setState((prev) => ({
+      validFields: {
+        ...prev.validFields,
+        ...result,
+      },
+    }));
   };
+
   /**
    * @description Handles on change events of the form. closes alert
    * @param {Event} event
    */
-  const onChange = (event) => {
-    const {name, value} = event.target;
-    getValidationFunction(name, value);
-    setUserCredential((prev) => ({...prev, [name]: value}));
-    setAlertNotification(defaultError);
+  onFormChange = (event) => {
+    const { name, value } = event.target;
+
+    this.validateField(name, value);
+
+    this.setState((prev) => ({
+      userCredentials: {
+        ...prev.userCredentials,
+        [name]: value,
+      },
+    }));
+    return this.dismissAlert();
   };
+
   /**
    * @description Check if condition is true or false. Shortcut to writting full condition.
-   * @param {Boolean} boolean_value check if true or false.
    * @param {Object} checkState the state to check against.
    * @param {String} name the name of the input field.
+   * @param {Boolean} boolean_value check if true or false.
    */
-  const checkValidity = (boolean_value, checkState, name) => {
-    const inputField = userCredentials[[name]];
-    return checkState === boolean_value && inputField && inputField !== "";
+  checkValidity = (checkState, name) => {
+    const inputField = this.state.userCredentials[name];
+    return checkState && inputField && inputField !== "";
   };
+
   /**
    * @description Handles form submittion and checks validity of inputs.
    * @param {Event} e The event after clicking on the button.
    */
-  const handleButtonClick = async (e) => {
+  handleSubmitClick = async (e) => {
     e.preventDefault();
+    this.setState({
+      isLoading: true
+    });
     if (
-        checkValidity(true, validPassword, "confirmPassword") &&
-        checkValidity(true, validPasswordFormat, "password") &&
-        checkValidity(true, validFirstName, "firstName") &&
-        checkValidity(true, validLastName, "lastName") &&
-        checkValidity(true, validEmail, "email")
+      this.checkValidity(this.state.validFields.password, "confirmPassword") &&
+      this.checkValidity(this.state.validFields.passwordFormat, "password") &&
+      this.checkValidity(this.state.validFields.firstName, "firstName") &&
+      this.checkValidity(this.state.validFields.lastName, "lastName") &&
+      this.checkValidity(this.state.validFields.email, "email")
     ) {
-      const dataToSend = {
-        firstName: userCredentials.firstName,
-        lastName: userCredentials.lastName,
-        email: userCredentials.email,
-        password: userCredentials.password,
+      const { firstName, lastName, email, password } = {
+        ...this.state.userCredentials,
       };
+
+      const dataToSend = {
+        firstName,
+        lastName,
+        email,
+        password,
+      };
+
       try {
         const response = await register(dataToSend);
         if (response.statusCode === 201) {
-          //login since user now exists, then get that token from login response.
-          const loginResponse = await login({
-            email: userCredentials.email,
-            password: userCredentials.password,
-          });
-          localStorage.setItem("billSnap_token", loginResponse.token);
-          props.history.push("/dashboard");
+          const loginInfo = {
+            email,
+            password
+          }
+          const { token } = await login(loginInfo);
+          
+          if (token) {
+            localStorage.setItem("billSnap_token", token);
+            this.props.history.push("/dashboard");
+          } else {
+            throw new Error('Account created, but failed to log in. Please try logging in with you credentials')
+          }
+        } else {
+          this.triggerAlert("error", response.message);
         }
         //if user already exists
-        else triggerAlert("error", response.message);
       } catch (error) {
-        throw new Error(error);
+        this.triggerAlert("error", error.message);
       }
     } else {
       //blank inputs
       registerFormInputs.forEach((error) => {
-        if (userCredentials[error.name] === "")
-          getValidationFunction(error.name, -1);
+        if (this.state.userCredentials[error.name] === "") {
+          this.validateField(error.name, -1);
+        }
       });
-      triggerAlert("error", "Form Not Validated"); //handle response
+      this.triggerAlert("error", "Form Not Validated"); //handle response
     }
+
+    this.setState({
+      isLoading: false
+    });
   };
-  //list of error messages / information for the Tool Tip component.
-  const conditions = [
-    {
-      name: "confirmPassword",
-      condition: checkValidity(false, validPassword, "confirmPassword"),
-      toolTipInfo: {
-        open: !validPassword,
-        errorMessage: !userCredentials.confirmPassword
+
+  render() {
+    const { userCredentials, validFields, alertNotification } = this.state;
+
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      passwordFormat,
+    } = validFields;
+
+    //list of error messages / information for the Tool Tip component.
+    const conditions = [
+      {
+        name: "confirmPassword",
+        toolTipInfo: {
+          open: !password,
+          errorMessage: !userCredentials.confirmPassword
             ? "Cannot be blank!"
             : "Password does not match",
+        },
       },
-    },
-    {
-      name: "password",
-      condition: checkValidity(false, validPasswordFormat, "password"),
-      toolTipInfo: {
-        open: !validPasswordFormat,
-        errorMessage: !userCredentials.password
+      {
+        name: "password",
+        toolTipInfo: {
+          open: !passwordFormat,
+          errorMessage: !userCredentials.password
             ? "Cannot be blank!"
             : "Must contain at least 1 upper case, lower case, number and symbol, and be between 8-20 characters.",
+        },
       },
-    },
-    {
-      name: "firstName",
-      condition: checkValidity(false, validFirstName, "firstName"),
-      toolTipInfo: {
-        open: !validFirstName,
-        errorMessage: !userCredentials.firstName
+      {
+        name: "firstName",
+        toolTipInfo: {
+          open: !firstName,
+          errorMessage: !userCredentials.firstName
             ? "Cannot be blank!"
             : "No numbers or special characters.",
+        },
       },
-    },
-    {
-      name: "lastName",
-      condition: checkValidity(false, validLastName, "lastName"),
-      toolTipInfo: {
-        open: !validLastName,
-        errorMessage: !userCredentials.lastName
+      {
+        name: "lastName",
+        toolTipInfo: {
+          open: !lastName,
+          errorMessage: !userCredentials.lastName
             ? "Cannot be blank!"
             : "No numbers or special characters.",
+        },
       },
-    },
-    {
-      name: "email",
-      condition: checkValidity(false, validEmail, "email"),
-      toolTipInfo: {
-        open: !validEmail,
-        errorMessage: !userCredentials.email
+      {
+        name: "email",
+        toolTipInfo: {
+          open: !email,
+          errorMessage: !userCredentials.email
             ? "Cannot be blank!"
             : "Invalid Email Format.",
+        },
       },
-    },
-  ];
+    ];
 
-  return (
-      <RegisterForm
-          handleButtonClick={handleButtonClick}
-          onChange={onChange}
-          validInputs={validInputs}
+    return (
+      <div className="register__container">
+        {this.state.isLoading && <Loader />}
+        <RegisterForm
+          handleButtonClick={this.handleSubmitClick}
+          onChange={this.onFormChange}
           userCredentials={userCredentials}
-          validInvalidByName={validInvalidByName}
-          conditions={[...conditions]}
-          dismissAlert={dismissAlert}
+          validInvalidByName={this.validInvalidByName}
+          conditions={conditions}
+          dismissAlert={this.dismissAlert}
           alertNotification={alertNotification}
-          setFormType={() => props.setFormType("login")}
-      />
-  );
+          setFormType={() => this.props.setFormType("login")}
+        />
+      </div>
+    );
+  }
+}
+
+RegisterFormContainer.propTypes = {
+  setFormType: PropType.func.isRequired,
+
 };
 
 RegisterForm.propTypes = {
   handleButtonClick: PropType.func.isRequired,
+  onChange: PropType.func.isRequired,
+  validInvalidByName: PropType.func.isRequired,
+  conditions: PropType.arrayOf(PropType.shape({})),
+  alertNotification: PropType.shape({}),
+  dismissAlert: PropType.func.isRequired,
+  setFormType: PropType.func.isRequired,
 };
+
+export default RegisterFormContainer;
