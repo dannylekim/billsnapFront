@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import TitleContent from "../../components/TitleContent";
 import RegisterForm from "../RegisterForm";
 import LoginForm from "../LoginForm";
@@ -10,8 +10,13 @@ import "./styles.scss";
  */
 
 export default (props) => {
-    const [formType, setFormType] = useState("login");
-    const {history} = props;
+
+    const {
+        history,
+        toggleFormType,
+        formType
+    } = props;
+
     return (
         <div className="page__landing">
             <Navbar/>
@@ -19,9 +24,9 @@ export default (props) => {
                 <TitleContent/>
                 <div>
                     {formType === "register" ? (
-                        <RegisterForm setFormType={setFormType} history={history}/>
+                        <RegisterForm setFormType={toggleFormType} history={history}/>
                     ) : (
-                        <LoginForm setFormType={setFormType} history={history}/>
+                        <LoginForm setFormType={toggleFormType} history={history}/>
                     )}
                 </div>
             </div>
