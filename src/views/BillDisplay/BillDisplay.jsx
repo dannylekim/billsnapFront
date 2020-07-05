@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import './styles.scss';
-import { getBill } from "../../utils/requests/BillRequests";
+import {getBills} from "../../utils/requests/BillRequests";
 import loading from "./gif/loading.gif" //temp loader gif
 
 class BillDisplay extends PureComponent {
@@ -17,7 +17,7 @@ class BillDisplay extends PureComponent {
      * @description calls the getBill function to get all bills for a user, then sets the bills states.
      */
     fetchBill = async () => {
-                            const bills =  await getBill();
+                            const bills =  await getBills();
                             this.setState({...this.state, bills, billsLoaded: true})
     };
 

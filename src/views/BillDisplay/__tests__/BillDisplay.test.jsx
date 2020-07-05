@@ -1,22 +1,22 @@
 import React from 'react';
 import BillDisplay from '../BillDisplay.jsx';
-import { shallow } from "enzyme";
+import {shallow} from "enzyme";
 
 jest.mock("../../../utils/requests/BillRequests", () => {
   return ({
-    getBill: jest.fn().mockResolvedValue(["bill1", "bill2"])
+    getBills: jest.fn().mockResolvedValue(["bill1", "bill2"])
   })
 });
 
 describe('BillDisplay', () => {
     let wrapper, instance;
-    
-    beforeEach(() => {    
+
+    beforeEach(() => {
         wrapper = shallow(
           <BillDisplay/>
         );
-        
-        instance = wrapper.instance(); 
+
+        instance = wrapper.instance();
       });
 
     describe("render", () => {
@@ -52,7 +52,7 @@ describe('BillDisplay', () => {
                             lastName: ""
                         },
                 bills:  mockBills,
-                billsLoaded: true  
+                billsLoaded: true
             } );
             expect(wrapper.find('ul')).toHaveLength(mockBills.length);
             expect(wrapper.find('li')).toHaveLength(mockBills.length * 3);
@@ -66,7 +66,7 @@ describe('BillDisplay', () => {
                                 lastName: ""
                             },
                     bills:  [],
-                    billsLoaded: true  
+                    billsLoaded: true
               }} );
               expect(wrapper.find('p')).toHaveLength(1);
             });
@@ -79,13 +79,13 @@ describe('BillDisplay', () => {
                                 lastName: ""
                             },
                     bills:  [],
-                    billsLoaded: false  
+                    billsLoaded: false
               });
               expect(wrapper.find('img.loading__gif')).toHaveLength(1);
             });
           });
         });
-         
+
       describe("functions", () => {
           it("fetchBill should be called 1 time", () => {
             const spy = jest.spyOn(instance, 'fetchBill'); // spy on the fetchBill
@@ -95,7 +95,7 @@ describe('BillDisplay', () => {
             spy.mockRestore();
 
           });
-        
+
         it("billStatusColor should return appropriate colors", () => {
             jest.spyOn(instance, 'billStatusColor'); // spy on the billStatusColor
             expect(instance.billStatusColor("OPEN")).toBe("success");

@@ -1,7 +1,7 @@
 const { URL } = require("../../config")
 
 /**
- * @function logUser
+ * @function loginUser
  * @description Function used to wrap the login request while simply requiring credentials as params
  * @param {String} credentials.email
  * @param {String} credentials.password // no need to encrypt yet
@@ -46,9 +46,9 @@ export const register = async (entries) => {
 
 async function checkStatus(response) {
     const parsedResponse = await response.json();
-  
+
+  //TODO: handle User Requests REST API responses
     if (response.status < 200 || response.status >= 300) {
-        
         // throw new Error(parsedResponse.errors);
     }
 
