@@ -2,8 +2,8 @@ import React from 'react';
 /**
  * Load you page components here. We will render them via routes
  */
-import LandingPage from '../LandingPage/LandingPage';
-import Dashboard from '../Dashboard/Dashboard';
+import LandingPage from '../LandingPage';
+import Dashboard from '../Dashboard';
 
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import BillSnapBackground from '../Background';
