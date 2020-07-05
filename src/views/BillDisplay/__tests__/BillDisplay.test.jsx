@@ -64,7 +64,7 @@ describe("BillDisplay", () => {
             const event = {
               target: { value: 'hahahhahahahha' }
             };
-           
+
             wrapper.find('input.form-control.border-0').simulate('change', event);
             expect(wrapper.state().seachedQuery).toBe(event.target.value);
           })
@@ -78,9 +78,9 @@ describe("BillDisplay", () => {
         });
 
       describe("components", () => {
-        
+
         it("BillDisplay should match snap shot when done loading + bills", () => {
-        
+
           matches(
             <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} />
           );
@@ -93,7 +93,7 @@ describe("BillDisplay", () => {
           });
 
           it("filterDateTime should return correct format", () => {
-           
+
             const today = new Date(new Date().setHours(0,0,0,0));
             expect(BillDisplay.filterDateTime("05-03-2017 15:25:10 -0400")).toBe("05/03/2017");
             expect(BillDisplay.filterDateTime(`01-01-${today.getFullYear()} 15:25:10 -0400`)).toBe("01/01");

@@ -1,6 +1,6 @@
-import { login, register } from "./UserRequests";
+import {login, register} from "../UserRequests";
 import sinonStubPromise from "sinon-stub-promise";
-import sinon from "sinon"
+import sinon from "sinon";
 import assert from "assert";
 
 const loginInput = {

@@ -31,7 +31,7 @@ class BillDisplay extends Component {
             case "shopping":
                 return <FaShoppingBag color={color} size={24}/>;
             default:
-                return <FaQuestion color={color} size={24}/>;   
+                return <FaQuestion color={color} size={24}/>;
         };
     };
    
@@ -43,12 +43,12 @@ class BillDisplay extends Component {
         const year = parseInt(dateArray[2]);
         const month = parseInt(dateArray[1]) - 1;
         const day = parseInt(dateArray[0]);
- 
+
         const dateCreated = new Date(year, month, day).setHours(0,0,0,0);
         const todayDate = new Date().setHours(0,0,0,0);
         if(dateCreated < todayDate){
             dateTime = (year < new Date(todayDate).getFullYear() ) ? `${day < 10 ? "0"+day : day}/${month+1 < 10 ? "0"+(month+1) : month+1}/${year}` : `${day < 10 ? "0"+day : day}/${month+1 < 10 ? "0"+(month+1) : month+1}`;
-        } 
+        }
         else {
             const hour = parseInt(time.split(":")[0]);
             const minute = parseInt(time.split(":")[1]);
@@ -62,16 +62,16 @@ class BillDisplay extends Component {
     /**
      * @description the search bar of the bill
      */
-    const searchBill = 
+    const searchBill =
         <div id="search__bill">
                 <span className="search__icon"><FaSearch /> </span>
                 <input type="text" className="form-control border-0" onChange= {event => this.setState({seachedQuery: event.target.value})} placeholder= "Search bill"/>
         </div>
-    
+
     /**
      * @description the navigation of the bill (add new bill)
      */
-    const NavigationTabs =   
+    const NavigationTabs =
         <Nav tabs>
             <NavItem >
                 <NavLink>
@@ -82,24 +82,24 @@ class BillDisplay extends Component {
 
     /**
      * @description returns the list of bills as cards.
-     * @param {Array} billsVar the variable bills, 
+     * @param {Array} billsVar the variable bills,
      */
     const BillsList = (billsVar) => {
 
-        billsVar = this.state.seachedQuery.trim() !== "" ? billsVar.filter(bill => bill.name === this.state.seachedQuery) : billsVar; 
+        billsVar = this.state.seachedQuery.trim() !== "" ? billsVar.filter(bill => bill.name === this.state.seachedQuery) : billsVar;
 
         return(
             <div className="bill__container">
                 { billsVar.length > 0 ? billsVar.map((bill,key) =>(
                     <div className= "bill__card card" key = {key} onClick= {() => this.setState({selectedBill: {bill, id: key+1}})}>
                         <SmallBillCard bill={bill} filterDateTime={this.constructor.filterDateTime} billIcons={this.constructor.billIcons}/>
-                        { key !== billsVar.length-1 && 
+                        { key !== billsVar.length-1 &&
                         <hr className="card__seperator"/>
                         }
                     </div>)
-                ) : 
+                ) :
                 <p> {`No bills found titled: ${this.state.seachedQuery}`}</p>
-                }   
+                }
             </div>
         );
     };
@@ -114,19 +114,19 @@ class BillDisplay extends Component {
     );
 
     const { bills, isBillLoading } = this.props;
-    
+
     return (
       <div className="bill__wrapper">
         {isBillLoading ? (
           <Loader />
         ) : bills.length > 0 ? (
-            <div className="bill__section"> 
+            <div className="bill__section">
                 <div className= "bill__list__section">
                     {searchBill}
                     {NavigationTabs}
                     {BillsList(bills)}
                 </div>
-                <div className= "specific__bill__section"> 
+                <div className= "specific__bill__section">
                     {BillsSummary(bills)}
                     <span id="more__details"> More details</span>
                     <LargeBillCard selectedBill={this.state.selectedBill}/>
