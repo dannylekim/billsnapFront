@@ -15,7 +15,7 @@ const applicationReducers = (state = INTIAL_STATE, action) => {
         case ACTIONS.SET_BILL_LOADING_STATUS:
             return {
                 ...state,
-                isBillLoading: state.isBillLoading
+                isBillLoading: action.isBillLoading
             }
         default:
             return state;
