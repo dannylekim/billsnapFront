@@ -14,13 +14,14 @@ const addBill = (bills = []) => ({
 export const fetchMyBills = () => {
   return async (dispatch) => {
     try {
-      const bills = await getBill();
-
       dispatch(setBillLoading(true));
+
+      const bills = await getBill();
       dispatch(addBill(bills));
-      dispatch(setBillLoading(false));
     } catch (err) {
         // maybe set bill fetch error?
+    } finally {
+      dispatch(setBillLoading(false));
     }
   };
 };
