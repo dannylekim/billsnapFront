@@ -51,10 +51,12 @@
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.11.0",
     "react-icons": "^3.9.0",
-    "react-redux": "^7.1.1",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-test-renderer": "^16.11.0",
-    "redux": "^4.0.4",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "resolve": "1.12.0",
     "resolve-url-loader": "3.1.0",
     "sass-loader": "7.2.0",
@@ -101,10 +103,11 @@
     ]
   },
   "devDependencies": {
-    "codecov": "^3.6.5",
     "@babel/plugin-syntax-jsx": "^7.8.3",
+    "codecov": "^3.6.5",
     "enzyme": "^3.10.0",
-    "redux-devtools": "^3.5.0"
+    "redux-devtools": "^3.5.0",
+    "redux-mock-store": "^1.5.4"
   },
   "jest": {
     "roots": [
@@ -114,6 +117,7 @@
       "<rootDir>/src/**/*.{js,jsx}",
       "!<rootDir>/node_modules/**",
       "!<rootDir>/coverage/**",
+      "!<rootDir>/src/redux/**/*.js",
       "!/src/serviceWorker.js",
       "!/src/**/index.js"
     ],

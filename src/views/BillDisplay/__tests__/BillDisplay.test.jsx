@@ -1,107 +1,79 @@
-import React from 'react';
-import BillDisplay from '../BillDisplay.jsx';
+import React from "react";
+import BillDisplay from "../BillDisplay.jsx";
 import { shallow } from "enzyme";
 
 jest.mock("../../../utils/requests/BillRequests", () => {
-  return ({
-    getBill: jest.fn().mockResolvedValue(["bill1", "bill2"])
-  })
+  return {
+    getBill: jest.fn().mockResolvedValue(["bill1", "bill2"]),
+  };
 });
 
-describe('BillDisplay', () => {
-    let wrapper, instance;
-    
-    beforeEach(() => {    
-        wrapper = shallow(
-          <BillDisplay/>
+describe("BillDisplay", () => {
+  let wrapper, instance;
+  let mockFetch;
+
+  beforeEach(() => {
+    mockFetch = jest.fn();
+
+    wrapper = shallow(
+      <BillDisplay bills={[]} fetchBills={mockFetch} isBillLoading={true} />
+    );
+
+    instance = wrapper.instance();
+  });
+  afterEach(() => {
+    mockFetch.mockRestore();
+  });
+
+  describe("render", () => {
+    describe("snapshots 📸", () => {
+      it("BillDisplay should match snap shot when loading", () => {
+        matches(
+          <BillDisplay bills={[]} fetchBills={mockFetch} isBillLoading={true} />
         );
-        
-        instance = wrapper.instance(); 
       });
 
-    describe("render", () => {
-        describe("snapshots 📸", () => {
-            it("BillDisplay should match snap shot", () => {
-                matches(<BillDisplay />);
-            });
-        });
+      it("BillDisplay should match snap shot when done loading + no bills", () => {
+        matches(
+          <BillDisplay bills={[]} fetchBills={mockFetch} isBillLoading={false} />
+        );
+      });
+
+      it("BillDisplay should match snap shot when done loading + bills", () => {
+        const mockBills = [
+          {
+            id: 1,
+            name: "BILL MOCK 1",
+            status: "OPEN",
+            category: "string",
+            balance: 12.0,
+          },
+          {
+            id: 2,
+            name: "BILL MOCK 2",
+            status: "OPEN",
+            category: "string",
+            balance: 15.0,
+          },
+        ];
+        matches(
+          <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} />
+        );
+      });
+    });
+  });
+
+  describe("functions", () => {
+    it("fetchBill should be called 1 time", () => {
+      expect(mockFetch).toBeCalledTimes(1);
     });
 
-    describe("components", () => {
-        describe("bill list item", () => {
+    it("billStatusColor should return appropriate colors", () => {
+      expect(BillDisplay.billStatusColor("OPEN")).toBe("success");
+      expect(BillDisplay.billStatusColor("RESOLVED")).toBe("primary");
+      expect(BillDisplay.billStatusColor("IN_PROGRESS")).toBe("warning");
+      expect(BillDisplay.billStatusColor("BlahBlah")).toBe("muted");
 
-          it("Should have 3 list items", () => {
-            const mockBills = [
-              {
-                  "id": 1,
-                  "name": "BILL MOCK 1",
-                  "status": "OPEN",
-                  "category": "string",
-                  "balance": 12.0000
-              },
-              {
-                  "id": 2,
-                  "name": "BILL MOCK 2",
-                  "status": "OPEN",
-                  "category": "string",
-                  "balance": 15.000000
-              }
-            ];
-            wrapper.setState({
-                user:   {   firstName:  "",
-                            lastName: ""
-                        },
-                bills:  mockBills,
-                billsLoaded: true  
-            } );
-            expect(wrapper.find('ul')).toHaveLength(mockBills.length);
-            expect(wrapper.find('li')).toHaveLength(mockBills.length * 3);
-          });
-        });
-
-        describe("no bills", () => {
-            it("Should have 1 p tag", () => {
-              wrapper.setState({bills: {
-                    user:   {   firstName:  "",
-                                lastName: ""
-                            },
-                    bills:  [],
-                    billsLoaded: true  
-              }} );
-              expect(wrapper.find('p')).toHaveLength(1);
-            });
-          });
-
-        describe("not loaded", () => {
-            it("Should display loader gif", () => {
-              wrapper.setState({
-                    user:   {   firstName:  "",
-                                lastName: ""
-                            },
-                    bills:  [],
-                    billsLoaded: false  
-              });
-              expect(wrapper.find('img.loading__gif')).toHaveLength(1);
-            });
-          });
-        });
-         
-      describe("functions", () => {
-          it("fetchBill should be called 1 time", () => {
-            const spy = jest.spyOn(instance, 'fetchBill'); // spy on the fetchBill
-
-            instance.componentDidMount();
-            expect(spy).toBeCalledTimes(1);
-            spy.mockRestore();
-
-          });
-        
-        it("billStatusColor should return appropriate colors", () => {
-            jest.spyOn(instance, 'billStatusColor'); // spy on the billStatusColor
-            expect(instance.billStatusColor("OPEN")).toBe("success");
-            expect(instance.billStatusColor("RESOLVED")).toBe("primary");
-            expect(instance.billStatusColor("IN_PROGRESS")).toBe("warning");
-            expect(instance.billStatusColor("BlahBlah")).toBe("muted");
-        });
     });
+  });
 });
