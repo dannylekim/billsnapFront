@@ -1,0 +1,10 @@
+div.dashboard__flexbox{
+    display: flex;
+    flex-wrap: nowrap;
+    width:100%;
+}
+
+div.bill__display{
+    width: calc(100% - 200px);
+    margin-left: 200px;
+}
