@@ -3,27 +3,27 @@
   position: fixed;
   height: 100vh;
   background-color: #47E5B6;
-  width: 200px;
+  width: 302px;
   margin-left: 0;
+  left: 0;
+  top: 0;
+  border-radius: 0 15px 15px 0;
 
-  &-open {
-    margin-left: 0;
-    box-shadow: 2px 5px 3px 0 #ccc;
-  }
-
-  &-close {
-    margin-left: -200px;
-  }
+}
+.billSnap-Logo {
+  display: block;
+  color: #1d76db;
 }
 
 .billSnap-SideBar a {
-  padding: 6px 8px 6px 16px;
+  padding: 15px 8px 15px 16px;
   text-decoration: none;
-  font-size: 25px;
-  display: block;
+  font-size: 30px;
+  color: black;
+  //display: block;
 }
 
 .billSnap-SideBar a:hover {
-  color: #127D69;
+  color: #242b2a;
 
 }
