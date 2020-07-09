@@ -81,9 +81,9 @@ class BillDisplay extends Component {
             )}
         </Nav>
 
-    const BillsList = (bills) => (
+    const BillsList = (billsVar) => (
             <div className="bill__container">
-                { bills.map((bill,key) =>(
+                { billsVar.map((bill,key) =>(
                     <span key = {key}>
                         <SmallBillCard bill={bill} filterDateTime={this.filterDateTime} billIcons={this.billIcons}/>
                     </span>)
@@ -92,12 +92,12 @@ class BillDisplay extends Component {
             </div>
     );
 
-    const BillsSummary = (bills) => (
+    const BillsSummary = (billsVar) => (
         <div className="bill__summary">
                 <h5> Split by : Unknown </h5>
                 <h5> Status : OPEN</h5>
-                <h5> Total Amount Owed : <span id="amount__owed"> {bills.reduce((a, b) => (a +  parseFloat(b.balance)), 0).toFixed(2)} $</span> </h5>
-                <h5> Total of bills : {bills.length} </h5>
+                <h5> Total Amount Owed : <span id="amount__owed"> {billsVar.reduce((a, b) => (a +  parseFloat(b.balance)), 0).toFixed(2)} $</span> </h5>
+                <h5> Total of bills : {billsVar.length} </h5>
         </div>
     );
 

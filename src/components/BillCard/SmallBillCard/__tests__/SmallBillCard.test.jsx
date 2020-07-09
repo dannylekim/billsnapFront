@@ -21,15 +21,6 @@ const fakeBills = [
 ]
 
 describe('SmallBillCard', () => {
-    let wrapper;
-    let handleMockFunction;
-    
-
-    beforeEach(() => {
-        handleMockFunction = jest.fn();
-
-        wrapper = shallow(<SmallBillCard bill={fakeBills} filterDateTime={jest.fn()} billIcons={jest.fn()}/>);
-    })
 
     describe('render', () => {
         describe('snapshots 📸', () => {

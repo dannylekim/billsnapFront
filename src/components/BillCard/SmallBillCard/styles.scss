@@ -16,7 +16,7 @@ div.bill__items{
             width:100%;
             #bill__name{
                 margin-left:10px;
-                font-family: Sarabun;
+                font-family: "Sarabun";
                 font-style: normal;
                 font-weight: bold;
                 float: left;
@@ -27,7 +27,7 @@ div.bill__items{
                 float: right;
             }
         }
-    };
+    }
 
     .card-footer{
         width:100%;
@@ -40,7 +40,7 @@ div.bill__items{
 }
 
 #bill__balance{
-    font-family: Sarabun;
+    font-family: "Sarabun";
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
