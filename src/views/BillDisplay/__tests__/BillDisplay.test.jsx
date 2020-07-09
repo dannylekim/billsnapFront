@@ -2,7 +2,6 @@ import React from "react";
 import BillDisplay from "../BillDisplay.jsx";
 import { shallow } from "enzyme";
 import { FaUtensils, FaShoppingCart, FaShoppingBag, FaCar, FaBus, FaQuestion } from 'react-icons/fa';
-import { NavLink } from "shards-react";
 
 jest.mock("../../../utils/requests/BillRequests", () => {
   return {
