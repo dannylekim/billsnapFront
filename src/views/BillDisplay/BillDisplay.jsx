@@ -5,22 +5,19 @@ import SmallBillCard from "../../components/BillCard/SmallBillCard";
 import LargeBillCard from "../../components/BillCard/LargeBillCard";
 import { Nav, NavItem, NavLink } from "shards-react";
 import { FaUtensils, FaShoppingCart, FaShoppingBag, FaCar, FaBus, FaQuestion, FaSearch } from 'react-icons/fa';
-import {navItems} from "../../constants/BillDisplayNav";
 
 class BillDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: { firstName: "", lastName: "" },
-      currentActiveTab: "allBills"
-    };
+      user: { firstName: "", lastName: "" }  };
   }
 
   componentDidMount = async () => {
     await this.props.fetchBills();
   };
 
-   billIcons = category => {
+  static billIcons = category => {
         const color = "rgba(0, 0, 0, 0.96)";
         switch(category){
             case "food":
@@ -38,7 +35,7 @@ class BillDisplay extends Component {
         };
     };
    
-    filterDateTime = (timestamp) => {
+    static filterDateTime = timestamp => {
         let dateTime = "";
         const date  = timestamp.split(" ")[0];
         const time  = timestamp.split(" ")[1];
@@ -63,30 +60,40 @@ class BillDisplay extends Component {
     }
 
     render = () => {
-    
+    /**
+     * @description the search bar of the bill
+     */
     const searchBill = 
         <div id="search__bill">
                 <span className="search__icon"><FaSearch /> </span>
-                <input type="text" className="form-control"  placeholder= "Search bill"/>
+                <input type="text" className="form-control border-0"  placeholder= "Search bill"/>
         </div>
-      
-    const NavigationTabs = tabItems => 
+    
+    /**
+     * @description the navigation of the bill (add new bill)
+     */
+    const NavigationTabs =   
         <Nav tabs>
-            { tabItems.map((item, key) =>
-            <NavItem key={key}>
-                <NavLink active= {this.state.currentActiveTab === item.name ? true : false} onClick= {() => this.setState({currentActiveTab : item.name})}>
-                    {item.title}
+            <NavItem >
+                <NavLink onClick= {() => null}>
+                    {"+ Add bill"}
                 </NavLink>
             </NavItem>
-            )}
         </Nav>
 
+    /**
+     * @description returns the list of bills as cards.
+     * @param {Array} billsVar the variable bills, 
+     */
     const BillsList = (billsVar) => (
             <div className="bill__container">
                 { billsVar.map((bill,key) =>(
-                    <span key = {key}>
-                        <SmallBillCard bill={bill} filterDateTime={this.filterDateTime} billIcons={this.billIcons}/>
-                    </span>)
+                    <div className= "bill__card card" key = {key}>
+                        <SmallBillCard bill={bill} filterDateTime={this.constructor.filterDateTime} billIcons={this.constructor.billIcons}/>
+                        { key !== billsVar.length-1 && 
+                        <hr className="card__seperator"/>
+                        }
+                    </div>)
                 )
                 }   
             </div>
@@ -102,6 +109,7 @@ class BillDisplay extends Component {
     );
 
     const { bills, isBillLoading } = this.props;
+    
     return (
       <div className="bill__wrapper">
         {isBillLoading ? (
@@ -110,7 +118,7 @@ class BillDisplay extends Component {
             <div className="bill__section"> 
                 <div className= "bill__list__section">
                     {searchBill}
-                    {NavigationTabs(navItems)}
+                    {NavigationTabs}
                     {BillsList(bills)}
                 </div>
                 <div className= "specific__bill__section"> 

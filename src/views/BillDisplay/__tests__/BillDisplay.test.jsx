@@ -73,23 +73,22 @@ describe("BillDisplay", () => {
           });
 
           it("filterDateTime should return correct format", () => {
-            jest.spyOn(instance, 'filterDateTime'); // spy on the filterDateTime
+           
             const date = new Date(new Date().setHours(0,0,0,0));
-            expect(instance.filterDateTime("05-03-2017 15:25:10 -0400")).toBe("05/03/2017");
-            expect(instance.filterDateTime(`01-01-${date.getFullYear()} 15:25:10 -0400`)).toBe("01/01");
-            expect(instance.filterDateTime(`${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} 15:25:10 -0400`)).toBe("3:25 PM");
-            expect(instance.filterDateTime(`${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} 3:25:10 -0400`)).toBe("3:25 AM");
+            expect(BillDisplay.filterDateTime("05-03-2017 15:25:10 -0400")).toBe("05/03/2017");
+            expect(BillDisplay.filterDateTime(`01-01-${date.getFullYear()} 15:25:10 -0400`)).toBe("01/01");
+            expect(BillDisplay.filterDateTime(`${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} 15:25:10 -0400`)).toBe("3:25 PM");
+            expect(BillDisplay.filterDateTime(`${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} 3:25:10 -0400`)).toBe("3:25 AM");
           });
 
           it("fetchBill should return correct icon", () => {
-            jest.spyOn(instance, 'billIcons'); // spy on the billIcons
             const color = "rgba(0, 0, 0, 0.96)";
-            expect(instance.billIcons("food")).toStrictEqual(<FaUtensils color={color} size={24}/>);
-            expect(instance.billIcons("transport")).toStrictEqual(<FaCar color={color} size={24}/>);
-            expect(instance.billIcons("public-transport")).toStrictEqual(<FaBus color={color} size={24}/>);
-            expect(instance.billIcons("grocery")).toStrictEqual(<FaShoppingCart color={color} size={24}/>);
-            expect(instance.billIcons("shopping")).toStrictEqual(<FaShoppingBag color={color} size={24}/>);
-            expect(instance.billIcons("unknown")).toStrictEqual(<FaQuestion color={color} size={24}/>);
+            expect(BillDisplay.billIcons("food")).toStrictEqual(<FaUtensils color={color} size={24}/>);
+            expect(BillDisplay.billIcons("transport")).toStrictEqual(<FaCar color={color} size={24}/>);
+            expect(BillDisplay.billIcons("public-transport")).toStrictEqual(<FaBus color={color} size={24}/>);
+            expect(BillDisplay.billIcons("grocery")).toStrictEqual(<FaShoppingCart color={color} size={24}/>);
+            expect(BillDisplay.billIcons("shopping")).toStrictEqual(<FaShoppingBag color={color} size={24}/>);
+            expect(BillDisplay.billIcons("unknown")).toStrictEqual(<FaQuestion color={color} size={24}/>);
           });
     });
 });
