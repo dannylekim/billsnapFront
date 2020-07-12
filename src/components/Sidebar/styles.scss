@@ -1,8 +1,10 @@
+@import '../../variables';
+
 .billSnap-SideBar {
   transition: 0.3s;
   position: fixed;
   height: 100vh;
-  background-color: #47E5B6;
+  background-color: $secondary-color;
   width: 302px;
   margin-left: 0;
   left: 0;
@@ -15,18 +17,21 @@
   margin-bottom: 50px;
 }
 .billSnap-SideBar.sideLogo {
-  color: black;
+  color: $primary-text-color;
 }
-
-.billSnap-SideBar a {
+//note:
+//make border color transparent
+//make css background to match round
+.nav-link {
   padding: 15px 8px 15px 16px;
   text-decoration: none;
   font-size: 30px;
-  color: black;
-  //display: block;
-}
-
-.billSnap-SideBar a:hover {
-  color: #242b2a;
-
+  color: $primary-text-color !important;
+  &:hover {
+    background-color: rgb(106, 252, 192);
+    border-color: transparent;
+  }
+  &.active {
+    color: $secondary-color !important;
+  }
 }
