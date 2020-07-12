@@ -36,6 +36,9 @@
 
   &:hover {
     background-color: rgb(106, 252, 192);
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 50px !important;
+    border-bottom-left-radius: 50px !important;
   }
 
   &.active {
