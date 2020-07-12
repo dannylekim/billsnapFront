@@ -10,28 +10,38 @@
   left: 0;
   top: 0;
   border-radius: 0 15px 15px 0;
+  text-align: justify;
 
 }
+
 .sideLogo.navbar-brand {
   display: block;
   margin-bottom: 50px;
 }
+
 .billSnap-SideBar.sideLogo {
   color: $primary-text-color;
 }
-//note:
-//make border color transparent
-//make css background to match round
+
+.nav-item {
+  margin-left: 30px;
+}
+
 .nav-link {
   padding: 15px 8px 15px 16px;
   text-decoration: none;
   font-size: 30px;
+  border-color: transparent !important;
   color: $primary-text-color !important;
+
   &:hover {
     background-color: rgb(106, 252, 192);
-    border-color: transparent;
   }
+
   &.active {
     color: $secondary-color !important;
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 50px !important;
+    border-bottom-left-radius: 50px !important;
   }
 }
