@@ -2,6 +2,8 @@ import React from "react";
 import BillDisplay from "../BillDisplay.jsx";
 import { shallow } from "enzyme";
 import { FaUtensils, FaShoppingCart, FaShoppingBag, FaCar, FaBus, FaQuestion } from 'react-icons/fa';
+import { NavLink } from "shards-react";
+
 
 jest.mock("../../../utils/requests/BillRequests", () => {
   return {
@@ -65,6 +67,7 @@ describe("BillDisplay", () => {
             <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} />
           );
         });
+
       });
 
       describe("functions", () => {
@@ -74,11 +77,11 @@ describe("BillDisplay", () => {
 
           it("filterDateTime should return correct format", () => {
            
-            const date = new Date(new Date().setHours(0,0,0,0));
+            const today = new Date(new Date().setHours(0,0,0,0));
             expect(BillDisplay.filterDateTime("05-03-2017 15:25:10 -0400")).toBe("05/03/2017");
-            expect(BillDisplay.filterDateTime(`01-01-${date.getFullYear()} 15:25:10 -0400`)).toBe("01/01");
-            expect(BillDisplay.filterDateTime(`${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} 15:25:10 -0400`)).toBe("3:25 PM");
-            expect(BillDisplay.filterDateTime(`${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} 3:25:10 -0400`)).toBe("3:25 AM");
+            expect(BillDisplay.filterDateTime(`01-01-${today.getFullYear()} 15:25:10 -0400`)).toBe("01/01");
+            expect(BillDisplay.filterDateTime(`${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()} 15:25:10 -0400`)).toBe("3:25 PM");
+            expect(BillDisplay.filterDateTime(`${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()} 3:25:10 -0400`)).toBe("3:25 AM");
           });
 
           it("fetchBill should return correct icon", () => {

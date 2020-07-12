@@ -47,8 +47,7 @@ class BillDisplay extends Component {
         const dateCreated = new Date(year, month, day).setHours(0,0,0,0);
         const todayDate = new Date().setHours(0,0,0,0);
         if(dateCreated < todayDate){
-            const dateString = (year < new Date(todayDate).getFullYear() ) ? `${day < 10 ? "0"+day : day}/${month+1 < 10 ? "0"+(month+1) : month+1}/${year}` : `${day < 10 ? "0"+day : day}/${month+1 < 10 ? "0"+(month+1) : month+1}`;
-            dateTime =  dateString;
+            dateTime = (year < new Date(todayDate).getFullYear() ) ? `${day < 10 ? "0"+day : day}/${month+1 < 10 ? "0"+(month+1) : month+1}/${year}` : `${day < 10 ? "0"+day : day}/${month+1 < 10 ? "0"+(month+1) : month+1}`;
         } 
         else {
             const hour = parseInt(time.split(":")[0]);
@@ -75,7 +74,7 @@ class BillDisplay extends Component {
     const NavigationTabs =   
         <Nav tabs>
             <NavItem >
-                <NavLink onClick= {() => null}>
+                <NavLink>
                     {"+ Add bill"}
                 </NavLink>
             </NavItem>
