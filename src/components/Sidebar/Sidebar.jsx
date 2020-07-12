@@ -9,21 +9,19 @@ export default () => {
     return (
 
         <Navbar>
-            <Nav className={"billSnap-SideBar"} vertical={true}>
+            <Nav tabs className={"billSnap-SideBar"} vertical={true}>
 
-                <NavbarBrand className={"billSnap-Logo"}>
-                    <NavLink href="#">
+                <NavbarBrand className={"sideLogo"}>
                         Billsnap Logo
-                    </NavLink>
                 </NavbarBrand>
 
                 <NavItem>
-                    <NavLink href="#">
+                    <NavLink href="/dashboard">
                         <Receipt/> Bills
                     </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="#">
+                    <NavLink href="/dashboard">
                         <Face/> Profile
                     </NavLink>
                 </NavItem>

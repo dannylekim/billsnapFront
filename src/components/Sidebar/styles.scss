@@ -10,9 +10,12 @@
   border-radius: 0 15px 15px 0;
 
 }
-.billSnap-Logo {
+.sideLogo.navbar-brand {
   display: block;
-  color: #1d76db;
+  margin-bottom: 50px;
+}
+.billSnap-SideBar.sideLogo {
+  color: black;
 }
 
 .billSnap-SideBar a {
