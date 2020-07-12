@@ -1,9 +1,13 @@
 import React from "react";
 import BillDisplay from "../BillDisplay";
 import "./styles.scss";
+import Sidebar from "../../components/Sidebar";
 
 export default props => {
     return (
-        <div><BillDisplay/></div>
+        <div>
+            <Sidebar/>
+            <BillDisplay/>
+        </div>
     )
 }
