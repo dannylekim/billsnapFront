@@ -10,7 +10,7 @@ class BillDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: { firstName: "", lastName: "" }  };
+      user: { firstName: "", lastName: "" } , seachedQuery : "" , selectedBill: {bill: null, id: 0}};
   }
 
   componentDidMount = async () => {
@@ -65,7 +65,7 @@ class BillDisplay extends Component {
     const searchBill = 
         <div id="search__bill">
                 <span className="search__icon"><FaSearch /> </span>
-                <input type="text" className="form-control border-0"  placeholder= "Search bill"/>
+                <input type="text" className="form-control border-0" onChange= {event => this.setState({seachedQuery: event.target.value})} placeholder= "Search bill"/>
         </div>
     
     /**
@@ -84,19 +84,25 @@ class BillDisplay extends Component {
      * @description returns the list of bills as cards.
      * @param {Array} billsVar the variable bills, 
      */
-    const BillsList = (billsVar) => (
+    const BillsList = (billsVar) => {
+
+        billsVar = this.state.seachedQuery.trim() !== "" ? billsVar.filter(bill => bill.name === this.state.seachedQuery) : billsVar; 
+
+        return(
             <div className="bill__container">
-                { billsVar.map((bill,key) =>(
-                    <div className= "bill__card card" key = {key}>
+                { billsVar.length > 0 ? billsVar.map((bill,key) =>(
+                    <div className= "bill__card card" key = {key} onClick= {() => this.setState({selectedBill: {bill, id: key+1}})}>
                         <SmallBillCard bill={bill} filterDateTime={this.constructor.filterDateTime} billIcons={this.constructor.billIcons}/>
                         { key !== billsVar.length-1 && 
                         <hr className="card__seperator"/>
                         }
                     </div>)
-                )
+                ) : 
+                <p> {`No bills found titled: ${this.state.seachedQuery}`}</p>
                 }   
             </div>
-    );
+        );
+    };
 
     const BillsSummary = (billsVar) => (
         <div className="bill__summary">
@@ -123,7 +129,7 @@ class BillDisplay extends Component {
                 <div className= "specific__bill__section"> 
                     {BillsSummary(bills)}
                     <span id="more__details"> More details</span>
-                    <LargeBillCard />
+                    <LargeBillCard selectedBill={this.state.selectedBill}/>
                 </div>
             </div>
         ) : (

@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 div.bill__items{
     text-align: left;
 
@@ -15,7 +17,7 @@ div.bill__items{
                 font-style: normal;
                 font-weight: bold;
                 float: left;
-                color: #000000;
+                color: $primary-text-color;
             }
 
             #bill__balance{
@@ -27,7 +29,7 @@ div.bill__items{
     .card-footer{
         width:100%;
         margin-left:25px;
-        background-color: #FFFFFF;
+        background-color: $card-color;
         padding:0;
     }
    
@@ -38,5 +40,5 @@ div.bill__items{
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
-    color:#17C671;
+    color:$primary-price-color;
 }
