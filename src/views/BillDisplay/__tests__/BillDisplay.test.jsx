@@ -1,5 +1,5 @@
 import React from "react";
-import BillDisplay from "../BillDisplay.jsx";
+import BillDisplay from "../BillDisplay";
 import { shallow } from "enzyme";
 import { FaUtensils, FaShoppingCart, FaShoppingBag, FaCar, FaBus, FaQuestion } from 'react-icons/fa';
 
@@ -13,11 +13,30 @@ describe("BillDisplay", () => {
       let wrapper, instance;
       let mockFetch;
 
+      const mockBills = [
+        {
+          id: 1,
+          name: "BILL MOCK 1",
+          status: "OPEN",
+          category: "string",
+          created:  "05-03-2018 15:25:10 -0400",
+          balance: 12.0,
+        },
+        {
+          id: 2,
+          name: "BILL MOCK 2",
+          status: "OPEN",
+          category: "string",
+          created:  "05-03-2018 15:25:10 -0400",
+          balance: 15.0,
+        },
+      ];
+
       beforeEach(() => {
         mockFetch = jest.fn();
 
         wrapper = shallow(
-          <BillDisplay bills={[]} fetchBills={mockFetch} isBillLoading={true} />
+          <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} />
         );
 
         instance = wrapper.instance();
@@ -40,32 +59,32 @@ describe("BillDisplay", () => {
               );
             });
           });
+
+          it("should change seachedQuery state on form search.", () => {
+            const event = {
+              target: { value: 'hahahhahahahha' }
+            };
+           
+            wrapper.find('input.form-control.border-0').simulate('change', event);
+            expect(wrapper.state().seachedQuery).toBe(event.target.value);
+          })
+
+          it("should change selectedBill on click.", () => {
+            wrapper.find('div.bill__card.card').at(0).simulate('click');
+            expect(wrapper.state().selectedBill.bill).toBe(mockBills[0]);
+            wrapper.find('div.bill__card.card').at(1).simulate('click');
+            expect(wrapper.state().selectedBill.bill).toBe(mockBills[1]);
+          })
         });
 
       describe("components", () => {
         
         it("BillDisplay should match snap shot when done loading + bills", () => {
-          const mockBills = [
-            {
-              id: 1,
-              name: "BILL MOCK 1",
-              status: "OPEN",
-              category: "string",
-              balance: 12.0,
-            },
-            {
-              id: 2,
-              name: "BILL MOCK 2",
-              status: "OPEN",
-              category: "string",
-              balance: 15.0,
-            },
-          ];
+        
           matches(
             <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} />
           );
         });
-
       });
 
       describe("functions", () => {
