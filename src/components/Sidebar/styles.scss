@@ -3,7 +3,7 @@
 .billSnap-SideBar {
   transition: 0.3s;
   position: fixed;
-  height: 100vh;
+  height: 100%;
   background-color: $secondary-color;
   width: 302px;
   margin-left: 0;
@@ -11,10 +11,11 @@
   top: 0;
   border-radius: 0 15px 15px 0;
   text-align: justify;
-
 }
 
 .sideLogo.navbar-brand {
+  margin-top: 35px;
+  margin-left: 45px;
   display: block;
   margin-bottom: 50px;
 }
@@ -23,28 +24,33 @@
   color: $primary-text-color;
 }
 
-.nav-item {
-  margin-left: 30px;
-}
+div.sidebar__navitems{
+  margin-top: 25px;
 
-.nav-link {
-  padding: 15px 8px 15px 16px;
-  text-decoration: none;
-  font-size: 30px;
-  border-color: transparent !important;
-  color: $primary-text-color !important;
+  .nav-item {
+    margin-left: 30px;
 
-  &:hover {
-    background-color: rgb(106, 252, 192);
-    border-top-right-radius: 0 !important;
-    border-top-left-radius: 50px !important;
-    border-bottom-left-radius: 50px !important;
   }
 
-  &.active {
-    color: $secondary-color !important;
-    border-top-right-radius: 0 !important;
-    border-top-left-radius: 50px !important;
-    border-bottom-left-radius: 50px !important;
+  .nav-link {
+    padding: 15px 8px 15px 16px;
+    text-decoration: none;
+    font-size: 30px;
+    border-color: transparent !important;
+    color: $primary-text-color !important;
+
+    &:hover {
+      background-color: rgb(106, 252, 192);
+      border-top-right-radius: 0 !important;
+      border-top-left-radius: 50px !important;
+      border-bottom-left-radius: 50px !important;
+    }
+
+    &.active {
+      color: $secondary-color !important;
+      border-top-right-radius: 0 !important;
+      border-top-left-radius: 50px !important;
+      border-bottom-left-radius: 50px !important;
+    }
   }
 }

@@ -43,31 +43,33 @@ class Sidebar extends React.Component {
                         Billsnap Logo
                     </NavbarBrand>
 
-                    <NavItem>
-                        <NavLink id='billSnap-SideBar__bills' onClick={() => this.handleClick("bills")} active={this.state.activeState.bills}>
-                            <MdReceipt/> Bills
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink id='billSnap-SideBar__profile' onClick={() => this.handleClick("profile")} active={this.state.activeState.profile}>
-                            <MdFace/> Profile
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink id='billSnap-SideBar__contacts' onClick={() => this.handleClick("contacts")} active={this.state.activeState.contacts}>
-                            <MdPeople/> Contacts
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink id='billSnap-SideBar__settings' onClick={() => this.handleClick("settings")} active={this.state.activeState.settings}>
-                            <MdSettings/> Settings
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink id='billSnap-SideBar__help' onClick={() => this.handleClick("help")} active={this.state.activeState.help}>
-                            <MdHelp/> Help
-                        </NavLink>
-                    </NavItem>
+                    <div className="sidebar__navitems">
+                        <NavItem>
+                            <NavLink id='billSnap-SideBar__bills' onClick={() => this.handleClick("bills")} active={this.state.activeState.bills}>
+                                <MdReceipt/> Bills
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink id='billSnap-SideBar__profile' onClick={() => this.handleClick("profile")} active={this.state.activeState.profile}>
+                                <MdFace/> Profile
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink id='billSnap-SideBar__contacts' onClick={() => this.handleClick("contacts")} active={this.state.activeState.contacts}>
+                                <MdPeople/> Contacts
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink id='billSnap-SideBar__settings' onClick={() => this.handleClick("settings")} active={this.state.activeState.settings}>
+                                <MdSettings/> Settings
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink id='billSnap-SideBar__help' onClick={() => this.handleClick("help")} active={this.state.activeState.help}>
+                                <MdHelp/> Help
+                            </NavLink>
+                        </NavItem>
+                    </div>
                 </Nav>
             </Navbar>
         )

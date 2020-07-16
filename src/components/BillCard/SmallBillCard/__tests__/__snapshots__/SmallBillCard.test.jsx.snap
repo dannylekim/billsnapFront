@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap shot 1`] = `
+<div
+  className="bill__items card-body"
+>
+  <div
+    className="bill__items card-text"
+  >
+    <div
+      id="bill__icon"
+    />
+    <div
+      className="bill__name__price"
+    >
+      <span
+        id="bill__name"
+      >
+         
+      </span>
+      <span
+        id="bill__balance"
+      >
+         
+        NaN
+         $  
+      </span>
+    </div>
+  </div>
+</div>
+`;

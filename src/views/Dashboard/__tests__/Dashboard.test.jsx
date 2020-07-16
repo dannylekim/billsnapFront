@@ -12,7 +12,6 @@ const store = mockStore({
   }
 });
 
-
 describe("Dashboard", () => {
    describe("render", () => {
        describe("snapshots 📸", () => {
