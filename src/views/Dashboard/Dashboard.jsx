@@ -1,13 +1,18 @@
 import React from "react";
+import Sidebar from "../../components/Sidebar";
 import BillDisplay from "../BillDisplay";
 import "./styles.scss";
-import Sidebar from "../../components/Sidebar";
 
 export default props => {
     return (
-        <div>
-            <Sidebar/>
-            <BillDisplay/>
+        <div className="dashboard__flexbox">
+            <div className="side__bar">
+                <Sidebar/> 
+            </div>
+            <div className="bill__display">
+                <BillDisplay/>
+            </div>
+            
         </div>
     )
 }
