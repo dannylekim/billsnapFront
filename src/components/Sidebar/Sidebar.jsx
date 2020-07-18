@@ -1,4 +1,5 @@
 import React from 'react';
+import UserReducer from '../../redux/reducers/userReducers';
 import {MdFace, MdHelp, MdPeople, MdReceipt, MdSettings} from 'react-icons/md';
 import {FiLogOut} from 'react-icons/fi';
 import {Nav, Navbar, NavbarBrand, NavItem, NavLink} from 'shards-react';
@@ -39,6 +40,7 @@ class Sidebar extends React.Component {
 
     handleLogoutClick() {
         localStorage.clear();
+        UserReducer({}, 'SET_STATE');
     }
 
     render() {
