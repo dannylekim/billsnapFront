@@ -10,7 +10,6 @@ export const DEFAULT_ACTIVE_STATE = {
     contacts: false,
     settings: false,
     help: false,
-    logout: false
 }
 
 class Sidebar extends React.Component {
@@ -83,8 +82,7 @@ class Sidebar extends React.Component {
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink id='billSnap-SideBar__logout' onClick={() => this.handleLogoutClick()}
-                                     active={this.state.activeState.logout}  href={"/"}>
+                            <NavLink id='billSnap-SideBar__logout' onClick={() => this.handleLogoutClick()} href={"/"}>
                                 <FiLogOut/> Log out
                             </NavLink>
                         </NavItem>
