@@ -21,6 +21,17 @@ describe("BillDisplay", () => {
           category: "string",
           created:  "05-03-2018 15:25:10 -0400",
           balance: 12.0,
+          responsible: {
+            id: 1,
+            email: "someEmail@email.com",
+            firstName: "Bob",
+            middleName: null,
+            lastName: "Smith",
+            gender: null,
+            phoneNumber: null,
+            birthDate: null,
+            location: null
+          }
         },
         {
           id: 2,
@@ -29,6 +40,17 @@ describe("BillDisplay", () => {
           category: "string",
           created:  "05-03-2018 15:25:10 -0400",
           balance: 15.0,
+          responsible: {
+            id: 1,
+            email: "someEmail@email.com",
+            firstName: "Bob",
+            middleName: null,
+            lastName: "Smith",
+            gender: null,
+            phoneNumber: null,
+            birthDate: null,
+            location: null
+          }
         },
       ];
 
@@ -74,6 +96,12 @@ describe("BillDisplay", () => {
             expect(wrapper.state().selectedBill.bill).toBe(mockBills[0]);
             wrapper.find('div.bill__card.card').at(1).simulate('click');
             expect(wrapper.state().selectedBill.bill).toBe(mockBills[1]);
+          })
+
+          it("should change activeTab on click.", () => {
+            expect(wrapper.state().currentActiveTab).toBe("allBills");
+            wrapper.find('NavLink').at(1).simulate('click');
+            expect(wrapper.state().currentActiveTab).toBe("owedToYou");
           })
         });
 

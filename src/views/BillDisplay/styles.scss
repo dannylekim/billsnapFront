@@ -50,35 +50,63 @@ div.bill__list__section{
         margin-bottom: auto;
     }
     
-    input.form-control{
-        width: 90%;
+    span.search__filter{
+        width: 30%;
+        margin-top: auto;
+        margin-bottom: auto;
+        font-weight: 500;
         border-top-right-radius: inherit;
         border-bottom-right-radius: inherit;
+        span.simple__sort {
+            margin-left: 10px;
+        }
+    }
+
+    input.form-control{
+        width: 60%;
         border: inherit;
         background: inherit;
         box-shadow: none;
     }
 
-
     ul.nav.nav-tabs{
-        margin-left: calc(100% - 120px);
-        border: none;        
+        justify-content: start;
+        border-bottom: 1px solid $border-color;
     }
 
-    a.nav-link{
-        font-size: 14px;
-        justify-content : end;
+    button#add__bill__button{
+        margin-left: calc(100% - 140px);
+        margin-bottom: 10px;
+        border-radius: 17px;
+        font-weight: bold;
+        font-size: 20px;
         border: 1px solid $secondary-color;
+        min-height:40px;
+        width: 140px;
+    }
+    a.nav-link{
+        height:50px;
+        width: 140px;
+        border-radius: 10px 10px 0px 1px;
+        margin-left: 5px;
+        font-size: 16px;
+        border-bottom: 1px solid $border-color;
+    }
+
+    a.nav-link.active{
+      border: 1px solid $border-color;
+      border-bottom: none;
+    }
+
+    button#add__bill__button,a.nav-link{
+        justify-content : end;
         background-color: $secondary-color;
         color: $card-color;
         box-sizing: border-box;
         box-shadow: 4px 0px 4px $card-shadow;
-        border-radius: 10px;
         font-family: Sarabun, sans-serif;
         font-style: normal;
         font-weight: 300;
-        width: 120px;
-        height:40px;
         padding:10px 0 10px 0;
     }
 
@@ -99,8 +127,6 @@ div.bill__list__section{
     }
 }
 
-
-
 div.bill__container{
     display: flex;
     flex-wrap: nowrap;
@@ -115,3 +141,4 @@ div.bill__summary{
     text-align: left;
     margin-left: 130px;
 }
+
