@@ -42,7 +42,51 @@ exports[`BillDisplay components BillDisplay should match snap shot when done loa
           placeholder="Search bill"
           type="text"
         />
+        <span
+          className="search__filter"
+        >
+            
+          <span
+            className="advanced__sort"
+          >
+            <svg
+              fill="currentColor"
+              height={24}
+              size={24}
+              stroke="currentColor"
+              strokeWidth="0"
+              style={
+                Object {
+                  "color": undefined,
+                }
+              }
+              viewBox="0 0 448 512"
+              width={24}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+              />
+            </svg>
+          </span>
+           
+          <span
+            className="simple__sort"
+          >
+            Newest 
+          </span>
+           
+        </span>
       </div>
+      <button
+        className="btn btn-primary"
+        id="add__bill__button"
+        onClick={[Function]}
+      >
+         
+        + Add bill
+         
+      </button>
       <ul
         className="nav nav-tabs"
       >
@@ -50,10 +94,20 @@ exports[`BillDisplay components BillDisplay should match snap shot when done loa
           className="nav-item"
         >
           <a
+            className="nav-link active"
+            onClick={[Function]}
+          >
+            All bills
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
             className="nav-link"
             onClick={[Function]}
           >
-            + Add bill
+            Bills owed to you
           </a>
         </li>
       </ul>
@@ -66,6 +120,7 @@ exports[`BillDisplay components BillDisplay should match snap shot when done loa
         >
           <div
             className="bill__items card-body"
+            id="non__active__bill"
           >
             <div
               className="bill__items card-title text-muted"
@@ -123,6 +178,17 @@ exports[`BillDisplay components BillDisplay should match snap shot when done loa
                 </span>
               </div>
             </div>
+            <div
+              className="bill__items split__by"
+            >
+              <span
+                id="responsible"
+              >
+                 Split by : 
+                Bob
+                 
+              </span>
+            </div>
           </div>
           <hr
             className="card__seperator"
@@ -134,6 +200,7 @@ exports[`BillDisplay components BillDisplay should match snap shot when done loa
         >
           <div
             className="bill__items card-body"
+            id="non__active__bill"
           >
             <div
               className="bill__items card-title text-muted"
@@ -191,6 +258,17 @@ exports[`BillDisplay components BillDisplay should match snap shot when done loa
                 </span>
               </div>
             </div>
+            <div
+              className="bill__items split__by"
+            >
+              <span
+                id="responsible"
+              >
+                 Split by : 
+                Bob
+                 
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -201,12 +279,6 @@ exports[`BillDisplay components BillDisplay should match snap shot when done loa
       <div
         className="bill__summary"
       >
-        <h5>
-           Split by : Unknown 
-        </h5>
-        <h5>
-           Status : OPEN
-        </h5>
         <h5>
            Total Amount Owed : 
           <span
