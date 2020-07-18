@@ -76,11 +76,10 @@ describe('Sidebar', () => {
             });
         })
         describe('handleLogoutClick', () => {
-            it.skip('should clear cache and return to landing page ', () => {
+            it('should clear local storage', () => {
                 const EXPECTED_LENGTH = 0;
                 wrapper.instance().handleLogoutClick();
-                const ACTUAL_LENGTH = wrapper.instance().localStorage.length;
-                expect(wrapper.instance().localStorage.clear()).toHaveBeenCalled();
+                const ACTUAL_LENGTH = localStorage.length;
                 expect(ACTUAL_LENGTH).toEqual(EXPECTED_LENGTH);
             });
         });
