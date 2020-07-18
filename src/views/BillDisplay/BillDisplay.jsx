@@ -3,14 +3,15 @@ import "./styles.scss";
 import Loader from "../../components/Loader";
 import SmallBillCard from "../../components/BillCard/SmallBillCard";
 import LargeBillCard from "../../components/BillCard/LargeBillCard";
-import { Nav, NavItem, NavLink } from "shards-react";
-import { FaUtensils, FaShoppingCart, FaShoppingBag, FaCar, FaBus, FaQuestion, FaSearch } from 'react-icons/fa';
+import { Button, Nav, NavItem, NavLink } from "shards-react";
+import { FaUtensils, FaShoppingCart, FaShoppingBag, FaCar, FaBus, FaQuestion, FaSearch, FaBars } from 'react-icons/fa';
+import navItems from "../../constants/BillDisplayNav.json";
 
 class BillDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: { firstName: "", lastName: "" } , seachedQuery : "" , selectedBill: {bill: null, id: 0}};
+      user: { firstName: "", lastName: "" } , seachedQuery : "" , selectedBill: {bill: null, id: 0}, currentActiveTab : "allBills"};
   }
 
   componentDidMount = async () => {
@@ -66,33 +67,37 @@ class BillDisplay extends Component {
         <div id="search__bill">
                 <span className="search__icon"><FaSearch /> </span>
                 <input type="text" className="form-control border-0" onChange= {event => this.setState({seachedQuery: event.target.value})} placeholder= "Search bill"/>
+                <span className="search__filter">  <span className="advanced__sort"><FaBars size={24}/></span> <span className="simple__sort">Newest </span> </span>
         </div>
     
     /**
-     * @description the navigation of the bill (add new bill)
+     * @description the add new bill button (add new bill)
      */
-    const NavigationTabs =   
+    const AddBillButton =  <Button id="add__bill__button"> {"+ Add bill"} </Button>
+            
+    const NavigationTabs = tabItems => 
         <Nav tabs>
-            <NavItem >
-                <NavLink>
-                    {"+ Add bill"}
+            { tabItems.map((item, key) =>
+            <NavItem key={key}>
+                <NavLink active= {this.state.currentActiveTab === item.name ? true : false} onClick= {() => this.setState({currentActiveTab : item.name})}>
+                    {item.title}
                 </NavLink>
             </NavItem>
+            )}
         </Nav>
-
     /**
      * @description returns the list of bills as cards.
      * @param {Array} billsVar the variable bills, 
      */
     const BillsList = (billsVar) => {
 
-        billsVar = this.state.seachedQuery.trim() !== "" ? billsVar.filter(bill => bill.name === this.state.seachedQuery) : billsVar; 
+        billsVar = this.state.seachedQuery.trim() !== "" ? billsVar.filter(bill => bill.name.includes(this.state.seachedQuery)) : billsVar; 
 
         return(
             <div className="bill__container">
                 { billsVar.length > 0 ? billsVar.map((bill,key) =>(
                     <div className= "bill__card card" key = {key} onClick= {() => this.setState({selectedBill: {bill, id: key+1}})}>
-                        <SmallBillCard bill={bill} filterDateTime={this.constructor.filterDateTime} billIcons={this.constructor.billIcons}/>
+                        <SmallBillCard activeBill = {this.state.selectedBill.bill} bill={bill} filterDateTime={this.constructor.filterDateTime} billIcons={this.constructor.billIcons}/>
                         { key !== billsVar.length-1 && 
                         <hr className="card__seperator"/>
                         }
@@ -104,14 +109,19 @@ class BillDisplay extends Component {
         );
     };
 
-    const BillsSummary = (billsVar) => (
-        <div className="bill__summary">
-                <h5> Split by : Unknown </h5>
-                <h5> Status : OPEN</h5>
-                <h5> Total Amount Owed : <span id="amount__owed"> {billsVar.reduce((a, b) => (a +  parseFloat(b.balance)), 0).toFixed(2)} $</span> </h5>
-                <h5> Total of bills : {billsVar.length} </h5>
-        </div>
-    );
+    const BillsSummary = (billsVar) => {
+        return this.state.selectedBill.bill === null ? 
+            (<div className="bill__summary">
+                    <h5> Total Amount Owed : <span id="amount__owed"> {billsVar.reduce((a, b) => (a +  parseFloat(b.balance)), 0).toFixed(2)} $</span> </h5>
+                    <h5> Total of bills : {billsVar.length} </h5>
+            </div>)
+        : 
+            (<div className="bill__summary">
+                <h5> {`Split by : ${this.state.selectedBill.bill.responsible.firstName} ${this.state.selectedBill.bill.responsible.lastName}`} </h5>
+                <h5> {`Status : ${this.state.selectedBill.bill.status}`}</h5>
+                <h5> Amount Owed : <span id="amount__owed"> {this.state.selectedBill.bill.balance} $</span> </h5>
+            </div>)
+};
 
     const { bills, isBillLoading } = this.props;
     
@@ -123,7 +133,8 @@ class BillDisplay extends Component {
             <div className="bill__section"> 
                 <div className= "bill__list__section">
                     {searchBill}
-                    {NavigationTabs}
+                    {AddBillButton}
+                    {NavigationTabs(navItems)}
                     {BillsList(bills)}
                 </div>
                 <div className= "specific__bill__section"> 
