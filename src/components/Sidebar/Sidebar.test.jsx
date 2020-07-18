@@ -28,15 +28,20 @@ describe('Sidebar', () => {
             });
         })
         describe('interactions', () => {
-            it('Navlink should call handleClick on click', () => {
-                const mockFunction = jest.fn();
-                wrapper.instance().handleClick = mockFunction;
+            it('Navlink should call all click handles on click', () => {
+                const mockHandleClick = jest.fn();
+                const mockHandleLogoutClick = jest.fn();
+
+                wrapper.instance().handleClick = mockHandleClick;
+                wrapper.instance().handleLogoutClick = mockHandleLogoutClick;
                 wrapper.find(NavLink).filter('#billSnap-SideBar__bills').simulate('click');
                 wrapper.find(NavLink).filter('#billSnap-SideBar__profile').simulate('click');
                 wrapper.find(NavLink).filter('#billSnap-SideBar__contacts').simulate('click');
                 wrapper.find(NavLink).filter('#billSnap-SideBar__settings').simulate('click');
                 wrapper.find(NavLink).filter('#billSnap-SideBar__help').simulate('click');
-                expect(mockFunction).toHaveBeenCalledTimes(5);
+                wrapper.find(NavLink).filter('#billSnap-SideBar__logout').simulate('click');
+                expect(mockHandleClick).toHaveBeenCalledTimes(5);
+                expect(mockHandleLogoutClick).toHaveBeenCalledTimes(1);
             });
         })
     })
@@ -70,6 +75,15 @@ describe('Sidebar', () => {
                 expect(wrapper.state('activeState')).toEqual(EXPECTED_STATE)
             });
         })
+        describe('handleLogoutClick', () => {
+            it.skip('should clear cache and return to landing page ', () => {
+                const EXPECTED_LENGTH = 0;
+                wrapper.instance().handleLogoutClick();
+                const ACTUAL_LENGTH = wrapper.instance().localStorage.length;
+                expect(wrapper.instance().localStorage.clear()).toHaveBeenCalled();
+                expect(ACTUAL_LENGTH).toEqual(EXPECTED_LENGTH);
+            });
+        });
     })
 
 })
