@@ -11,11 +11,17 @@ class BillDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: { firstName: "", lastName: "" } , seachedQuery : "" , selectedBill: {bill: null, id: 0}, currentActiveTab : "allBills"};
+        user: { firstName: "", lastName: "" },
+        seachedQuery : "",
+        selectedBill: {bill: null, id: 0},
+        currentActiveTab : "allBills",
+        filterClicked: false,
+        sorting: {opened: false, type: "Newest"}
+    };
   }
 
   componentDidMount = async () => {
-    await this.props.fetchBills();
+    await this.props.fetchBills("");
   };
 
   static billIcons = category => {
@@ -60,6 +66,19 @@ class BillDisplay extends Component {
     }
 
     render = () => {
+    const { bills, isBillLoading, count } = this.props;
+
+    const updateBills = (type) => {
+        this.setState({sorting: {type, opened: !this.state.sorting.opened}});
+        if(type !== "A to Z" && type !== "Z to A"){
+            const filterQueryParam = {
+                "Newest" : "?sort_by=CREATED&order_by=DESC",
+                "Oldest": "?sort_by=CREATED&order_by=ASC"
+            }
+            this.props.fetchBills(filterQueryParam[type]);
+        }
+        else this.props.orderAlphabetical(type,bills);
+    };
     /**
      * @description the search bar of the bill
      */
@@ -67,9 +86,22 @@ class BillDisplay extends Component {
         <div id="search__bill">
                 <span className="search__icon"><FaSearch /> </span>
                 <input type="text" className="form-control border-0" onChange= {event => this.setState({seachedQuery: event.target.value})} placeholder= "Search bill"/>
-                <span className="search__filter">  <span className="advanced__sort"><FaBars size={24}/></span> <span className="simple__sort">Newest </span> </span>
+                <span className="search__filter">  
+                    <span className="advanced__sort"><FaBars size={24}/></span>
+                    <span className="simple__sort" onClick= {()=> this.setState({sorting: {...this.state.sorting, opened: !this.state.sorting.opened}})}>{this.state.sorting.type} </span>
+                </span>
         </div>
     
+    const simpleSort = <div className ="quick__sorting__container">
+        <ul className="sorting__content">
+            {
+                ["Newest", "A to Z", "Z to A", "Oldest"].filter(title => title !== this.state.sorting.type).map(
+                    (title, key) => <li className = "sorting__titles" onClick= {() => updateBills(title) } key = {key}> {title} </li>
+                )
+            }
+        </ul>
+    </div>
+
     /**
      * @description the add new bill button (add new bill)
      */
@@ -113,7 +145,7 @@ class BillDisplay extends Component {
         return this.state.selectedBill.bill === null ? 
             (<div className="bill__summary">
                     <h5> Total Amount Owed : <span id="amount__owed"> {billsVar.reduce((a, b) => (a +  parseFloat(b.balance)), 0).toFixed(2)} $</span> </h5>
-                    <h5> Total of bills : {billsVar.length} </h5>
+                    <h5> Total of bills : {count} </h5>
             </div>)
         : 
             (<div className="bill__summary">
@@ -121,10 +153,8 @@ class BillDisplay extends Component {
                 <h5> {`Status : ${this.state.selectedBill.bill.status}`}</h5>
                 <h5> Amount Owed : <span id="amount__owed"> {this.state.selectedBill.bill.balance} $</span> </h5>
             </div>)
-};
+    };
 
-    const { bills, isBillLoading } = this.props;
-    
     return (
       <div className="bill__wrapper">
         {isBillLoading ? (
@@ -133,6 +163,7 @@ class BillDisplay extends Component {
             <div className="bill__section"> 
                 <div className= "bill__list__section">
                     {searchBill}
+                    {this.state.sorting.opened === true && simpleSort}
                     {AddBillButton}
                     {NavigationTabs(navItems)}
                     {BillsList(bills)}

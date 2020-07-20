@@ -11,7 +11,7 @@ jest.mock("../../../utils/requests/BillRequests", () => {
 
 describe("BillDisplay", () => {
       let wrapper, instance;
-      let mockFetch;
+      let mockFetch,mockSortAlphabetical;
 
       const mockBills = [
         {
@@ -56,28 +56,29 @@ describe("BillDisplay", () => {
 
       beforeEach(() => {
         mockFetch = jest.fn();
-
+        mockSortAlphabetical = jest.fn();
         wrapper = shallow(
-          <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} />
+          <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} orderAlphabetical={mockSortAlphabetical} />
         );
 
         instance = wrapper.instance();
       });
       afterEach(() => {
         mockFetch.mockRestore();
+        mockSortAlphabetical.mockRestore();
       });
 
       describe("render", () => {
           describe("snapshots 📸", () => {
             it("BillDisplay should match snap shot when loading", () => {
               matches(
-                <BillDisplay bills={[]} fetchBills={mockFetch} isBillLoading={true} />
+                <BillDisplay bills={[]} fetchBills={mockFetch} isBillLoading={true} orderAlphabetical={mockSortAlphabetical} />
               );
             });
 
             it("BillDisplay should match snap shot when done loading + no bills", () => {
               matches(
-                <BillDisplay bills={[]} fetchBills={mockFetch} isBillLoading={false} />
+                <BillDisplay bills={[]} fetchBills={mockFetch} isBillLoading={false} orderAlphabetical={mockSortAlphabetical} />
               );
             });
           });
@@ -98,6 +99,21 @@ describe("BillDisplay", () => {
             expect(wrapper.state().selectedBill.bill).toBe(mockBills[1]);
           })
 
+          it("should trigger a Mock function when Oldest is clicked.", () => {
+            wrapper.find('span.simple__sort').simulate('click');
+            wrapper.update();
+            wrapper.find('li.sorting__titles').at(2).simulate('click');
+            expect(mockFetch).toHaveBeenCalled()
+          })
+
+          it("should trigger a Mock function when A to Z is clicked.", () => {
+            wrapper.find('span.simple__sort').simulate('click');
+            wrapper.update();
+            wrapper.find('li.sorting__titles').at(0).simulate('click');
+            expect(mockSortAlphabetical).toHaveBeenCalled()
+            expect(wrapper.state().sorting.type).toBe("A to Z");
+          })
+
           it("should change activeTab on click.", () => {
             expect(wrapper.state().currentActiveTab).toBe("allBills");
             wrapper.find('NavLink').at(1).simulate('click');
@@ -110,7 +126,7 @@ describe("BillDisplay", () => {
         it("BillDisplay should match snap shot when done loading + bills", () => {
         
           matches(
-            <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} />
+            <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} orderAlphabetical={mockSortAlphabetical} />
           );
         });
       });

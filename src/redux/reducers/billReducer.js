@@ -13,6 +13,11 @@ const billReducers = (state = INTIAL_STATE, action) => {
                 count: action.count,
                 bills: action.bills
             }
+        case ACTIONS.UPDATE_BILLS:
+                return {
+                    ...state,
+                    bills: action.bills
+                }
         default:
             return state;
     }
