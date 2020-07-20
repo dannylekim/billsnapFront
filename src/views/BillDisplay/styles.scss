@@ -37,7 +37,6 @@ div.bill__list__section{
         background: #F1F1F1;
         display: flex;
         align-content: center;
-        margin-bottom: 25px;
     } 
 
     span.search__icon{
@@ -55,10 +54,12 @@ div.bill__list__section{
         margin-top: auto;
         margin-bottom: auto;
         font-weight: 500;
+        font-size: 20px;
         border-top-right-radius: inherit;
         border-bottom-right-radius: inherit;
         span.simple__sort {
             margin-left: 10px;
+            
         }
     }
 
@@ -76,6 +77,7 @@ div.bill__list__section{
 
     button#add__bill__button{
         margin-left: calc(100% - 140px);
+        margin-top: 25px;
         margin-bottom: 10px;
         border-radius: 17px;
         font-weight: bold;
@@ -123,6 +125,34 @@ div.bill__list__section{
             width: 80.67%;
             margin-left: auto;
             margin-right: auto;
+        }
+    }
+
+    div.quick__sorting__container{
+        position: absolute;
+        height: 120px;
+
+        ul.sorting__content{
+            width: 103px;
+            transform: translateX(470px);
+            border-radius: 6px;
+            height: inherit;
+            background-color: #F1F1F1;
+            list-style : none;
+            padding-top:10px;
+            padding-left:0;
+
+            li.sorting__titles{
+                font-family: Sarabun, sans-serif;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 26px;
+                color: $secondary-text-color;
+            }
+
+            li.sorting__titles:hover{
+                background-color: #bebebe;
+            }
         }
     }
 }

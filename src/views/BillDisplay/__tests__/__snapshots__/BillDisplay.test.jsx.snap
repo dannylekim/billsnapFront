@@ -45,7 +45,6 @@ exports[`BillDisplay components BillDisplay should match snap shot when done loa
         <span
           className="search__filter"
         >
-            
           <span
             className="advanced__sort"
           >
@@ -69,13 +68,13 @@ exports[`BillDisplay components BillDisplay should match snap shot when done loa
               />
             </svg>
           </span>
-           
           <span
             className="simple__sort"
+            onClick={[Function]}
           >
-            Newest 
+            Newest
+             
           </span>
-           
         </span>
       </div>
       <button
@@ -292,7 +291,6 @@ exports[`BillDisplay components BillDisplay should match snap shot when done loa
         </h5>
         <h5>
            Total of bills : 
-          2
            
         </h5>
       </div>
