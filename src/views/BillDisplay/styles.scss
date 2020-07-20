@@ -26,15 +26,17 @@ div.specific__bill__section{
     }
 }
 
+
+
 div.bill__list__section{
     margin-left: 2.74117026885%;
     width: 38.909%;
   
     #search__bill{
-        border: 1px solid #F1F1F1;
+        border: 1px solid $light-gray-background;
         box-sizing: border-box;
         border-radius: 50px;
-        background: #F1F1F1;
+        background: $light-gray-background;
         display: flex;
         align-content: center;
     } 
@@ -73,11 +75,12 @@ div.bill__list__section{
     ul.nav.nav-tabs{
         justify-content: start;
         border-bottom: 1px solid $border-color;
+        margin-bottom: 15px;
     }
 
     button#add__bill__button{
         margin-left: calc(100% - 140px);
-        margin-top: 25px;
+        margin-top: 10px;
         margin-bottom: 10px;
         border-radius: 17px;
         font-weight: bold;
@@ -106,7 +109,7 @@ div.bill__list__section{
         color: $card-color;
         box-sizing: border-box;
         box-shadow: 4px 0px 4px $card-shadow;
-        font-family: Sarabun, sans-serif;
+        font-family: $primary-font;
         font-style: normal;
         font-weight: 300;
         padding:10px 0 10px 0;
@@ -128,22 +131,113 @@ div.bill__list__section{
         }
     }
 
+    div.bill__filter__container{
+        position: absolute;
+        top:75px;
+        height: 220px;
+        width:  600px;
+        border-radius: 6px;
+        background-color: $light-gray-background;
+        div.filter__header{
+            text-align: left;
+            margin-left: 10px;
+            
+            font-family: $primary-font;
+            font-size: 25px;
+
+            span.filter__header__title{
+                margin-left: 10px;
+                position: relative;  
+                top:2px;
+                font-weight: bold;       
+            }
+        }
+        div.filter__selections__container{
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            height: 120px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+
+            span.badge.badge-outline-primary.badge-pill{
+                border: 1px solid $secondary-text-color;
+                box-sizing: border-box;
+                border-radius: 50px;
+                color: $secondary-text-color;
+                font-family: $primary-font;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 20px;
+                line-height: 16px;
+                width: 120px;
+                margin-bottom: 10px;
+            }
+            span.badge.badge-outline-primary.badge-pill:hover{
+                background-color: #bebebe;
+            }
+        }
+
+        div.advanced__filter__selection{
+            position: relative;
+            bottom:80px;
+            left:380px;
+            width:180px;
+            height:110px;
+            font-family: $primary-font;
+            label.custom-control.custom-checkbox{
+                padding:0;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 15px;
+                color:$secondary-text-color;
+            }
+
+            input.form-control {
+                box-sizing: border-box;
+                color: rgba(0, 0, 0, 0.42);
+                font-size: 15px;
+                background: $card-color;
+            }
+            div.date__filter{
+                span.custom-control-description{
+                    margin-left: 25px;
+                }
+
+                input.form-control {
+                    width: 172px;
+                    border: 3px solid rgba(0, 0, 0, 0.17);
+                }
+            }
+
+            div.category__filter{
+                input.form-control {
+                    margin-top: 10px;
+                    width: 150px;
+                    border: 1px solid #BECAD6;
+                }
+            }
+        }
+    }
+
     div.quick__sorting__container{
         position: absolute;
+        top:75px;
         height: 120px;
-
         ul.sorting__content{
             width: 103px;
             transform: translateX(470px);
             border-radius: 6px;
             height: inherit;
-            background-color: #F1F1F1;
+            background-color: $light-gray-background;
             list-style : none;
             padding-top:10px;
             padding-left:0;
 
             li.sorting__titles{
-                font-family: Sarabun, sans-serif;
+                font-family: $primary-font;
                 font-weight: 500;
                 font-size: 20px;
                 line-height: 26px;
@@ -155,20 +249,20 @@ div.bill__list__section{
             }
         }
     }
-}
 
-div.bill__container{
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: column;
-    margin-bottom: 15px;
-    margin-top: 15px;
-    background-color: white;
-    box-shadow: -1px -1px 2px rgba(90, 97, 105, 0.25);
-}
-
-div.bill__summary{
-    text-align: left;
-    margin-left: 130px;
+    div.bill__container{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        margin-bottom: 15px;
+        box-shadow: -1px -1px 2px rgba(90, 97, 105, 0.25);
+    }
+    
+    div.bill__summary{
+        text-align: left;
+        margin-left: 130px;
+    }
+    
+    
 }
 
