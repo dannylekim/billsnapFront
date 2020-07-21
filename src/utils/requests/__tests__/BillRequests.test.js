@@ -3,7 +3,7 @@ import {getBills, getDetailedBill} from "../BillRequests";
 const {URL} = require("../../../config");
 
 describe("BillRequests", () => {
-    describe("getBill", () => {
+    describe("getBills", () => {
 
         afterEach(() => {
             localStorage.clear();

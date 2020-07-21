@@ -1,11 +1,11 @@
 import React from "react";
 import BillDisplay from "../BillDisplay";
-import { shallow } from "enzyme";
-import { FaUtensils, FaShoppingCart, FaShoppingBag, FaCar, FaBus, FaQuestion } from 'react-icons/fa';
+import {shallow} from "enzyme";
+import {FaBus, FaCar, FaQuestion, FaShoppingBag, FaShoppingCart, FaUtensils} from 'react-icons/fa';
 
 jest.mock("../../../utils/requests/BillRequests", () => {
   return {
-    getBill: jest.fn().mockResolvedValue(["bill1", "bill2"]),
+    getBills: jest.fn().mockResolvedValue(["bill1", "bill2"]),
   };
 });
 

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import "./styles.scss";
 import Loader from "../../components/Loader";
 import SmallBillCard from "../../components/BillCard/SmallBillCard";
-import LargeBillCard from "../../components/BillCard/LargeBillCard";
-import { Nav, NavItem, NavLink } from "shards-react";
-import { FaUtensils, FaShoppingCart, FaShoppingBag, FaCar, FaBus, FaQuestion, FaSearch } from 'react-icons/fa';
+import BillCard from "../../components/BillCard/BillCard";
+import {Nav, NavItem, NavLink} from "shards-react";
+import {FaBus, FaCar, FaQuestion, FaSearch, FaShoppingBag, FaShoppingCart, FaUtensils} from 'react-icons/fa';
 
 class BillDisplay extends Component {
   constructor(props) {
@@ -129,7 +129,7 @@ class BillDisplay extends Component {
                 <div className= "specific__bill__section">
                     {BillsSummary(bills)}
                     <span id="more__details"> More details</span>
-                    <LargeBillCard selectedBill={this.state.selectedBill}/>
+                    <BillCard selectedBill={this.state.selectedBill}/>
                 </div>
             </div>
         ) : (

@@ -1,5 +1,5 @@
-import { getBill } from "../../utils/requests/BillRequests";
-import { setBillLoading } from "./applicationActions";
+import {getBills} from "../../utils/requests/BillRequests";
+import {setBillLoading} from "./applicationActions";
 
 export const ACTIONS = {
   ADD_BILLS: "ADD_BILLS",
@@ -16,7 +16,7 @@ export const fetchMyBills = () => {
     try {
       dispatch(setBillLoading(true));
 
-      const bills = await getBill();
+      const bills = await getBills();
       dispatch(addBill(bills));
     } catch (err) {
         // maybe set bill fetch error?
