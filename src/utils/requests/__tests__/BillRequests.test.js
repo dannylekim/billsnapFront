@@ -24,7 +24,7 @@ describe("BillRequests", () => {
                 });
             });
 
-            const res = await getBill("");
+            const res = await getBill();
 
             expect(res.data).toEqual({});
         });
@@ -45,7 +45,7 @@ describe("BillRequests", () => {
                 });
             });
 
-            const res = await getBill("");
+            const res = await getBill();
 
             expect(res.data).toEqual({});
         });
@@ -69,7 +69,7 @@ describe("BillRequests", () => {
                 });
             });
             try {
-                await getBill("");
+                await getBill();
             }catch (e) {
                 expect(() => expect(e.message).toBe("missing Authorization header"));
             }
@@ -83,7 +83,7 @@ describe("BillRequests", () => {
             });
             
             try {
-                await getBill("");
+                await getBill();
 
             }catch (e) {
                 expect(() => expect(e.message).toBe("error"));

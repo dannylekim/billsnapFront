@@ -26,7 +26,7 @@ export const orderAlphabetical = (alphabeticalType,bills) => async dispatch => {
   dispatch(updateBill(alphabeticalType === "A to Z" ? sortedBills : sortedBills.reverse()))
 };
 
-export const fetchMyBills = (query_param) => {
+export const fetchMyBills = (query_param = "") => {
   return async (dispatch) => {
     try {
       dispatch(setBillLoading(true));

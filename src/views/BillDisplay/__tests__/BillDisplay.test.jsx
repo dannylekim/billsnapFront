@@ -1,5 +1,6 @@
 import React from "react";
 import BillDisplay from "../BillDisplay";
+import BillFilter from "../../../components/BillFilter";
 import { shallow } from "enzyme";
 import { FaUtensils, FaShoppingCart, FaShoppingBag, FaCar, FaBus, FaQuestion } from 'react-icons/fa';
 
@@ -57,6 +58,7 @@ describe("BillDisplay", () => {
       beforeEach(() => {
         mockFetch = jest.fn();
         mockSortAlphabetical = jest.fn();
+ 
         wrapper = shallow(
           <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} orderAlphabetical={mockSortAlphabetical} />
         );
@@ -76,195 +78,210 @@ describe("BillDisplay", () => {
               );
             });
 
+            it("BillDisplay should match snap shot when done loading + bills", () => {
+              matches(
+                <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} orderAlphabetical={mockSortAlphabetical} />
+              );
+            });
+
             it("BillDisplay should match snap shot when done loading + no bills", () => {
               matches(
                 <BillDisplay bills={[]} fetchBills={mockFetch} isBillLoading={false} orderAlphabetical={mockSortAlphabetical} />
               );
             });
           });
-
-          it("should change seachedQuery state on form search.", () => {
-            const event = {
-              target: { value: 'hahahhahahahha' }
-            };
-           
-            wrapper.find('input.form-control.border-0').simulate('change', event);
-            expect(wrapper.state().seachedQuery).toBe(event.target.value);
-          })
-
-          it("should change selectedBill on click.", () => {
-            wrapper.find('div.bill__card.card').at(0).simulate('click');
-            expect(wrapper.state().selectedBill.bill).toBe(mockBills[0]);
-            wrapper.find('div.bill__card.card').at(1).simulate('click');
-            expect(wrapper.state().selectedBill.bill).toBe(mockBills[1]);
-          })
-
-
-          describe("simple sort onClicks", () => {
-            beforeEach(() => {
-              wrapper.find('span.simple__sort').simulate('click');
-              wrapper.update();
-            });
-
-            it("should trigger a Mock function when A to Z is clicked.", () => {
-              wrapper.find('li.sorting__titles').at(0).simulate('click');
-              expect(mockSortAlphabetical).toHaveBeenCalled()
-              expect(wrapper.state().sorting.type).toBe("A to Z");
-            })
-
-            it("should trigger a Mock function when Z to A is clicked.", () => {
-              wrapper.find('li.sorting__titles').at(1).simulate('click');
-              expect(mockSortAlphabetical).toHaveBeenCalled()
-              expect(wrapper.state().sorting.type).toBe("Z to A");
-            })
-
-            it("should trigger a Mock function when Newest is selected after oldest is selected.", () => {
-              wrapper.find('li.sorting__titles').at(2).simulate('click');
-              expect(mockFetch).toHaveBeenCalled()
-              wrapper.find('span.simple__sort').simulate('click');
-              wrapper.update();
-              wrapper.find('li.sorting__titles').at(0).simulate('click');
-              expect(mockFetch).toHaveBeenCalled()
-            });
-          });
-
-          describe("filter badge onClicks", () => {
-            beforeEach(() => {
-              expect(wrapper.state().filter.opened).toBeFalsy();
-              wrapper.find('span.filter__bill').simulate('click');
-              wrapper.update();
-            });
-
-            it("should close filter div", () => {
-              expect(wrapper.state().filter.opened).toBeTruthy();
-              wrapper.find('div.filter__header').simulate('click');
-              wrapper.update();
-              expect(wrapper.state().filter.opened).toBeFalsy();
-            });
-            
-            it("should trigger a Mock function when Newest is selected.", () => {
-              wrapper.find('Badge').at(0).simulate('click');
-              expect(mockFetch).toHaveBeenCalled()
-              expect(wrapper.state().sorting.type).toBe("Newest");
-            });
-
-            it("should trigger a Mock function when Oldest is clicked.", () => {
-              wrapper.find('Badge').at(1).simulate('click');
-              expect(mockFetch).toHaveBeenCalled()
-              expect(wrapper.state().sorting.type).toBe("Oldest");
-            });
-            
-            it("should change status checkbox states on status filter select.", () => {
-              expect(wrapper.state().filter.statusOpened).toBeFalsy();
-              wrapper.find('Badge').at(2).simulate('click');
-              expect(wrapper.state().filter.statusOpened).toBeTruthy();
-              
-              wrapper.find('FormCheckbox').at(2).simulate('change');
-              expect(wrapper.state().billStatusFilter.in_progess).toBeTruthy();
-              expect(wrapper.state().billStatusFilter.resolved).toBeFalsy();
-              expect(wrapper.state().billStatusFilter.open).toBeFalsy();
-              
-              wrapper.find('FormCheckbox').at(1).simulate('change');
-              expect(wrapper.state().billStatusFilter.in_progess).toBeFalsy();
-              expect(wrapper.state().billStatusFilter.resolved).toBeFalsy();
-              expect(wrapper.state().billStatusFilter.open).toBeTruthy();
-              
-              wrapper.find('FormCheckbox').at(0).simulate('change');
-              expect(wrapper.state().billStatusFilter.in_progess).toBeFalsy();
-              expect(wrapper.state().billStatusFilter.resolved).toBeTruthy();
-              expect(wrapper.state().billStatusFilter.open).toBeFalsy();
-            });
-
-            it("should trigger a Mock function when A to Z is clicked.", () => {
-              wrapper.find('Badge').at(3).simulate('click');
-              expect(mockSortAlphabetical).toHaveBeenCalled()
-              expect(wrapper.state().sorting.type).toBe("A to Z");
-            });
-
-            it("should trigger a Mock function when Z to A is clicked.", () => {
-              wrapper.find('Badge').at(4).simulate('click');
-              expect(mockSortAlphabetical).toHaveBeenCalled()
-              expect(wrapper.state().sorting.type).toBe("Z to A");
-            });
-
-            it("should trigger category open state on category filter select", () => {
-              expect(wrapper.state().filter.categoryOpened).toBeFalsy();
-              wrapper.find('Badge').at(5).simulate('click');
-              expect(wrapper.state().filter.categoryOpened).toBeTruthy();
-            });
-  
-            describe("testing the date function", () => { 
-              beforeEach(() => {
-                expect(wrapper.state().dateFilters.startDate.selected).toBeFalsy();
-                expect(wrapper.state().dateFilters.endDate.selected).toBeFalsy();
-              
-                wrapper.find('Badge').at(6).simulate('click');
-                expect(wrapper.state().filter.dateOpened).toBeTruthy();
-                
-                wrapper.find('FormCheckbox').at(0).simulate('change');
-                expect(wrapper.state().dateFilters.startDate.selected).toBeTruthy();
-                expect(wrapper.state().dateFilters.endDate.selected).toBeFalsy();
-              
-                wrapper.find('FormCheckbox').at(1).simulate('change');
-                expect(wrapper.state().dateFilters.startDate.selected).toBeFalsy();
-                expect(wrapper.state().dateFilters.endDate.selected).toBeTruthy();
-              });
-              
-              it("should change start date checkbox states onChange.", () => {
-                const event = ({
-                  preventDefault: jest.fn(),
-                  target: {
-                      value: '2020-01-01'
-                  }
-                });
-                wrapper.find('FormInput').at(0).simulate('change',event);
-                wrapper.setState({ dateFilters: {
-                                    startDate: {selected: true, value: ""},
-                                    endDate: {selected: false, value: ""}
-                                } });
-                const spy = jest.spyOn(instance, 'handleDateSelection'); // handleDateSelection
-                instance.handleDateSelection(event);
-                expect(spy).toBeCalledTimes(1);
-                expect(spy).toHaveBeenCalledWith(event);
-                wrapper.update();
-                expect(wrapper.state().dateFilters.startDate.value).toBe(event.target.value);
-                spy.mockRestore();
-              });
-
-              it("should return null", ()=> {
-                const event = ({
-                  preventDefault: jest.fn(),
-                  target: {
-                      value: ""
-                  }
-                })
-                wrapper.find('FormInput').at(0).simulate('change',event);
-                expect(instance.handleDateSelection(event)).toBe(null);
-
-              });
-          })
-        });
-
-          it("should change activeTab on click.", () => {
-            expect(wrapper.state().currentActiveTab).toBe("allBills");
-            wrapper.find('NavLink').at(1).simulate('click');
-            expect(wrapper.state().currentActiveTab).toBe("owedToYou");
-          });
-
-          it("should call mock function on all bills", () => {
-            wrapper.find('NavItem').at(0).simulate('click');
-            expect(mockFetch).toHaveBeenCalled();
-          });
-
-        });
+      });
 
       describe("components", () => {
-        
-        it("BillDisplay should match snap shot when done loading + bills", () => {
-        
-          matches(
-            <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} orderAlphabetical={mockSortAlphabetical} />
-          );
+       
+        it("should change seachedQuery state on form search.", () => {
+          const event = {
+            target: { value: 'hahahhahahahha' }
+          };
+         
+          wrapper.find('input.form-control.border-0').simulate('change', event);
+          expect(wrapper.state().seachedQuery).toBe(event.target.value);
+        })
+
+        it("should change selectedBill on click.", () => {
+          wrapper.find('div.bill__card.card').at(0).simulate('click');
+          expect(wrapper.state().selectedBill.bill).toBe(mockBills[0]);
+          wrapper.find('div.bill__card.card').at(1).simulate('click');
+          expect(wrapper.state().selectedBill.bill).toBe(mockBills[1]);
+        })
+
+        it("should change activeTab on click.", () => {
+          expect(wrapper.state().currentActiveTab).toBe("allBills");
+          wrapper.find('NavLink').at(1).simulate('click');
+          expect(wrapper.state().currentActiveTab).toBe("owedToYou");
+        });
+
+        it("should call mock function on all bills", () => {
+          wrapper.find('NavItem').at(0).simulate('click');
+          expect(mockFetch).toHaveBeenCalled();
+        });
+
+        describe("simple sort onClicks", () => {
+          beforeEach(() => {
+            wrapper.find('span.simple__sort').simulate('click');
+            wrapper.update();
+          });
+
+          it("should trigger a Mock function when A to Z is clicked.", () => {
+            wrapper.find('li.sorting__titles').at(0).simulate('click');
+            expect(mockSortAlphabetical).toHaveBeenCalled()
+            expect(wrapper.state().sorting.type).toBe("A to Z");
+          })
+
+          it("should trigger a Mock function when Z to A is clicked.", () => {
+            wrapper.find('li.sorting__titles').at(1).simulate('click');
+            expect(mockSortAlphabetical).toHaveBeenCalled()
+            expect(wrapper.state().sorting.type).toBe("Z to A");
+          })
+
+          it("should trigger a Mock function when Newest is selected after oldest is selected.", () => {
+            wrapper.find('li.sorting__titles').at(2).simulate('click');
+            expect(mockFetch).toHaveBeenCalled()
+            wrapper.find('span.simple__sort').simulate('click');
+            wrapper.update();
+            wrapper.find('li.sorting__titles').at(0).simulate('click');
+            expect(mockFetch).toHaveBeenCalled()
+          });
+        });
+
+        describe("filter badge onClicks", () => {
+          let billFilterWrapper, billWrapper;
+          beforeEach(() => {
+            expect(wrapper.state().filter.opened).toBeFalsy();
+            wrapper.find('span.filter__bill').simulate('click');
+            wrapper.update();
+
+            billFilterWrapper = () => shallow(<BillFilter dateFilters={wrapper.state().dateFilters}
+                                                          filter={wrapper.state().filter} 
+                                                          billStatusFilter={wrapper.state().billStatusFilter}  
+                                                          handleDateSelection={(event) => instance.handleDateSelection(event)}
+                                                          updateBills={(type) => instance.updateBills(type)}
+                                                          setState={(newState) => instance.setState(newState)} />);
+            billWrapper = billFilterWrapper();
+          });
+
+          it("should close filter div", () => {
+            expect(wrapper.state().filter.opened).toBeTruthy();
+            billWrapper.find('div.filter__header').simulate('click');
+            wrapper.update();
+            expect(wrapper.state().filter.opened).toBeFalsy();
+          });
+          
+          it("should trigger a Mock function when Newest is selected.", () => {
+            billWrapper.find('Badge').at(0).simulate('click');//calls updateBills
+            expect(mockFetch).toHaveBeenCalled();
+            expect(wrapper.state().sorting.type).toBe("Newest");
+          });
+
+          it("should trigger a Mock function when Oldest is clicked.", () => {
+            billWrapper.find('Badge').at(1).simulate('click');
+            expect(mockFetch).toHaveBeenCalled()
+            expect(wrapper.state().sorting.type).toBe("Oldest");
+          });
+          
+          it("should change status checkbox states on status filter select.", () => {
+            expect(wrapper.state().filter.statusOpened).toBeFalsy();
+            billWrapper.find('Badge').at(2).simulate('click');
+            expect(wrapper.state().filter.statusOpened).toBeTruthy();
+            
+            billWrapper = billFilterWrapper();
+
+            billWrapper.find('FormCheckbox').at(2).simulate('change');
+            wrapper.update();
+            expect(wrapper.state().billStatusFilter.in_progess).toBeTruthy();
+            expect(wrapper.state().billStatusFilter.resolved).toBeFalsy();
+            expect(wrapper.state().billStatusFilter.open).toBeFalsy();
+            
+            billWrapper.find('FormCheckbox').at(1).simulate('change');
+            expect(wrapper.state().billStatusFilter.in_progess).toBeFalsy();
+            expect(wrapper.state().billStatusFilter.resolved).toBeFalsy();
+            expect(wrapper.state().billStatusFilter.open).toBeTruthy();
+            
+            billWrapper.find('FormCheckbox').at(0).simulate('change');
+            expect(wrapper.state().billStatusFilter.in_progess).toBeFalsy();
+            expect(wrapper.state().billStatusFilter.resolved).toBeTruthy();
+            expect(wrapper.state().billStatusFilter.open).toBeFalsy();
+          });
+
+          it("should trigger a Mock function when A to Z is clicked.", () => {
+            billWrapper.find('Badge').at(3).simulate('click');
+            expect(mockSortAlphabetical).toHaveBeenCalled()
+            expect(wrapper.state().sorting.type).toBe("A to Z");
+          });
+
+          it("should trigger a Mock function when Z to A is clicked.", () => {
+            billWrapper.find('Badge').at(4).simulate('click');
+            expect(mockSortAlphabetical).toHaveBeenCalled()
+            expect(wrapper.state().sorting.type).toBe("Z to A");
+          });
+
+          it("should trigger category open state on category filter select", () => {
+            expect(wrapper.state().filter.categoryOpened).toBeFalsy();
+            billWrapper.find('Badge').at(5).simulate('click');
+            expect(wrapper.state().filter.categoryOpened).toBeTruthy();
+          });
+
+          describe("testing the date function", () => { 
+           //has to re-shallow bill filter every time wrapper is updated (.update does not work on functional)
+            beforeEach(() => {
+              expect(wrapper.state().dateFilters.startDate.selected).toBeFalsy();
+              expect(wrapper.state().dateFilters.endDate.selected).toBeFalsy();
+             
+              billWrapper.find('Badge').at(6).simulate('click');
+              expect(wrapper.state().filter.dateOpened).toBeTruthy();
+             
+              billFilterWrapper().find('FormCheckbox').at(0).simulate('change');
+              wrapper.update();
+              expect(wrapper.state().dateFilters.startDate.selected).toBeTruthy();
+              expect(wrapper.state().dateFilters.endDate.selected).toBeFalsy();
+            
+              billWrapper =  billFilterWrapper()
+              billWrapper.find('FormCheckbox').at(1).simulate('change');
+              expect(wrapper.state().dateFilters.startDate.selected).toBeFalsy();
+              expect(wrapper.state().dateFilters.endDate.selected).toBeTruthy();
+              
+              
+            });
+            
+            it("should change start date checkbox states onChange.", () => {
+              const event = ({
+                preventDefault: jest.fn(),
+                target: {
+                    value: '2020-01-01'
+                }
+              });
+              wrapper.setState({  dateFilters: {
+                                  startDate: {selected: true, value: ""},
+                                  endDate: {selected: false, value: ""}
+                                } });
+
+              billWrapper.find('FormInput').at(0).simulate('change',event);
+            
+              const spy = jest.spyOn(instance, 'handleDateSelection'); // handleDateSelection
+              instance.handleDateSelection(event);
+              expect(spy).toBeCalledTimes(1);
+              expect(spy).toHaveBeenCalledWith(event);
+              wrapper.update();
+              expect(wrapper.state().dateFilters.startDate.value).toBe(event.target.value);
+              spy.mockRestore();
+            });
+
+            it("should return null", ()=> {
+              const event = ({
+                preventDefault: jest.fn(),
+                target: {
+                    value: ""
+                }
+              })
+              billWrapper.find('FormInput').at(0).simulate('change',event);
+              expect(instance.handleDateSelection(event)).toBe(null);
+            });
+          });
         });
       });
 
@@ -291,5 +308,5 @@ describe("BillDisplay", () => {
             expect(BillDisplay.billIcons("shopping")).toStrictEqual(<FaShoppingBag color={color} size={24}/>);
             expect(BillDisplay.billIcons("unknown")).toStrictEqual(<FaQuestion color={color} size={24}/>);
           });
-    });
+      });
 });

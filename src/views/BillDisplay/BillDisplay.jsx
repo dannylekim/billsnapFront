@@ -3,7 +3,8 @@ import "./styles.scss";
 import Loader from "../../components/Loader";
 import SmallBillCard from "../../components/BillCard/SmallBillCard";
 import LargeBillCard from "../../components/BillCard/LargeBillCard";
-import { Button, Badge, Nav, NavItem, NavLink, FormCheckbox,FormInput  } from "shards-react";
+import BillFilter from "../../components/BillFilter";
+import { Button, Nav, NavItem, NavLink } from "shards-react";
 import {
   FaUtensils,
   FaShoppingCart,
@@ -12,7 +13,7 @@ import {
   FaBus,
   FaQuestion,
   FaSearch,
-  FaBars,
+  FaBars
 } from "react-icons/fa";
 import navItems from "../../constants/BillDisplayNav.json";
 
@@ -20,7 +21,6 @@ class BillDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: { firstName: "", lastName: "" },
       seachedQuery: "",
       selectedBill: { bill: null, id: 0 },
       currentActiveTab: "allBills",
@@ -32,11 +32,10 @@ class BillDisplay extends Component {
       },
       billStatusFilter: {resolved: false, open: false, in_progess:false}
     };
-    this.handleDateSelection = this.handleDateSelection.bind(this); 
   }
 
   componentDidMount = async () => {
-    await this.props.fetchBills("");
+    await this.props.fetchBills();
   };
 
   static billIcons = (category) => {
@@ -187,126 +186,6 @@ class BillDisplay extends Component {
     );
 
     /**
-     * @description the filter box when three horizontal lines clicked
-     */
-    const billFilters = () => {
-        const filterBadges = [ 
-            {   title: "Newest",
-                onClick: () => this.updateBills("Newest")
-            },
-            {   title: "Oldest",
-                onClick: () => this.updateBills("Oldest")
-            },
-            {   title: "Status",
-                onClick: () => this.setState({filter: {
-                                                        ...this.state.filter,
-                                                        statusOpened: true,
-                                                        categoryOpened:false,
-                                                        dateOpened: false
-                                                    },
-                                                    dateFilters: {...this.state.dateFilters, startDate: {...this.state.dateFilters.startDate, selected: false}, endDate: {...this.state.dateFilters.endDate,selected: false} }})
-            },
-            {   title: "A to Z",
-                onClick: () => this.updateBills("A to Z")
-            },
-            {   title: "Z to A",
-                onClick: () => this.updateBills("Z to A")
-            },
-            {   title: "Category",
-                onClick: () => this.setState({filter: {
-                                                        ...this.state.filter,
-                                                        categoryOpened: true,
-                                                        statusOpened: false,
-                                                        dateOpened: false
-                                                    },
-                                                dateFilters: {...this.state.dateFilters, startDate: {...this.state.dateFilters.startDate, selected: false}, endDate: {...this.state.dateFilters.endDate,selected: false} }})
-            },
-            {   title: "Date",
-                onClick: () => this.setState({filter: {
-                                                        ...this.state.filter,
-                                                        dateOpened: true,
-                                                        categoryOpened: false,
-                                                        statusOpened: false
-                                                    }})
-            }
-        ];
-
-     return( 
-      <div className="bill__filter__container">
-        <div className="filter__header" onClick={() =>
-              this.setState({
-                filter: {
-                  ...this.state.filter,
-                  opened: false,
-                }
-              })
-            }> <FaBars size={24}/><span className="filter__header__title">Filters</span> 
-        </div>
-        <div className="filter__selections__container">
-            {
-                filterBadges.map((badgeObject, key) =>  <Badge key={key} outline pill onClick={badgeObject.onClick}>{badgeObject.title}</Badge> )
-            }
-        </div>
-        {  (this.state.filter.dateOpened  || this.state.filter.statusOpened === true || this.state.filter.categoryOpened === true) &&
-        <div className="advanced__filter__selection">
-            {
-                this.state.filter.dateOpened === true && (
-                    <div className="date__filter"> 
-                        <FormCheckbox
-                            checked={this.state.dateFilters.startDate.selected}
-                            onChange={() => this.setState({dateFilters: {...this.state.dateFilters, startDate: {...this.state.dateFilters.startDate, selected: true}, endDate: {...this.state.dateFilters.endDate,selected: false} }})}
-                        > 
-                            Start date {this.state.dateFilters.startDate.value !== "" ? `: ${this.state.dateFilters.startDate.value}` : ""}
-                        </FormCheckbox>
-                        <FormCheckbox
-                              checked={this.state.dateFilters.endDate.selected}
-                              onChange={() => this.setState({dateFilters: {...this.state.dateFilters, startDate: {...this.state.dateFilters.startDate, selected: false}, endDate: {...this.state.dateFilters.endDate,selected: true} }})}
-                        > 
-                            End date {this.state.dateFilters.endDate.value !== "" ? `: ${this.state.dateFilters.endDate.value}` : ""}
-                        </FormCheckbox>
-                        <FormInput type="date" onChange={(event)=> this.handleDateSelection(event)} disabled={this.state.dateFilters.endDate.selected === false && this.state.dateFilters.startDate.selected === false}/>
-                    </div>
-                )
-            }
-            {     
-                this.state.filter.statusOpened === true && (
-                    <div className="status__filter"> 
-                        <FormCheckbox
-                            checked={this.state.billStatusFilter.resolved}
-                            onChange={() => this.setState({billStatusFilter: {...this.state.billStatusFilter, resolved: true, open: false, in_progess: false}})}
-                        > 
-                            PAID
-                        </FormCheckbox>
-                        <FormCheckbox
-                              checked={this.state.billStatusFilter.open}
-                              onChange={() => this.setState({billStatusFilter: {...this.state.billStatusFilter, resolved: false, open: true, in_progess: false}})}
-                        > 
-                            UNPAID
-                        </FormCheckbox>
-                        <FormCheckbox
-                              checked={this.state.billStatusFilter.in_progess}
-                              onChange={() => this.setState({billStatusFilter: {...this.state.billStatusFilter, resolved: false, open: false, in_progess: true}})}
-                        > 
-                            ONGOING
-                        </FormCheckbox>
-                    </div>
-                )
-            }
-            {     
-                this.state.filter.categoryOpened === true && (
-                    <div className="category__filter"> 
-                        <FormInput type="text" placeholder="Restaurant"/>
-                    </div>
-                )
-            }
-        </div>
-        }
-
-      </div>
-     );
-    };
-
-    /**
      * @description the sorting box when furthest right is clicked
      */
     const simpleSort = (
@@ -334,10 +213,22 @@ class BillDisplay extends Component {
       <Button id="add__bill__button"> {"+ Add bill"} </Button>
     );
 
+    const resetFilters = () => {
+      this.props.fetchBills();
+      this.setState({ 
+                      sorting: { opened: false, type: "Newest" },
+                      dateFilters: {
+                                      startDate: {selected: false, value: ""},
+                                      endDate: {selected: false, value: ""}
+                                    },
+                      billStatusFilter: {resolved: false, open: false, in_progess:false}
+                    });
+    };
+
     const NavigationTabs = (tabItems) => (
       <Nav tabs>
         {tabItems.map((item, key) => (
-          <NavItem key={key} onClick={() => key===0 && this.props.fetchBills("")}>
+          <NavItem key={key} onClick={() => key===0 && resetFilters() }> 
             <NavLink
               active={this.state.currentActiveTab === item.name ? true : false}
               onClick={() => this.setState({ currentActiveTab: item.name })}
@@ -421,6 +312,7 @@ class BillDisplay extends Component {
       );
     };
 
+    const {dateFilters,filter,billStatusFilter} = this.state;
     return (
       <div className="bill__wrapper">
         {isBillLoading ? (
@@ -432,7 +324,12 @@ class BillDisplay extends Component {
               {AddBillButton}
               {NavigationTabs(navItems)}
               {BillsList(bills)}
-              {this.state.filter.opened === true && billFilters()}
+              {this.state.filter.opened === true && <BillFilter dateFilters={dateFilters}
+                                                                filter={filter} 
+                                                                billStatusFilter={billStatusFilter}  
+                                                                handleDateSelection={(event) => this.handleDateSelection(event)}
+                                                                updateBills={(type) => this.updateBills(type)}
+                                                                setState={(newState) => this.setState(newState)} />} 
               {this.state.sorting.opened === true && simpleSort}
             </div>
             <div className="specific__bill__section">

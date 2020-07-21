@@ -1,0 +1,808 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot when category filter opened 1`] = `
+<div
+  className="bill__filter__container"
+>
+  <div
+    className="filter__header"
+    onClick={[Function]}
+  >
+     
+    <svg
+      fill="currentColor"
+      height={24}
+      size={24}
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 448 512"
+      width={24}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+      />
+    </svg>
+    <span
+      className="filter__header__title"
+    >
+      Filters
+    </span>
+  </div>
+  <div
+    className="filter__selections__container"
+  >
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="descending"
+      onClick={[Function]}
+    >
+      Newest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="ascending"
+      onClick={[Function]}
+    >
+      Oldest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__status"
+      onClick={[Function]}
+    >
+      Status
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__increasing"
+      onClick={[Function]}
+    >
+      A to Z
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__decreasing"
+      onClick={[Function]}
+    >
+      Z to A
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__category"
+      onClick={[Function]}
+    >
+      Category
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__date"
+      onClick={[Function]}
+    >
+      Date
+    </span>
+  </div>
+  <div
+    className="advanced__filter__selection"
+  >
+    <div
+      className="category__filter"
+    >
+      <input
+        className="form-control"
+        placeholder="Restaurant"
+        type="text"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot when date filter opened 1`] = `
+<div
+  className="bill__filter__container"
+>
+  <div
+    className="filter__header"
+    onClick={[Function]}
+  >
+     
+    <svg
+      fill="currentColor"
+      height={24}
+      size={24}
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 448 512"
+      width={24}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+      />
+    </svg>
+    <span
+      className="filter__header__title"
+    >
+      Filters
+    </span>
+  </div>
+  <div
+    className="filter__selections__container"
+  >
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="descending"
+      onClick={[Function]}
+    >
+      Newest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="ascending"
+      onClick={[Function]}
+    >
+      Oldest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__status"
+      onClick={[Function]}
+    >
+      Status
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__increasing"
+      onClick={[Function]}
+    >
+      A to Z
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__decreasing"
+      onClick={[Function]}
+    >
+      Z to A
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__category"
+      onClick={[Function]}
+    >
+      Category
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__date"
+      onClick={[Function]}
+    >
+      Date
+    </span>
+  </div>
+  <div
+    className="advanced__filter__selection"
+  >
+    <div
+      className="date__filter"
+    >
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={true}
+          className="custom-control-input"
+          id="dr-checkbox-l1KHdAQuT"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="dr-checkbox-l1KHdAQuT"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          Start date 
+          
+        </span>
+      </label>
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="dr-checkbox-rF-IjhLWE0"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="dr-checkbox-rF-IjhLWE0"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          End date 
+          
+        </span>
+      </label>
+      <input
+        className="form-control"
+        disabled={false}
+        onChange={[Function]}
+        type="date"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot when end date exists 1`] = `
+<div
+  className="bill__filter__container"
+>
+  <div
+    className="filter__header"
+    onClick={[Function]}
+  >
+     
+    <svg
+      fill="currentColor"
+      height={24}
+      size={24}
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 448 512"
+      width={24}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+      />
+    </svg>
+    <span
+      className="filter__header__title"
+    >
+      Filters
+    </span>
+  </div>
+  <div
+    className="filter__selections__container"
+  >
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="descending"
+      onClick={[Function]}
+    >
+      Newest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="ascending"
+      onClick={[Function]}
+    >
+      Oldest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__status"
+      onClick={[Function]}
+    >
+      Status
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__increasing"
+      onClick={[Function]}
+    >
+      A to Z
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__decreasing"
+      onClick={[Function]}
+    >
+      Z to A
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__category"
+      onClick={[Function]}
+    >
+      Category
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__date"
+      onClick={[Function]}
+    >
+      Date
+    </span>
+  </div>
+  <div
+    className="advanced__filter__selection"
+  >
+    <div
+      className="date__filter"
+    >
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="dr-checkbox-LfYF6WvvNp"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="dr-checkbox-LfYF6WvvNp"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          Start date 
+          
+        </span>
+      </label>
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={true}
+          className="custom-control-input"
+          id="dr-checkbox-w8Pl_GL3mj"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="dr-checkbox-w8Pl_GL3mj"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          End date 
+          : 2020-01-01
+        </span>
+      </label>
+      <input
+        className="form-control"
+        disabled={false}
+        onChange={[Function]}
+        type="date"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot when nothing opened 1`] = `
+<div
+  className="bill__filter__container"
+>
+  <div
+    className="filter__header"
+    onClick={[Function]}
+  >
+     
+    <svg
+      fill="currentColor"
+      height={24}
+      size={24}
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 448 512"
+      width={24}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+      />
+    </svg>
+    <span
+      className="filter__header__title"
+    >
+      Filters
+    </span>
+  </div>
+  <div
+    className="filter__selections__container"
+  >
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="descending"
+      onClick={[Function]}
+    >
+      Newest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="ascending"
+      onClick={[Function]}
+    >
+      Oldest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__status"
+      onClick={[Function]}
+    >
+      Status
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__increasing"
+      onClick={[Function]}
+    >
+      A to Z
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__decreasing"
+      onClick={[Function]}
+    >
+      Z to A
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__category"
+      onClick={[Function]}
+    >
+      Category
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__date"
+      onClick={[Function]}
+    >
+      Date
+    </span>
+  </div>
+</div>
+`;
+
+exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot when start date exists 1`] = `
+<div
+  className="bill__filter__container"
+>
+  <div
+    className="filter__header"
+    onClick={[Function]}
+  >
+     
+    <svg
+      fill="currentColor"
+      height={24}
+      size={24}
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 448 512"
+      width={24}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+      />
+    </svg>
+    <span
+      className="filter__header__title"
+    >
+      Filters
+    </span>
+  </div>
+  <div
+    className="filter__selections__container"
+  >
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="descending"
+      onClick={[Function]}
+    >
+      Newest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="ascending"
+      onClick={[Function]}
+    >
+      Oldest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__status"
+      onClick={[Function]}
+    >
+      Status
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__increasing"
+      onClick={[Function]}
+    >
+      A to Z
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__decreasing"
+      onClick={[Function]}
+    >
+      Z to A
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__category"
+      onClick={[Function]}
+    >
+      Category
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__date"
+      onClick={[Function]}
+    >
+      Date
+    </span>
+  </div>
+  <div
+    className="advanced__filter__selection"
+  >
+    <div
+      className="date__filter"
+    >
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={true}
+          className="custom-control-input"
+          id="dr-checkbox--ixkT1FL_1"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="dr-checkbox--ixkT1FL_1"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          Start date 
+          : 2020-01-01
+        </span>
+      </label>
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="dr-checkbox-j7rCRzAOVm"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="dr-checkbox-j7rCRzAOVm"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          End date 
+          
+        </span>
+      </label>
+      <input
+        className="form-control"
+        disabled={false}
+        onChange={[Function]}
+        type="date"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot when status filter opened 1`] = `
+<div
+  className="bill__filter__container"
+>
+  <div
+    className="filter__header"
+    onClick={[Function]}
+  >
+     
+    <svg
+      fill="currentColor"
+      height={24}
+      size={24}
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 448 512"
+      width={24}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+      />
+    </svg>
+    <span
+      className="filter__header__title"
+    >
+      Filters
+    </span>
+  </div>
+  <div
+    className="filter__selections__container"
+  >
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="descending"
+      onClick={[Function]}
+    >
+      Newest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="ascending"
+      onClick={[Function]}
+    >
+      Oldest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__status"
+      onClick={[Function]}
+    >
+      Status
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__increasing"
+      onClick={[Function]}
+    >
+      A to Z
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__decreasing"
+      onClick={[Function]}
+    >
+      Z to A
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__category"
+      onClick={[Function]}
+    >
+      Category
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__date"
+      onClick={[Function]}
+    >
+      Date
+    </span>
+  </div>
+  <div
+    className="advanced__filter__selection"
+  >
+    <div
+      className="status__filter"
+    >
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="dr-checkbox-YDdx8JQwKN"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="dr-checkbox-YDdx8JQwKN"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          PAID
+        </span>
+      </label>
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="dr-checkbox-XLD2bfUxAH"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="dr-checkbox-XLD2bfUxAH"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          UNPAID
+        </span>
+      </label>
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="dr-checkbox-65cTkJO-rQ"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="dr-checkbox-65cTkJO-rQ"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          ONGOING
+        </span>
+      </label>
+    </div>
+  </div>
+</div>
+`;
