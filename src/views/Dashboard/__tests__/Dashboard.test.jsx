@@ -18,7 +18,7 @@ describe("Dashboard", () => {
            it("Dashboard should match snap shot", () => {
                matches(
                 <Provider store={store}>
-                    <Dashboard/>
+                    <Dashboard history = {{push: jest.fn()}}/>
                 </Provider>);
            });
        });
