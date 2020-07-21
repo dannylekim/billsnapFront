@@ -5,12 +5,16 @@ import SmallBillCard from "../../components/BillCard/SmallBillCard";
 import BillCard from "../../components/BillCard/BillCard";
 import {Nav, NavItem, NavLink} from "shards-react";
 import {FaBus, FaCar, FaQuestion, FaSearch, FaShoppingBag, FaShoppingCart, FaUtensils} from 'react-icons/fa';
+import {getDetailedBill} from "../../utils/requests/BillRequests";
 
 class BillDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: { firstName: "", lastName: "" } , seachedQuery : "" , selectedBill: {bill: null, id: 0}};
+      user: { firstName: "", lastName: "" },
+        seachedQuery : "",
+        selectedBill: {bill: null},
+    };
   }
 
   componentDidMount = async () => {
@@ -58,6 +62,15 @@ class BillDisplay extends Component {
         return dateTime;
     }
 
+    // handleOnBillClick = async (billId) => {
+    //     try {
+    //         const bill = await getDetailedBill(billId);
+    //         this.setState({selectedBill: bill});
+    //     } catch (err) {
+    //         //TODO: error handling
+    //     }
+    // } ;
+
     render = () => {
     /**
      * @description the search bar of the bill
@@ -91,7 +104,8 @@ class BillDisplay extends Component {
         return(
             <div className="bill__container">
                 { billsVar.length > 0 ? billsVar.map((bill,key) =>(
-                    <div className= "bill__card card" key = {key} onClick= {() => this.setState({selectedBill: {bill, id: key+1}})}>
+                    // <div className= "bill__card card" key = {key} onClick= {handleOnBillClick(bill.id)}> //TODO: getDetailedBill
+                    <div className= "bill__card card" key = {key} onClick= {() => this.setState({selectedBill: {bill}})}>
                         <SmallBillCard bill={bill} filterDateTime={this.constructor.filterDateTime} billIcons={this.constructor.billIcons}/>
                         { key !== billsVar.length-1 &&
                         <hr className="card__seperator"/>
@@ -103,6 +117,16 @@ class BillDisplay extends Component {
             </div>
         );
     };
+
+    //TODO: fix getDetailedBill call
+    const handleOnBillClick = async (billId) => {
+        try {
+            const bill = await getDetailedBill(billId);
+            this.setState({selectedBill: bill});
+        } catch (err) {
+            //TODO: error handling
+        }
+    } ;
 
     const BillsSummary = (billsVar) => (
         <div className="bill__summary">
