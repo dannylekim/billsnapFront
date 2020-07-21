@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot when category filter opened 1`] = `
+exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when category filter opened 1`] = `
 <div
   className="bill__filter__container"
 >
@@ -103,7 +103,7 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
 </div>
 `;
 
-exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot when date filter opened 1`] = `
+exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when date filter opened 1`] = `
 <div
   className="bill__filter__container"
 >
@@ -202,14 +202,14 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
         <input
           checked={true}
           className="custom-control-input"
-          id="dr-checkbox-l1KHdAQuT"
+          id="dr-checkbox-j2oiGzmDV"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-l1KHdAQuT"
+          id="dr-checkbox-j2oiGzmDV"
           onClick={[Function]}
         />
         <span
@@ -225,14 +225,14 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
         <input
           checked={false}
           className="custom-control-input"
-          id="dr-checkbox-rF-IjhLWE0"
+          id="dr-checkbox-zs07DMgg9y"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-rF-IjhLWE0"
+          id="dr-checkbox-zs07DMgg9y"
           onClick={[Function]}
         />
         <span
@@ -253,7 +253,7 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
 </div>
 `;
 
-exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot when end date exists 1`] = `
+exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when end date exists 1`] = `
 <div
   className="bill__filter__container"
 >
@@ -352,14 +352,14 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
         <input
           checked={false}
           className="custom-control-input"
-          id="dr-checkbox-LfYF6WvvNp"
+          id="dr-checkbox-E2S7VvqjT4"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-LfYF6WvvNp"
+          id="dr-checkbox-E2S7VvqjT4"
           onClick={[Function]}
         />
         <span
@@ -375,14 +375,14 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
         <input
           checked={true}
           className="custom-control-input"
-          id="dr-checkbox-w8Pl_GL3mj"
+          id="dr-checkbox-9cOuAijdPp"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-w8Pl_GL3mj"
+          id="dr-checkbox-9cOuAijdPp"
           onClick={[Function]}
         />
         <span
@@ -403,7 +403,7 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
 </div>
 `;
 
-exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot when nothing opened 1`] = `
+exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when nothing opened 1`] = `
 <div
   className="bill__filter__container"
 >
@@ -493,7 +493,7 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
 </div>
 `;
 
-exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot when start date exists 1`] = `
+exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when start date exists 1`] = `
 <div
   className="bill__filter__container"
 >
@@ -592,14 +592,14 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
         <input
           checked={true}
           className="custom-control-input"
-          id="dr-checkbox--ixkT1FL_1"
+          id="dr-checkbox-oQHuOHr5ru"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox--ixkT1FL_1"
+          id="dr-checkbox-oQHuOHr5ru"
           onClick={[Function]}
         />
         <span
@@ -615,14 +615,14 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
         <input
           checked={false}
           className="custom-control-input"
-          id="dr-checkbox-j7rCRzAOVm"
+          id="dr-checkbox-x7zhzaZGqC"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-j7rCRzAOVm"
+          id="dr-checkbox-x7zhzaZGqC"
           onClick={[Function]}
         />
         <span
@@ -643,7 +643,7 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
 </div>
 `;
 
-exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot when status filter opened 1`] = `
+exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when status filter opened 1`] = `
 <div
   className="bill__filter__container"
 >
@@ -742,14 +742,14 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
         <input
           checked={false}
           className="custom-control-input"
-          id="dr-checkbox-YDdx8JQwKN"
+          id="dr-checkbox-u2jH-9kK5x"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-YDdx8JQwKN"
+          id="dr-checkbox-u2jH-9kK5x"
           onClick={[Function]}
         />
         <span
@@ -764,14 +764,14 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
         <input
           checked={false}
           className="custom-control-input"
-          id="dr-checkbox-XLD2bfUxAH"
+          id="dr-checkbox-30HLAYpDUr"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-XLD2bfUxAH"
+          id="dr-checkbox-30HLAYpDUr"
           onClick={[Function]}
         />
         <span
@@ -786,14 +786,14 @@ exports[`BillDisplay render snapshots 📸 BillFilter should match snap shot whe
         <input
           checked={false}
           className="custom-control-input"
-          id="dr-checkbox-65cTkJO-rQ"
+          id="dr-checkbox-93dTuSvCV7"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-65cTkJO-rQ"
+          id="dr-checkbox-93dTuSvCV7"
           onClick={[Function]}
         />
         <span
