@@ -1,10 +1,9 @@
 import React from "react";
 import BillFilter from "../BillFilter";
-import { FormCheckbox } from "shards-react";
 import { shallow } from "enzyme";
 
 describe("BillFilter", () => {
-    let wrapper, instance;
+    let wrapper;
     describe("render", () => {
         describe("snapshots 📸", () => {
             it("BillFilter should match snap shot when category filter opened", () => {
