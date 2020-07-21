@@ -15,7 +15,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     // beginBillLoading: () => dispatch(setBillLoading(true)),
     // finishBillLoading: () => dispatch(setBillLoading(false)),
-    fetchBills: (query_param) => dispatch(fetchMyBills(query_param)),
+    fetchBills: (query_param = "") => dispatch(fetchMyBills(query_param)),
     orderAlphabetical: (alphabeticalType,bills) => dispatch(orderAlphabetical(alphabeticalType,bills)),
 })
 

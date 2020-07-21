@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BillDisplay components BillDisplay should match snap shot when done loading + bills 1`] = `
+exports[`BillDisplay render snapshots 📸 BillDisplay should match snap shot when done loading + bills 1`] = `
 <div
   className="bill__wrapper"
 >
