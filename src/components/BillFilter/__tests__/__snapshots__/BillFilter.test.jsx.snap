@@ -103,156 +103,6 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
 </div>
 `;
 
-exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when date filter opened 1`] = `
-<div
-  className="bill__filter__container"
->
-  <div
-    className="filter__header"
-    onClick={[Function]}
-  >
-     
-    <svg
-      fill="currentColor"
-      height={24}
-      size={24}
-      stroke="currentColor"
-      strokeWidth="0"
-      style={
-        Object {
-          "color": undefined,
-        }
-      }
-      viewBox="0 0 448 512"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
-      />
-    </svg>
-    <span
-      className="filter__header__title"
-    >
-      Filters
-    </span>
-  </div>
-  <div
-    className="filter__selections__container"
-  >
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="descending"
-      onClick={[Function]}
-    >
-      Newest
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="ascending"
-      onClick={[Function]}
-    >
-      Oldest
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="by__status"
-      onClick={[Function]}
-    >
-      Status
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="alphabetical__increasing"
-      onClick={[Function]}
-    >
-      A to Z
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="alphabetical__decreasing"
-      onClick={[Function]}
-    >
-      Z to A
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="by__category"
-      onClick={[Function]}
-    >
-      Category
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="by__date"
-      onClick={[Function]}
-    >
-      Date
-    </span>
-  </div>
-  <div
-    className="advanced__filter__selection"
-  >
-    <div
-      className="date__filter"
-    >
-      <label
-        className="custom-control custom-checkbox"
-      >
-        <input
-          checked={true}
-          className="custom-control-input"
-          id="dr-checkbox-j2oiGzmDV"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          aria-hidden="true"
-          className="custom-control-label"
-          id="dr-checkbox-j2oiGzmDV"
-          onClick={[Function]}
-        />
-        <span
-          className="custom-control-description"
-        >
-          Start date 
-          
-        </span>
-      </label>
-      <label
-        className="custom-control custom-checkbox"
-      >
-        <input
-          checked={false}
-          className="custom-control-input"
-          id="dr-checkbox-zs07DMgg9y"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          aria-hidden="true"
-          className="custom-control-label"
-          id="dr-checkbox-zs07DMgg9y"
-          onClick={[Function]}
-        />
-        <span
-          className="custom-control-description"
-        >
-          End date 
-          
-        </span>
-      </label>
-      <input
-        className="form-control"
-        disabled={false}
-        onChange={[Function]}
-        type="date"
-      />
-    </div>
-  </div>
-</div>
-`;
-
 exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when end date exists 1`] = `
 <div
   className="bill__filter__container"
@@ -352,14 +202,14 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
         <input
           checked={false}
           className="custom-control-input"
-          id="dr-checkbox-E2S7VvqjT4"
+          id="dr-checkbox-8dsSJ_7Omz"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-E2S7VvqjT4"
+          id="dr-checkbox-8dsSJ_7Omz"
           onClick={[Function]}
         />
         <span
@@ -375,14 +225,14 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
         <input
           checked={true}
           className="custom-control-input"
-          id="dr-checkbox-9cOuAijdPp"
+          id="dr-checkbox-ubRpGINAx5"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-9cOuAijdPp"
+          id="dr-checkbox-ubRpGINAx5"
           onClick={[Function]}
         />
         <span
@@ -399,96 +249,6 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
         type="date"
       />
     </div>
-  </div>
-</div>
-`;
-
-exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when nothing opened 1`] = `
-<div
-  className="bill__filter__container"
->
-  <div
-    className="filter__header"
-    onClick={[Function]}
-  >
-     
-    <svg
-      fill="currentColor"
-      height={24}
-      size={24}
-      stroke="currentColor"
-      strokeWidth="0"
-      style={
-        Object {
-          "color": undefined,
-        }
-      }
-      viewBox="0 0 448 512"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
-      />
-    </svg>
-    <span
-      className="filter__header__title"
-    >
-      Filters
-    </span>
-  </div>
-  <div
-    className="filter__selections__container"
-  >
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="descending"
-      onClick={[Function]}
-    >
-      Newest
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="ascending"
-      onClick={[Function]}
-    >
-      Oldest
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="by__status"
-      onClick={[Function]}
-    >
-      Status
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="alphabetical__increasing"
-      onClick={[Function]}
-    >
-      A to Z
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="alphabetical__decreasing"
-      onClick={[Function]}
-    >
-      Z to A
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="by__category"
-      onClick={[Function]}
-    >
-      Category
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="by__date"
-      onClick={[Function]}
-    >
-      Date
-    </span>
   </div>
 </div>
 `;
@@ -592,14 +352,14 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
         <input
           checked={true}
           className="custom-control-input"
-          id="dr-checkbox-oQHuOHr5ru"
+          id="dr-checkbox-t59CiTFQ8"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-oQHuOHr5ru"
+          id="dr-checkbox-t59CiTFQ8"
           onClick={[Function]}
         />
         <span
@@ -615,14 +375,14 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
         <input
           checked={false}
           className="custom-control-input"
-          id="dr-checkbox-x7zhzaZGqC"
+          id="dr-checkbox-uQYkcRNGVd"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-x7zhzaZGqC"
+          id="dr-checkbox-uQYkcRNGVd"
           onClick={[Function]}
         />
         <span
@@ -638,170 +398,6 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
         onChange={[Function]}
         type="date"
       />
-    </div>
-  </div>
-</div>
-`;
-
-exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when status filter opened 1`] = `
-<div
-  className="bill__filter__container"
->
-  <div
-    className="filter__header"
-    onClick={[Function]}
-  >
-     
-    <svg
-      fill="currentColor"
-      height={24}
-      size={24}
-      stroke="currentColor"
-      strokeWidth="0"
-      style={
-        Object {
-          "color": undefined,
-        }
-      }
-      viewBox="0 0 448 512"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
-      />
-    </svg>
-    <span
-      className="filter__header__title"
-    >
-      Filters
-    </span>
-  </div>
-  <div
-    className="filter__selections__container"
-  >
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="descending"
-      onClick={[Function]}
-    >
-      Newest
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="ascending"
-      onClick={[Function]}
-    >
-      Oldest
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="by__status"
-      onClick={[Function]}
-    >
-      Status
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="alphabetical__increasing"
-      onClick={[Function]}
-    >
-      A to Z
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="alphabetical__decreasing"
-      onClick={[Function]}
-    >
-      Z to A
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="by__category"
-      onClick={[Function]}
-    >
-      Category
-    </span>
-    <span
-      className="badge badge-outline-primary badge-pill"
-      id="by__date"
-      onClick={[Function]}
-    >
-      Date
-    </span>
-  </div>
-  <div
-    className="advanced__filter__selection"
-  >
-    <div
-      className="status__filter"
-    >
-      <label
-        className="custom-control custom-checkbox"
-      >
-        <input
-          checked={false}
-          className="custom-control-input"
-          id="dr-checkbox-u2jH-9kK5x"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          aria-hidden="true"
-          className="custom-control-label"
-          id="dr-checkbox-u2jH-9kK5x"
-          onClick={[Function]}
-        />
-        <span
-          className="custom-control-description"
-        >
-          PAID
-        </span>
-      </label>
-      <label
-        className="custom-control custom-checkbox"
-      >
-        <input
-          checked={false}
-          className="custom-control-input"
-          id="dr-checkbox-30HLAYpDUr"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          aria-hidden="true"
-          className="custom-control-label"
-          id="dr-checkbox-30HLAYpDUr"
-          onClick={[Function]}
-        />
-        <span
-          className="custom-control-description"
-        >
-          UNPAID
-        </span>
-      </label>
-      <label
-        className="custom-control custom-checkbox"
-      >
-        <input
-          checked={false}
-          className="custom-control-input"
-          id="dr-checkbox-93dTuSvCV7"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          aria-hidden="true"
-          className="custom-control-label"
-          id="dr-checkbox-93dTuSvCV7"
-          onClick={[Function]}
-        />
-        <span
-          className="custom-control-description"
-        >
-          ONGOING
-        </span>
-      </label>
     </div>
   </div>
 </div>
