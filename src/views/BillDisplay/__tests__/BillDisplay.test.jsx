@@ -12,7 +12,19 @@ jest.mock("../../../utils/requests/BillRequests", () => {
 
 describe("BillDisplay", () => {
       let wrapper, instance;
-      let mockFetch,mockSortAlphabetical;
+      let mockFetch = jest.fn(),mockSortAlphabetical = jest.fn();
+
+      const responsible = ({
+        id: 1,
+        email: "someEmail@email.com",
+        firstName: "Bob",
+        middleName: null,
+        lastName: "Smith",
+        gender: null,
+        phoneNumber: null,
+        birthDate: null,
+        location: null
+      });
 
       const mockBills = [
         {
@@ -22,43 +34,20 @@ describe("BillDisplay", () => {
           category: "string",
           created:  "05-03-2018 15:25:10 -0400",
           balance: 12.0,
-          responsible: {
-            id: 1,
-            email: "someEmail@email.com",
-            firstName: "Bob",
-            middleName: null,
-            lastName: "Smith",
-            gender: null,
-            phoneNumber: null,
-            birthDate: null,
-            location: null
-          }
+          responsible
         },
         {
           id: 2,
           name: "BILL MOCK 2",
           status: "OPEN",
           category: "string",
-          created:  "05-03-2018 15:25:10 -0400",
+          created:  "06-04-2018 15:25:10 -0400",
           balance: 15.0,
-          responsible: {
-            id: 1,
-            email: "someEmail@email.com",
-            firstName: "Bob",
-            middleName: null,
-            lastName: "Smith",
-            gender: null,
-            phoneNumber: null,
-            birthDate: null,
-            location: null
-          }
+          responsible
         },
       ];
 
       beforeEach(() => {
-        mockFetch = jest.fn();
-        mockSortAlphabetical = jest.fn();
- 
         wrapper = shallow(
           <BillDisplay bills={mockBills} fetchBills={mockFetch} isBillLoading={false} orderAlphabetical={mockSortAlphabetical} />
         );

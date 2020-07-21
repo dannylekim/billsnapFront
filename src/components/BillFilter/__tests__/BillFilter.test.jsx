@@ -2,7 +2,7 @@ import React from "react";
 import BillFilter from "../BillFilter";
 
 import { shallow } from "enzyme";
-describe("BillDisplay", () => {
+describe("BillFilter", () => {
     let wrapper, instance;
     let mockHandleDate,mockUpdateBill,mockSetState;
 
@@ -105,8 +105,6 @@ describe("BillDisplay", () => {
             });
         });
     });
-
-
 
 })
 
