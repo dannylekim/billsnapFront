@@ -24,7 +24,7 @@ describe('Sidebar', () => {
     describe('render', () => {
         describe('snapshots 📸', () => {
             it('Sidebar should match snap shot', () => {
-                matches(<Sidebar setUser={mockSetUser}/>);
+                matches(<Sidebar/>);
             });
 
             it('SidebarComponent should match snap shot', () => {
