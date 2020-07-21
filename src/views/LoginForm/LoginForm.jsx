@@ -216,6 +216,9 @@ class LoginFormContainer extends Component {
         this.handleErrorResponse(response);
       } else {
         localStorage.setItem("billSnap_token", response.token);
+        const {id, ...userProfile} = response.profile;
+        console.log(userProfile);
+        this.props.setUser(userProfile);
         this.props.history.push("/dashboard");
       }
     } catch (error) {

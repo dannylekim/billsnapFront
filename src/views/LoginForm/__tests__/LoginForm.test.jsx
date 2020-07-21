@@ -240,7 +240,6 @@ describe("LoginForm", () => {
 
         wrapper.instance().dismissAlert = mockDismissAlert;
         wrapper.instance().setState = setState;
-        // wrapper.instance().handleErrorResponse = mockHandleResponse;
         wrapper.setProps({
           history: {
             push: mockPushFunction,
@@ -251,8 +250,9 @@ describe("LoginForm", () => {
 
         expect(mockDismissAlert).toBeCalledTimes(1);
         expect(login).toBeCalledTimes(1);
-        expect(mockPushFunction).toBeCalledTimes(1);
-        expect(setState).toBeCalledTimes(2);
+       
+        expect(setState).toBeCalledTimes(3);
+     
       });
 
       it("should follow steps on passing request with no token", async () => {

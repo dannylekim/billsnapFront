@@ -1,196 +1,200 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LandingPage render snapshots 📸 LandingPage should match snap shot login 1`] = `
-<div
-  className="page__landing"
->
-  <nav
-    className="navbar navbar-expand-sm navbar-light"
-  >
-    <ul
-      className="navbar-nav"
-    >
-      <li
-        className="nav-item"
-      >
-        <a
-          className="nav-link"
-          href="#"
-          onClick={[Function]}
-        >
-          Billsnap Logo
-        </a>
-      </li>
-    </ul>
-    <ul
-      className="ml-auto navbar-nav"
-    >
-      <li
-        className="nav-item"
-      >
-        <a
-          className="nav-link"
-          href="#"
-          onClick={[Function]}
-        >
-          About us
-        </a>
-      </li>
-      <li
-        className="nav-item"
-      >
-        <a
-          className="nav-link"
-          href="#"
-          onClick={[Function]}
-        >
-          Features
-        </a>
-      </li>
-      <li
-        className="nav-item"
-      >
-        <a
-          className="nav-link"
-          onClick={[Function]}
-        >
-          Contact us
-        </a>
-      </li>
-    </ul>
-  </nav>
+Array [
+  " ",
   <div
-    className="page__content"
+    className="page__landing"
   >
+    <nav
+      className="navbar navbar-expand-sm navbar-light"
+    >
+      <ul
+        className="navbar-nav"
+      >
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Billsnap Logo
+          </a>
+        </li>
+      </ul>
+      <ul
+        className="ml-auto navbar-nav"
+      >
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="#"
+            onClick={[Function]}
+          >
+            About us
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            href="#"
+            onClick={[Function]}
+          >
+            Features
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            onClick={[Function]}
+          >
+            Contact us
+          </a>
+        </li>
+      </ul>
+    </nav>
     <div
-      className="title"
+      className="page__content"
     >
       <div
-        className="title__row"
+        className="title"
       >
-        <h3
-          className="title__title"
+        <div
+          className="title__row"
         >
-          Welcome to Billsnap
-        </h3>
-      </div>
-      <div
-        className="title__row title__text"
-      >
-        <p>
-          BillSnap is all about snapping away full bills into dust. The goal is to facilitate the process of splitting bills with roommates, friends & family.
-        </p>
-      </div>
-      <div
-        className="title__row"
-      >
-        <button
-          className="title__button btn btn-primary btn-md btn-pill"
-          onClick={[Function]}
-        >
-          How it works
-        </button>
-      </div>
-    </div>
-    <div>
-      <div
-        className="login__container"
-      >
-        <div>
-          <div
-            className="login__form"
+          <h3
+            className="title__title"
           >
+            Welcome to Billsnap
+          </h3>
+        </div>
+        <div
+          className="title__row title__text"
+        >
+          <p>
+            BillSnap is all about snapping away full bills into dust. The goal is to facilitate the process of splitting bills with roommates, friends & family.
+          </p>
+        </div>
+        <div
+          className="title__row"
+        >
+          <button
+            className="title__button btn btn-primary btn-md btn-pill"
+            onClick={[Function]}
+          >
+            How it works
+          </button>
+        </div>
+      </div>
+      <div>
+        <div
+          className="login__container"
+        >
+          <div>
             <div
-              className="hidden__div"
-            />
-            <img
-              alt="character logo"
-              className="character__icon__image"
-              src="./billSnapIcon.png"
-            />
-            <form
-              className=""
+              className="login__form"
             >
               <div
-                className="form__inputs"
+                className="hidden__div"
+              />
+              <img
+                alt="character logo"
+                className="character__icon__image"
+                src="./billSnapIcon.png"
+              />
+              <form
+                className=""
               >
                 <div
-                  className="form-group"
-                  onChange={[Function]}
+                  className="form__inputs"
                 >
-                  <input
-                    autoComplete="username"
-                    className="register__login__inputs form-control"
-                    id="email"
-                    name="email"
-                    placeholder="Email"
-                    type="email"
-                  />
+                  <div
+                    className="form-group"
+                    onChange={[Function]}
+                  >
+                    <input
+                      autoComplete="username"
+                      className="register__login__inputs form-control"
+                      id="email"
+                      name="email"
+                      placeholder="Email"
+                      type="email"
+                    />
+                  </div>
+                  <div
+                    className="form-group"
+                    onChange={[Function]}
+                  >
+                    <input
+                      autoComplete="new-password"
+                      className="register__login__inputs form-control"
+                      id="password"
+                      name="password"
+                      placeholder="Password"
+                      type="password"
+                    />
+                  </div>
                 </div>
                 <div
-                  className="form-group"
-                  onChange={[Function]}
+                  className="forgot__password__login"
                 >
-                  <input
-                    autoComplete="new-password"
-                    className="register__login__inputs form-control"
-                    id="password"
-                    name="password"
-                    placeholder="Password"
-                    type="password"
-                  />
+                  <a
+                    className="forgot__password"
+                    href="/#"
+                  >
+                    Forgot Password?
+                  </a>
+                  <button
+                    className="login_register__submit__button btn btn-primary btn-md btn-pill"
+                    name="submit"
+                    onClick={[Function]}
+                    type="button"
+                  >
+                    Log in
+                  </button>
                 </div>
-              </div>
+              </form>
+            </div>
+            <div>
               <div
-                className="forgot__password__login"
+                className="form__seperator"
               >
-                <a
-                  className="forgot__password"
-                  href="/#"
-                >
-                  Forgot Password?
-                </a>
+                <hr
+                  className="form__horizontal__line"
+                />
+                Or
+                <hr
+                  className="form__horizontal__line"
+                />
+              </div>
+              <div>
+                <h6>
+                  New to Billsnap?
+                </h6>
                 <button
-                  className="login_register__submit__button btn btn-primary btn-md btn-pill"
-                  name="submit"
+                  className="form__toggle btn btn-primary"
                   onClick={[Function]}
                   type="button"
                 >
-                  Log in
+                  👋 Create account
                 </button>
               </div>
-            </form>
-          </div>
-          <div>
-            <div
-              className="form__seperator"
-            >
-              <hr
-                className="form__horizontal__line"
-              />
-              Or
-              <hr
-                className="form__horizontal__line"
-              />
-            </div>
-            <div>
-              <h6>
-                New to Billsnap?
-              </h6>
-              <button
-                className="form__toggle btn btn-primary"
-                onClick={[Function]}
-                type="button"
-              >
-                👋 Create account
-              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+  " ",
+]
 `;
 
 exports[`LandingPage render snapshots 📸 LandingPage should match snap shot register 1`] = `

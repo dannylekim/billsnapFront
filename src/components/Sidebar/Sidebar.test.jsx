@@ -1,21 +1,36 @@
 import React from 'react';
 import Sidebar, {DEFAULT_ACTIVE_STATE} from './Sidebar.jsx';
+import SidebarComponent from '../Sidebar';
 import {NavLink} from "shards-react";
+import configureStore from 'redux-mock-store';
+import { Provider } from "react-redux";
+
+const mockStore = configureStore();
+
+const store = mockStore({
+  
+});
 
 describe('Sidebar', () => {
     let wrapper;
-    let handleMockFunction;
+    let handleMockFunction, mockSetUser;
 
     beforeEach(() => {
         handleMockFunction = jest.fn();
-        wrapper = shallow(<Sidebar/>);
+        mockSetUser = jest.fn();
+        wrapper = shallow(<Sidebar setUser={mockSetUser}/>);
     })
 
     describe('render', () => {
         describe('snapshots 📸', () => {
             it('Sidebar should match snap shot', () => {
-                matches(<Sidebar/>);
+                matches(<Sidebar setUser={mockSetUser}/>);
             });
+
+            it('SidebarComponent should match snap shot', () => {
+                matches(<Provider store={store}> <SidebarComponent setUser={mockSetUser}/></Provider>);
+            });
+
             it('Sidebar should match snap shot', () => {
                 const EXPECTED_STATE = {
                     ...DEFAULT_ACTIVE_STATE,
@@ -31,7 +46,7 @@ describe('Sidebar', () => {
             it('Navlink should call all click handles on click', () => {
                 const mockHandleClick = jest.fn();
                 const mockHandleLogoutClick = jest.fn();
-
+               
                 wrapper.instance().handleClick = mockHandleClick;
                 wrapper.instance().handleLogoutClick = mockHandleLogoutClick;
                 wrapper.find(NavLink).filter('#billSnap-SideBar__bills').simulate('click');
@@ -78,6 +93,9 @@ describe('Sidebar', () => {
         describe('handleLogoutClick', () => {
             it('should clear local storage', () => {
                 const EXPECTED_LENGTH = 0;
+                wrapper.setProps({
+                    setUser: mockSetUser
+                });
                 wrapper.instance().handleLogoutClick();
                 const ACTUAL_LENGTH = localStorage.length;
                 expect(ACTUAL_LENGTH).toEqual(EXPECTED_LENGTH);

@@ -19,6 +19,7 @@ describe("RegisterForm", () => {
   let mockOnChange;
   let mockCheckValidity;
   let mockTriggerAlert;
+  let mockSetUser;
 
   const conditions = [
     {
@@ -71,10 +72,11 @@ describe("RegisterForm", () => {
     mockOnChange = jest.fn();
     mockCheckValidity = jest.fn();
     mockTriggerAlert = jest.fn();
+    mockSetUser = jest.fn();
 
     wrapper = shallow(
       <RegisterFormContainer
-        setFormType={mockToggleFormType}
+        setFormType={mockToggleFormType} setUser={mockSetUser}
       />
     );
   });
@@ -110,6 +112,7 @@ describe("RegisterForm", () => {
         matches(
           <RegisterFormContainer
             setFormType={mockToggleFormType}
+            setUser={mockSetUser}
           />
         );
       });
@@ -301,7 +304,6 @@ describe("RegisterForm", () => {
       const result1 = wrapper.instance().checkValidity(wrapper.state().validFields.password, "password");
       expect(result1).toBe(false);
 
-      const result2 = wrapper.instance().checkValidity(wrapper.state().validFields.email, "email");
       expect(result1).toBe(false);
 
     });
@@ -360,10 +362,9 @@ describe("RegisterForm", () => {
         await wrapper.instance().handleSubmitClick(mockEvent);
 
         expect(mockCheckValidity).toBeCalledTimes(5);
-        expect(mockPushFunction).toBeCalledTimes(1);
         expect(register).toHaveBeenCalledWith(TEMP_DATA);
         expect(login).toHaveBeenCalledWith(LOGIN_TEMP_DATA);
-        expect(mockSetState).toBeCalledTimes(2);
+        expect(mockSetState).toBeCalledTimes(3);
       });
 
       it('should call appropridate functions on success 201 request + login failing', async () => {
