@@ -26,8 +26,6 @@ div.specific__bill__section{
     }
 }
 
-
-
 div.bill__list__section{
     margin-left: 2.74117026885%;
     width: 38.909%;
@@ -128,97 +126,6 @@ div.bill__list__section{
             width: 80.67%;
             margin-left: auto;
             margin-right: auto;
-        }
-    }
-
-    div.bill__filter__container{
-        position: absolute;
-        top:75px;
-        height: 220px;
-        width:  600px;
-        border-radius: 6px;
-        background-color: $light-gray-background;
-        div.filter__header{
-            text-align: left;
-            margin-left: 10px;
-            
-            font-family: $primary-font;
-            font-size: 25px;
-
-            span.filter__header__title{
-                margin-left: 10px;
-                position: relative;  
-                top:2px;
-                font-weight: bold;       
-            }
-        }
-        div.filter__selections__container{
-            margin-top: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-            height: 120px;
-            width: 90%;
-            margin-left: auto;
-            margin-right: auto;
-
-            span.badge.badge-outline-primary.badge-pill{
-                border: 1px solid $secondary-text-color;
-                box-sizing: border-box;
-                border-radius: 50px;
-                color: $secondary-text-color;
-                font-family: $primary-font;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 20px;
-                line-height: 16px;
-                width: 120px;
-                margin-bottom: 10px;
-            }
-            span.badge.badge-outline-primary.badge-pill:hover{
-                background-color: #bebebe;
-            }
-        }
-
-        div.advanced__filter__selection{
-            position: relative;
-            bottom:80px;
-            left:380px;
-            width:180px;
-            height:110px;
-            font-family: $primary-font;
-            label.custom-control.custom-checkbox{
-                padding:0;
-                font-style: normal;
-                font-weight: normal;
-                font-size: 15px;
-                color:$secondary-text-color;
-            }
-
-            input.form-control {
-                box-sizing: border-box;
-                color: rgba(0, 0, 0, 0.42);
-                font-size: 15px;
-                background: $card-color;
-            }
-            div.date__filter{
-                span.custom-control-description{
-                    margin-left: 25px;
-                }
-
-                input.form-control {
-                    width: 172px;
-                    border: 3px solid rgba(0, 0, 0, 0.17);
-                }
-            }
-
-            div.category__filter{
-                input.form-control {
-                    margin-top: 10px;
-                    width: 150px;
-                    border: 1px solid #BECAD6;
-                }
-            }
         }
     }
 
