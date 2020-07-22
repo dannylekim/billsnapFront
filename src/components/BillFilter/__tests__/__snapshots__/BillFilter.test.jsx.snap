@@ -8,7 +8,6 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
     className="filter__header"
     onClick={[Function]}
   >
-     
     <svg
       fill="currentColor"
       height={24}
