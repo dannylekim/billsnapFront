@@ -9,7 +9,7 @@ export const DEFAULT_ACTIVE_STATE = {
     profile: false,
     contacts: false,
     settings: false,
-    help: false,
+    help: false
 }
 
 class Sidebar extends React.Component {
@@ -38,7 +38,7 @@ class Sidebar extends React.Component {
     }
 
     handleLogoutClick() {
-        localStorage.clear();
+        localStorage.removeItem("billSnap_token");
         this.props.setUser({});
     }
 
