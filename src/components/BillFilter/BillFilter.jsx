@@ -84,6 +84,7 @@ const BillFilter = ({
     filter.categoryOpened === true;
 
   return (
+    filter.opened === true &&
     <div className="bill__filter__container">
       <div
         className="filter__header"
