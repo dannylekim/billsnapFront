@@ -139,16 +139,17 @@ describe("BillDisplay", () => {
         });
 
         describe("filter badge onClicks", () => {
-          let billFilterWrapper, billWrapper;
+          let billFilterWrapper, billWrapper, mockHandleDateSelection;
           beforeEach(() => {
             expect(wrapper.state().filter.opened).toBeFalsy();
             wrapper.find('span.filter__bill').simulate('click');
             wrapper.update();
 
+            mockHandleDateSelection = jest.fn();
             billFilterWrapper = () => shallow(<BillFilter dateFilters={wrapper.state().dateFilters}
                                                           filter={wrapper.state().filter} 
                                                           billStatusFilter={wrapper.state().billStatusFilter}  
-                                                          handleDateSelection={(event) => instance.handleDateSelection(event)}
+                                                          handleDateSelection={mockHandleDateSelection}
                                                           updateBills={(type) => instance.updateBills(type)}
                                                           setState={(newState) => instance.setState(newState)} />);
             billWrapper = billFilterWrapper();
@@ -222,6 +223,7 @@ describe("BillDisplay", () => {
               expect(wrapper.state().dateFilters.endDate.selected).toBeFalsy();
              
               billWrapper.find('Badge').at(6).simulate('click');
+            
               expect(wrapper.state().filter.dateOpened).toBeTruthy();
              
               billFilterWrapper().find('FormCheckbox').at(0).simulate('change');
@@ -234,30 +236,43 @@ describe("BillDisplay", () => {
               expect(wrapper.state().dateFilters.startDate.selected).toBeFalsy();
               expect(wrapper.state().dateFilters.endDate.selected).toBeTruthy();
               
-              
             });
             
-            it("should change start date checkbox states onChange.", () => {
-              const event = ({
-                preventDefault: jest.fn(),
-                target: {
-                    value: '2020-01-01'
-                }
-              });
-              wrapper.setState({  dateFilters: {
-                                  startDate: {selected: true, value: ""},
-                                  endDate: {selected: false, value: ""}
-                                } });
+              describe(" Start date and End date should be triggered on handleDateSelection", () => {
+                const event = ({
+                  preventDefault: jest.fn(),
+                  target: {
+                      value: '2020-01-01'
+                  }
+                });
 
-              billWrapper.find('FormInput').at(0).simulate('change',event);
-            
-              const spy = jest.spyOn(instance, 'handleDateSelection'); // handleDateSelection
-              instance.handleDateSelection(event);
-              expect(spy).toBeCalledTimes(1);
-              expect(spy).toHaveBeenCalledWith(event);
-              wrapper.update();
-              expect(wrapper.state().dateFilters.startDate.value).toBe(event.target.value);
-              spy.mockRestore();
+                it("should change start date checkbox states onChange.", () => {
+                  wrapper.setState({  dateFilters: {
+                                      startDate: {selected: true, value: ""},
+                                      endDate: {selected: false, value: ""}
+                                    } });
+
+                  billWrapper.find('FormInput').at(0).simulate('change',event);
+                  const spy = jest.spyOn(instance, 'handleDateSelection'); // handleDateSelection
+                  instance.handleDateSelection(event);
+                  expect(spy).toBeCalledTimes(1);
+                  expect(spy).toHaveBeenCalledWith(event);
+                  wrapper.update();
+                  expect(wrapper.state().dateFilters.startDate.value).toBe(event.target.value);
+                  spy.mockRestore();
+              });
+
+                it("should change enddate checkbox states onChange.", () => {
+                  wrapper.setState({  dateFilters: {
+                                      startDate: {selected: false, value: ""},
+                                      endDate: {selected: true, value: ""}
+                                    } });
+
+                  billWrapper.find('FormInput').at(0).simulate('change',event);
+                  instance.handleDateSelection(event);
+                  wrapper.update();
+                  expect(wrapper.state().dateFilters.endDate.value).toBe(event.target.value);
+              });
             });
 
             it("should return null", ()=> {

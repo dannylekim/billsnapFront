@@ -324,12 +324,13 @@ class BillDisplay extends Component {
               {AddBillButton}
               {NavigationTabs(navItems)}
               {BillsList(bills)}
-              {this.state.filter.opened === true && <BillFilter dateFilters={dateFilters}
-                                                                filter={filter} 
-                                                                billStatusFilter={billStatusFilter}  
-                                                                handleDateSelection={(event) => this.handleDateSelection(event)}
-                                                                updateBills={(type) => this.updateBills(type)}
-                                                                setState={(newState) => this.setState(newState)} />} 
+              <BillFilter dateFilters={dateFilters}
+                          filter={filter} 
+                          billStatusFilter={billStatusFilter}  
+                          handleDateSelection={this.handleDateSelection}
+                          updateBills={this.updateBills}
+                          setState={this.setState.bind(this)} 
+              />             
               {this.state.sorting.opened === true && simpleSort}
             </div>
             <div className="specific__bill__section">
