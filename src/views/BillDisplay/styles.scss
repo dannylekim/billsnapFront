@@ -2,7 +2,7 @@
 
 div.bill__wrapper{
     height:500px;
-    min-width: 1313px; 
+    min-width: 1313px;
 }
 
 div.bill__section{
@@ -16,9 +16,9 @@ div.specific__bill__section{
         text-decoration: underline;
         color:$primary-text-color;
         float: right;
-        margin-bottom: 15px;  
+        margin-bottom: 15px;
         margin-right: 32px;
-        right:0;  
+        right:0;
     }
 
     h5 span#amount__owed{
@@ -38,7 +38,7 @@ div.bill__list__section{
         display: flex;
         align-content: center;
         margin-bottom: 25px;
-    } 
+    }
 
     span.search__icon{
         width: 10%;
@@ -62,7 +62,7 @@ div.bill__list__section{
 
     ul.nav.nav-tabs{
         margin-left: calc(100% - 120px);
-        border: none;        
+        border: none;
     }
 
     a.nav-link{
@@ -72,14 +72,14 @@ div.bill__list__section{
         background-color: $secondary-color;
         color: $card-color;
         box-sizing: border-box;
-        box-shadow: 4px 0px 4px $card-shadow;
+        box-shadow: 4px 0 4px $card-shadow;
         border-radius: 10px;
         font-family: Sarabun, sans-serif;
         font-style: normal;
         font-weight: 300;
         width: 120px;
         height:40px;
-        padding:10px 0 10px 0;
+        padding:10px 0;
     }
 
     div.bill__card.card{

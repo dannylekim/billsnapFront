@@ -311,10 +311,12 @@ class RegisterFormContainer extends Component {
             email,
             password
           }
-          const { token } = await login(loginInfo);
+          const { token, profile } = await login(loginInfo);
           
           if (token) {
             localStorage.setItem("billSnap_token", token);
+            const {id, ...userProfile} = profile;
+            this.props.setUser(userProfile);
             this.props.history.push("/dashboard");
           } else {
             throw new Error('Account created, but failed to log in. Please try logging in with you credentials')
