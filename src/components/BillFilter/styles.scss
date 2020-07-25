@@ -2,7 +2,7 @@
 
 div.bill__filter__container{
     position: absolute;
-    top:75px;
+    top:62px;
     height: 220px;
     width:  600px;
     border-radius: 6px;
@@ -78,6 +78,7 @@ div.bill__filter__container{
             input.form-control {
                 width: 172px;
                 border: 3px solid rgba(0, 0, 0, 0.17);
+                background: $card-color;
             }
         }
 
@@ -86,6 +87,7 @@ div.bill__filter__container{
                 margin-top: 10px;
                 width: 150px;
                 border: 1px solid #BECAD6;
+                background: $card-color;
             }
         }
     }

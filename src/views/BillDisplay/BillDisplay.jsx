@@ -114,11 +114,11 @@ class BillDisplay extends Component {
     const date = event.target.value;
   
     if(date !== ""){
-        if(this.state.dateFilters.startDate.selected === true){
-            this.setState({dateFilters: {...this.state.dateFilters, startDate: {...this.state.dateFilters.startDate, value: date}}})
-            
+        if(this.state.dateFilters.startDate.selected === true && this.state.dateFilters.endDate.selected === false){
+            this.setState({dateFilters: {...this.state.dateFilters, startDate: {...this.state.dateFilters.startDate, value: date}}})     
         }
-        else if(this.state.dateFilters.endDate.selected === true){
+        
+        if(this.state.dateFilters.endDate.selected === true && this.state.dateFilters.startDate.selected === false){
             this.setState({dateFilters: {...this.state.dateFilters, endDate: {...this.state.dateFilters.endDate, value: date}}})
         }
     }

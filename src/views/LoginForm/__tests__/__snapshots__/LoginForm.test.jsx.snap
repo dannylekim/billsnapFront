@@ -88,7 +88,6 @@ exports[`LoginForm render snapshots 📸 LoginForm should match snap shot 1`] = 
         <button
           className="form__toggle btn btn-primary"
           onClick={[Function]}
-          type="button"
         >
           👋 Create account
         </button>

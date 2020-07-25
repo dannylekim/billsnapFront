@@ -66,7 +66,7 @@ export const RegisterForm = ({
             size="md"
             className="login_register__submit__button"
             pill
-            onClick={(event) => handleButtonClick(event)}
+            onClick={handleButtonClick}
             name="submit"
           >
             Sign Up
@@ -245,7 +245,7 @@ class RegisterFormContainer extends Component {
         ...prev.validFields,
         ...result,
       },
-    }));
+    })) ;
   };
 
   /**
@@ -414,7 +414,7 @@ class RegisterFormContainer extends Component {
           conditions={conditions}
           dismissAlert={this.dismissAlert}
           alertNotification={alertNotification}
-          setFormType={() => this.props.setFormType("login")}
+          setFormType={this.props.setFormType("login")}
         />
       </div>
     );

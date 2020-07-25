@@ -92,7 +92,7 @@ const BillFilter = ({
           setState({
             filter: {
               ...filter,
-              opened: false,
+              opened: false
             },
           })
         }
@@ -129,7 +129,7 @@ const BillFilter = ({
                   })
                 }
               >
-                Start date{" "}
+                Start date
                 {dateFilters.startDate.value !== ""
                   ? `: ${dateFilters.startDate.value}`
                   : ""}
@@ -146,7 +146,7 @@ const BillFilter = ({
                   })
                 }
               >
-                End date{" "}
+                End date
                 {dateFilters.endDate.value !== ""
                   ? `: ${dateFilters.endDate.value}`
                   : ""}
