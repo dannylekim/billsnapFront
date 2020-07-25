@@ -36,7 +36,7 @@ describe("BillFilter", () => {
                                     updateBills={jest.fn()}
                                     setState={jest.fn()} />);
 
-                expect(wrapper.find("FormCheckbox").at(0).render().text()).toBe("Start date : 2020-01-01");
+                expect(wrapper.find("FormCheckbox").at(0).render().text()).toBe("Start date: 2020-01-01");
 
             })
 
@@ -51,7 +51,7 @@ describe("BillFilter", () => {
                                                 updateBills={jest.fn()}
                                                 setState={jest.fn()} />);
 
-                expect(wrapper.find("FormCheckbox").at(1).render().text()).toBe("End date : 2020-01-01");
+                expect(wrapper.find("FormCheckbox").at(1).render().text()).toBe("End date: 2020-01-01");
 
             })
         })

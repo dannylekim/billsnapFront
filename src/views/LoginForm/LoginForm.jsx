@@ -70,7 +70,7 @@ export const LoginForm = ({
               size="md"
               pill
               className="login_register__submit__button"
-              onClick={(event) => handleButtonClick(event)}
+              onClick={handleButtonClick}
               name="submit"
             >
               Log in
@@ -264,7 +264,7 @@ class LoginFormContainer extends Component {
           alertMessage={alertMessage}
           dismissAlert={this.dismissAlert}
           error_message={error_message}
-          setFormType={() => this.props.setFormType("register")}
+          setFormType={this.props.setFormType("register")}
         />
       </div>
     );
