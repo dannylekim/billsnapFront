@@ -24,7 +24,7 @@
   color: $primary-text-color;
 }
 
-div.sidebar__navitems{
+div.sidebar__navitems {
   margin-top: 25px;
 
   .nav-item {
@@ -44,6 +44,7 @@ div.sidebar__navitems{
       border-top-right-radius: 0 !important;
       border-top-left-radius: 50px !important;
       border-bottom-left-radius: 50px !important;
+      cursor: pointer;
     }
 
     &.active {

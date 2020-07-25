@@ -1,5 +1,6 @@
 import React from 'react';
 import {MdFace, MdHelp, MdPeople, MdReceipt, MdSettings} from 'react-icons/md';
+import {FiLogOut} from 'react-icons/fi';
 import {Nav, Navbar, NavbarBrand, NavItem, NavLink} from 'shards-react';
 import './styles.scss';
 
@@ -22,6 +23,7 @@ class Sidebar extends React.Component {
             }
         }
         this.handleClick = this.handleClick.bind(this)
+        this.handleLogoutClick = this.handleLogoutClick.bind(this)
     }
 
     handleClick(link) {
@@ -35,7 +37,13 @@ class Sidebar extends React.Component {
         }
     }
 
+    handleLogoutClick() {
+        localStorage.removeItem("billSnap_token");
+        this.props.setUser({});
+    }
+
     render() {
+
         return (
             <Navbar>
                 <Nav tabs className={"billSnap-SideBar"} vertical={true}>
@@ -45,28 +53,38 @@ class Sidebar extends React.Component {
 
                     <div className="sidebar__navitems">
                         <NavItem>
-                            <NavLink id='billSnap-SideBar__bills' onClick={() => this.handleClick("bills")} active={this.state.activeState.bills}>
+                            <NavLink id='billSnap-SideBar__bills' onClick={() => this.handleClick("bills")}
+                                     active={this.state.activeState.bills}>
                                 <MdReceipt/> Bills
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink id='billSnap-SideBar__profile' onClick={() => this.handleClick("profile")} active={this.state.activeState.profile}>
+                            <NavLink id='billSnap-SideBar__profile' onClick={() => this.handleClick("profile")}
+                                     active={this.state.activeState.profile}>
                                 <MdFace/> Profile
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink id='billSnap-SideBar__contacts' onClick={() => this.handleClick("contacts")} active={this.state.activeState.contacts}>
+                            <NavLink id='billSnap-SideBar__contacts' onClick={() => this.handleClick("contacts")}
+                                     active={this.state.activeState.contacts}>
                                 <MdPeople/> Contacts
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink id='billSnap-SideBar__settings' onClick={() => this.handleClick("settings")} active={this.state.activeState.settings}>
+                            <NavLink id='billSnap-SideBar__settings' onClick={() => this.handleClick("settings")}
+                                     active={this.state.activeState.settings}>
                                 <MdSettings/> Settings
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink id='billSnap-SideBar__help' onClick={() => this.handleClick("help")} active={this.state.activeState.help}>
+                            <NavLink id='billSnap-SideBar__help' onClick={() => this.handleClick("help")}
+                                     active={this.state.activeState.help}>
                                 <MdHelp/> Help
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink id='billSnap-SideBar__logout' onClick={() => this.handleLogoutClick()} href={"/"}>
+                                <FiLogOut/> Log out
                             </NavLink>
                         </NavItem>
                     </div>
