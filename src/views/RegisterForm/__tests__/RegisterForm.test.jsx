@@ -116,6 +116,22 @@ describe("RegisterForm", () => {
           />
         );
       });
+
+      it("RegisterForm should match snap shot when loading", () => {
+        wrapper.setState({isLoading: true});
+
+        matches(
+          <RegisterForm
+            dismissAlert={mockDismissAlert}
+            onChange={mockOnChange}
+            setFormType={mockToggleFormType}
+            handleButtonClick={handleMockFunction}
+            validInvalidByName={handleMockFunction}
+            conditions={conditions}
+            alertNotification={DEFAULT_ERRORS}
+          />
+        );
+      });
     });
 
     describe("components", () => {});
@@ -238,11 +254,14 @@ describe("RegisterForm", () => {
           expect(wrapper.state().validFields.passwordFormat).toBe(false);
 
           wrapper.instance().validateField('password', '123@123.Com');
+          wrapper.instance().validateField('blahblah', '')
           expect(wrapper.state().validFields.passwordFormat).toBe(true);
         });
 
         it("should password matching", () => {
           const mockFn = jest.fn();
+          expect( RegisterFormContainer.validatePassword("hi","hi")).toBeTruthy();
+          expect( RegisterFormContainer.validatePassword("hi","bye")).toBeFalsy();
           RegisterFormContainer.validatePassword = mockFn;
 
           mockFn.mockImplementation(() => true);
@@ -330,7 +349,7 @@ describe("RegisterForm", () => {
           statusCode: 201,
         }
         const SUCCESS_LOGIN = {
-          token: "billsnaptest"
+          token: "billsnaptest", profile: {id:1 , firtName: "Bob"} 
         }
         const TEMP_DATA = {
           firstName: 'chad',
@@ -364,7 +383,7 @@ describe("RegisterForm", () => {
         expect(mockCheckValidity).toBeCalledTimes(5);
         expect(register).toHaveBeenCalledWith(TEMP_DATA);
         expect(login).toHaveBeenCalledWith(LOGIN_TEMP_DATA);
-        expect(mockSetState).toBeCalledTimes(3);
+        expect(mockSetState).toBeCalledTimes(2);
       });
 
       it('should call appropridate functions on success 201 request + login failing', async () => {

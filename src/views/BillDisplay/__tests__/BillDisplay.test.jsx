@@ -225,17 +225,6 @@ describe("BillDisplay", () => {
               billWrapper.find('Badge').at(6).simulate('click');
             
               expect(wrapper.state().filter.dateOpened).toBeTruthy();
-             
-              billFilterWrapper().find('FormCheckbox').at(0).simulate('change');
-              wrapper.update();
-              expect(wrapper.state().dateFilters.startDate.selected).toBeTruthy();
-              expect(wrapper.state().dateFilters.endDate.selected).toBeFalsy();
-            
-              billWrapper =  billFilterWrapper()
-              billWrapper.find('FormCheckbox').at(1).simulate('change');
-              expect(wrapper.state().dateFilters.startDate.selected).toBeFalsy();
-              expect(wrapper.state().dateFilters.endDate.selected).toBeTruthy();
-              
             });
             
               describe(" Start date and End date should be triggered on handleDateSelection", () => {
@@ -247,28 +236,28 @@ describe("BillDisplay", () => {
                 });
 
                 it("should change start date checkbox states onChange.", () => {
-                  wrapper.setState({  dateFilters: {
-                                      startDate: {selected: true, value: ""},
-                                      endDate: {selected: false, value: ""}
-                                    } });
-
-                  billWrapper.find('FormInput').at(0).simulate('change',event);
+                  billFilterWrapper().find('FormCheckbox').at(0).simulate('change');
+                  wrapper.update();
+                  
+                  billWrapper =  billFilterWrapper()
+                  billWrapper.find('FormInput').simulate('change',event);
                   const spy = jest.spyOn(instance, 'handleDateSelection'); // handleDateSelection
                   instance.handleDateSelection(event);
-                  expect(spy).toBeCalledTimes(1);
-                  expect(spy).toHaveBeenCalledWith(event);
                   wrapper.update();
                   expect(wrapper.state().dateFilters.startDate.value).toBe(event.target.value);
+
+                  expect(spy).toBeCalledTimes(1);
+                  expect(spy).toHaveBeenCalledWith(event);
                   spy.mockRestore();
               });
 
                 it("should change enddate checkbox states onChange.", () => {
-                  wrapper.setState({  dateFilters: {
-                                      startDate: {selected: false, value: ""},
-                                      endDate: {selected: true, value: ""}
-                                    } });
-
-                  billWrapper.find('FormInput').at(0).simulate('change',event);
+                  billFilterWrapper().find('FormCheckbox').at(1).simulate('change');
+                  wrapper.update();
+                  
+                  billWrapper =  billFilterWrapper()
+          
+                  billWrapper.find('FormInput').simulate('change',event);
                   instance.handleDateSelection(event);
                   wrapper.update();
                   expect(wrapper.state().dateFilters.endDate.value).toBe(event.target.value);
@@ -282,7 +271,10 @@ describe("BillDisplay", () => {
                     value: ""
                 }
               })
-              billWrapper.find('FormInput').at(0).simulate('change',event);
+              billFilterWrapper().find('FormCheckbox').at(1).simulate('change');
+              wrapper.update();
+              
+              billFilterWrapper().find('FormInput').at(0).simulate('change',event);
               expect(instance.handleDateSelection(event)).toBe(null);
             });
           });
@@ -298,7 +290,10 @@ describe("BillDisplay", () => {
            
             const today = new Date(new Date().setHours(0,0,0,0));
             expect(BillDisplay.filterDateTime("05-03-2017 15:25:10 -0400")).toBe("05/03/2017");
+            expect(BillDisplay.filterDateTime("15-12-2017 15:25:10 -0400")).toBe("15/12/2017");
+            expect(BillDisplay.filterDateTime("11-10-2017 15:25:10 -0400")).toBe("11/10/2017");
             expect(BillDisplay.filterDateTime(`01-01-${today.getFullYear()} 15:25:10 -0400`)).toBe("01/01");
+            expect(BillDisplay.filterDateTime(`15-01-${today.getFullYear()} 15:25:10 -0400`)).toBe("15/01");
             expect(BillDisplay.filterDateTime(`${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()} 15:25:10 -0400`)).toBe("3:25 PM");
             expect(BillDisplay.filterDateTime(`${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()} 3:25:10 -0400`)).toBe("3:25 AM");
           });

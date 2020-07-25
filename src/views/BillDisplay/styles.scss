@@ -2,174 +2,176 @@
 
 div.bill__wrapper{
     height:500px;
-    min-width: 1313px;
-}
+    min-width: 1313px; 
+    margin-top: 1600px; //????? parent div is out of bounds don't know how to fix !!! 
 
-div.bill__section{
-    display: flex;
-}
-
-div.specific__bill__section{
-    width: 61.091%;
-
-    span#more__details{
-        text-decoration: underline;
-        color:$primary-text-color;
-        float: right;
-        margin-bottom: 15px;
-        margin-right: 32px;
-        right:0;
+    div.specific__bill__section{
+        width: 61.091%;
+    
+        span#more__details{
+            text-decoration: underline;
+            color:$primary-text-color;
+            float: right;
+            margin-bottom: 15px;  
+            margin-right: 32px;
+            right:0;  
+        }
+    
+        h5 span#amount__owed{
+            color:$secondary-price-color;
+        }
     }
-
-    h5 span#amount__owed{
-        color:$secondary-price-color;
-    }
-}
-
-div.bill__list__section{
-    margin-left: 2.74117026885%;
-    width: 38.909%;
-  
-    #search__bill{
-        border: 1px solid $light-gray-background;
-        box-sizing: border-box;
-        border-radius: 50px;
-        background: $light-gray-background;
+    div.bill__section{
         display: flex;
-        align-content: center;
-    } 
-
-    span.search__icon{
-        width: 10%;
-        border-top-left-radius: inherit;
-        border-bottom-left-radius: inherit;
-        border: inherit;
-        background: inherit;
-        margin-top: auto;
-        margin-bottom: auto;
-    }
     
-    span.search__filter{
-        width: 30%;
-        margin-top: auto;
-        margin-bottom: auto;
-        font-weight: 500;
-        font-size: 20px;
-        border-top-right-radius: inherit;
-        border-bottom-right-radius: inherit;
-        span.simple__sort {
-            margin-left: 10px;
+        div.bill__list__section{
+            margin-left: 2.74117026885%;
+            width: 38.909%;
+          
+            #search__bill{
+                border: 1px solid $light-gray-background;
+                box-sizing: border-box;
+                border-radius: 50px;
+                background: $light-gray-background;
+                display: flex;
+                align-content: center;
+            } 
+        
+            span.search__icon{
+                width: 10%;
+                border-top-left-radius: inherit;
+                border-bottom-left-radius: inherit;
+                border: inherit;
+                background: inherit;
+                margin-top: auto;
+                margin-bottom: auto;
+            }
             
-        }
-    }
-
-    input.form-control{
-        width: 60%;
-        border: inherit;
-        background: inherit;
-        box-shadow: none;
-    }
-
-    ul.nav.nav-tabs{
-        margin-left: calc(100% - 120px);
-        border: none;
-    }
-
-    button#add__bill__button{
-        margin-left: calc(100% - 140px);
-        margin-top: 10px;
-        margin-bottom: 10px;
-        border-radius: 17px;
-        font-weight: bold;
-        font-size: 20px;
-        border: 1px solid $secondary-color;
-        min-height:40px;
-        width: 140px;
-    }
-    a.nav-link{
-        height:50px;
-        width: 140px;
-        border-radius: 10px 10px 0px 1px;
-        margin-left: 5px;
-        font-size: 16px;
-        border-bottom: 1px solid $border-color;
-    }
-
-    a.nav-link.active{
-      border: 1px solid $border-color;
-      border-bottom: none;
-    }
-
-    button#add__bill__button,a.nav-link{
-        justify-content : end;
-        background-color: $secondary-color;
-        color: $card-color;
-        box-sizing: border-box;
-        box-shadow: 4px 0 4px $card-shadow;
-        border-radius: 10px;
-        font-family: Sarabun, sans-serif;
-        font-style: normal;
-        font-weight: 300;
-        width: 120px;
-        height:40px;
-        padding:10px 0;
-    }
-
-    div.bill__card.card{
-        background-color: $card-color;
-        border-radius: 0;
-        box-shadow: none;
-        height:160px;
-    
-        hr.card__seperator{
-            margin-bottom: 0;
-            margin-top: 0;
-            background-color:rgba(0, 0, 0, 0.63);
-            width: 80.67%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    }
-
-    div.quick__sorting__container{
-        position: absolute;
-        top:75px;
-        height: 120px;
-        ul.sorting__content{
-            width: 103px;
-            transform: translateX(470px);
-            border-radius: 6px;
-            height: inherit;
-            background-color: $light-gray-background;
-            list-style : none;
-            padding-top:10px;
-            padding-left:0;
-
-            li.sorting__titles{
-                font-family: $primary-font;
+            span.search__filter{
+                width: 30%;
+                margin-top: auto;
+                margin-bottom: auto;
                 font-weight: 500;
                 font-size: 20px;
-                line-height: 26px;
-                color: $secondary-text-color;
+                border-top-right-radius: inherit;
+                border-bottom-right-radius: inherit;
+                span.simple__sort {
+                    margin-left: 10px;
+                    
+                }
             }
-
-            li.sorting__titles:hover{
-                background-color: #bebebe;
+        
+            input.form-control{
+                width: 60%;
+                border: inherit;
+                background: inherit;
+                box-shadow: none;
             }
+        
+            ul.nav.nav-tabs{
+                justify-content: start;
+                border-bottom: 1px solid $border-color;
+                margin-bottom: 15px;
+            }
+        
+            button#add__bill__button{
+                margin-left: calc(100% - 140px);
+                margin-top: 10px;
+                margin-bottom: 10px;
+                border-radius: 17px;
+                font-weight: bold;
+                font-size: 20px;
+                border: 1px solid $secondary-color;
+                min-height:40px;
+                width: 140px;
+            }
+            a.nav-link{
+                height:50px;
+                width: 140px;
+                border-radius: 10px 10px 0px 1px;
+                margin-left: 5px;
+                font-size: 16px;
+                border-bottom: 1px solid $border-color;
+            }
+        
+            a.nav-link.active{
+              border: 1px solid $border-color;
+              border-bottom: none;
+              background: $card-color;
+              color:black;
+            }
+        
+            button#add__bill__button,a.nav-link{
+                justify-content : end;
+                background-color: $secondary-color;
+                color: $card-color;
+                box-sizing: border-box;
+                box-shadow: 4px 0px 4px $card-shadow;
+                font-family: $primary-font;
+                font-style: normal;
+                font-weight: 300;
+                padding:10px 0 10px 0;
+            }
+        
+            div.bill__card.card{
+                background-color: $card-color;
+                border-radius: 0;
+                box-shadow: none;
+                height:160px;
+            
+                hr.card__seperator{
+                    margin-bottom: 0;
+                    margin-top: 0;
+                    background-color:rgba(0, 0, 0, 0.63);
+                    width: 80.67%;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+        
+            div.quick__sorting__container{
+                position: absolute;
+                top:60px;
+                left:265px;
+                height: 120px;
+                ul.sorting__content{
+                    width: 103px;
+                    transform: translateX(470px);
+                    border-radius: 6px;
+                    height: inherit;
+                    background-color: $light-gray-background;
+                    list-style : none;
+                    padding-top:10px;
+                    padding-left:0;
+        
+                    li.sorting__titles{
+                        font-family: $primary-font;
+                        font-weight: 500;
+                        font-size: 20px;
+                        line-height: 26px;
+                        color: $secondary-text-color;
+                    }
+        
+                    li.sorting__titles:hover{
+                        background-color: #bebebe;
+                    }
+                }
+            }
+        
+            div.bill__container{
+                display: flex;
+                flex-wrap: nowrap;
+                flex-direction: column;
+                margin-bottom: 15px;
+                box-shadow: -1px -1px 2px rgba(90, 97, 105, 0.25);
+            }
+            
+            div.bill__summary{
+                text-align: left;
+                margin-left: 130px;
+            }  
         }
     }
-
-    div.bill__container{
-        display: flex;
-        flex-wrap: nowrap;
-        flex-direction: column;
-        margin-bottom: 15px;
-        box-shadow: -1px -1px 2px rgba(90, 97, 105, 0.25);
-    }
     
-    div.bill__summary{
-        text-align: left;
-        margin-left: 130px;
-    }  
 }
 

@@ -24,9 +24,9 @@ export default (props) => {
                 <TitleContent/>
                 <div>
                     {formType === "register" ? (
-                        <RegisterForm setFormType={toggleFormType} history={history}/>
+                        <RegisterForm setFormType={() => toggleFormType} history={history}/>
                     ) : (
-                        <LoginForm setFormType={toggleFormType} history={history}/>
+                        <LoginForm setFormType={() => toggleFormType} history={history}/>
                     )}
                 </div>
             </div>
