@@ -1,8 +1,12 @@
 @import '../../../variables';
 
+div#active__bill{
+    background-color: rgba(241, 241, 241, 0.71);
+}
+
 div.bill__items{
     text-align: left;
-
+   
     .card-text{
         width:100%;
         margin-top: 25px;
@@ -13,7 +17,7 @@ div.bill__items{
             width:100%;
             #bill__name{
                 margin-left:10px;
-                font-family: Sarabun, sans-serif;
+                font-family: $primary-font;
                 font-style: normal;
                 font-weight: bold;
                 float: left;
@@ -26,17 +30,25 @@ div.bill__items{
         }
     }
 
+    .split__by{
+        span#responsible{
+            margin-left:32px;
+            font-weight: bold;
+            font-family: $primary-font;
+            color: $tertiary-text-color;
+        }
+    }
+
     .card-footer{
         width:100%;
         margin-left:25px;
         background-color: $card-color;
         padding:0;
     }
-   
 }
 
 #bill__balance{
-    font-family: Sarabun, sans-serif;
+    font-family: $primary-font;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;

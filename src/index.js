@@ -8,19 +8,26 @@ import * as serviceWorker from "./serviceWorker";
 import * as Sentry from "@sentry/browser";
 
 import store from './redux/billSnapConfiguredStore';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
-//add redux and redux persist
 
 //by default, Sentry uses a null DSN, a no-op connection is used and won't attempt to connect or anything, effectively disabling it.
 if(process.env.SENTRY_DSN){
     Sentry.init({dsn: process.env.SENTRY_DSN});
 }
 
+const persistor = persistStore(store);
+
+!localStorage.getItem("billSnap_token") && persistor.purge();
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

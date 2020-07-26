@@ -21,12 +21,26 @@ const fakeBills = [
 ]
 
 describe('SmallBillCard', () => {
-
+    let wrapper;
     describe('render', () => {
         describe('snapshots 📸', () => {
             it('SmallBillCard should match snap shot', () => {
-                matches(<SmallBillCard bill={fakeBills} filterDateTime={jest.fn()} billIcons={jest.fn()}/>);
+                matches(<SmallBillCard bill={fakeBills[0]} filterDateTime={jest.fn()} billIcons={jest.fn()} activeBill={fakeBills[0]}/>);
             });
         })
+    })
+
+    describe("component ", () => {
+        it("should not find an active bill", () => {
+            wrapper = shallow( <SmallBillCard bill={fakeBills[1]} filterDateTime={jest.fn()} billIcons={jest.fn()} activeBill={fakeBills[0]}/>);
+            expect(wrapper.find("#non__active__bill")).toHaveLength(1);
+        })
+
+        it("should find an active bill", () => {
+            wrapper = shallow( <SmallBillCard bill={fakeBills[0]} filterDateTime={jest.fn()} billIcons={jest.fn()} activeBill={fakeBills[0]}/>);
+            expect(wrapper.find("#active__bill")).toHaveLength(1);
+
+        })
+
     })
 })

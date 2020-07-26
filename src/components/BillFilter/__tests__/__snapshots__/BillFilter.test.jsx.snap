@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when category filter opened 1`] = `
+<div
+  className="bill__filter__container"
+>
+  <div
+    className="filter__header"
+    onClick={[Function]}
+  >
+    <svg
+      fill="currentColor"
+      height={24}
+      size={24}
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 448 512"
+      width={24}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+      />
+    </svg>
+    <span
+      className="filter__header__title"
+    >
+      Filters
+    </span>
+  </div>
+  <div
+    className="filter__selections__container"
+  >
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="descending"
+      onClick={[Function]}
+    >
+      Newest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="ascending"
+      onClick={[Function]}
+    >
+      Oldest
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__status"
+      onClick={[Function]}
+    >
+      Status
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__increasing"
+      onClick={[Function]}
+    >
+      A to Z
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="alphabetical__decreasing"
+      onClick={[Function]}
+    >
+      Z to A
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__category"
+      onClick={[Function]}
+    >
+      Category
+    </span>
+    <span
+      className="badge badge-outline-primary badge-pill"
+      id="by__date"
+      onClick={[Function]}
+    >
+      Date
+    </span>
+  </div>
+  <div
+    className="advanced__filter__selection"
+  >
+    <div
+      className="category__filter"
+    >
+      <input
+        className="form-control"
+        placeholder="Restaurant"
+        type="text"
+      />
+    </div>
+  </div>
+</div>
+`;

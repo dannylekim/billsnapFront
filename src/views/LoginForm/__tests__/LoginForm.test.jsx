@@ -4,7 +4,7 @@ import LoginFormContainer, {
   DEFAULT_ERRORS,
   DEFAULT_ALERT_MESSAGE,
 } from "../LoginForm.jsx";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import { login } from "../../../utils/requests/UserRequests";
 
 jest.mock("../../../utils/requests/UserRequests");
@@ -236,7 +236,7 @@ describe("LoginForm", () => {
           preventDefault: jest.fn(),
         };
         const mockPushFunction = jest.fn();
-        login.mockResolvedValue({ token: "billsnaptest " });
+        login.mockResolvedValue({ token: "billsnaptest ", profile: {id:1 , firtName: "Bob"} });
 
         wrapper.instance().dismissAlert = mockDismissAlert;
         wrapper.instance().setState = setState;
@@ -245,14 +245,13 @@ describe("LoginForm", () => {
             push: mockPushFunction,
           },
         });
-
         await wrapper.instance().handleSubmitClick(mockDOMevent);
 
         expect(mockDismissAlert).toBeCalledTimes(1);
         expect(login).toBeCalledTimes(1);
-       
+        expect(mockPushFunction).toBeCalledTimes(0);
         expect(setState).toBeCalledTimes(3);
-     
+    
       });
 
       it("should follow steps on passing request with no token", async () => {
