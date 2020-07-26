@@ -10,26 +10,31 @@ import "./styles.scss";
  */
 
 export default (props) => {
+  const { history, toggleFormType, formType } = props;
 
-    const {
-        history,
-        toggleFormType,
-        formType
-    } = props;
-
-    return (
-        <div className="page__landing">
-            <Navbar/>
-            <div className="page__content">
-                <TitleContent/>
-                <div>
-                    {formType === "register" ? (
-                        <RegisterForm setFormType={() => toggleFormType} history={history}/>
-                    ) : (
-                        <LoginForm setFormType={() => toggleFormType} history={history}/>
-                    )}
-                </div>
+  return (
+    <div className="page__landing">
+         <Navbar />
+      {!localStorage.getItem("billSnap_token") ? (
+          <div className="page__content">
+            <TitleContent />
+            <div>
+              {formType === "register" ? (
+                <RegisterForm
+                  setFormType={() => toggleFormType}
+                  history={history}
+                />
+              ) : (
+                <LoginForm
+                  setFormType={() => toggleFormType}
+                  history={history}
+                />
+              )}
             </div>
-        </div>
-    );
+          </div>
+      ) : (
+        props.history.push("/dashboard")
+      )}
+    </div>
+  );
 };
