@@ -6,10 +6,10 @@ import "./styles.scss";
 export default props => {
 
     return (
-        <div className="dashboard__flexbox">
+        <div>
             {localStorage.getItem("billSnap_token") ? 
                ( 
-               <div>
+               <div className="dashboard__flexbox">
                     <div className="side__bar">
                         <Sidebar/> 
                     </div>

@@ -1,9 +1,7 @@
 @import '../../variables';
 
 div.bill__wrapper{
-    height:500px;
-    min-width: 1313px; 
-    margin-top: 1600px; //????? parent div is out of bounds don't know how to fix !!! 
+    min-width: 1313px;
 
     div.specific__bill__section{
         width: 61.091%;
@@ -131,8 +129,8 @@ div.bill__wrapper{
         
             div.quick__sorting__container{
                 position: absolute;
-                top:60px;
-                left:265px;
+                top:75px;
+                left:275px;
                 height: 120px;
                 ul.sorting__content{
                     width: 103px;
