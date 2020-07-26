@@ -21,6 +21,8 @@ if(process.env.SENTRY_DSN){
 
 const persistor = persistStore(store);
 
+!localStorage.getItem("billSnap_token") && persistor.purge();
+
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>
