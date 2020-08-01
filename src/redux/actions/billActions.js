@@ -1,5 +1,5 @@
-import { getBill } from "../../utils/requests/BillRequests";
-import { setBillLoading } from "./applicationActions";
+import {getBills} from "../../utils/requests/BillRequests";
+import {setBillLoading} from "./applicationActions";
 
 export const ACTIONS = {
   ADD_BILLS: "ADD_BILLS",
@@ -31,7 +31,7 @@ export const fetchMyBills = (query_param = "") => {
     try {
       dispatch(setBillLoading(true));
 
-      const bills = await getBill(query_param);
+      const bills = await getBills(query_param);
 
       dispatch(query_param === "" ? addBill(bills) : updateBill(bills));
     } catch (err) {

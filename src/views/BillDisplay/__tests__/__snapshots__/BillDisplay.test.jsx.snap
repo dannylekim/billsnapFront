@@ -305,7 +305,7 @@ exports[`BillDisplay render snapshots 📸 BillDisplay should match snap shot wh
          More details
       </span>
       <div
-        className="large__bill"
+        className="bill__card"
       >
         Bill #  
         <div

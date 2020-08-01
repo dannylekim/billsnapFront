@@ -1,20 +1,11 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import "./styles.scss";
 import Loader from "../../components/Loader";
 import SmallBillCard from "../../components/BillCard/SmallBillCard";
-import LargeBillCard from "../../components/BillCard/LargeBillCard";
+import BillCard from "../../components/BillCard/BillCard";
 import BillFilter from "../../components/BillFilter";
-import { Button, Nav, NavItem, NavLink } from "shards-react";
-import {
-  FaUtensils,
-  FaShoppingCart,
-  FaShoppingBag,
-  FaCar,
-  FaBus,
-  FaQuestion,
-  FaSearch,
-  FaBars
-} from "react-icons/fa";
+import {Button, Nav, NavItem, NavLink} from "shards-react";
+import {FaBars, FaBus, FaCar, FaQuestion, FaSearch, FaShoppingBag, FaShoppingCart, FaUtensils} from "react-icons/fa";
 import navItems from "../../constants/BillDisplayNav.json";
 
 class BillDisplay extends Component {
@@ -336,7 +327,7 @@ class BillDisplay extends Component {
             <div className="specific__bill__section">
               {BillsSummary(bills)}
               <span id="more__details"> More details</span>
-              <LargeBillCard selectedBill={this.state.selectedBill} />
+              <BillCard selectedBill={this.state.selectedBill} />
             </div>
           </div>
         ) : (
