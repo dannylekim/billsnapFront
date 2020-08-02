@@ -31,13 +31,13 @@ export const login = async (credentials) => {
 {type: "cors", url: "https://billsnap-development.herokuapp.com/billsnap/register", redirected: false, status: 400, ok: false, …}
 */
 export const register = async (entries) => {
-  const response = await fetch(`${URL}/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(entries),
-  });
+    const response = await fetch(`${URL}/register`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(entries),
+    });
 
   return checkStatus(response);
 };

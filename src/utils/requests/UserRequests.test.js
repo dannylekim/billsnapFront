@@ -73,7 +73,7 @@ describe("UserRequests", () => {
       window.fetch.returns(mockApiResponse(goodResponse));
       const res = await login(loginInput);
 
-      assert.equal(res.status, goodResponse.status);
+      assert.strictEqual(res.status, goodResponse.status);
     });
 
     it("Should throw error from unsuccesful post when logging", async () => {
@@ -86,9 +86,9 @@ describe("UserRequests", () => {
       window.fetch.returns(mockApiResponse(blankResponse));
       const res = await login(blankLoginInput);
 
-      assert.equal(res.status, blankResponse.status);
-      assert.equal(res.errors[0].message, "must not be blank");
-      assert.equal(res.errors[1].message, "must not be blank");
+      assert.strictEqual(res.status, blankResponse.status);
+      assert.strictEqual(res.errors[0].message, "must not be blank");
+      assert.strictEqual(res.errors[1].message, "must not be blank");
     });
   });
 
