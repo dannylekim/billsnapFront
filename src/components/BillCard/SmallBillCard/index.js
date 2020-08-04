@@ -1,3 +1,3 @@
-import SmallBillCard from './SmallBillCard.jsx';
+import SmallBillCard from "./SmallBillCard.jsx";
 
 export default SmallBillCard;

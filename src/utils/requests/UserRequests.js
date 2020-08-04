@@ -1,4 +1,4 @@
-const {URL} = require("../../config")
+const { URL } = require("../../config");
 
 /**
  * @function logUser
@@ -7,16 +7,15 @@ const {URL} = require("../../config")
  * @param {String} credentials.password // no need to encrypt yet
  */
 export const login = async (credentials) => {
+  const response = await fetch(`${URL}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
 
-    const response = await fetch(`${URL}/login`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(credentials),
-    });
-
-    return await checkStatus(response);
+  return await checkStatus(response);
 };
 
 /**
@@ -32,25 +31,23 @@ export const login = async (credentials) => {
 {type: "cors", url: "https://billsnap-development.herokuapp.com/billsnap/register", redirected: false, status: 400, ok: false, …}
 */
 export const register = async (entries) => {
+  const response = await fetch(`${URL}/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(entries),
+  });
 
-    const response = await fetch(`${URL}/register`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(entries),
-    });
-
-    return await checkStatus(response);
+  return await checkStatus(response);
 };
 
 async function checkStatus(response) {
-    const parsedResponse = await response.json();
+  const parsedResponse = await response.json();
 
-    if (response.status < 200 || response.status >= 300) {
+  if (response.status < 200 || response.status >= 300) {
+    // throw new Error(parsedResponse.errors);
+  }
 
-        // throw new Error(parsedResponse.errors);
-    }
-
-    return {...parsedResponse, statusCode: response.status};
+  return { ...parsedResponse, statusCode: response.status };
 }

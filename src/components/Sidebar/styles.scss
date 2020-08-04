@@ -1,4 +1,4 @@
-@import '../../variables';
+@import "../../variables";
 
 .billSnap-SideBar {
   transition: 0.3s;
@@ -29,7 +29,6 @@ div.sidebar__navitems {
 
   .nav-item {
     margin-left: 30px;
-
   }
 
   .nav-link {

@@ -20,16 +20,16 @@ export const RegisterForm = ({
   return (
     <div className="register__container">
       {alertNotification.isOpen === true ? (
-          <Alert
-              dismissible={dismissAlert}
-              open={alertNotification.isOpen}
-              className="mb-3"
-              theme={alertNotification.alertType}
-          >
-              {alertNotification.alertMessage}
-          </Alert>
+        <Alert
+          dismissible={dismissAlert}
+          open={alertNotification.isOpen}
+          className="mb-3"
+          theme={alertNotification.alertType}
+        >
+          {alertNotification.alertMessage}
+        </Alert>
       ) : (
-          <div className="hidden__div"/>
+        <div className="hidden__div" />
       )}
       <img
         alt="character logo"
@@ -80,9 +80,9 @@ export const RegisterForm = ({
 
       <div>
         <div className="form__seperator">
-            <hr className="form__horizontal__line"/>
+          <hr className="form__horizontal__line" />
           Or
-            <hr className="form__horizontal__line"/>
+          <hr className="form__horizontal__line" />
         </div>
         <div>
           <h6>Have an account?</h6>
@@ -103,7 +103,7 @@ export const DEFAULT_ERRORS = {
 
 const NAME_REGEX = new RegExp(/^[_A-z]*((-|\s)*[_A-z])*$/);
 const EMAIL_REGEX = new RegExp(
-    /^(([^<>()\\[\].,;:\s@"]+(\.[^<>()\\[\].,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  /^(([^<>()\\[\].,;:\s@"]+(\.[^<>()\\[\].,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 );
 const PASSWORD_REGEX = new RegExp(
   /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).{8,20}/
@@ -154,50 +154,50 @@ class RegisterFormContainer extends Component {
    * @param {String} type valid or invalid
    */
   validInvalidByName = (name, type) => {
-      return (
-          (type === "invalid"
-              ? !this.state.validFields[name]
-              : this.state.validFields[name]) &&
-          this.state.userCredentials[name] !== "" &&
-          this.state.validFields[name]
-      );
+    return (
+      (type === "invalid"
+        ? !this.state.validFields[name]
+        : this.state.validFields[name]) &&
+      this.state.userCredentials[name] !== "" &&
+      this.state.validFields[name]
+    );
   };
 
-    /**
-     * @description Sets the alert or turns it off by calling the setter.
-     * @param {String} triggerType - type of trigger success or error.
-     * @param message message to display
-     */
-    triggerAlert = (triggerType, message) => {
-        const alertNotification =
-            triggerType === "error"
-                ? {
-                    isOpen: true,
-                    alertType: "danger",
-                    alertMessage: message,
-                }
-                : {
-                    isOpen: true,
-                    alertType: "success",
-                    alertMessage: message,
-                };
-        return this.setState({
-            alertNotification,
-        });
-    };
+  /**
+   * @description Sets the alert or turns it off by calling the setter.
+   * @param {String} triggerType - type of trigger success or error.
+   * @param message message to display
+   */
+  triggerAlert = (triggerType, message) => {
+    const alertNotification =
+      triggerType === "error"
+        ? {
+            isOpen: true,
+            alertType: "danger",
+            alertMessage: message,
+          }
+        : {
+            isOpen: true,
+            alertType: "success",
+            alertMessage: message,
+          };
+    return this.setState({
+      alertNotification,
+    });
+  };
 
-    /**
-     * @description dismiss the alert. Sets the alert states back to default.
-     */
-    dismissAlert = () => {
-        return this.setState({
-            alertNotification: DEFAULT_ERRORS,
-        });
-    };
+  /**
+   * @description dismiss the alert. Sets the alert states back to default.
+   */
+  dismissAlert = () => {
+    return this.setState({
+      alertNotification: DEFAULT_ERRORS,
+    });
+  };
 
-    /**
-     * Returns the value of the key given from the map.
-     * Map value is the result of the regex.
+  /**
+   * Returns the value of the key given from the map.
+   * Map value is the result of the regex.
    * Object that returns the proper valid input function.
    * Lots of if statements.
    * @param {String} name - the input name.
@@ -214,34 +214,34 @@ class RegisterFormContainer extends Component {
         break;
       case "email":
         result.email = EMAIL_REGEX.test(value);
-          break;
-        case "password":
-            result.passwordFormat = PASSWORD_REGEX.test(value);
-            break;
-        case "confirmPassword":
-            const {password} = this.state.userCredentials;
-            const passwordMatches = this.constructor.validatePassword(
-                password,
-                value
-            );
-            result.password = passwordMatches;
-            this.setState((prev) => ({
-                userCredentials: {
-                    ...prev.userCredentials,
-                    confirmPassword: true,
-                },
-            }));
-            break;
-        default:
-            break;
+        break;
+      case "password":
+        result.passwordFormat = PASSWORD_REGEX.test(value);
+        break;
+      case "confirmPassword":
+        const { password } = this.state.userCredentials;
+        const passwordMatches = this.constructor.validatePassword(
+          password,
+          value
+        );
+        result.password = passwordMatches;
+        this.setState((prev) => ({
+          userCredentials: {
+            ...prev.userCredentials,
+            confirmPassword: true,
+          },
+        }));
+        break;
+      default:
+        break;
     }
 
-      return this.setState((prev) => ({
-          validFields: {
-              ...prev.validFields,
-              ...result,
-          },
-      }));
+    return this.setState((prev) => ({
+      validFields: {
+        ...prev.validFields,
+        ...result,
+      },
+    }));
   };
 
   /**
@@ -279,7 +279,7 @@ class RegisterFormContainer extends Component {
   handleSubmitClick = async (e) => {
     e.preventDefault();
     this.setState({
-        isLoading: true,
+      isLoading: true,
     });
     if (
       this.checkValidity(this.state.validFields.password, "confirmPassword") &&
@@ -302,23 +302,23 @@ class RegisterFormContainer extends Component {
       try {
         const response = await register(dataToSend);
         if (response.statusCode === 201) {
-            const loginInfo = {
-                email,
-                password,
-            };
-            const {token, profile} = await login(loginInfo);
+          const loginInfo = {
+            email,
+            password,
+          };
+          const { token, profile } = await login(loginInfo);
 
-            if (token) {
-                localStorage.setItem("billSnap_token", token);
-                const {id, ...userProfile} = profile;
-                this.props.setUser(userProfile);
-                this.props.history.push("/dashboard");
-            } else {
-                this.triggerAlert(
-                    "error",
-                    "'Account created, but failed to log in. Please try logging in with your credentials"
-                );
-            }
+          if (token) {
+            localStorage.setItem("billSnap_token", token);
+            const { id, ...userProfile } = profile;
+            this.props.setUser(userProfile);
+            this.props.history.push("/dashboard");
+          } else {
+            this.triggerAlert(
+              "error",
+              "'Account created, but failed to log in. Please try logging in with your credentials"
+            );
+          }
         } else {
           this.triggerAlert("error", response.message);
         }
@@ -337,7 +337,7 @@ class RegisterFormContainer extends Component {
     }
 
     this.setState({
-        isLoading: false,
+      isLoading: false,
     });
   };
 
@@ -424,13 +424,13 @@ RegisterFormContainer.propTypes = {
 };
 
 RegisterForm.propTypes = {
-    handleButtonClick: PropType.func.isRequired,
-    onChange: PropType.func.isRequired,
-    validInvalidByName: PropType.func.isRequired,
-    conditions: PropType.arrayOf(PropType.shape({})),
-    alertNotification: PropType.shape({}),
-    dismissAlert: PropType.func.isRequired,
-    setFormType: PropType.func.isRequired,
+  handleButtonClick: PropType.func.isRequired,
+  onChange: PropType.func.isRequired,
+  validInvalidByName: PropType.func.isRequired,
+  conditions: PropType.arrayOf(PropType.shape({})),
+  alertNotification: PropType.shape({}),
+  dismissAlert: PropType.func.isRequired,
+  setFormType: PropType.func.isRequired,
 };
 
 export default RegisterFormContainer;

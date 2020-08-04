@@ -1,14 +1,14 @@
 [
-    {
-        "placeholder": "Email",
-        "name": "email",
-        "type": "email",
-        "autoComplete": "username"
-    },
-    {
-        "placeholder": "Password",
-        "name": "password",
-        "type": "password",
-        "autoComplete": "new-password"
-    }
+  {
+    "placeholder": "Email",
+    "name": "email",
+    "type": "email",
+    "autoComplete": "username"
+  },
+  {
+    "placeholder": "Password",
+    "name": "password",
+    "type": "password",
+    "autoComplete": "new-password"
+  }
 ]

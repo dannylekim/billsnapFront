@@ -5,7 +5,7 @@ import users from "./userReducers";
 import application from "./applicationReducers";
 
 export default combineReducers({
-    application,
-    bills,
-    users,
+  application,
+  bills,
+  users,
 });
