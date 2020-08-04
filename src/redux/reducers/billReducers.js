@@ -1,4 +1,4 @@
-import { ACTIONS } from '../actions/billActions';
+import {ACTIONS} from '../actions/billActions';
 
 const INTIAL_STATE = {
     count: 0, // keep track of count of bills
@@ -6,7 +6,7 @@ const INTIAL_STATE = {
 };
 
 const billReducers = (state = INTIAL_STATE, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case ACTIONS.ADD_BILLS:
             return {
                 ...state,
@@ -14,10 +14,10 @@ const billReducers = (state = INTIAL_STATE, action) => {
                 bills: action.bills
             }
         case ACTIONS.UPDATE_BILLS:
-                return {
-                    ...state,
-                    bills: action.bills
-                }
+            return {
+                ...state,
+                bills: action.bills
+            }
         default:
             return state;
     }

@@ -1,10 +1,10 @@
 [
-        {
-            "name"  : "allBills",
-            "title" : "All bills"
-        },
-        {
-            "name"  : "owedToYou",
-            "title" : "Bills owed to you"
-        }
+  {
+    "name": "allBills",
+    "title": "All bills"
+  },
+  {
+    "name": "owedToYou",
+    "title": "Bills owed to you"
+  }
 ]

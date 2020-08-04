@@ -1,23 +1,23 @@
-import { login, register } from "./UserRequests";
+import {login, register} from "./UserRequests";
 import sinonStubPromise from "sinon-stub-promise";
 import sinon from "sinon"
 import assert from "assert";
 
 const loginInput = {
-    "email":"test@email.com",
-    "password":"password",
+    "email": "test@email.com",
+    "password": "password",
 };
 
 const blankLoginInput = {
-    "email":"",
-    "password":"",
+    "email": "",
+    "password": "",
 };
 
 const registerInput = {
-    "email":"test@email.com",
-    "password":"password",
-    "firstName":"test",
-    "lastName":"test",
+    "email": "test@email.com",
+    "password": "password",
+    "firstName": "test",
+    "lastName": "test",
 }
 
 const goodResponse = {
@@ -47,11 +47,11 @@ const badResponse = {
     "timestamp": "a date",
     "message": "error message from server",
     "errors": [
-      {
-        "field": "string",
-        "rejectedValue": {},
-        "message": "string",
-      }
+        {
+            "field": "string",
+            "rejectedValue": {},
+            "message": "string",
+        }
     ]
 }
 
@@ -73,7 +73,7 @@ describe("UserRequests", () => {
         it("Should login successfully", async () => {
             window.fetch.returns(mockApiResponse(goodResponse));
             const res = await login(loginInput);
-            
+
             assert.equal(res.status, goodResponse.status);
         });
 
@@ -86,7 +86,7 @@ describe("UserRequests", () => {
         it("Should throw error blank inputs, async", async () => {
             window.fetch.returns(mockApiResponse(blankResponse));
             const res = await login(blankLoginInput);
-            
+
             assert.equal(res.status, blankResponse.status);
             assert.equal(res.errors[0].message, "must not be blank");
             assert.equal(res.errors[1].message, "must not be blank");
@@ -108,7 +108,7 @@ describe("UserRequests", () => {
         it("Should register successfully", async () => {
             window.fetch.returns(mockApiResponse(goodResponse));
             const res = await register(registerInput);
-            
+
             assert.equal(res.status, goodResponse.status);
         });
 
@@ -123,8 +123,8 @@ describe("UserRequests", () => {
 
 function mockApiResponse(response) {
     return new window.Response(JSON.stringify(response), {
-       status: response.status,
-       headers: { "Content-type": "application/json" },
-       body: response.body,
+        status: response.status,
+        headers: {"Content-type": "application/json"},
+        body: response.body,
     });
 }

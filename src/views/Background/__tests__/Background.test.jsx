@@ -5,7 +5,7 @@ describe('Background', () => {
     describe("render", () => {
         describe("snapshots 📸", () => {
             it("Background should match snap shot if no prop provided", () => {
-                matches(<Background />);
+                matches(<Background/>);
             });
             it("Background should match snap shot if wave prop provided", () => {
                 matches(<Background showWave/>);

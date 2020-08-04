@@ -1,6 +1,6 @@
-import { combineReducers } from "redux";
+import {combineReducers} from "redux";
 
-import bills from "./billReducer";
+import bills from "./billReducers";
 import users from "./userReducers";
 import application from "./applicationReducers";
 

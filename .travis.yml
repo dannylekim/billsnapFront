@@ -8,15 +8,15 @@ install:
 cache:
   yarn: true
   directories:
-  - node_modules
+    - node_modules
 
 matrix:
   include:
-  - name: 'JavaScript Unit Tests'
-    script: 
-    - node -v
-    - yarn run test
-    - codecov
+    - name: 'JavaScript Unit Tests'
+      script:
+        - node -v
+        - yarn run test
+        - codecov
 
-  - name: 'JavaScript Build'
-    script: yarn run build
+    - name: 'JavaScript Build'
+      script: yarn run build

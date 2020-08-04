@@ -1,4 +1,4 @@
-import { ACTIONS } from '../actions/applicationActions';
+import {ACTIONS} from '../actions/applicationActions';
 
 const INTIAL_STATE = {
     showRegisterFirst: true,
@@ -6,7 +6,7 @@ const INTIAL_STATE = {
 };
 
 const applicationReducers = (state = INTIAL_STATE, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case ACTIONS.TOGGLE_LANDING_PAGE_FORM:
             return {
                 ...state,

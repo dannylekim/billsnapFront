@@ -3,13 +3,11 @@ import Sidebar, {DEFAULT_ACTIVE_STATE} from './Sidebar.jsx';
 import SidebarComponent from '../Sidebar';
 import {NavLink} from "shards-react";
 import configureStore from 'redux-mock-store';
-import { Provider } from "react-redux";
+import {Provider} from "react-redux";
 
 const mockStore = configureStore();
 
-const store = mockStore({
-  
-});
+const store = mockStore({});
 
 describe('Sidebar', () => {
     let wrapper;
@@ -46,7 +44,7 @@ describe('Sidebar', () => {
             it('Navlink should call all click handles on click', () => {
                 const mockHandleClick = jest.fn();
                 const mockHandleLogoutClick = jest.fn();
-               
+
                 wrapper.instance().handleClick = mockHandleClick;
                 wrapper.instance().handleLogoutClick = mockHandleLogoutClick;
                 wrapper.find(NavLink).filter('#billSnap-SideBar__bills').simulate('click');

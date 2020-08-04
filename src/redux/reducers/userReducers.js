@@ -1,15 +1,15 @@
-import { ACTIONS } from '../actions/userActions';
+import {ACTIONS} from '../actions/userActions';
 
 const INTIAL_STATE = {
     userInfo: {},
 };
 
 const userReducers = (state = INTIAL_STATE, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case ACTIONS.SET_USER:
             return {
                 ...state,
-                userInfo: { ...action.newUser }
+                userInfo: {...action.newUser}
             }
         default:
             return state;

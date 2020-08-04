@@ -1,11 +1,11 @@
 div.page__landing {
-  display: -webkit-box;  /* iOS 6-, Safari 3.1-6 */
-  display: -ms-flexbox;  /* IE 10 */
+  display: -webkit-box; /* iOS 6-, Safari 3.1-6 */
+  display: -ms-flexbox; /* IE 10 */
   display: -webkit-flex;
   display: flex;
   flex-wrap: wrap;
   width: 80%;
-  height:100%;
+  height: 100%;
 }
 
 div.page__content {
@@ -16,14 +16,14 @@ div.page__content {
   justify-content: space-evenly;
 }
 
-div.form__inputs{
-  width:70%;
+div.form__inputs {
+  width: 70%;
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
 }
 
-input.register__login__inputs{
+input.register__login__inputs {
   font-size: 15px;
   border: 3px solid #47E5B6;
   border-radius: 50px;
@@ -50,7 +50,7 @@ button.login_register__submit__button.btn.btn-primary {
 }
 
 button.login_register__submit__button.btn.btn-primary:hover, button.login_register__submit__button.btn.btn-primary:active,
-button.login_register__submit__button.btn.btn-primary:focus:hover,button.login_register__submit__button.btn.btn-primary:active:focus{
+button.login_register__submit__button.btn.btn-primary:focus:hover, button.login_register__submit__button.btn.btn-primary:active:focus {
   background: #30E3AE;
   border: 1px solid #47E5B6;
 }
@@ -63,33 +63,33 @@ button.form__toggle.btn.btn-primary, button.form__toggle.btn.btn-primary:hover, 
   border-radius: 50px;
 }
 
-div.tooltip__inner{
+div.tooltip__inner {
   text-shadow: 1px 1px black;
   border: 1px solid black;
   background-color: rgb(71, 70, 70);
 }
 
-div.hidden__div{
+div.hidden__div {
   padding: .75rem 1.25rem;
   margin-bottom: 1rem;
-  height:48px;
+  height: 48px;
 }
 
-h6 a.form__toggle{
-  color:rgba(165, 199, 245, 0.801);
+h6 a.form__toggle {
+  color: rgba(165, 199, 245, 0.801);
 }
 
-div.form__seperator{
+div.form__seperator {
   display: flex;
   font-size: 18px;
   text-align: center;
 }
 
-hr.form__horizontal__line{
+hr.form__horizontal__line {
   width: 25%;
   border: 0.1px solid rgba(0, 0, 0, 0.63);
 }
 
-img.character__icon__image{
-  height:50px;
+img.character__icon__image {
+  height: 50px;
 }

@@ -70,22 +70,22 @@ describe("BillRequests", () => {
             });
             try {
                 await getBill();
-            }catch (e) {
+            } catch (e) {
                 expect(() => expect(e.message).toBe("missing Authorization header"));
             }
         });
 
 
         it("Should throw an error if api throws an error", async () => {
-           
+
             fetch = jest.fn(() => {
                 throw new Error("error")
             });
-            
+
             try {
                 await getBill();
 
-            }catch (e) {
+            } catch (e) {
                 expect(() => expect(e.message).toBe("error"));
             }
         });

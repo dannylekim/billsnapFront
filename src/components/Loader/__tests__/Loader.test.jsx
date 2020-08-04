@@ -5,7 +5,7 @@ describe('Loader', () => {
     describe("render", () => {
         describe("snapshots 📸", () => {
             it("Loader should match snap shot", () => {
-                matches(<Background />);
+                matches(<Background/>);
             });
         });
     });

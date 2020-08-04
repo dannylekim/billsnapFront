@@ -4,7 +4,7 @@ export const createRegisterFormElements = () => {
     const emailToolTip = document.createElement('div');
     const passwordToolTip = document.createElement('div');
     const verifyPasswordToolTip = document.createElement('div');
-    
+
     firstNameToolTip.setAttribute("id", "firstName");
     document.body.appendChild(firstNameToolTip);
 

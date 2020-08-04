@@ -1,27 +1,29 @@
 @import '../../variables';
 
-div.bill__filter__container{
+div.bill__filter__container {
     position: absolute;
-    top:75px;
+    top: 75px;
     height: 220px;
-    width:  500px;
+    width: 500px;
     border-radius: 6px;
     background-color: $light-gray-background;
-    div.filter__header{
+
+    div.filter__header {
         text-align: left;
         margin-left: 10px;
-        
+
         font-family: $primary-font;
         font-size: 25px;
 
-        span.filter__header__title{
+        span.filter__header__title {
             margin-left: 10px;
-            position: relative;  
-            top:2px;
-            font-weight: bold;       
+            position: relative;
+            top: 2px;
+            font-weight: bold;
         }
     }
-    div.filter__selections__container{
+
+    div.filter__selections__container {
         margin-top: 10px;
         display: flex;
         flex-wrap: wrap;
@@ -31,7 +33,7 @@ div.bill__filter__container{
         margin-left: auto;
         margin-right: auto;
 
-        span.badge.badge-outline-primary.badge-pill{
+        span.badge.badge-outline-primary.badge-pill {
             border: 1px solid $secondary-text-color;
             box-sizing: border-box;
             border-radius: 50px;
@@ -44,24 +46,26 @@ div.bill__filter__container{
             width: 120px;
             margin-bottom: 10px;
         }
-        span.badge.badge-outline-primary.badge-pill:hover{
+
+        span.badge.badge-outline-primary.badge-pill:hover {
             background-color: #bebebe;
         }
     }
 
-    div.advanced__filter__selection{
+    div.advanced__filter__selection {
         position: relative;
-        bottom:80px;
-        left:380px;
-        width:180px;
-        height:110px;
+        bottom: 80px;
+        left: 380px;
+        width: 180px;
+        height: 110px;
         font-family: $primary-font;
-        label.custom-control.custom-checkbox{
-            padding:0;
+
+        label.custom-control.custom-checkbox {
+            padding: 0;
             font-style: normal;
             font-weight: normal;
             font-size: 15px;
-            color:$secondary-text-color;
+            color: $secondary-text-color;
         }
 
         input.form-control {
@@ -70,8 +74,9 @@ div.bill__filter__container{
             font-size: 15px;
             background: $card-color;
         }
-        div.date__filter{
-            span.custom-control-description{
+
+        div.date__filter {
+            span.custom-control-description {
                 margin-left: 25px;
             }
 
@@ -82,7 +87,7 @@ div.bill__filter__container{
             }
         }
 
-        div.category__filter{
+        div.category__filter {
             input.form-control {
                 margin-top: 10px;
                 width: 150px;

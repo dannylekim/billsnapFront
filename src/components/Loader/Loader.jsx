@@ -6,8 +6,8 @@ import "./styles.scss";
  */
 
 export default () => {
-  return (
-    <div className="billsnap-loader loader">Loading...
-    </div>
-  );
+    return (
+        <div className="billsnap-loader loader">Loading...
+        </div>
+    );
 };
