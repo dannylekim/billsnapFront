@@ -175,7 +175,8 @@ exports[`BillDisplay render snapshots 📸 BillDisplay should match snap shot wh
                 >
                    
                   12.00
-                   $  
+                   $
+                   
                 </span>
               </div>
             </div>
@@ -255,7 +256,8 @@ exports[`BillDisplay render snapshots 📸 BillDisplay should match snap shot wh
                 >
                    
                   15.00
-                   $  
+                   $
+                   
                 </span>
               </div>
             </div>

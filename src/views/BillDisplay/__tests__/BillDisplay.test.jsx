@@ -136,24 +136,25 @@ describe("BillDisplay", () => {
         wrapper.update();
       });
 
+      const sortingTitles = "li.sorting__titles";
       it("should trigger a Mock function when A to Z is clicked.", () => {
-        wrapper.find("li.sorting__titles").at(0).simulate("click");
+        wrapper.find(sortingTitles).at(0).simulate("click");
         expect(mockSortAlphabetical).toHaveBeenCalled();
         expect(wrapper.state().sorting.type).toBe("A to Z");
       });
 
       it("should trigger a Mock function when Z to A is clicked.", () => {
-        wrapper.find("li.sorting__titles").at(1).simulate("click");
+        wrapper.find(sortingTitles).at(1).simulate("click");
         expect(mockSortAlphabetical).toHaveBeenCalled();
         expect(wrapper.state().sorting.type).toBe("Z to A");
       });
 
       it("should trigger a Mock function when Newest is selected after oldest is selected.", () => {
-        wrapper.find("li.sorting__titles").at(2).simulate("click");
+        wrapper.find(sortingTitles).at(2).simulate("click");
         expect(mockFetch).toHaveBeenCalled();
         wrapper.find("span.simple__sort").simulate("click");
         wrapper.update();
-        wrapper.find("li.sorting__titles").at(0).simulate("click");
+        wrapper.find(sortingTitles).at(0).simulate("click");
         expect(mockFetch).toHaveBeenCalled();
       });
     });

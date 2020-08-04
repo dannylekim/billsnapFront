@@ -316,7 +316,7 @@ class RegisterFormContainer extends Component {
           } else {
             this.triggerAlert(
               "error",
-              "'Account created, but failed to log in. Please try logging in with your credentials"
+              "Account created, but failed to log in. Please try logging in with your credentials"
             );
           }
         } else {
@@ -353,13 +353,14 @@ class RegisterFormContainer extends Component {
     } = validFields;
 
     //list of error messages / information for the Tool Tip component.
+    const CANNOT_BE_BLANK = "Cannot be blank!";
     const conditions = [
       {
         name: "confirmPassword",
         toolTipInfo: {
           open: !password,
           errorMessage: !userCredentials.confirmPassword
-            ? "Cannot be blank!"
+            ? CANNOT_BE_BLANK
             : "Password does not match",
         },
       },
@@ -368,7 +369,7 @@ class RegisterFormContainer extends Component {
         toolTipInfo: {
           open: !passwordFormat,
           errorMessage: !userCredentials.password
-            ? "Cannot be blank!"
+            ? CANNOT_BE_BLANK
             : "Must contain at least 1 upper case, lower case, number and symbol, and be between 8-20 characters.",
         },
       },
@@ -377,7 +378,7 @@ class RegisterFormContainer extends Component {
         toolTipInfo: {
           open: !firstName,
           errorMessage: !userCredentials.firstName
-            ? "Cannot be blank!"
+            ? CANNOT_BE_BLANK
             : "No numbers or special characters.",
         },
       },
@@ -386,7 +387,7 @@ class RegisterFormContainer extends Component {
         toolTipInfo: {
           open: !lastName,
           errorMessage: !userCredentials.lastName
-            ? "Cannot be blank!"
+            ? CANNOT_BE_BLANK
             : "No numbers or special characters.",
         },
       },
@@ -395,7 +396,7 @@ class RegisterFormContainer extends Component {
         toolTipInfo: {
           open: !email,
           errorMessage: !userCredentials.email
-            ? "Cannot be blank!"
+            ? CANNOT_BE_BLANK
             : "Invalid Email Format.",
         },
       },

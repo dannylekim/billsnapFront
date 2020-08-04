@@ -131,7 +131,6 @@ describe("RegisterForm", () => {
       });
     });
 
-    describe("components", () => {});
   });
 
   describe("functions", () => {
@@ -439,7 +438,7 @@ describe("RegisterForm", () => {
         expect(login).toHaveBeenCalledWith(LOGIN_TEMP_DATA);
         expect(mockTriggerAlert).toHaveBeenCalledWith(
           "error",
-          "Account created, but failed to log in. Please try logging in with you credentials"
+          "Account created, but failed to log in. Please try logging in with your credentials"
         );
       });
 

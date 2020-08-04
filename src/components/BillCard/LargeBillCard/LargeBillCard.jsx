@@ -8,7 +8,7 @@ const LargeBillCard = ({ selectedBill }) => (
         ? selectedBill.id + " " + selectedBill.bill.name
         : ""
     }`}
-    <div className="inner__bill_container"></div>
+    <div className="inner__bill_container"/>
   </div>
 );
 export default LargeBillCard;

@@ -1,7 +1,6 @@
 import BillDisplay from "./BillDisplay.jsx";
 
 import {connect} from "react-redux";
-// import { setBillLoading } from '../../redux/actions/applicationActions';
 import {fetchMyBills, orderAlphabetical,} from "../../redux/actions/billActions";
 
 const mapStateToProps = (state) => ({
@@ -11,9 +10,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // beginBillLoading: () => dispatch(setBillLoading(true)),
-  // finishBillLoading: () => dispatch(setBillLoading(false)),
-  fetchBills: (query_param = "") => dispatch(fetchMyBills(query_param)),
+  fetchBills: (queryParam = "") => dispatch(fetchMyBills(queryParam)),
   orderAlphabetical: (alphabeticalType, bills) =>
     dispatch(orderAlphabetical(alphabeticalType, bills)),
 });

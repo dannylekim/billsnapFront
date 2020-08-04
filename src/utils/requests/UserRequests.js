@@ -39,15 +39,10 @@ export const register = async (entries) => {
     body: JSON.stringify(entries),
   });
 
-  return await checkStatus(response);
+  return checkStatus(response);
 };
 
 async function checkStatus(response) {
   const parsedResponse = await response.json();
-
-  if (response.status < 200 || response.status >= 300) {
-    // throw new Error(parsedResponse.errors);
-  }
-
   return { ...parsedResponse, statusCode: response.status };
 }
