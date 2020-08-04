@@ -1,13 +1,36 @@
-import {getBill} from "../BillRequests";
+import {createBill, getBill} from "../BillRequests";
 
 const { URL } = require("../../../config");
+const { BILLS, BILLSNAP_TOKEN } = require("../../../constants/constants");
+
+const createBillsParam = {
+  name: "Bill Test #1",
+  category: "category",
+  company: "company",
+  items: [
+    {
+      name: "test item",
+      cost: 10,
+    },
+  ],
+  accountsList: ["testAccount@email.com"],
+  tipAmount: 10,
+  taxes: [
+    {
+      name: "tax1",
+      percentage: 10,
+    },
+  ],
+};
+
+const token = "token";
 
 describe("BillRequests", () => {
-  describe("getBill", () => {
-    afterEach(() => {
-      localStorage.clear();
-    });
+  afterEach(() => {
+    localStorage.clear();
+  });
 
+  describe("getBill", () => {
     it("Should return an json object with the right method", async () => {
       fetch = jest.fn((url, options) => {
         if (options.method !== "GET") {
@@ -45,9 +68,7 @@ describe("BillRequests", () => {
     });
 
     it("Should return a json object if called with Authorization header with bearer token", async () => {
-      const token = "token";
-
-      localStorage.setItem("billSnap_token", token);
+      localStorage.setItem(BILLSNAP_TOKEN, token);
 
       fetch = jest.fn((url, options) => {
         if (options.headers.Authorization !== `Bearer ${token}`) {
@@ -74,6 +95,52 @@ describe("BillRequests", () => {
 
       try {
         await getBill();
+      } catch (e) {
+        expect(() => expect(e.message).toBe("error"));
+      }
+    });
+  });
+
+  describe("createBill", () => {
+    it("Should return an json object with the right method, body, url and header", async () => {
+      localStorage.setItem(BILLSNAP_TOKEN, token);
+
+      fetch = jest.fn((url, options) => {
+        if (options.method !== "POST") {
+          throw new Error("wrong method");
+        }
+
+        if (options.body !== JSON.stringify(createBillsParam)) {
+          throw new Error("Wrong body");
+        }
+
+        if (url !== `${URL}/${BILLS}`) {
+          throw new Error("wrong url");
+        }
+
+        if (options.headers.Authorization !== `Bearer ${token}`) {
+          throw new Error("missing Authorization header");
+        }
+
+        return new Promise((resolve) => {
+          resolve({
+            json: jest.fn().mockResolvedValue({ data: {} }),
+          });
+        });
+      });
+
+      const res = await createBill(createBillsParam);
+
+      expect(res.data).toEqual({});
+    });
+
+    it("Should throw an error if api throws an error", async () => {
+      fetch = jest.fn(() => {
+        throw new Error("error");
+      });
+
+      try {
+        await createBill(createBillsParam);
       } catch (e) {
         expect(() => expect(e.message).toBe("error"));
       }

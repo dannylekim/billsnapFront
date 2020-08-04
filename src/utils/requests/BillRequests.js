@@ -1,19 +1,34 @@
 const { URL } = require("../../config");
+const { BILLSNAP_TOKEN, BILLS } = require("../../constants/constants");
 /**
  * @function getBill
  * @description Function that calls the /bills route to return the bills associated to the user. With bearer token.
  */
-export const getBill = async (query_params = "") => {
-  try {
-    const token = localStorage.getItem("billSnap_token");
-    const response = await fetch(`${URL}/bills${query_params}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    return response.json();
-  } catch (error) {
-    throw error;
-  }
+export const getBill = async () => {
+  const token = localStorage.getItem(BILLSNAP_TOKEN);
+  const response = await fetch(`${URL}/${BILLS}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
+};
+
+/**
+ * @function createBill
+ * @description function that creates a bill by calling the secured POST /bills endpoint.
+ * @param createBillParams (which has name, category, company, items, accountsList, tipAmount, tipPercent, taxes)
+ * @returns a Promise<Bill> on code 201
+ */
+export const createBill = async (createBillParams) => {
+  const token = localStorage.getItem(BILLSNAP_TOKEN);
+  const response = await fetch(`${URL}/${BILLS}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(createBillParams),
+  });
+  return response.json();
 };
