@@ -1,22 +1,22 @@
 export const createRegisterFormElements = () => {
-    const firstNameToolTip = document.createElement('div');
-    const lastNameToolTip = document.createElement('div');
-    const emailToolTip = document.createElement('div');
-    const passwordToolTip = document.createElement('div');
-    const verifyPasswordToolTip = document.createElement('div');
-    
-    firstNameToolTip.setAttribute("id", "firstName");
-    document.body.appendChild(firstNameToolTip);
+  const firstNameToolTip = document.createElement("div");
+  const lastNameToolTip = document.createElement("div");
+  const emailToolTip = document.createElement("div");
+  const passwordToolTip = document.createElement("div");
+  const verifyPasswordToolTip = document.createElement("div");
 
-    lastNameToolTip.setAttribute("id", "lastName");
-    document.body.appendChild(lastNameToolTip);
+  firstNameToolTip.setAttribute("id", "firstName");
+  document.body.appendChild(firstNameToolTip);
 
-    emailToolTip.setAttribute("id", "email");
-    document.body.appendChild(emailToolTip);
+  lastNameToolTip.setAttribute("id", "lastName");
+  document.body.appendChild(lastNameToolTip);
 
-    passwordToolTip.setAttribute("id", "password");
-    document.body.appendChild(passwordToolTip);
+  emailToolTip.setAttribute("id", "email");
+  document.body.appendChild(emailToolTip);
 
-    verifyPasswordToolTip.setAttribute("id", "confirmPassword");
-    document.body.appendChild(verifyPasswordToolTip);
+  passwordToolTip.setAttribute("id", "password");
+  document.body.appendChild(passwordToolTip);
+
+  verifyPasswordToolTip.setAttribute("id", "confirmPassword");
+  document.body.appendChild(verifyPasswordToolTip);
 };

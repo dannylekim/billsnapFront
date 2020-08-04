@@ -1,28 +1,55 @@
+@import "../../variables";
+
 .billSnap-SideBar {
   transition: 0.3s;
   position: fixed;
-  height: 100vh;
-  background-color: white;
-  width: 200px;
-
-  &-open {
-    margin-left: 0;
-    box-shadow: 2px 5px 3px 0 #ccc;
-  }
-
-  &-close {
-    margin-left: -200px;
-  }
+  height: 100%;
+  background-color: $secondary-color;
+  width: 302px;
+  margin-left: 0;
+  left: 0;
+  top: 0;
+  border-radius: 0 15px 15px 0;
+  text-align: justify;
 }
 
-.billSnap-SideBar a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
+.sideLogo.navbar-brand {
+  margin-top: 35px;
+  margin-left: 45px;
   display: block;
+  margin-bottom: 50px;
 }
 
-.billSnap-SideBar a:hover {
-  color: #127D69;
+.billSnap-SideBar.sideLogo {
+  color: $primary-text-color;
+}
 
+div.sidebar__navitems {
+  margin-top: 55px;
+
+  .nav-item {
+    margin-left: 30px;
+  }
+
+  .nav-link {
+    padding: 15px 8px 15px 16px;
+    text-decoration: none;
+    font-size: 30px;
+    border-color: transparent !important;
+    color: $primary-text-color !important;
+
+    &:hover {
+      background-color: rgb(106, 252, 192);
+      border-top-right-radius: 0 !important;
+      border-top-left-radius: 50px !important;
+      border-bottom-left-radius: 50px !important;
+    }
+
+    &.active {
+      color: $secondary-color !important;
+      border-top-right-radius: 0 !important;
+      border-top-left-radius: 50px !important;
+      border-bottom-left-radius: 50px !important;
+    }
+  }
 }

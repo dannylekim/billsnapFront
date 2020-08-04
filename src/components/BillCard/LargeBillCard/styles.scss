@@ -1,0 +1,30 @@
+@import "../../../variables";
+
+div.large__bill {
+  height: 600px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: 32px;
+  margin-top: 50px;
+  background: $card-color;
+  box-shadow: 0 7.5px 60px rgba(90, 97, 105, 0.25);
+  border-radius: 10px;
+
+  font-family: $primary-font;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 45px;
+  color: $primary-text-color;
+}
+
+div.inner__bill_container {
+  height: 81.09%;
+  width: 87.1%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.59);
+  box-sizing: border-box;
+  border-radius: 26px;
+}

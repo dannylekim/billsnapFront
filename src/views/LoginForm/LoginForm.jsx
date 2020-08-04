@@ -1,16 +1,9 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropType from "prop-types";
 import loginFormInputs from "./loginFormConstants.json";
-import { login } from "../../utils/requests/UserRequests";
-import {
-  Alert,
-  Button,
-  Form,
-  FormGroup,
-  FormInput,
-  Tooltip,
-} from "shards-react";
-import Loader from '../../components/Loader';
+import {login} from "../../utils/requests/UserRequests";
+import {Alert, Button, Form, FormGroup, FormInput, Tooltip,} from "shards-react";
+import Loader from "../../components/Loader";
 
 import "./styles.scss";
 
@@ -36,7 +29,7 @@ export const LoginForm = ({
             {error_message}
           </Alert>
         ) : (
-          <div className="hidden__div"></div>
+          <div className="hidden__div" />
         )}
 
         <img
@@ -70,7 +63,7 @@ export const LoginForm = ({
               size="md"
               pill
               className="login_register__submit__button"
-              onClick={(event) => handleButtonClick(event)}
+              onClick={handleButtonClick}
               name="submit"
             >
               Log in
@@ -92,9 +85,9 @@ export const LoginForm = ({
 
       <div>
         <div className="form__seperator">
-          <hr className="form__horizontal__line"></hr>
+          <hr className="form__horizontal__line" />
           Or
-          <hr className="form__horizontal__line"></hr>
+          <hr className="form__horizontal__line" />
         </div>
         <div>
           <h6>New to Billsnap?</h6>
@@ -128,7 +121,7 @@ class LoginFormContainer extends Component {
       error_message: "",
       hasErrors: DEFAULT_ERRORS,
       alertMessage: DEFAULT_ALERT_MESSAGE,
-      isLoading: false
+      isLoading: false,
     };
 
     this.dismissAlert = this.dismissAlert.bind(this);
@@ -158,17 +151,16 @@ class LoginFormContainer extends Component {
    */
   handleErrorResponse = (response) => {
     if (response.status === "BAD_REQUEST") {
-      response.errors.forEach(
-        (error) =>
-          this.setState((prev) => ({
-            hasErrors: {
-              ...prev.hasErrors,
-              [error.field]: {
-                hasError: true,
-                message: error.message,
-              },
+      response.errors.forEach((error) =>
+        this.setState((prev) => ({
+          hasErrors: {
+            ...prev.hasErrors,
+            [error.field]: {
+              hasError: true,
+              message: error.message,
             },
-          }))
+          },
+        }))
       );
     }
 
@@ -194,7 +186,7 @@ class LoginFormContainer extends Component {
     }
 
     return this.setState({
-      error_message: response.message
+      error_message: response.message,
     });
   };
 
@@ -209,20 +201,22 @@ class LoginFormContainer extends Component {
     this.dismissAlert();
     try {
       this.setState({
-        isLoading: true
+        isLoading: true,
       });
       const response = await login(this.state.user_credentials);
       if (!response.token) {
         this.handleErrorResponse(response);
       } else {
         localStorage.setItem("billSnap_token", response.token);
+        const { id, ...userProfile } = response.profile;
+        this.props.setUser(userProfile);
         this.props.history.push("/dashboard");
       }
     } catch (error) {
       this.handleErrorResponse(error);
     } finally {
       this.setState({
-        isLoading: false
+        isLoading: false,
       });
     }
   };
@@ -239,7 +233,7 @@ class LoginFormContainer extends Component {
         ...prev.user_credentials,
         [name]: value,
       },
-      hasError: DEFAULT_ERRORS
+      hasError: DEFAULT_ERRORS,
     }));
   };
 
@@ -248,7 +242,7 @@ class LoginFormContainer extends Component {
       hasErrors,
       user_credentials,
       alertMessage,
-      error_message
+      error_message,
     } = this.state;
 
     return (
@@ -262,7 +256,7 @@ class LoginFormContainer extends Component {
           alertMessage={alertMessage}
           dismissAlert={this.dismissAlert}
           error_message={error_message}
-          setFormType={() => this.props.setFormType("register")}
+          setFormType={this.props.setFormType("register")}
         />
       </div>
     );

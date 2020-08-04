@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap shot 1`] = `
+<div
+  className="bill__items card-body"
+  id="active__bill"
+>
+  <div
+    className="bill__items card-title text-muted"
+  >
+    <span
+      className="float-right"
+      id="bill__created"
+    >
+       
+    </span>
+  </div>
+  <div
+    className="bill__items card-text"
+  >
+    <div
+      id="bill__icon"
+    />
+    <div
+      className="bill__name__price"
+    >
+      <span
+        id="bill__name"
+      >
+        Mcdonald
+         
+      </span>
+      <span
+        id="bill__balance"
+      >
+         
+        253.89
+         $
+         
+      </span>
+    </div>
+  </div>
+</div>
+`;

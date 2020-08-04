@@ -1,11 +1,7 @@
 import React from "react";
-import LoginFormContainer, {
-  LoginForm,
-  DEFAULT_ERRORS,
-  DEFAULT_ALERT_MESSAGE,
-} from "../LoginForm.jsx";
-import { shallow, mount } from "enzyme";
-import { login } from "../../../utils/requests/UserRequests";
+import LoginFormContainer, {DEFAULT_ALERT_MESSAGE, DEFAULT_ERRORS, LoginForm,} from "../LoginForm.jsx";
+import {shallow} from "enzyme";
+import {login} from "../../../utils/requests/UserRequests";
 
 jest.mock("../../../utils/requests/UserRequests");
 
@@ -34,7 +30,6 @@ describe("LoginForm", () => {
     mockHandleSubmitClick = jest
       .fn()
       .mockImplementation(() => mockHandleResponse);
-
 
     wrapper = shallow(<LoginFormContainer setFormType={mockToggleFormType} />);
   });
@@ -236,23 +231,24 @@ describe("LoginForm", () => {
           preventDefault: jest.fn(),
         };
         const mockPushFunction = jest.fn();
-        login.mockResolvedValue({ token: "billsnaptest " });
+        login.mockResolvedValue({
+          token: "billsnaptest ",
+          profile: { id: 1, firtName: "Bob" },
+        });
 
         wrapper.instance().dismissAlert = mockDismissAlert;
         wrapper.instance().setState = setState;
-        // wrapper.instance().handleErrorResponse = mockHandleResponse;
         wrapper.setProps({
           history: {
             push: mockPushFunction,
           },
         });
-
         await wrapper.instance().handleSubmitClick(mockDOMevent);
 
         expect(mockDismissAlert).toBeCalledTimes(1);
         expect(login).toBeCalledTimes(1);
-        expect(mockPushFunction).toBeCalledTimes(1);
-        expect(setState).toBeCalledTimes(2);
+        expect(mockPushFunction).toBeCalledTimes(0);
+        expect(setState).toBeCalledTimes(3);
       });
 
       it("should follow steps on passing request with no token", async () => {
@@ -274,13 +270,12 @@ describe("LoginForm", () => {
         expect(login).toBeCalledTimes(1);
         expect(mockPushFunction).toBeCalledTimes(0);
         expect(mockHandleResponse).toBeCalledTimes(1);
-        
       });
       it("should follow steps on failing request", async () => {
         const mockDOMevent = {
           preventDefault: jest.fn(),
         };
-        const ERROR_MESSAGE = 'haha it failed 💩';
+        const ERROR_MESSAGE = "haha it failed 💩";
         login.mockRejectedValue(ERROR_MESSAGE);
 
         wrapper.instance().handleErrorResponse = mockHandleResponse;
@@ -289,7 +284,6 @@ describe("LoginForm", () => {
 
         expect(login).toBeCalledTimes(1);
         expect(mockHandleResponse).toHaveBeenCalledWith(ERROR_MESSAGE);
-        
       });
     });
 

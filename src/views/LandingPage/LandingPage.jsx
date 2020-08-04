@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import TitleContent from "../../components/TitleContent";
 import RegisterForm from "../RegisterForm";
 import LoginForm from "../LoginForm";
@@ -10,21 +10,28 @@ import "./styles.scss";
  */
 
 export default (props) => {
-    const [formType, setFormType] = useState("login");
-    const {history} = props;
-    return (
-        <div className="page__landing">
-            <Navbar/>
-            <div className="page__content">
-                <TitleContent/>
-                <div>
-                    {formType === "register" ? (
-                        <RegisterForm setFormType={setFormType} history={history}/>
-                    ) : (
-                        <LoginForm setFormType={setFormType} history={history}/>
-                    )}
-                </div>
-            </div>
+  const { history, toggleFormType, formType } = props;
+
+  return (
+    <div className="page__landing">
+      <Navbar />
+      {!localStorage.getItem("billSnap_token") ? (
+        <div className="page__content">
+          <TitleContent />
+          <div>
+            {formType === "register" ? (
+              <RegisterForm
+                setFormType={() => toggleFormType}
+                history={history}
+              />
+            ) : (
+              <LoginForm setFormType={() => toggleFormType} history={history} />
+            )}
+          </div>
         </div>
-    );
+      ) : (
+        props.history.push("/dashboard")
+      )}
+    </div>
+  );
 };

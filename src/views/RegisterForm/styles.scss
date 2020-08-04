@@ -1,19 +1,19 @@
-div.register__container{
-    height: 650px;
-    min-width: 500px;
-    background-color: #FFFFFF;
-    box-shadow: 0 0 80px 10px rgba(90, 97, 105, 0.17);
+div.register__container {
+  height: 650px;
+  min-width: 500px;
+  background-color: #ffffff;
+  box-shadow: 0 0 80px 10px rgba(90, 97, 105, 0.17);
 }
 
-div.register__container form{
-    margin-top: 25px;
+div.register__container form {
+  margin-top: 25px;
 }
 
-div.register__form .form-control{
-    color: black;
-    background-color: white; 
+div.register__form .form-control {
+  color: black;
+  background-color: white;
 }
 
-span#input__error{
-    color: red;
+span#input__error {
+  color: red;
 }

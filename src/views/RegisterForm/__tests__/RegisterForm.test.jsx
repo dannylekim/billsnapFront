@@ -1,14 +1,10 @@
 import React from "react";
-import RegisterFormContainer, {
-  RegisterForm,
-  DEFAULT_ERRORS,
-} from "../RegisterForm.jsx";
-import { createRegisterFormElements } from "../../../constants/FormElements";
-import { shallow } from "enzyme";
-import { register, login } from "../../../utils/requests/UserRequests";
+import RegisterFormContainer, {DEFAULT_ERRORS, RegisterForm,} from "../RegisterForm.jsx";
+import {createRegisterFormElements} from "../../../constants/FormElements";
+import {shallow} from "enzyme";
+import {login, register} from "../../../utils/requests/UserRequests";
 
 jest.mock("../../../utils/requests/UserRequests");
-
 
 describe("RegisterForm", () => {
   let wrapper;
@@ -19,6 +15,7 @@ describe("RegisterForm", () => {
   let mockOnChange;
   let mockCheckValidity;
   let mockTriggerAlert;
+  let mockSetUser;
 
   const conditions = [
     {
@@ -71,10 +68,12 @@ describe("RegisterForm", () => {
     mockOnChange = jest.fn();
     mockCheckValidity = jest.fn();
     mockTriggerAlert = jest.fn();
+    mockSetUser = jest.fn();
 
     wrapper = shallow(
       <RegisterFormContainer
         setFormType={mockToggleFormType}
+        setUser={mockSetUser}
       />
     );
   });
@@ -110,21 +109,38 @@ describe("RegisterForm", () => {
         matches(
           <RegisterFormContainer
             setFormType={mockToggleFormType}
+            setUser={mockSetUser}
+          />
+        );
+      });
+
+      it("RegisterForm should match snap shot when loading", () => {
+        wrapper.setState({ isLoading: true });
+
+        matches(
+          <RegisterForm
+            dismissAlert={mockDismissAlert}
+            onChange={mockOnChange}
+            setFormType={mockToggleFormType}
+            handleButtonClick={handleMockFunction}
+            validInvalidByName={handleMockFunction}
+            conditions={conditions}
+            alertNotification={DEFAULT_ERRORS}
           />
         );
       });
     });
 
-    describe("components", () => {});
   });
 
   describe("functions", () => {
     describe("validInvalidByName", () => {
       describe("invalid state", () => {
-        const type = 'invalid';
+        const type = "invalid";
         it("should return appropriate boolean value", () => {
-
-          const result = wrapper.instance().validInvalidByName('firstName', type);
+          const result = wrapper
+            .instance()
+            .validInvalidByName("firstName", type);
           expect(result).toBe(false);
 
           wrapper.setState({
@@ -133,20 +149,22 @@ describe("RegisterForm", () => {
             },
             userCredentials: {
               firstName: "nice",
-            }
+            },
           });
 
-          const result1 = wrapper.instance().validInvalidByName('firstName', type);
+          const result1 = wrapper
+            .instance()
+            .validInvalidByName("firstName", type);
           expect(result1).toBe(false);
-
         });
       });
 
       describe("valid state", () => {
-        const type = 'valid';
+        const type = "valid";
         it("should return appropriate boolean value", () => {
-
-          const result = wrapper.instance().validInvalidByName('firstName', type);
+          const result = wrapper
+            .instance()
+            .validInvalidByName("firstName", type);
           expect(result).toBe(false);
 
           wrapper.setState({
@@ -155,39 +173,44 @@ describe("RegisterForm", () => {
             },
             userCredentials: {
               firstName: "nice",
-            }
+            },
           });
 
-          const result1 = wrapper.instance().validInvalidByName('firstName', type);
+          const result1 = wrapper
+            .instance()
+            .validInvalidByName("firstName", type);
           expect(result1).toBe(true);
-
         });
       });
     });
 
     describe("triggerAlert", () => {
       it("return danger object on error", () => {
-        const testMessage =  'nice 💩';
+        const testMessage = "nice 💩";
         const EXPECTED_RESULT = {
           isOpen: true,
           alertType: "danger",
           alertMessage: testMessage,
         };
 
-        wrapper.instance().triggerAlert('error', testMessage);
+        wrapper.instance().triggerAlert("error", testMessage);
 
-        expect(wrapper.state().alertNotification).toMatchObject(EXPECTED_RESULT);
+        expect(wrapper.state().alertNotification).toMatchObject(
+          EXPECTED_RESULT
+        );
       });
       it("return danger object on anything else", () => {
-        const testMessage =  'nice 💩';
+        const testMessage = "nice 💩";
         const EXPECTED_RESULT = {
           isOpen: true,
           alertType: "success",
           alertMessage: testMessage,
         };
-        wrapper.instance().triggerAlert('nice', testMessage);
+        wrapper.instance().triggerAlert("nice", testMessage);
 
-        expect(wrapper.state().alertNotification).toMatchObject(EXPECTED_RESULT);
+        expect(wrapper.state().alertNotification).toMatchObject(
+          EXPECTED_RESULT
+        );
       });
     });
 
@@ -208,48 +231,55 @@ describe("RegisterForm", () => {
     describe("validateField", () => {
       describe("names", () => {
         it("should pass regex", () => {
-          wrapper.instance().validateField('firstName', 1231321);
+          wrapper.instance().validateField("firstName", 1231321);
           expect(wrapper.state().validFields.firstName).toBe(false);
 
-          wrapper.instance().validateField('lastName', 'jimbo');
+          wrapper.instance().validateField("lastName", "jimbo");
           expect(wrapper.state().validFields.lastName).toBe(true);
         });
       });
 
       describe("email", () => {
         it("should pass regex", () => {
-          wrapper.instance().validateField('email', 'asdasa1231321');
+          wrapper.instance().validateField("email", "asdasa1231321");
           expect(wrapper.state().validFields.email).toBe(false);
 
-          wrapper.instance().validateField('email', '123@123.com');
+          wrapper.instance().validateField("email", "123@123.com");
           expect(wrapper.state().validFields.email).toBe(true);
         });
       });
 
       describe("password", () => {
         it("should pass password regex", () => {
-          wrapper.instance().validateField('password', 'as21');
+          wrapper.instance().validateField("password", "as21");
           expect(wrapper.state().validFields.passwordFormat).toBe(false);
 
-          wrapper.instance().validateField('password', '123@123.com');
+          wrapper.instance().validateField("password", "123@123.com");
           expect(wrapper.state().validFields.passwordFormat).toBe(false);
 
-          wrapper.instance().validateField('password', '123@123.Com');
+          wrapper.instance().validateField("password", "123@123.Com");
+          wrapper.instance().validateField("blahblah", "");
           expect(wrapper.state().validFields.passwordFormat).toBe(true);
         });
 
         it("should password matching", () => {
           const mockFn = jest.fn();
+          expect(
+            RegisterFormContainer.validatePassword("hi", "hi")
+          ).toBeTruthy();
+          expect(
+            RegisterFormContainer.validatePassword("hi", "bye")
+          ).toBeFalsy();
           RegisterFormContainer.validatePassword = mockFn;
 
           mockFn.mockImplementation(() => true);
-          const TEMP_PW = '123@123.Com';
+          const TEMP_PW = "123@123.Com";
           wrapper.setState({
             userCredentials: {
-              password: TEMP_PW
-            }
-          })
-          wrapper.instance().validateField('confirmPassword', TEMP_PW);
+              password: TEMP_PW,
+            },
+          });
+          wrapper.instance().validateField("confirmPassword", TEMP_PW);
           expect(wrapper.state().validFields.password).toBe(true);
           expect(mockFn).toBeCalledTimes(1);
           expect(wrapper.state().userCredentials.confirmPassword).toBe(true);
@@ -260,92 +290,95 @@ describe("RegisterForm", () => {
     it("onFormChange should modify user state", () => {
       const mockEvent = {
         target: {
-          name: 'firstName',
-          value: 'Jon'
-        }
-      }
-      wrapper.instance().validateField = mockValidateField
-      wrapper.instance().dismissAlert = mockDismissAlert
-      
+          name: "firstName",
+          value: "Jon",
+        },
+      };
+      wrapper.instance().validateField = mockValidateField;
+      wrapper.instance().dismissAlert = mockDismissAlert;
+
       wrapper.instance().onFormChange(mockEvent);
 
-      expect(mockValidateField).toHaveBeenCalledWith('firstName', 'Jon');
+      expect(mockValidateField).toHaveBeenCalledWith("firstName", "Jon");
       expect(mockDismissAlert).toBeCalledTimes(1);
       expect(wrapper.state().userCredentials).toMatchObject({
-        firstName: 'Jon',
-        lastName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
+        firstName: "Jon",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
       });
     });
 
     it("checkValidity should return correct boolean values based on params", () => {
-      const FAKE_NAME = 'JON PEW PEW';
-      const PASSWORD = 'J@NP3Wp3W';
-      
+      const FAKE_NAME = "JON PEW PEW";
+      const PASSWORD = "J@NP3Wp3W";
+
       wrapper.setState({
         validFields: {
           firstName: true,
-          password: false
+          password: false,
         },
         userCredentials: {
           firstName: FAKE_NAME,
-          password: PASSWORD
-        }
-      })
-      
-      const result = wrapper.instance().checkValidity(wrapper.state().validFields.firstName, "firstName");
+          password: PASSWORD,
+        },
+      });
+
+      const result = wrapper
+        .instance()
+        .checkValidity(wrapper.state().validFields.firstName, "firstName");
       expect(result).toBe(true);
 
-      const result1 = wrapper.instance().checkValidity(wrapper.state().validFields.password, "password");
+      const result1 = wrapper
+        .instance()
+        .checkValidity(wrapper.state().validFields.password, "password");
       expect(result1).toBe(false);
 
-      const result2 = wrapper.instance().checkValidity(wrapper.state().validFields.email, "email");
       expect(result1).toBe(false);
-
     });
 
-    describe('handleSubmitClick', () => {
+    describe("handleSubmitClick", () => {
       let mockEvent;
       let mockSetState;
       beforeEach(() => {
         mockSetState = jest.fn();
 
         mockEvent = {
-          preventDefault: jest.fn()
-        }
-        wrapper.instance().checkValidity = mockCheckValidity
+          preventDefault: jest.fn(),
+        };
+        wrapper.instance().checkValidity = mockCheckValidity;
         wrapper.instance().setState = mockSetState;
       });
 
       afterEach(() => {
         mockSetState.mockRestore();
-      })
+      });
 
-      it('should call appropridate functions on success 201 request + login passing', async () => {
+      it("should call appropridate functions on success 201 request + login passing", async () => {
         const SUCCESS_RESPONSE = {
           statusCode: 201,
-        }
+        };
         const SUCCESS_LOGIN = {
-          token: "billsnaptest"
-        }
+          token: "billsnaptest",
+          profile: { id: 1, firtName: "Bob" },
+        };
         const TEMP_DATA = {
-          firstName: 'chad',
-          lastName: 'alpha',
-          email: 'alpha@chad.chad',
-          password: 'alpha🕶️chad💪chad'
-        }
+          firstName: "chad",
+          lastName: "alpha",
+          email: "alpha@chad.chad",
+          password: "alpha🕶️chad💪chad",
+        };
 
         const LOGIN_TEMP_DATA = {
           email: TEMP_DATA.email,
           password: TEMP_DATA.password,
-        }
+        };
         const mockPushFunction = jest.fn();
 
         wrapper.setState({
-          userCredentials: TEMP_DATA
-        })
+          userCredentials: TEMP_DATA,
+        });
 
         wrapper.setProps({
           history: {
@@ -360,34 +393,32 @@ describe("RegisterForm", () => {
         await wrapper.instance().handleSubmitClick(mockEvent);
 
         expect(mockCheckValidity).toBeCalledTimes(5);
-        expect(mockPushFunction).toBeCalledTimes(1);
         expect(register).toHaveBeenCalledWith(TEMP_DATA);
         expect(login).toHaveBeenCalledWith(LOGIN_TEMP_DATA);
         expect(mockSetState).toBeCalledTimes(2);
       });
 
-      it('should call appropridate functions on success 201 request + login failing', async () => {
+      it("should call appropridate functions on success 201 request + login failing", async () => {
         const SUCCESS_RESPONSE = {
           statusCode: 201,
-        }
-        const BAD_LOGIN = {
-        }
+        };
+        const BAD_LOGIN = {};
         const TEMP_DATA = {
-          firstName: 'chad',
-          lastName: 'alpha',
-          email: 'alpha@chad.chad',
-          password: 'alpha🕶️chad💪chad'
-        }
+          firstName: "chad",
+          lastName: "alpha",
+          email: "alpha@chad.chad",
+          password: "alpha🕶️chad💪chad",
+        };
 
         const LOGIN_TEMP_DATA = {
           email: TEMP_DATA.email,
           password: TEMP_DATA.password,
-        }
+        };
         const mockPushFunction = jest.fn();
 
         wrapper.setState({
-          userCredentials: TEMP_DATA
-        })
+          userCredentials: TEMP_DATA,
+        });
 
         wrapper.setProps({
           history: {
@@ -405,14 +436,17 @@ describe("RegisterForm", () => {
         expect(mockPushFunction).toBeCalledTimes(0);
         expect(register).toHaveBeenCalledWith(TEMP_DATA);
         expect(login).toHaveBeenCalledWith(LOGIN_TEMP_DATA);
-        expect(mockTriggerAlert).toHaveBeenCalledWith('error', 'Account created, but failed to log in. Please try logging in with you credentials');
+        expect(mockTriggerAlert).toHaveBeenCalledWith(
+          "error",
+          "Account created, but failed to log in. Please try logging in with your credentials"
+        );
       });
 
-      it('should trigger triggerAlert on success anything but 201 request', async () => {
+      it("should trigger triggerAlert on success anything but 201 request", async () => {
         const SUCCESS_RESPONSE = {
           statusCode: 200,
-          message: 'uhoh buddy'
-        }
+          message: "uhoh buddy",
+        };
         wrapper.instance().triggerAlert = mockTriggerAlert;
 
         mockCheckValidity.mockReturnValue(true);
@@ -420,11 +454,14 @@ describe("RegisterForm", () => {
 
         await wrapper.instance().handleSubmitClick(mockEvent);
 
-        expect(mockTriggerAlert).toHaveBeenCalledWith('error', SUCCESS_RESPONSE.message);
+        expect(mockTriggerAlert).toHaveBeenCalledWith(
+          "error",
+          SUCCESS_RESPONSE.message
+        );
       });
 
-      it('should trigger triggerAlert on failed request', async () => {
-        const ERROR_RESPONSE = 'uhoh buddy 💁‍♂️';
+      it("should trigger triggerAlert on failed request", async () => {
+        const ERROR_RESPONSE = "uhoh buddy 💁‍♂️";
         wrapper.instance().triggerAlert = mockTriggerAlert;
 
         mockCheckValidity.mockReturnValue(true);
@@ -432,24 +469,26 @@ describe("RegisterForm", () => {
 
         await wrapper.instance().handleSubmitClick(mockEvent);
 
-        expect(mockTriggerAlert).toHaveBeenCalledWith('error', ERROR_RESPONSE);
+        expect(mockTriggerAlert).toHaveBeenCalledWith("error", ERROR_RESPONSE);
       });
 
-      it('should validate fields if checkValidity fails', async () => {
-        const ERROR_RESPONSE = 'uhoh buddy 💁‍♂️';
+      it("should validate fields if checkValidity fails", async () => {
         wrapper.instance().triggerAlert = mockTriggerAlert;
 
         mockCheckValidity.mockReturnValue(false);
-        wrapper.instance().validateField = mockValidateField
+        wrapper.instance().validateField = mockValidateField;
 
         await wrapper.instance().handleSubmitClick(mockEvent);
 
         expect(mockValidateField).toBeCalledTimes(5);
-        expect(mockValidateField).toHaveBeenCalledWith('firstName', -1);
-        expect(mockValidateField).toHaveBeenCalledWith('lastName', -1);
-        expect(mockValidateField).toHaveBeenCalledWith('email', -1);
-        expect(mockValidateField).toHaveBeenCalledWith('password', -1);
-        expect(mockTriggerAlert).toHaveBeenCalledWith('error', "Form Not Validated");
+        expect(mockValidateField).toHaveBeenCalledWith("firstName", -1);
+        expect(mockValidateField).toHaveBeenCalledWith("lastName", -1);
+        expect(mockValidateField).toHaveBeenCalledWith("email", -1);
+        expect(mockValidateField).toHaveBeenCalledWith("password", -1);
+        expect(mockTriggerAlert).toHaveBeenCalledWith(
+          "error",
+          "Form Not Validated"
+        );
       });
     });
 

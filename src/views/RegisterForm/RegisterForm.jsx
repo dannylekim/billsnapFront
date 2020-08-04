@@ -1,17 +1,10 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropType from "prop-types";
-import {
-  Tooltip,
-  Alert,
-  Button,
-  Form,
-  FormGroup,
-  FormInput,
-} from "shards-react";
+import {Alert, Button, Form, FormGroup, FormInput, Tooltip,} from "shards-react";
 import Loader from "../../components/Loader";
 
 import registerFormInputs from "./registerFormConstants.json";
-import { register, login } from "../../utils/requests/UserRequests";
+import {login, register} from "../../utils/requests/UserRequests";
 
 import "./styles.scss";
 
@@ -28,15 +21,15 @@ export const RegisterForm = ({
     <div className="register__container">
       {alertNotification.isOpen === true ? (
         <Alert
-            dismissible={dismissAlert}
-            open={alertNotification.isOpen}
-            className="mb-3"
-            theme={alertNotification.alertType}
+          dismissible={dismissAlert}
+          open={alertNotification.isOpen}
+          className="mb-3"
+          theme={alertNotification.alertType}
         >
           {alertNotification.alertMessage}
         </Alert>
       ) : (
-          <div className="hidden__div"></div>
+        <div className="hidden__div" />
       )}
       <img
         alt="character logo"
@@ -66,7 +59,7 @@ export const RegisterForm = ({
             size="md"
             className="login_register__submit__button"
             pill
-            onClick={(event) => handleButtonClick(event)}
+            onClick={handleButtonClick}
             name="submit"
           >
             Sign Up
@@ -87,9 +80,9 @@ export const RegisterForm = ({
 
       <div>
         <div className="form__seperator">
-          <hr className="form__horizontal__line"></hr>
+          <hr className="form__horizontal__line" />
           Or
-          <hr className="form__horizontal__line"></hr>
+          <hr className="form__horizontal__line" />
         </div>
         <div>
           <h6>Have an account?</h6>
@@ -110,7 +103,7 @@ export const DEFAULT_ERRORS = {
 
 const NAME_REGEX = new RegExp(/^[_A-z]*((-|\s)*[_A-z])*$/);
 const EMAIL_REGEX = new RegExp(
-  /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  /^(([^<>()\\[\].,;:\s@"]+(\.[^<>()\\[\].,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 );
 const PASSWORD_REGEX = new RegExp(
   /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+*!=]).{8,20}/
@@ -162,15 +155,18 @@ class RegisterFormContainer extends Component {
    */
   validInvalidByName = (name, type) => {
     return (
-      (type === "invalid" ? !this.state.validFields[name] : this.state.validFields[name]) 
-      && this.state.userCredentials[name] !== ""
-      && this.state.validFields[name]
+      (type === "invalid"
+        ? !this.state.validFields[name]
+        : this.state.validFields[name]) &&
+      this.state.userCredentials[name] !== "" &&
+      this.state.validFields[name]
     );
   };
 
   /**
    * @description Sets the alert or turns it off by calling the setter.
    * @param {String} triggerType - type of trigger success or error.
+   * @param message message to display
    */
   triggerAlert = (triggerType, message) => {
     const alertNotification =
@@ -270,7 +266,6 @@ class RegisterFormContainer extends Component {
    * @description Check if condition is true or false. Shortcut to writting full condition.
    * @param {Object} checkState the state to check against.
    * @param {String} name the name of the input field.
-   * @param {Boolean} boolean_value check if true or false.
    */
   checkValidity = (checkState, name) => {
     const inputField = this.state.userCredentials[name];
@@ -284,7 +279,7 @@ class RegisterFormContainer extends Component {
   handleSubmitClick = async (e) => {
     e.preventDefault();
     this.setState({
-      isLoading: true
+      isLoading: true,
     });
     if (
       this.checkValidity(this.state.validFields.password, "confirmPassword") &&
@@ -309,15 +304,20 @@ class RegisterFormContainer extends Component {
         if (response.statusCode === 201) {
           const loginInfo = {
             email,
-            password
-          }
-          const { token } = await login(loginInfo);
-          
+            password,
+          };
+          const { token, profile } = await login(loginInfo);
+
           if (token) {
             localStorage.setItem("billSnap_token", token);
+            const { id, ...userProfile } = profile;
+            this.props.setUser(userProfile);
             this.props.history.push("/dashboard");
           } else {
-            throw new Error('Account created, but failed to log in. Please try logging in with you credentials')
+            this.triggerAlert(
+              "error",
+              "Account created, but failed to log in. Please try logging in with your credentials"
+            );
           }
         } else {
           this.triggerAlert("error", response.message);
@@ -337,7 +337,7 @@ class RegisterFormContainer extends Component {
     }
 
     this.setState({
-      isLoading: false
+      isLoading: false,
     });
   };
 
@@ -353,13 +353,14 @@ class RegisterFormContainer extends Component {
     } = validFields;
 
     //list of error messages / information for the Tool Tip component.
+    const CANNOT_BE_BLANK = "Cannot be blank!";
     const conditions = [
       {
         name: "confirmPassword",
         toolTipInfo: {
           open: !password,
           errorMessage: !userCredentials.confirmPassword
-            ? "Cannot be blank!"
+            ? CANNOT_BE_BLANK
             : "Password does not match",
         },
       },
@@ -368,7 +369,7 @@ class RegisterFormContainer extends Component {
         toolTipInfo: {
           open: !passwordFormat,
           errorMessage: !userCredentials.password
-            ? "Cannot be blank!"
+            ? CANNOT_BE_BLANK
             : "Must contain at least 1 upper case, lower case, number and symbol, and be between 8-20 characters.",
         },
       },
@@ -377,7 +378,7 @@ class RegisterFormContainer extends Component {
         toolTipInfo: {
           open: !firstName,
           errorMessage: !userCredentials.firstName
-            ? "Cannot be blank!"
+            ? CANNOT_BE_BLANK
             : "No numbers or special characters.",
         },
       },
@@ -386,7 +387,7 @@ class RegisterFormContainer extends Component {
         toolTipInfo: {
           open: !lastName,
           errorMessage: !userCredentials.lastName
-            ? "Cannot be blank!"
+            ? CANNOT_BE_BLANK
             : "No numbers or special characters.",
         },
       },
@@ -395,7 +396,7 @@ class RegisterFormContainer extends Component {
         toolTipInfo: {
           open: !email,
           errorMessage: !userCredentials.email
-            ? "Cannot be blank!"
+            ? CANNOT_BE_BLANK
             : "Invalid Email Format.",
         },
       },
@@ -412,7 +413,7 @@ class RegisterFormContainer extends Component {
           conditions={conditions}
           dismissAlert={this.dismissAlert}
           alertNotification={alertNotification}
-          setFormType={() => this.props.setFormType("login")}
+          setFormType={this.props.setFormType("login")}
         />
       </div>
     );
@@ -421,7 +422,6 @@ class RegisterFormContainer extends Component {
 
 RegisterFormContainer.propTypes = {
   setFormType: PropType.func.isRequired,
-
 };
 
 RegisterForm.propTypes = {
