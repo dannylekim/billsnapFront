@@ -18,70 +18,68 @@ export const LoginForm = ({
 }) => {
   return (
     <div>
-      <div className="login__form">
-        {alertMessage.visible === true ? (
-          <Alert
-            dismissible={dismissAlert}
-            open={alertMessage.visible}
-            className="mb-3"
-            theme={alertMessage.alertType}
+      {alertMessage.visible === true ? (
+        <Alert
+          dismissible={dismissAlert}
+          open={alertMessage.visible}
+          className="mb-3"
+          theme={alertMessage.alertType}
+        >
+          {error_message}
+        </Alert>
+      ) : (
+        <div className="hidden__div" />
+      )}
+
+      <img
+        alt="character logo"
+        src="./billSnapIcon.png"
+        className="character__icon__image"
+      />
+
+      <Form>
+        <div className="form__inputs">
+          {loginFormInputs.map((inputs, key) => (
+            <FormGroup key={key} onChange={onChange}>
+              <FormInput
+                className="register__login__inputs"
+                type={inputs.type}
+                name={inputs.name}
+                id={inputs.name}
+                placeholder={inputs.placeholder}
+                autoComplete={inputs.autoComplete}
+                invalid={hasErrors[inputs.name].hasError}
+              />
+            </FormGroup>
+          ))}
+        </div>
+        <div className="forgot__password__login">
+          <a href="/#" className="forgot__password">
+            Forgot Password?
+          </a>
+
+          <Button
+            size="md"
+            pill
+            className="login_register__submit__button"
+            onClick={handleButtonClick}
+            name="submit"
           >
-            {error_message}
-          </Alert>
-        ) : (
-          <div className="hidden__div" />
-        )}
+            Log in
+          </Button>
+        </div>
+      </Form>
 
-        <img
-          alt="character logo"
-          src="./billSnapIcon.png"
-          className="character__icon__image"
-        />
-
-        <Form>
-          <div className="form__inputs">
-            {loginFormInputs.map((inputs, key) => (
-              <FormGroup key={key} onChange={onChange}>
-                <FormInput
-                  className="register__login__inputs"
-                  type={inputs.type}
-                  name={inputs.name}
-                  id={inputs.name}
-                  placeholder={inputs.placeholder}
-                  autoComplete={inputs.autoComplete}
-                  invalid={hasErrors[inputs.name].hasError}
-                />
-              </FormGroup>
-            ))}
-          </div>
-          <div className="forgot__password__login">
-            <a href="/#" className="forgot__password">
-              Forgot Password?
-            </a>
-
-            <Button
-              size="md"
-              pill
-              className="login_register__submit__button"
-              onClick={handleButtonClick}
-              name="submit"
-            >
-              Log in
-            </Button>
-          </div>
-        </Form>
-
-        {loginFormInputs.map((field, key) => (
-          <Tooltip
-            key={key}
-            placement="left"
-            open={hasErrors[field.name].hasError}
-            target={`#${field.name}`}
-          >
-            <span id="input_error"> {hasErrors[field.name].message} </span>
-          </Tooltip>
-        ))}
-      </div>
+      {loginFormInputs.map((field, key) => (
+        <Tooltip
+          key={key}
+          placement="left"
+          open={hasErrors[field.name].hasError}
+          target={`#${field.name}`}
+        >
+          <span id="input_error"> {hasErrors[field.name].message} </span>
+        </Tooltip>
+      ))}
 
       <div>
         <div className="form__seperator">
