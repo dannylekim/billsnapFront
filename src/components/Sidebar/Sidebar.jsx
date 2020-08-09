@@ -2,7 +2,6 @@ import React from "react";
 import {MdFace, MdHelp, MdPeople, MdReceipt, MdSettings,} from "react-icons/md";
 import {FiLogOut} from "react-icons/fi";
 import {Nav, Navbar, NavbarBrand, NavItem, NavLink} from "shards-react";
-import BillDisplay from "../../views/BillDisplay";
 import "./styles.scss";
 
 export const DEFAULT_ACTIVE_STATE = {
@@ -21,25 +20,13 @@ class Sidebar extends React.Component {
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
   }
 
-  filterComponentFromNav = (navType) => {
-    const filterKeyVal = {
-      "bills" : <BillDisplay/>,
-      "profile" : <div> Profile </div>,
-      "contacts": <div> Contacts </div>,
-      "settings": <div> Settings </div>,
-      "help": <div> Help </div>
-    };
-    this.props.setComponent(filterKeyVal[navType]);
-  }
-
-
   handleClick(link) {
     if (typeof this.props.activeState[link] == "boolean") {
       this.props.setActiveState({
             ...DEFAULT_ACTIVE_STATE,
             [link]: true,
           });
-      this.filterComponentFromNav(link);
+      this.props.filterComponentFromNav(link);
     }
   }
 

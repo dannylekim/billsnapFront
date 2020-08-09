@@ -11,7 +11,7 @@ const store = mockStore({});
 
 describe("Sidebar", () => {
   let wrapper;
-  let handleMockFunction, mockSetUser,mockSetActiveState, mockSetComponent;
+  let handleMockFunction, mockSetUser,mockSetActiveState, mockFilterComponent;
 
   const STARTING_ACTIVE_STATE = {
     ...DEFAULT_ACTIVE_STATE,
@@ -23,20 +23,20 @@ describe("Sidebar", () => {
   beforeEach(() => {
     handleMockFunction = jest.fn();
     mockSetUser = jest.fn();
-    mockSetComponent= jest.fn();
-    wrapper = shallow(<Sidebar setUser={mockSetUser} activeState={STARTING_ACTIVE_STATE} setActiveState={mockSetActiveState} setComponent={mockSetComponent}/>);
+    mockFilterComponent= jest.fn();
+    wrapper = shallow(<Sidebar setUser={mockSetUser} activeState={STARTING_ACTIVE_STATE} setActiveState={mockSetActiveState} filterComponentFromNav={mockFilterComponent}/>);
   });
 
   describe("render", () => {
     describe("snapshots 📸", () => {
       it("Sidebar should match snap shot", () => {
-        matches(<Sidebar activeState={STARTING_ACTIVE_STATE} setActiveState={mockSetActiveState} setComponent={mockSetComponent}/>);
+        matches(<Sidebar activeState={STARTING_ACTIVE_STATE} setActiveState={mockSetActiveState} filterComponentFromNav={mockFilterComponent}/>);
       });
 
       it("SidebarComponent should match snap shot", () => {
         matches(
           <Provider store={store}>
-            <SidebarComponent setUser={mockSetUser} activeState={STARTING_ACTIVE_STATE} setActiveState={mockSetActiveState} setComponent={mockSetComponent}  />
+            <SidebarComponent setUser={mockSetUser} activeState={STARTING_ACTIVE_STATE} setActiveState={mockSetActiveState} filterComponentFromNav={mockFilterComponent}  />
           </Provider>
         );
       });
@@ -46,7 +46,7 @@ describe("Sidebar", () => {
           ...DEFAULT_ACTIVE_STATE,
           contacts: true,
         };
-        wrapper = shallow(<Sidebar setUser={mockSetUser} activeState={EXPECTED_STATE} setActiveState={mockSetActiveState} setComponent={mockSetComponent} />);
+        wrapper = shallow(<Sidebar setUser={mockSetUser} activeState={EXPECTED_STATE} setActiveState={mockSetActiveState} filterComponentFromNav={mockFilterComponent} />);
         matches(wrapper);
       });
     });
