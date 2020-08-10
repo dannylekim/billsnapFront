@@ -4,7 +4,7 @@ import {DEFAULT_ACTIVE_STATE} from "../../components/Sidebar/Sidebar.jsx";
 import BillDisplay from "../BillDisplay";
 import "./styles.scss";
 
-export default (props) => {
+export default ({history,userInfo}) => {
   //testing with @testing-library to be learnt later
   const [activeState, setActiveState] = useState(
                                                 {
@@ -17,7 +17,7 @@ export default (props) => {
   const filterComponentFromNav = (navType) => {
     const filterKeyVal = {
       "bills" : <BillDisplay/>,
-      "profile" : <div> Profile </div>,
+      "profile" : <div> Profile <p> {JSON.stringify(userInfo)} </p> </div>, //temporary please allow
       "contacts": <div> Contacts </div>,
       "settings": <div> Settings </div>,
       "help": <div> Help </div>
@@ -37,7 +37,7 @@ export default (props) => {
           </div>
         </div>
       ) : (
-        props.history.push("/")
+        history.push("/")
       )}
     </div>
   );
