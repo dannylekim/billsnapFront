@@ -2,6 +2,8 @@
 
 div.bill__wrapper {
   min-width: 1313px;
+  margin-left: 3%;
+  margin-top: 35px;
 
   div.specific__bill__section {
     width: 61.091%;
@@ -22,9 +24,7 @@ div.bill__wrapper {
 
   div.bill__section {
     display: flex;
-
     div.bill__list__section {
-      margin-left: 2.74117026885%;
       width: 38.909%;
 
       #search__bill {
@@ -133,12 +133,11 @@ div.bill__wrapper {
       div.quick__sorting__container {
         position: absolute;
         top: 75px;
-        left: 275px;
         height: 120px;
+        left: 43.909%; 
 
         ul.sorting__content {
           width: 103px;
-          transform: translateX(470px);
           border-radius: 6px;
           height: inherit;
           background-color: $light-gray-background;
@@ -173,5 +172,11 @@ div.bill__wrapper {
         margin-left: 130px;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  div.quick__sorting__container {
+    margin-left: 100px;
   }
 }

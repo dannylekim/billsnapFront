@@ -6,9 +6,12 @@ div.dashboard__flexbox {
   margin: 0;
   padding: 0;
 
+  div.side__bar{
+    width: 15%;
+  }
+
   div.dashboard__content {
     height: inherit;
-    width: calc(100% - 302px);
-    margin-top: 35px;
+    width: 85%;
   }
 }

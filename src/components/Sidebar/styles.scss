@@ -5,7 +5,7 @@
   position: fixed;
   height: 100%;
   background-color: $secondary-color;
-  width: 302px;
+  width: 15%;
   margin-left: 0;
   left: 0;
   top: 0;
@@ -15,7 +15,7 @@
 
 .sideLogo.navbar-brand {
   margin-top: 35px;
-  margin-left: 45px;
+  margin-left: 12%;
   display: block;
   margin-bottom: 50px;
 }
@@ -28,16 +28,16 @@ div.sidebar__navitems {
   margin-top: 55px;
 
   .nav-item {
-    margin-left: 30px;
+    margin-left: 15px;
   }
 
   .nav-link {
     padding: 15px 8px 15px 16px;
     text-decoration: none;
-    font-size: 30px;
+    font-size: 1.5em;
     border-color: transparent !important;
     color: $primary-text-color !important;
-
+    
     &:hover {
       background-color: rgb(106, 252, 192);
       border-top-right-radius: 0 !important;
@@ -45,7 +45,8 @@ div.sidebar__navitems {
       border-bottom-left-radius: 50px !important;
     }
 
-    &.active {
+    &.active, &.active:hover {
+      background-color: white;
       color: $secondary-color !important;
       border-top-right-radius: 0 !important;
       border-top-left-radius: 50px !important;
