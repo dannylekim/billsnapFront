@@ -11,25 +11,32 @@ const store = mockStore({});
 
 describe("Sidebar", () => {
   let wrapper;
-  let handleMockFunction, mockSetUser;
+  let handleMockFunction, mockSetUser,mockSetActiveState, mockFilterComponent;
+
+  const STARTING_ACTIVE_STATE = {
+    ...DEFAULT_ACTIVE_STATE,
+    bills: true
+  };
+
+  mockSetActiveState = (activeState) => wrapper.setProps({activeState});
 
   beforeEach(() => {
     handleMockFunction = jest.fn();
     mockSetUser = jest.fn();
-    wrapper = shallow(<Sidebar setUser={mockSetUser} />);
+    mockFilterComponent= jest.fn();
+    wrapper = shallow(<Sidebar setUser={mockSetUser} activeState={STARTING_ACTIVE_STATE} setActiveState={mockSetActiveState} filterComponentFromNav={mockFilterComponent}/>);
   });
 
   describe("render", () => {
     describe("snapshots 📸", () => {
       it("Sidebar should match snap shot", () => {
-        matches(<Sidebar />);
+        matches(<Sidebar activeState={STARTING_ACTIVE_STATE} setActiveState={mockSetActiveState} filterComponentFromNav={mockFilterComponent}/>);
       });
 
       it("SidebarComponent should match snap shot", () => {
         matches(
           <Provider store={store}>
-            {" "}
-            <SidebarComponent setUser={mockSetUser} />
+            <SidebarComponent setUser={mockSetUser} activeState={STARTING_ACTIVE_STATE} setActiveState={mockSetActiveState} filterComponentFromNav={mockFilterComponent}  />
           </Provider>
         );
       });
@@ -39,9 +46,7 @@ describe("Sidebar", () => {
           ...DEFAULT_ACTIVE_STATE,
           contacts: true,
         };
-        wrapper.setState({
-          activeState: { ...EXPECTED_STATE },
-        });
+        wrapper = shallow(<Sidebar setUser={mockSetUser} activeState={EXPECTED_STATE} setActiveState={mockSetActiveState} filterComponentFromNav={mockFilterComponent} />);
         matches(wrapper);
       });
     });
@@ -84,31 +89,14 @@ describe("Sidebar", () => {
 
   describe("function", () => {
     describe("handleClick", () => {
-      it("should not change state if parameter does not exist in this state", () => {
-        const EXPECTED_STATE = {
-          ...DEFAULT_ACTIVE_STATE,
-          contacts: true,
-        };
-        wrapper.setState({
-          activeState: { ...EXPECTED_STATE },
-        });
+      it("should not change props if parameter does not exist in this props", () => {
         wrapper.instance().handleClick("starlord");
-        expect(wrapper.state("activeState")).toEqual(EXPECTED_STATE);
+        expect(wrapper.find(NavLink).at(0).prop("active")).toBeTruthy();
       });
-      it("should change state if parameter does exist in this state", () => {
-        const DEFAULT_STATE = {
-          ...DEFAULT_ACTIVE_STATE,
-          contacts: true,
-        };
-        const EXPECTED_STATE = {
-          ...DEFAULT_ACTIVE_STATE,
-          bills: true,
-        };
-        wrapper.setState({
-          activeState: { ...DEFAULT_STATE },
-        });
-        wrapper.instance().handleClick("bills");
-        expect(wrapper.state("activeState")).toEqual(EXPECTED_STATE);
+      it("should change props if parameter does exist in this props", () => {
+        wrapper.instance().handleClick("contacts");
+        expect(wrapper.find(NavLink).at(0).prop("active")).toBeFalsy();
+        expect(wrapper.find(NavLink).at(2).prop("active")).toBeTruthy();
       });
     });
     describe("handleLogoutClick", () => {
