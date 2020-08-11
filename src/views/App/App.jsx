@@ -24,7 +24,7 @@ export default () => {
         <Switch>
           <React.Fragment>
             <div className='App__container'>
-              <Sidebar visible={ !localStorage.getItem("billSnap_token") } />
+              <Sidebar hide={ !localStorage.getItem("billSnap_token") } />
               <Route path='/' exact component={LandingPage} />
               <Route path='/dashboard' exact component={Dashboard} />
             </div>

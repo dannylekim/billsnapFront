@@ -35,13 +35,15 @@ class Sidebar extends React.Component {
   }
 
   handleClick(link) {
-    this.setState({
-      activeState: {
-        ...DEFAULT_ACTIVE_STATE,
-        [link]: true,
-      }
-    });
-    this.props.history.push(`/${link}`);
+    if (this.state.activeState[link] != null) {
+      this.setState({
+        activeState: {
+          ...DEFAULT_ACTIVE_STATE,
+          [link]: true,
+        }
+      });
+      this.props.history.push(`/${link}`);
+    }
   }
 
   handleLogoutClick() {
@@ -51,7 +53,7 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <Navbar style={ this.props.visible ? { display: 'none' } : {}}>
+      <Navbar style={ this.props.hide ? { display: 'none' } : {}}>
         <Nav tabs className={"billSnap-SideBar"} vertical={true}>
           <NavbarBrand className={"sideLogo"}>Billsnap Logo</NavbarBrand>
 
@@ -116,7 +118,7 @@ Sidebar.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func
   }),
-  visible: PropTypes.bool,
+  hide: PropTypes.bool,
   setUser: PropTypes.func,
 };
 
