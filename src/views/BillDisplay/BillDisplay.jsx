@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./styles.scss";
-import Loader from "../../components/Loader";
+// import Loader from "../../components/Loader";
 import SmallBillCard from "../../components/BillCard/SmallBillCard";
 import LargeBillCard from "../../components/BillCard/LargeBillCard";
 import BillFilter from "../../components/BillFilter";
@@ -334,7 +334,8 @@ class BillDisplay extends Component {
     return (
       <div className="bill__wrapper">
         {isBillLoading ? (
-          <Loader />
+          // <Loader />
+          "nice"
         ) : bills.length > 0 ? (
           <div className="bill__section">
             <div className="bill__list__section">

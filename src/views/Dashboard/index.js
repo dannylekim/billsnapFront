@@ -3,9 +3,7 @@ import {connect} from "react-redux";
 
 const mapStateToProps = (state) => ({
   userInfo: state.users.userInfo,
+  isBillLoading: state.application.isBillLoading,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);
