@@ -4,8 +4,11 @@ import React from "react";
  */
 import LandingPage from "../LandingPage";
 import Dashboard from "../Dashboard";
+import { useHistory } from "react-router-dom";
 
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import Sidebar from "../../components/Sidebar";
+
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import BillSnapBackground from "../Background";
 import "./styles.scss";
 
@@ -15,14 +18,15 @@ import "./styles.scss";
 
 export default () => {
   return (
-    <div className="App">
+    <div className='App'>
       <BillSnapBackground showWave />
       <BrowserRouter>
         <Switch>
           <React.Fragment>
-            <div className="App__container">
-              <Route path="/" exact component={LandingPage} />
-              <Route path="/dashboard" exact component={Dashboard} />
+            <div className='App__container'>
+              <Sidebar visible={ !localStorage.getItem("billSnap_token") } />
+              <Route path='/' exact component={LandingPage} />
+              <Route path='/dashboard' exact component={Dashboard} />
             </div>
           </React.Fragment>
         </Switch>
