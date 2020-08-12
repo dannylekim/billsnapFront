@@ -5,6 +5,8 @@ import {Button, Nav, NavItem, NavLink} from "shards-react";
 import navItems from "../../constants/BillDisplayNav.json";
 
 import BillDisplay from "../BillDisplay";
+import BillFilter from "../../components/BillFilter";
+import { SearchBar } from "../../components/SearchBar";
 import Loader from "../../components/Loader";
 
 import "./styles.scss";
@@ -14,7 +16,7 @@ export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      seachedQuery: "",
+      searchedQuery: "",
       selectedBill: { bill: null, id: 0 },
       currentActiveTab: "allBills",
       sorting: { opened: false, type: "Newest" },
@@ -32,33 +34,8 @@ export default class Dashboard extends Component {
       billStatusFilter: { resolved: false, open: false, in_progess: false },
     };
   }
-  //testing with @testing-library to be learnt later
-  // const [activeState, setActiveState] = useState(
-  //                                               {
-  //                                                 ...DEFAULT_ACTIVE_STATE,
-  //                                                 bills: true
-  //                                               }
-  //                                             );
-  // const [component, setComponent] = useState(<BillDisplay />);
-
-  // filterComponentFromNav = (navType) => {
-  //   const filterKeyVal = {
-  //     bills: <BillDisplay />,
-  //     profile: (
-  //       <div>
-  //         {" "}
-  //         Profile <p> {JSON.stringify(this.props.userInfo)} </p>{" "}
-  //       </div>
-  //     ), //temporary please allow
-  //     contacts: <div> Contacts </div>,
-  //     settings: <div> Settings </div>,
-  //     help: <div> Help </div>,
-  //   };
-  //   // setComponent(filterKeyVal[navType]);
-  // };
 
   resetFilters = () => {
-    this.props.fetchBills();
     this.setState({
       sorting: { opened: false, type: "Newest" },
       dateFilters: {
@@ -69,15 +46,25 @@ export default class Dashboard extends Component {
     });
   };
 
+  displayTab = (navType) => {
+    switch (navType) {
+      case 'allBills':
+        return <BillDisplay />;
+      case 'owedToYou':
+        return 'TODO'
+      default:
+        return <Loader />;
+    }
+  };
+
   render() {
+    const { dateFilters, filter, billStatusFilter } = this.state;
+
     return (
       <>
         {localStorage.getItem("billSnap_token") ? (
           <div className='dashboard__flexbox'>
-            {/* <div className='dashboard__content'> */}
-              {/* {searchBill}
-                  {AddBillButton}
-                  {NavigationTabs(navItems)}
+              {/* 
                   <BillFilter
                     dateFilters={dateFilters}
                     filter={filter}
@@ -86,12 +73,19 @@ export default class Dashboard extends Component {
                     updateBills={this.updateBills}
                     setState={this.setState.bind(this)}
                   />
-                  {this.state.sorting.opened && simpleSort} */}
+                  */}
               <div className='bill__wrapper'>
                 {this.props.isBillLoading ? (
                   <Loader />
                 ) : (
                   <div className='bill__section'>
+                    <SearchBar
+                      onInputChangeHandler={(e) => this.setState({ searchedQuery: e.target.value })}
+                      advanceFilterHandler={() => {}}
+                      simpleFilterHandler={() => {}}
+                      currentSortingType={this.state.sorting.type}
+                    />
+                    <Button id="add__bill__button"> {"+ Add bill"} </Button>
                     <Nav tabs>
                       {navItems.map((item, key) => (
                         <NavItem
@@ -107,7 +101,16 @@ export default class Dashboard extends Component {
                         </NavItem>
                       ))}
                     </Nav>
-                    <div className='bill__list__section'></div>
+                    {/* 
+                        TODO, create SimpleSort component
+                        
+                        {this.state.sorting.opened && simpleSort}  
+                    
+                      */} 
+                    <div className='bill__list__section'>
+                      { this.displayTab(this.state.currentActiveTab) }
+                     {/* TODO: display bills/pending bills based on button selected */}
+                    </div>
                   </div>
                 )}
                 <div className='specific__bill__section'>
