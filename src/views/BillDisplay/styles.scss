@@ -45,35 +45,6 @@ div.bill__wrapper {
         }
       }
 
-      div.quick__sorting__container {
-        position: absolute;
-        top: 75px;
-        left: 275px;
-        height: 120px;
-
-        ul.sorting__content {
-          width: 103px;
-          transform: translateX(470px);
-          border-radius: 6px;
-          height: inherit;
-          background-color: $light-gray-background;
-          list-style: none;
-          padding-top: 10px;
-          padding-left: 0;
-
-          li.sorting__titles {
-            font-family: $primary-font;
-            font-weight: 500;
-            font-size: 20px;
-            line-height: 26px;
-            color: $secondary-text-color;
-          }
-
-          li.sorting__titles:hover {
-            background-color: #bebebe;
-          }
-        }
-      }
 
       div.bill__container {
         display: flex;
