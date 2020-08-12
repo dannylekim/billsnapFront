@@ -5,7 +5,7 @@ import { FaBars, FaSearch } from "react-icons/fa";
 
 import "./styles.scss";
 
-export const SearchBar = ({
+const SearchBar = ({
     onInputChangeHandler,
     advanceFilterHandler,
     simpleFilterHandler,
@@ -44,3 +44,5 @@ SearchBar.propTypes = {
     simpleFilterHandler: PropType.func.isRequired, // onclick handler for simple filter button click
     currentSortingType: PropType.string // current filter type as string
 };
+
+export default SearchBar;
