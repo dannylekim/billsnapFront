@@ -53,8 +53,11 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <Navbar style={ this.props.hide ? { display: 'none' } : {}}>
-        <Nav tabs className={"billSnap-SideBar"} vertical={true}>
+      <Navbar className="billSnap-SideBar" style={ this.props.hide ? { display: 'none' } : {}}>
+        <Nav
+          tabs
+          vertical={true}
+        >
           <NavbarBrand className={"sideLogo"}>Billsnap Logo</NavbarBrand>
 
           <div className='sidebar__navitems'>

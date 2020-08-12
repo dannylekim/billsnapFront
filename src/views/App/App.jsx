@@ -4,7 +4,6 @@ import React from "react";
  */
 import LandingPage from "../LandingPage";
 import Dashboard from "../Dashboard";
-import { useHistory } from "react-router-dom";
 
 import Sidebar from "../../components/Sidebar";
 
@@ -24,7 +23,7 @@ export default () => {
         <Switch>
           <React.Fragment>
             <div className='App__container'>
-              <Sidebar hide={ !localStorage.getItem("billSnap_token") } />
+              <Sidebar hide={ !(!!localStorage.getItem("billSnap_token")) } />
               <Route path='/' exact component={LandingPage} />
               <Route path='/dashboard' exact component={Dashboard} />
             </div>
