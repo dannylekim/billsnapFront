@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import PropType from "prop-types";
 import {useOutsideAlerter} from '../../helpers/ClickEvent'; 
 import "./styles.scss";

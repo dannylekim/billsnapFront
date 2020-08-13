@@ -112,39 +112,6 @@ export default class Dashboard extends Component {
     } else this.props.orderAlphabetical(type, this.props.bills);
   };
 
-  handleDateSelection = (event) => {
-    event.preventDefault();
-    const date = event.target.value;
-
-    if (date !== "") {
-      if (
-        this.state.dateFilters.startDate.selected === true &&
-        this.state.dateFilters.endDate.selected === false
-      ) {
-        this.setState({
-          dateFilters: {
-            ...this.state.dateFilters,
-            startDate: { ...this.state.dateFilters.startDate, value: date },
-          },
-        });
-      }
-
-      if (
-        this.state.dateFilters.endDate.selected === true &&
-        this.state.dateFilters.startDate.selected === false
-      ) {
-        this.setState({
-          dateFilters: {
-            ...this.state.dateFilters,
-            endDate: { ...this.state.dateFilters.endDate, value: date },
-          },
-        });
-      }
-    } else {
-      return null;
-    }
-  };
-
   render() {
     const { dateFilters, filter, billStatusFilter } = this.state;
 
@@ -158,44 +125,8 @@ export default class Dashboard extends Component {
                   onInputChangeHandler={(e) =>
                     this.setState({ searchedQuery: e.target.value })
                   }
-                  advanceFilterHandler={() =>
-                    this.setState((prev) => ({
-                      filter: { ...prev.filter, opened: true },
-                    }))
-                  }
-                  simpleFilterHandler={() =>
-                    this.setState((prev) => ({
-                      sorting: { ...prev.sorting, opened: true },
-                    }))
-                  }
                   currentSortingType={this.state.sorting.type}
                 />
-
-                {filter.opened && (
-                  <BillFilter
-                    dateFilters={dateFilters}
-                    filter={filter}
-                    billStatusFilter={billStatusFilter}
-                    handleDateSelection={this.handleDateSelection}
-                    updateBills={this.updateBills}
-                    setState={this.setState.bind(this)}
-                  />
-                )}
-
-                {this.state.sorting.opened && (
-                  <SimpleFilter
-                    applyFilter={(e) => {
-                      /** TODO change bill filter */
-                      this.updateBills(e);
-                    }}
-                    closeHandler={() =>
-                      this.setState((prev) => ({
-                        sorting: { ...prev.sorting, opened: false },
-                      }))
-                    }
-                    currentActive={this.state.sorting.type}
-                  />
-                )}
                 <Button id='add__bill__button'> {"+ Add bill"} </Button>
                 <Nav tabs>
                   {navItems.map((item, key) => (
