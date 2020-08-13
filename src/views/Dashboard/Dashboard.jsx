@@ -5,14 +5,39 @@ import { Button, Nav, NavItem, NavLink } from "shards-react";
 import navItems from "../../constants/BillDisplayNav.json";
 
 import BillDisplay from "../BillDisplay";
-// import BillFilter from "../../components/BillFilter";
+import BillFilter from "../../components/BillFilter";
 import SimpleFilter from "../../components/SimpleFilter";
 import SearchBar from "../../components/SearchBar";
 import Loader from "../../components/Loader";
 
 import "./styles.scss";
 
-// export default ({history,userInfo}) =>
+const BillsSummary = ({ billsVar, activeBill = null }) => {
+  return activeBill === null ? (
+    <div className='bill__summary'>
+      <h5>
+        {" "}
+        Total Amount Owed :{" "}
+        <span id='amount__owed'>
+          {" "}
+          {billsVar.reduce((a, b) => a + parseFloat(b.balance), 0).toFixed(2)} $
+        </span>{" "}
+      </h5>
+      <h5> Total of bills : {billsVar.length} </h5>
+    </div>
+  ) : (
+    <div className='bill__summary'>
+      <h5>
+        {`Split by : ${activeBill.responsible.firstName} ${activeBill.responsible.lastName}`}
+      </h5>
+      <h5> {`Status : ${activeBill.status}`}</h5>
+      <h5>
+        Amount Owed : <span id='amount__owed'>{activeBill.balance} $</span>{" "}
+      </h5>
+    </div>
+  );
+};
+
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -58,6 +83,68 @@ export default class Dashboard extends Component {
     }
   };
 
+  updateBills = (type) => {
+    this.setState((prev) => ({
+      sorting: { type, opened: false },
+      filter: {
+        ...prev.filter,
+        opened: false,
+        categoryOpened: false,
+        statusOpened: false,
+        dateOpened: false,
+      },
+      dateFilters: {
+        ...prev.dateFilters,
+        startDate: { ...prev.dateFilters.startDate, selected: false },
+        endDate: { ...prev.dateFilters.endDate, selected: false },
+      },
+    }));
+
+    if (type !== "A to Z" && type !== "Z to A") {
+      const startDate = `start=${this.state.dateFilters.startDate.value}`;
+      const endDate = `end=${this.state.dateFilters.endDate.value}`;
+
+      const filterQueryParam = {
+        Newest: `?${startDate}&${endDate}&sort_by=CREATED&order_by=DESC`,
+        Oldest: `?${startDate}&${endDate}&sort_by=CREATED&order_by=ASC`,
+      };
+      this.props.fetchBills(filterQueryParam[type]);
+    } else this.props.orderAlphabetical(type, this.props.bills);
+  };
+
+  handleDateSelection = (event) => {
+    event.preventDefault();
+    const date = event.target.value;
+
+    if (date !== "") {
+      if (
+        this.state.dateFilters.startDate.selected === true &&
+        this.state.dateFilters.endDate.selected === false
+      ) {
+        this.setState({
+          dateFilters: {
+            ...this.state.dateFilters,
+            startDate: { ...this.state.dateFilters.startDate, value: date },
+          },
+        });
+      }
+
+      if (
+        this.state.dateFilters.endDate.selected === true &&
+        this.state.dateFilters.startDate.selected === false
+      ) {
+        this.setState({
+          dateFilters: {
+            ...this.state.dateFilters,
+            endDate: { ...this.state.dateFilters.endDate, value: date },
+          },
+        });
+      }
+    } else {
+      return null;
+    }
+  };
+
   render() {
     const { dateFilters, filter, billStatusFilter } = this.state;
 
@@ -65,7 +152,26 @@ export default class Dashboard extends Component {
       <>
         {localStorage.getItem("billSnap_token") ? (
           <div className='dashboard__flexbox'>
-            {/* 
+            <div className='bill__wrapper'>
+              <div className='bill__section'>
+                <SearchBar
+                  onInputChangeHandler={(e) =>
+                    this.setState({ searchedQuery: e.target.value })
+                  }
+                  advanceFilterHandler={() =>
+                    this.setState((prev) => ({
+                      filter: { ...prev.filter, opened: true },
+                    }))
+                  }
+                  simpleFilterHandler={() =>
+                    this.setState((prev) => ({
+                      sorting: { ...prev.sorting, opened: true },
+                    }))
+                  }
+                  currentSortingType={this.state.sorting.type}
+                />
+
+                {filter.opened && (
                   <BillFilter
                     dateFilters={dateFilters}
                     filter={filter}
@@ -74,17 +180,22 @@ export default class Dashboard extends Component {
                     updateBills={this.updateBills}
                     setState={this.setState.bind(this)}
                   />
-                  */}
-            <div className='bill__wrapper'>
-              <div className='bill__section'>
-                <SearchBar
-                  onInputChangeHandler={(e) =>
-                    this.setState({ searchedQuery: e.target.value })
-                  }
-                  advanceFilterHandler={() => {}}
-                  simpleFilterHandler={() => {}}
-                  currentSortingType={this.state.sorting.type}
-                />
+                )}
+
+                {this.state.sorting.opened && (
+                  <SimpleFilter
+                    applyFilter={(e) => {
+                      /** TODO change bill filter */
+                      this.updateBills(e);
+                    }}
+                    closeHandler={() =>
+                      this.setState((prev) => ({
+                        sorting: { ...prev.sorting, opened: false },
+                      }))
+                    }
+                    currentActive={this.state.sorting.type}
+                  />
+                )}
                 <Button id='add__bill__button'> {"+ Add bill"} </Button>
                 <Nav tabs>
                   {navItems.map((item, key) => (
@@ -101,22 +212,15 @@ export default class Dashboard extends Component {
                     </NavItem>
                   ))}
                 </Nav>
-                {this.state.sorting.opened && (
-                  <SimpleFilter
-                    applyFilter={() => {
-                      /** TODO change bill filter */
-                    }}
-                    currentActive={this.state.sorting.type}
-                  />
-                )}
+
                 <div className='bill__list__section'>
                   {this.displayTab(this.state.currentActiveTab)}
                   {/* TODO: display bills/pending bills based on button selected */}
                 </div>
               </div>
               <div className='specific__bill__section'>
-                {/* {BillsSummary(bills)}
-                      <span id="more__details"> More details</span>
+                {/* { BillsSummary(this.props.bills, this.state.selectedBill.bill) } */}
+                {/* <span id="more__details"> More details</span>
                       <LargeBillCard selectedBill={this.state.selectedBill} /> */}
               </div>
             </div>
