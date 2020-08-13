@@ -44,6 +44,9 @@ class SearchBar extends Component {
     });
   };
 
+  /**
+   * Change date state on handler event
+   */
   handleDateSelection = (event) => {
     event.preventDefault();
     const date = event.target.value;
@@ -72,13 +75,82 @@ class SearchBar extends Component {
           },
         });
       }
-    } else {
-      return null;
     }
+  };
+
+  updateBills_TEST = (type) => {
+    this.setState((prev) => ({
+      sorting: { type, opened: false },
+      filter: {
+        ...prev.filter,
+        opened: false,
+        categoryOpened: false,
+        statusOpened: false,
+        dateOpened: false,
+      },
+      dateFilters: {
+        ...prev.dateFilters,
+        startDate: { ...prev.dateFilters.startDate, selected: false },
+        endDate: { ...prev.dateFilters.endDate, selected: false },
+      },
+    }));
+
+    if (type !== "A to Z" && type !== "Z to A") {
+      const startDate = `start=${this.state.dateFilters.startDate.value}`;
+      const endDate = `end=${this.state.dateFilters.endDate.value}`;
+
+      const filterQueryParam = {
+        Newest: `?${startDate}&${endDate}&sort_by=CREATED&order_by=DESC`,
+        Oldest: `?${startDate}&${endDate}&sort_by=CREATED&order_by=ASC`,
+      };
+      this.props.fetchBills(filterQueryParam[type]);
+    } else this.props.orderAlphabetical(type, this.props.bills);
   };
 
   updateBills(e) {
     console.log(e);
+  }
+
+  /**
+   * Convert filtering data into REST params string
+   */
+  getFilterParams = () => {
+    
+  }
+
+  /**
+   * Convert sorting type into REST params string
+   */
+  static getSortingParams = (type) => {
+    switch(type) {
+      case "Newest":
+        return `sort_by=CREATED&order_by=DESC`;
+      case "Oldest":
+        return `sort_by=CREATED&order_by=ASC`;
+      case "A to Z":
+        return 'sort_by=NAME&order_by=ASC';
+      case "Z to A":
+        return 'sort_by=NAME&order_by=DESC';
+      default:
+        return '';
+    }
+  }
+
+  applySorting = (type) => {
+    this.setState({
+      currentSorting: type,
+    });
+    this.closeHandler();
+
+    const params = this.constructor.getSortingParams(type);
+
+    switch(this.props.activeTab) {
+      case 'allBills':
+        return this.props.fetchBills(`?${params}`);
+      default:
+        break;
+    }
+
   }
 
   render() {
@@ -137,7 +209,7 @@ class SearchBar extends Component {
             <SimpleFilter
               applyFilter={(e) => {
                 /** TODO change bill filter */
-                this.updateBills(e);
+                this.applySorting(e);
               }}
               closeHandler={this.closeHandler}
               currentActive={this.state.currentSorting}
@@ -150,7 +222,7 @@ class SearchBar extends Component {
 }
 
 SearchBar.propTypes = {
-  onInputChangeHandler: PropType.func.isRequired, // handler function for input change
+  activeTab: PropType.string,
 };
 
 export default SearchBar;

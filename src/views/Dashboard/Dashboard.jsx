@@ -42,7 +42,6 @@ export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchedQuery: "",
       selectedBill: { bill: null, id: 0 },
       currentActiveTab: "allBills",
       sorting: { opened: false, type: "Newest" },
@@ -83,37 +82,8 @@ export default class Dashboard extends Component {
     }
   };
 
-  updateBills = (type) => {
-    this.setState((prev) => ({
-      sorting: { type, opened: false },
-      filter: {
-        ...prev.filter,
-        opened: false,
-        categoryOpened: false,
-        statusOpened: false,
-        dateOpened: false,
-      },
-      dateFilters: {
-        ...prev.dateFilters,
-        startDate: { ...prev.dateFilters.startDate, selected: false },
-        endDate: { ...prev.dateFilters.endDate, selected: false },
-      },
-    }));
-
-    if (type !== "A to Z" && type !== "Z to A") {
-      const startDate = `start=${this.state.dateFilters.startDate.value}`;
-      const endDate = `end=${this.state.dateFilters.endDate.value}`;
-
-      const filterQueryParam = {
-        Newest: `?${startDate}&${endDate}&sort_by=CREATED&order_by=DESC`,
-        Oldest: `?${startDate}&${endDate}&sort_by=CREATED&order_by=ASC`,
-      };
-      this.props.fetchBills(filterQueryParam[type]);
-    } else this.props.orderAlphabetical(type, this.props.bills);
-  };
-
   render() {
-    const { dateFilters, filter, billStatusFilter } = this.state;
+    const { currentActiveTab } = this.state;
 
     return (
       <>
@@ -122,10 +92,7 @@ export default class Dashboard extends Component {
             <div className='bill__wrapper'>
               <div className='bill__section'>
                 <SearchBar
-                  onInputChangeHandler={(e) =>
-                    this.setState({ searchedQuery: e.target.value })
-                  }
-                  currentSortingType={this.state.sorting.type}
+					activeTab={currentActiveTab}
                 />
                 <Button id='add__bill__button'> {"+ Add bill"} </Button>
                 <Nav tabs>
