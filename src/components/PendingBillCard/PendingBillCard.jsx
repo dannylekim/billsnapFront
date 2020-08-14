@@ -15,39 +15,35 @@ export const PendingBillCard = ({
   return (
     <div
       className="card-body"
-      id={activeBillId === bill.id ? "active_bill" : "non_active_bill"}
+      id={activeBillId === bill.id ? "active__bill" : "non__active__bill"}
     >
-      {bill.created && (
-        <div className="split_info">
-          <div />
-          <div className="date">{filterDateHandler(bill.created)}</div>
-        </div>
-      )}
-      <div className="bill_items">
-        <div className="split_info">
-          <div className="separate_right bill_icon">
+      <div className="split__info">
+        <div />
+        <div className="date">{filterDateHandler(bill.created)}</div>
+      </div>
+      <div className="bill__items">
+        <div className="split__info">
+          <div className="separate__right bill-icon">
             {getBillIconHandler(bill.category)}
           </div>
-          <div className="bill_name">
+          <div className="bill__name">
             <div>{bill.name}</div>
-            {bill.responsible && (
-              <div className="responsible">
-                Split by : {bill.responsible.firstName}
-              </div>
-            )}
+            <div className="responsible">
+              Split by : {bill.responsible.firstName}
+            </div>
           </div>
         </div>
-        <div className="money_info">
-          <div className="split_info">
+        <div className="money__info">
+          <div className="split__info">
             <div> Bill Total </div>
             <div> {parseFloat(bill.balance).toFixed(2)} </div>
           </div>
-          <div className="split_info">
-            <div className="separate_right">You will owe </div>
-            <div className="bill_balance">{bill.balance}</div>
+          <div className="split__info">
+            <div className="separate-right">You will owe </div>
+            <div className="bill-balance">{bill.amountOwed}</div>
           </div>
 
-          <div className="split_info">
+          <div className="split__info">
             <div> Accept? </div>
             <div>
               <MdThumbUp
