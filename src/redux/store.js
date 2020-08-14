@@ -34,6 +34,8 @@ if (process.env.NODE_ENV === "development") {
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ['application', 'users'],
+  throttle: 500,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
