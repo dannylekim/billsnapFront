@@ -19,3 +19,23 @@ export const getActiveBills = createSelector(
         return bills.filter((bill) => bill.name.toLowerCase().includes(searchName.toLowerCase()))
     }
 )
+
+export const getTotalAmountOwe = createSelector(
+    [
+        userActiveBills
+    ],
+    (bills) => {
+        return bills.reduce((arr, value) => {
+            return arr + parseFloat(value.balance)
+        }, 0).toFixed(2);
+    }
+)
+
+export const getCountOfBills = createSelector(
+    [
+        userActiveBills
+    ],
+    (bills) => {
+        return bills.length;
+    }
+)

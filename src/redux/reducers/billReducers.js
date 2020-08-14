@@ -4,6 +4,7 @@ const INTIAL_STATE = {
   count: 0, // keep track of count of bills
   bills: [],
   searchInput: '',
+  activeBill: {} // bill user has selected
 };
 
 const billReducers = (state = INTIAL_STATE, action) => {
@@ -18,6 +19,11 @@ const billReducers = (state = INTIAL_STATE, action) => {
       return {
         ...state,
         bills: action.bills,
+      };
+    case ACTIONS.SET_ACTIVE_BILL:
+      return {
+        ...state,
+        activeBill: action.bill
       };
     case ACTIONS.UPDATE_BILL_SEARCH_NAME:
       return {

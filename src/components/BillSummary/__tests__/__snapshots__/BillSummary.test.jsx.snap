@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BillSummary render snapshots 📸 BillSummary should match snap shot with empty active bill and many bills count 1`] = `
+<div
+  className="bill__summary"
+>
+  <h5>
+     
+    Total Amount Owed :
+     
+    <span
+      id="amount__owed"
+    >
+       
+      123
+       $
+    </span>
+     
+  </h5>
+  <h5>
+     Total of bills : 
+    100
+     
+  </h5>
+</div>
+`;
+
+exports[`BillSummary render snapshots 📸 BillSummary should match snap shot with empty active bill and many bills count 2`] = `
+<div
+  className="bill__summary"
+>
+  <h5>
+    Split by : Bob Ross
+  </h5>
+  <h5>
+     
+    Status : OPENED
+  </h5>
+  <h5>
+    Amount Owed :
+     
+    <span
+      id="amount__owed"
+    >
+      20.2
+       $
+    </span>
+     
+  </h5>
+</div>
+`;
+
+exports[`BillSummary render snapshots 📸 BillSummary should match snap shot with empty bill 1`] = `
+<div
+  className="bill__summary"
+>
+  <h5>
+     
+    Total Amount Owed :
+     
+    <span
+      id="amount__owed"
+    >
+       
+       $
+    </span>
+     
+  </h5>
+  <h5>
+     Total of bills : 
+     
+  </h5>
+</div>
+`;
