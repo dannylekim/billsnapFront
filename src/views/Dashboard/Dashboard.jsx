@@ -5,8 +5,6 @@ import { Button, Nav, NavItem, NavLink } from "shards-react";
 import navItems from "../../constants/BillDisplayNav.json";
 
 import BillDisplay from "../BillDisplay";
-import BillFilter from "../../components/BillFilter";
-import SimpleFilter from "../../components/SimpleFilter";
 import SearchBar from "../../components/SearchBar";
 import Loader from "../../components/Loader";
 
@@ -42,34 +40,9 @@ export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedBill: { bill: null, id: 0 },
       currentActiveTab: "allBills",
-      sorting: { opened: false, type: "Newest" },
-      filter: {
-        opened: false,
-        type: "",
-        statusOpened: false,
-        categoryOpened: false,
-        dateOpened: false,
-      },
-      dateFilters: {
-        startDate: { selected: false, value: "" },
-        endDate: { selected: false, value: "" },
-      },
-      billStatusFilter: { resolved: false, open: false, in_progess: false },
     };
   }
-
-  resetFilters = () => {
-    this.setState({
-      sorting: { opened: false, type: "Newest" },
-      dateFilters: {
-        startDate: { selected: false, value: "" },
-        endDate: { selected: false, value: "" },
-      },
-      billStatusFilter: { resolved: false, open: false, in_progess: false },
-    });
-  };
 
   displayTab = (navType) => {
     switch (navType) {
@@ -91,15 +64,11 @@ export default class Dashboard extends Component {
           <div className='dashboard__flexbox'>
             <div className='bill__wrapper'>
               <div className='bill__section'>
-                <SearchBar
-					activeTab={currentActiveTab}
-                />
+                <SearchBar activeTab={currentActiveTab} />
                 <Button id='add__bill__button'> {"+ Add bill"} </Button>
                 <Nav tabs>
                   {navItems.map((item, key) => (
-                    <NavItem
-                      key={key}
-                      onClick={() => key === 0 && this.resetFilters()}>
+                    <NavItem key={key}>
                       <NavLink
                         active={this.state.currentActiveTab === item.name}
                         onClick={() =>
@@ -113,14 +82,9 @@ export default class Dashboard extends Component {
 
                 <div className='bill__list__section'>
                   {this.displayTab(this.state.currentActiveTab)}
-                  {/* TODO: display bills/pending bills based on button selected */}
                 </div>
               </div>
-              <div className='specific__bill__section'>
-                {/* { BillsSummary(this.props.bills, this.state.selectedBill.bill) } */}
-                {/* <span id="more__details"> More details</span>
-                      <LargeBillCard selectedBill={this.state.selectedBill} /> */}
-              </div>
+              <div className='specific__bill__section'>{/* GL HF */}</div>
             </div>
           </div>
         ) : (

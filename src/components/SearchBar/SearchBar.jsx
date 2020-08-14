@@ -12,9 +12,48 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentSorting: "Newest",
-      filter: {
-        type: "",
+      currentSorting: "Newest",      
+      dateFilters: {
+        startDate: { selected: false, value: "" },
+        endDate: { selected: false, value: "" },
+      },
+      statusFilter: { resolved: false, open: false, in_progess: false },
+      toggle: {
+        short: false,
+        long: false,
+      },
+      filterToggles: {
+        statusOpened: false,
+        categoryOpened: false,
+        dateOpened: false,
+      },
+
+      // TODO
+      // categoryFilter: ''
+    };
+  }
+
+  /**
+   * Convert sorting type into REST params string
+   */
+  static getSortingParams = (type) => {
+    switch(type) {
+      case "Newest":
+        return `sort_by=CREATED&order_by=DESC`;
+      case "Oldest":
+        return `sort_by=CREATED&order_by=ASC`;
+      case "A to Z":
+        return 'sort_by=NAME&order_by=ASC';
+      case "Z to A":
+        return 'sort_by=NAME&order_by=DESC';
+      default:
+        return '';
+    }
+  }
+
+  clearFilter = () => {
+    this.setState({
+      filterToggles: {
         statusOpened: false,
         categoryOpened: false,
         dateOpened: false,
@@ -23,17 +62,12 @@ class SearchBar extends Component {
         startDate: { selected: false, value: "" },
         endDate: { selected: false, value: "" },
       },
-      billStatusFilter: { resolved: false, open: false, in_progess: false },
-
-      toggle: {
-        short: false,
-        long: false,
-      },
-    };
+      statusFilter: { resolved: false, open: false, in_progess: false },
+    })
   }
 
   /**
-   * Close all opened filter/sorting popups
+   * Close all opened filterToggles/sorting popups
    */
   closeHandler = () => {
     this.setState({
@@ -43,6 +77,123 @@ class SearchBar extends Component {
       },
     });
   };
+
+  //TO REMOVE
+  updateBills_TEST = (type) => {
+    this.setState((prev) => ({
+      sorting: { type, opened: false },
+      filterToggles: {
+        categoryOpened: false,
+        statusOpened: false,
+        dateOpened: false,
+      },
+      dateFilters: {
+        ...prev.dateFilters,
+        startDate: { ...prev.dateFilters.startDate, selected: false },
+        endDate: { ...prev.dateFilters.endDate, selected: false },
+      },
+    }));
+
+    if (type !== "A to Z" && type !== "Z to A") {
+      const startDate = `start=${this.state.dateFilters.startDate.value}`;
+      const endDate = `end=${this.state.dateFilters.endDate.value}`;
+
+      const filterQueryParam = {
+        Newest: `?${startDate}&${endDate}&sort_by=CREATED&order_by=DESC`,
+        Oldest: `?${startDate}&${endDate}&sort_by=CREATED&order_by=ASC`,
+      };
+      this.props.fetchBills(filterQueryParam[type]);
+    } else this.props.orderAlphabetical(type, this.props.bills);
+  };
+
+  /**
+   * Convert filtering data into REST params string
+   */
+  getDateParams = () => {
+    let params = '';
+
+    const {
+      dateFilters,
+    } = this.state;
+
+    if (!!dateFilters.startDate.value) {
+      params = `start=${this.state.dateFilters.startDate.value}`; 
+    }
+    if (!!dateFilters.endDate.value) {
+      params =+ `&end=${this.state.dateFilters.endDate.value}`; 
+    }
+
+    return params
+  }
+
+  getAllBillFilter = () => {
+    const {
+      resolved,
+      open,
+      in_progess
+    } = this.state.statusFilter;
+
+    // If none of the filters are on, skip
+    if (!resolved && !open && !in_progess) {
+      return '';
+    } 
+
+    let params = 'statuses=';
+
+    if (resolved) {
+      params += 'RESOLVED,';
+    }
+    if (open) {
+      params += 'OPEN,';
+    }
+    if (in_progess) {
+      params += 'IN_PROGRESS';
+    }
+
+    return params;
+  }
+
+  /**
+   * Get the REST sorting params and immediately fetch bills according to activeTab
+   */
+  applySorting = (type) => {
+    this.setState({
+      currentSorting: type,
+    });
+    this.closeHandler();
+
+    const params = this.constructor.getSortingParams(type);
+
+    switch(this.props.activeTab) {
+      case 'allBills':
+        return this.props.fetchBills(`?${params}`);
+      default:
+        break;
+    }
+
+  }
+
+  /**
+   * Similar to applySorting() above, however the bill filtering params will also be included in the REST call.
+   * 
+   * @param {String} sortingType 
+   */
+  applyFiltering = (sortingType) => {
+    this.setState({
+      currentSorting: sortingType,
+    });
+    const sortingParams = this.constructor.getSortingParams(sortingType);
+    const dateParams = this.getDateParams();
+
+    switch(this.props.activeTab) {
+      case 'allBills':
+        const filterParams = this.getAllBillFilter();
+        const totalParams = `?${sortingParams}&${dateParams}&${filterParams}`;
+        return this.props.fetchBills(`${totalParams}`);
+      default:
+        break;
+    }
+  }
 
   /**
    * Change date state on handler event
@@ -78,87 +229,56 @@ class SearchBar extends Component {
     }
   };
 
-  updateBills_TEST = (type) => {
+  /**
+   * Date checkbox handler to enable date modification. It can only be start XOR end.
+   */
+  dateCheckboxHandler = (startOrEnd, selected = true) => {
+    const oppositeDate = startOrEnd === 'startDate' ? 'endDate' : 'startDate';
     this.setState((prev) => ({
-      sorting: { type, opened: false },
-      filter: {
-        ...prev.filter,
-        opened: false,
-        categoryOpened: false,
-        statusOpened: false,
-        dateOpened: false,
-      },
+      dateFilters: {
+        ...prev.dateFilters,
+        [startOrEnd]: {
+          ...prev.dateFilters[startOrEnd],
+          selected
+        },
+        [oppositeDate]: {
+          ...prev.dateFilters[oppositeDate],
+          selected: !selected
+        }
+      }
+    }));
+  }
+  
+  /**
+   * Switch focus between status, category XOR date filter.
+   */
+  filterToggleChange = (filterToggles) => {
+    this.setState((prev) => ({
+      filterToggles,
       dateFilters: {
         ...prev.dateFilters,
         startDate: { ...prev.dateFilters.startDate, selected: false },
         endDate: { ...prev.dateFilters.endDate, selected: false },
       },
+    }))
+  }
+
+  statusFilterHandler = (status) => {
+    this.setState((prev) => ({
+      statusFilter: {
+        ...prev.statusFilter,
+        [status]: !prev.statusFilter[status]
+      }
     }));
-
-    if (type !== "A to Z" && type !== "Z to A") {
-      const startDate = `start=${this.state.dateFilters.startDate.value}`;
-      const endDate = `end=${this.state.dateFilters.endDate.value}`;
-
-      const filterQueryParam = {
-        Newest: `?${startDate}&${endDate}&sort_by=CREATED&order_by=DESC`,
-        Oldest: `?${startDate}&${endDate}&sort_by=CREATED&order_by=ASC`,
-      };
-      this.props.fetchBills(filterQueryParam[type]);
-    } else this.props.orderAlphabetical(type, this.props.bills);
-  };
-
-  updateBills(e) {
-    console.log(e);
   }
 
-  /**
-   * Convert filtering data into REST params string
-   */
-  getFilterParams = () => {
-    
-  }
-
-  /**
-   * Convert sorting type into REST params string
-   */
-  static getSortingParams = (type) => {
-    switch(type) {
-      case "Newest":
-        return `sort_by=CREATED&order_by=DESC`;
-      case "Oldest":
-        return `sort_by=CREATED&order_by=ASC`;
-      case "A to Z":
-        return 'sort_by=NAME&order_by=ASC';
-      case "Z to A":
-        return 'sort_by=NAME&order_by=DESC';
-      default:
-        return '';
-    }
-  }
-
-  applySorting = (type) => {
-    this.setState({
-      currentSorting: type,
-    });
-    this.closeHandler();
-
-    const params = this.constructor.getSortingParams(type);
-
-    switch(this.props.activeTab) {
-      case 'allBills':
-        return this.props.fetchBills(`?${params}`);
-      default:
-        break;
-    }
-
+  onInputChangeHandler = (e) => {
+    // TODO
+    const value = e.target.value;
   }
 
   render() {
-    const {
-      onInputChangeHandler,
-    } = this.props;
-
-    const { dateFilters, filter, billStatusFilter, currentSorting } = this.state;
+    const { dateFilters, filterToggles, statusFilter, currentSorting } = this.state;
 
     return (
       <div id='search__bill'>
@@ -169,7 +289,7 @@ class SearchBar extends Component {
           <input
             type='text'
             className='form-control border-0'
-            onChange={onInputChangeHandler}
+            onChange={this.onInputChangeHandler}
             placeholder='Search bill'
           />
           <span className='search__filter'>
@@ -196,13 +316,16 @@ class SearchBar extends Component {
         <div id='search__bill-options'>
           {this.state.toggle.long && (
             <BillFilter
-              dateFilters={dateFilters}
-              filter={filter}
-              billStatusFilter={billStatusFilter}
-              handleDateSelection={this.handleDateSelection}
-              updateBills={this.updateBills}
-              setState={this.setState.bind(this)}
+              activeTab={this.state.activeTab}
+              applyFiltering={this.applyFiltering}
+              billStatusFilter={statusFilter}
               closeHandler={this.closeHandler}
+              dateFilters={dateFilters}
+              dateCheckboxHandler={this.dateCheckboxHandler}
+              filterToggles={filterToggles}
+              filterToggleChange={this.filterToggleChange}
+              handleDateSelection={this.handleDateSelection}
+              handleStatusChange={this.statusFilterHandler}
             />
           )}
           {this.state.toggle.short && (
