@@ -10,6 +10,7 @@ import "./styles.scss";
 const BillFilter = ({
   activeTab,
   applyFiltering,
+  currentSorting,
   billStatusFilter,
   closeHandler,
   dateCheckboxHandler,
@@ -89,7 +90,7 @@ const BillFilter = ({
         {filterBadges.map((badgeObject, key) => (
           <Badge
             key={key}
-            className={badgeObject.title === activeTab && 'active'}
+            className={badgeObject.title === currentSorting && 'active'}
             outline
             pill
             id={badgeObject.id}

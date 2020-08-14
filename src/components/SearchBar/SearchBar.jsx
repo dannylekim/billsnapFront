@@ -316,7 +316,8 @@ class SearchBar extends Component {
         <div id='search__bill-options'>
           {this.state.toggle.long && (
             <BillFilter
-              activeTab={this.state.activeTab}
+              activeTab={this.props.activeTab}
+              currentSorting={currentSorting}
               applyFiltering={this.applyFiltering}
               billStatusFilter={statusFilter}
               closeHandler={this.closeHandler}

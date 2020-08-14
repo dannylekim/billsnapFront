@@ -44,6 +44,10 @@ div.bill__filter__container {
       line-height: 16px;
       width: 120px;
       margin-bottom: 10px;
+
+      &.active {
+        background-color: $secondary-color;
+      }
     }
 
     span.badge.badge-outline-primary.badge-pill:hover {
