@@ -4,7 +4,7 @@ import React from "react";
  */
 import LandingPage from "../LandingPage";
 import Dashboard from "../Dashboard";
-
+import Profile from "../Profile";
 import Sidebar from "../../components/Sidebar";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -23,9 +23,10 @@ export default () => {
         <Switch>
           <React.Fragment>
             <div className='App__container'>
-              <Sidebar hide={ !(!!localStorage.getItem("billSnap_token")) } />
               <Route path='/' exact component={LandingPage} />
+              <Sidebar hide={ !(!!localStorage.getItem("billSnap_token")) } />
               <Route path='/dashboard' exact component={Dashboard} />
+              <Route path='/profile' exact component={Profile} />
             </div>
           </React.Fragment>
         </Switch>

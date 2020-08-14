@@ -121,7 +121,7 @@ class SearchBar extends Component {
       params = `start=${this.state.dateFilters.startDate.value}`; 
     }
     if (!!dateFilters.endDate.value) {
-      params =+ `&end=${this.state.dateFilters.endDate.value}`; 
+      params += `&end=${this.state.dateFilters.endDate.value}`; 
     }
 
     return params
@@ -318,7 +318,7 @@ class SearchBar extends Component {
                   toggle: { ...prev.toggle, short: true },
                 }))
               }>
-              {currentSorting}{" "}
+              {currentSorting}
             </span>
           </span>
         </div>

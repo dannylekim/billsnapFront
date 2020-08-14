@@ -3,7 +3,7 @@
 exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap shot 1`] = `
 <div
   className="bill__items card-body"
-  id="non__active__bill"
+  id="active__bill"
 >
   <div
     className="bill__items card-title text-muted"

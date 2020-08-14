@@ -6,31 +6,11 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
 >
   <div
     className="filter__header"
-    onClick={[Function]}
   >
-    <svg
-      fill="currentColor"
-      height={24}
-      size={24}
-      stroke="currentColor"
-      strokeWidth="0"
-      style={
-        Object {
-          "color": undefined,
-        }
-      }
-      viewBox="0 0 448 512"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
-      />
-    </svg>
     <span
       className="filter__header__title"
     >
-      Filters
+      Filters 
     </span>
   </div>
   <div
@@ -90,12 +70,59 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
     className="advanced__filter__selection"
   >
     <div
-      className="category__filter"
+      className="date__filter"
     >
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="dr-checkbox-m0JFsY7b3"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="dr-checkbox-m0JFsY7b3"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          Start date
+          
+        </span>
+      </label>
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="dr-checkbox-T4W-PMpkQu"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="dr-checkbox-T4W-PMpkQu"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          End date
+          
+        </span>
+      </label>
       <input
         className="form-control"
-        placeholder="Restaurant"
-        type="text"
+        disabled={true}
+        onChange={[Function]}
+        type="date"
       />
     </div>
   </div>

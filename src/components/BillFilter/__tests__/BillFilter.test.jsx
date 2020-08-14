@@ -8,17 +8,20 @@ describe("BillFilter", () => {
     describe("snapshots 📸", () => {
       it("BillFilter should match snap shot when category filter opened", () => {
         matches(
-          <BillFilter
+          shallow(<BillFilter
             dateFilters={{
               startDate: { selected: false, value: "" },
               endDate: { selected: false, value: "" },
             }}
-            filter={{
-              opened: true,
-              type: "",
+            statusFilter= {{ resolved: false, open: false, in_progess: false }}
+            toggle = {{
+              short: false,
+              long: false,
+            }}
+            filterToggles= {{
               statusOpened: false,
-              categoryOpened: true,
-              dateOpened: false,
+              categoryOpened: false,
+              dateOpened: true,
             }}
             billStatusFilter={{
               resolved: false,
@@ -28,7 +31,7 @@ describe("BillFilter", () => {
             handleDateSelection={jest.fn()}
             updateBills={jest.fn()}
             setState={jest.fn()}
-          />
+          />)
         );
       });
     });
@@ -42,9 +45,12 @@ describe("BillFilter", () => {
             startDate: { selected: true, value: "2020-01-01" },
             endDate: { selected: false, value: "" },
           }}
-          filter={{
-            opened: true,
-            type: "",
+          statusFilter= {{ resolved: false, open: false, in_progess: false }}
+          toggle = {{
+            short: false,
+            long: false,
+          }}
+          filterToggles= {{
             statusOpened: false,
             categoryOpened: false,
             dateOpened: true,
@@ -68,14 +74,18 @@ describe("BillFilter", () => {
             startDate: { selected: false, value: "" },
             endDate: { selected: true, value: "2020-01-01" },
           }}
-          filter={{
-            opened: true,
-            type: "",
+          statusFilter= {{ resolved: false, open: false, in_progess: false }}
+          toggle = {{
+            short: false,
+            long: false,
+          }}
+          filterToggles= {{
             statusOpened: false,
             categoryOpened: false,
             dateOpened: true,
           }}
           billStatusFilter={{ resolved: false, open: false, in_progess: false }}
+        
           handleDateSelection={jest.fn()}
           updateBills={jest.fn()}
           setState={jest.fn()}

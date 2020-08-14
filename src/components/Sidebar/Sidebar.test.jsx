@@ -3,7 +3,6 @@ import Sidebar from "./Sidebar.jsx";
 import SidebarComponent, {DEFAULT_ACTIVE_STATE} from "../Sidebar";
 import {NavLink} from "shards-react";
 import configureStore from "redux-mock-store";
-import {Provider} from "react-redux";
 
 const mockStore = configureStore();
 
