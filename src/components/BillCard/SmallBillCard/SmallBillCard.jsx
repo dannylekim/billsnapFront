@@ -24,11 +24,11 @@ const getBillIcons = (category) => {
   }
 };
 
-const SmallBillCard = ({ activeBill, bill }) => (
+const SmallBillCard = ({ activeBillId, bill }) => (
   <div
     className="bill__items card-body"
     id={
-      activeBill && activeBill.id === bill.id
+      typeof activeBillId === 'number' && activeBillId === bill.id
         ? "active__bill"
         : "non__active__bill"
     }
@@ -61,8 +61,8 @@ const SmallBillCard = ({ activeBill, bill }) => (
 );
 
 SmallBillCard.propTypes = {
-  bill: PropType.arrayOf(PropType.shape({})), // array of bill object
-  activeBill: PropType.shape({}) // bill selected
+  bill: PropType.shape({}), // array of bill object
+  activeBillId: PropType.number // bill selected
 }
 
 export default SmallBillCard;

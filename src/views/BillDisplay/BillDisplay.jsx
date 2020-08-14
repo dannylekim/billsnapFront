@@ -6,47 +6,18 @@ import SmallBillCard from "../../components/BillCard/SmallBillCard";
 import "./styles.scss";
 
 class BillDisplay extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      seachedQuery: "",
-      selectedBill: { bill: null, id: 0 },
-      currentActiveTab: "allBills",
-      sorting: { opened: false, type: "Newest" },
-      filter: {
-        opened: false,
-        type: "",
-        statusOpened: false,
-        categoryOpened: false,
-        dateOpened: false,
-      },
-      dateFilters: {
-        startDate: { selected: false, value: "" },
-        endDate: { selected: false, value: "" },
-      },
-      billStatusFilter: { resolved: false, open: false, in_progess: false },
-    };
-  }
-
   componentDidMount = async () => {
     await this.props.fetchBills();
   };
 
   render = () => {
-    const { bills, isBillLoading, count } = this.props;
+    const { bills, isBillLoading } = this.props;
 
     /**
      * @description returns the list of bills as cards.
      * @param {Array} billsVar the variable bills,
      */
     const BillsList = (billsVar) => {
-    //   billsVar =
-    //     this.state.seachedQuery.trim() !== ""
-    //       ? billsVar.filter((bill) =>
-    //           bill.name.includes(this.state.seachedQuery)
-    //         )
-    //       : billsVar;
-
       return (
         <div className="bill__container">
           {billsVar.length > 0 ? (
@@ -55,11 +26,11 @@ class BillDisplay extends Component {
                 className="bill__card card"
                 key={bill.id}
                 onClick={() =>
-                  this.setState({ selectedBill: { bill, id: bill.id } })
+                  this.props.setActiveBill(bill)
                 }
               >
                 <SmallBillCard
-                  activeBill={this.state.selectedBill.bill}
+                  activeBillId={this.props.activeBillId}
                   bill={bill}
                 />
                 {key !== billsVar.length - 1 && (
@@ -68,7 +39,7 @@ class BillDisplay extends Component {
               </div>
             ))
           ) : (
-            <p> {`No bills found titled: ${this.state.seachedQuery}`}</p>
+            <p> {`No bills found titled: ${this.props.searchInput}`}</p>
           )}
         </div>
       );
