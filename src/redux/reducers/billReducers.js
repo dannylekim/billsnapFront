@@ -3,6 +3,7 @@ import {ACTIONS} from "../actions/billActions";
 const INTIAL_STATE = {
   count: 0, // keep track of count of bills
   bills: [],
+  searchInput: '',
 };
 
 const billReducers = (state = INTIAL_STATE, action) => {
@@ -17,6 +18,11 @@ const billReducers = (state = INTIAL_STATE, action) => {
       return {
         ...state,
         bills: action.bills,
+      };
+    case ACTIONS.UPDATE_BILL_SEARCH_NAME:
+      return {
+        ...state,
+        searchInput: action.input,
       };
     default:
       return state;

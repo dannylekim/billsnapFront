@@ -7,6 +7,7 @@ import BillFilter from "../BillFilter";
 import SimpleFilter from "../SimpleFilter";
 
 import "./styles.scss";
+import { Button } from "shards-react";
 
 class SearchBar extends Component {
   constructor(props) {
@@ -275,6 +276,7 @@ class SearchBar extends Component {
   onInputChangeHandler = (e) => {
     // TODO
     const value = e.target.value;
+    this.props.updateBillNameSearch(value);
   }
 
   render() {
@@ -291,7 +293,14 @@ class SearchBar extends Component {
             className='form-control border-0'
             onChange={this.onInputChangeHandler}
             placeholder='Search bill'
+            value={this.props.billNameSearch}
           />
+          {!!this.props.billNameSearch && (
+            <Button
+              onClick={() => this.props.updateBillNameSearch()}
+              theme="light"> 
+              Clear
+            </Button>)}
           <span className='search__filter'>
             <span
               className='filter__bill'

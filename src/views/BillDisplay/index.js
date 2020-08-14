@@ -2,10 +2,11 @@ import BillDisplay from "./BillDisplay.jsx";
 
 import {connect} from "react-redux";
 import {fetchMyBills, orderAlphabetical,} from "../../redux/actions/billActions";
+import { getActiveBills } from "../../redux/selectors/billsSelectors";
 
 const mapStateToProps = (state) => ({
   count: state.bills.count,
-  bills: state.bills.bills,
+  bills: getActiveBills(state),
   isBillLoading: state.application.isBillLoading,
 });
 
