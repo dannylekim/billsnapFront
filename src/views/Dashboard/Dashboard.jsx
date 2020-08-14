@@ -1,40 +1,14 @@
 import React, { Component } from "react";
 import { Button, Nav, NavItem, NavLink } from "shards-react";
 
-// import { DEFAULT_ACTIVE_STATE } from "../../components/Sidebar/Sidebar.jsx";
 import navItems from "../../constants/BillDisplayNav.json";
 
 import BillDisplay from "../BillDisplay";
 import SearchBar from "../../components/SearchBar";
 import Loader from "../../components/Loader";
+import BillSummary from '../../components/BillSummary';
 
 import "./styles.scss";
-
-const BillsSummary = ({ billsVar, activeBill = null }) => {
-  return activeBill === null ? (
-    <div className='bill__summary'>
-      <h5>
-        {" "}
-        Total Amount Owed :{" "}
-        <span id='amount__owed'>
-          {" "}
-          {billsVar.reduce((a, b) => a + parseFloat(b.balance), 0).toFixed(2)} $
-        </span>{" "}
-      </h5>
-      <h5> Total of bills : {billsVar.length} </h5>
-    </div>
-  ) : (
-    <div className='bill__summary'>
-      <h5>
-        {`Split by : ${activeBill.responsible.firstName} ${activeBill.responsible.lastName}`}
-      </h5>
-      <h5> {`Status : ${activeBill.status}`}</h5>
-      <h5>
-        Amount Owed : <span id='amount__owed'>{activeBill.balance} $</span>{" "}
-      </h5>
-    </div>
-  );
-};
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -84,7 +58,9 @@ export default class Dashboard extends Component {
                   {this.displayTab(this.state.currentActiveTab)}
                 </div>
               </div>
-              <div className='specific__bill__section'>{/* GL HF */}</div>
+              <div className='specific__bill__section'>
+				  <BillSummary />
+			  </div>
             </div>
           </div>
         ) : (
