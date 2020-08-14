@@ -15,8 +15,6 @@ div.bill__items {
 
     .bill__name__price {
       width: 100%;
-      display: flex;
-      justify-content: space-between;
 
       #bill__name {
         margin-left: 10px;
@@ -33,6 +31,15 @@ div.bill__items {
     }
   }
 
+  .split__by {
+    span#responsible {
+      margin-left: 32px;
+      font-weight: bold;
+      font-family: $primary-font;
+      color: $tertiary-text-color;
+    }
+  }
+
   .card-footer {
     width: 100%;
     margin-left: 25px;
@@ -41,23 +48,10 @@ div.bill__items {
   }
 }
 
-.bill__balance {
+#bill__balance {
   font-family: $primary-font;
   font-style: normal;
   font-weight: bold;
-  font-size: 12px;
-  color: $primary-text-color;
-}
-
-.split_info {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-}
-
-.responsible {
-  margin-left: 32px;
-  font-weight: bold;
-  font-family: $primary-font;
-  color: $tertiary-text-color;
+  font-size: 16px;
+  color: $primary-price-color;
 }

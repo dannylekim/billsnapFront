@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import "./styles.scss";
 import Loader from "../../components/Loader";
+import SmallBillCard from "../../components/BillCard/SmallBillCard";
 import LargeBillCard from "../../components/BillCard/LargeBillCard";
 import BillFilter from "../../components/BillFilter";
 import {Button, Nav, NavItem, NavLink} from "shards-react";
 import {FaBars, FaBus, FaCar, FaQuestion, FaSearch, FaShoppingBag, FaShoppingCart, FaUtensils,} from "react-icons/fa";
 import navItems from "../../constants/BillDisplayNav.json";
-import {PendingBillCard} from "../../components/PendingBillCard/PendingBillCard";
 
 class BillDisplay extends Component {
   constructor(props) {
@@ -280,11 +280,11 @@ class BillDisplay extends Component {
                   this.setState({ selectedBill: { bill, id: key + 1 } })
                 }
               >
-                <PendingBillCard
+                <SmallBillCard
                   activeBill={this.state.selectedBill.bill}
                   bill={bill}
-                  filterDateHandler={this.constructor.filterDateTime}
-                  getBillIconHandler={this.constructor.billIcons}
+                  filterDateTime={this.constructor.filterDateTime}
+                  billIcons={this.constructor.billIcons}
                 />
                 {key !== billsVar.length - 1 && (
                   <hr className="card__seperator" />

@@ -1,57 +1,56 @@
 @import "../../variables";
 
-div#active__bill {
+div#active_bill {
   background-color: rgba(241, 241, 241, 0.71);
 }
 
-div.bill__items {
-  text-align: left;
-
-  .card-text {
-    width: 100%;
-    margin-top: 25px;
-    height: 50px;
-    display: flex;
-
-    .bill__name__price {
-      width: 100%;
-
-      #bill__name {
-        margin-left: 10px;
-        font-family: $primary-font;
-        font-style: normal;
-        font-weight: bold;
-        float: left;
-        color: $primary-text-color;
-      }
-
-      #bill__balance {
-        float: right;
-      }
-    }
-  }
-
-  .split__by {
-    span#responsible {
-      margin-left: 32px;
-      font-weight: bold;
-      font-family: $primary-font;
-      color: $tertiary-text-color;
-    }
-  }
-
-  .card-footer {
-    width: 100%;
-    margin-left: 25px;
-    background-color: $card-color;
-    padding: 0;
-  }
+.date {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.56);
+  font-size: 18px;
 }
 
-#bill__balance {
+div.bill_items {
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bill_name {
   font-family: $primary-font;
   font-style: normal;
   font-weight: bold;
-  font-size: 16px;
-  color: $primary-price-color;
+  font-size: 20px;
+  color: $primary-text-color;
+}
+
+.bill_icon {
+  margin-top: 0.5rem;
+}
+
+.separate_right {
+  margin-right: 1em;
+}
+
+.split_info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.money_info {
+  font-family: $primary-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  color: $primary-text-color;
+}
+
+.bill_balance {
+  color: #ffb400;
+}
+
+.responsible {
+  font-weight: bold;
+  font-family: $primary-font;
+  color: $tertiary-text-color;
 }
