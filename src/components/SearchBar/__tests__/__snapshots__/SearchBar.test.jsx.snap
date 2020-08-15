@@ -68,7 +68,6 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when s
         onClick={[Function]}
       >
         A to Z
-         
       </span>
     </span>
   </div>
@@ -146,7 +145,6 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot withou
         onClick={[Function]}
       >
         Newest
-         
       </span>
     </span>
   </div>
