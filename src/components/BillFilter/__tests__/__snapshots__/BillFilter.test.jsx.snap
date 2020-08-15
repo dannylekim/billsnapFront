@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when category filter opened 1`] = `
+exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when category opened 1`] = `
 <div
   className="bill__filter__container"
 >
@@ -11,13 +11,14 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
       className="filter__header__title"
     >
       Filters 
+      allBills
     </span>
   </div>
   <div
     className="filter__selections__container"
   >
     <span
-      className={false}
+      className="active"
     >
       <span
         className="badge badge-outline-primary badge-pill"
@@ -98,59 +99,12 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
     className="advanced__filter__selection"
   >
     <div
-      className="date__filter"
+      className="category__filter"
     >
-      <label
-        className="custom-control custom-checkbox"
-      >
-        <input
-          checked={false}
-          className="custom-control-input"
-          id="dr-checkbox-ySfse0zZ6"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          aria-hidden="true"
-          className="custom-control-label"
-          id="dr-checkbox-ySfse0zZ6"
-          onClick={[Function]}
-        />
-        <span
-          className="custom-control-description"
-        >
-          Start date
-          
-        </span>
-      </label>
-      <label
-        className="custom-control custom-checkbox"
-      >
-        <input
-          checked={false}
-          className="custom-control-input"
-          id="dr-checkbox-ZWJ1Yk_VGv"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <label
-          aria-hidden="true"
-          className="custom-control-label"
-          id="dr-checkbox-ZWJ1Yk_VGv"
-          onClick={[Function]}
-        />
-        <span
-          className="custom-control-description"
-        >
-          End date
-          
-        </span>
-      </label>
       <input
         className="form-control"
-        disabled={true}
-        onChange={[Function]}
-        type="date"
+        placeholder="Restaurant"
+        type="text"
       />
     </div>
   </div>
