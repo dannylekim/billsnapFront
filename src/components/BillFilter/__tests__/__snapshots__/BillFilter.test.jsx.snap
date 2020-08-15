@@ -17,53 +17,81 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
     className="filter__selections__container"
   >
     <span
-      className="badge badge-outline-primary badge-pill"
-      id="descending"
-      onClick={[Function]}
+      className={false}
     >
-      Newest
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="descending"
+        onClick={[Function]}
+      >
+        Newest
+      </span>
     </span>
     <span
-      className="badge badge-outline-primary badge-pill"
-      id="ascending"
-      onClick={[Function]}
+      className={false}
     >
-      Oldest
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="ascending"
+        onClick={[Function]}
+      >
+        Oldest
+      </span>
     </span>
     <span
-      className="badge badge-outline-primary badge-pill"
-      id="by__status"
-      onClick={[Function]}
+      className={false}
     >
-      Status
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="by__status"
+        onClick={[Function]}
+      >
+        Status
+      </span>
     </span>
     <span
-      className="badge badge-outline-primary badge-pill"
-      id="alphabetical__increasing"
-      onClick={[Function]}
+      className={false}
     >
-      A to Z
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="alphabetical__increasing"
+        onClick={[Function]}
+      >
+        A to Z
+      </span>
     </span>
     <span
-      className="badge badge-outline-primary badge-pill"
-      id="alphabetical__decreasing"
-      onClick={[Function]}
+      className={false}
     >
-      Z to A
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="alphabetical__decreasing"
+        onClick={[Function]}
+      >
+        Z to A
+      </span>
     </span>
     <span
-      className="badge badge-outline-primary badge-pill"
-      id="by__category"
-      onClick={[Function]}
+      className={false}
     >
-      Category
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="by__category"
+        onClick={[Function]}
+      >
+        Category
+      </span>
     </span>
     <span
-      className="badge badge-outline-primary badge-pill"
-      id="by__date"
-      onClick={[Function]}
+      className={false}
     >
-      Date
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="by__date"
+        onClick={[Function]}
+      >
+        Date
+      </span>
     </span>
   </div>
   <div
@@ -78,14 +106,14 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
         <input
           checked={false}
           className="custom-control-input"
-          id="dr-checkbox-m0JFsY7b3"
+          id="dr-checkbox-ySfse0zZ6"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-m0JFsY7b3"
+          id="dr-checkbox-ySfse0zZ6"
           onClick={[Function]}
         />
         <span
@@ -101,14 +129,14 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
         <input
           checked={false}
           className="custom-control-input"
-          id="dr-checkbox-T4W-PMpkQu"
+          id="dr-checkbox-ZWJ1Yk_VGv"
           onChange={[Function]}
           type="checkbox"
         />
         <label
           aria-hidden="true"
           className="custom-control-label"
-          id="dr-checkbox-T4W-PMpkQu"
+          id="dr-checkbox-ZWJ1Yk_VGv"
           onClick={[Function]}
         />
         <span

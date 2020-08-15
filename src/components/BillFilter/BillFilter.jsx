@@ -88,15 +88,15 @@ const BillFilter = ({
       </div>
       <div className='filter__selections__container'>
         {filterBadges.map((badgeObject, key) => (
-          <Badge
-            key={key}
-            className={badgeObject.title === currentSorting && 'active'}
-            outline
-            pill
-            id={badgeObject.id}
-            onClick={badgeObject.onClick}>
-            {badgeObject.title}
-          </Badge>
+          <span key={key}  className={badgeObject.title === currentSorting && 'active'}>
+            <Badge
+              outline
+              pill
+              id={badgeObject.id}
+              onClick={badgeObject.onClick}>
+              {badgeObject.title}
+            </Badge>
+          </span>
         ))}
       </div>
       {extraFilterSelected && (

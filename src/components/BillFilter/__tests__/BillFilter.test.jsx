@@ -8,7 +8,7 @@ describe("BillFilter", () => {
     describe("snapshots 📸", () => {
       it("BillFilter should match snap shot when category filter opened", () => {
         matches(
-          shallow(<BillFilter
+         <BillFilter
             dateFilters={{
               startDate: { selected: false, value: "" },
               endDate: { selected: false, value: "" },
@@ -16,7 +16,7 @@ describe("BillFilter", () => {
             statusFilter= {{ resolved: false, open: false, in_progess: false }}
             toggle = {{
               short: false,
-              long: false,
+              long: true,
             }}
             filterToggles= {{
               statusOpened: false,
@@ -31,7 +31,7 @@ describe("BillFilter", () => {
             handleDateSelection={jest.fn()}
             updateBills={jest.fn()}
             setState={jest.fn()}
-          />)
+          />
         );
       });
     });
@@ -48,7 +48,7 @@ describe("BillFilter", () => {
           statusFilter= {{ resolved: false, open: false, in_progess: false }}
           toggle = {{
             short: false,
-            long: false,
+            long: true,
           }}
           filterToggles= {{
             statusOpened: false,
@@ -77,7 +77,7 @@ describe("BillFilter", () => {
           statusFilter= {{ resolved: false, open: false, in_progess: false }}
           toggle = {{
             short: false,
-            long: false,
+            long: true,
           }}
           filterToggles= {{
             statusOpened: false,
