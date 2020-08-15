@@ -34,6 +34,7 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when s
       onChange={[Function]}
       placeholder="Search bill"
       type="text"
+      value=""
     />
     <span
       className="search__filter"
@@ -66,7 +67,7 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when s
         className="simple__sort"
         onClick={[Function]}
       >
-        Newest
+        A to Z
          
       </span>
     </span>
@@ -111,6 +112,7 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot withou
       onChange={[Function]}
       placeholder="Search bill"
       type="text"
+      value=""
     />
     <span
       className="search__filter"

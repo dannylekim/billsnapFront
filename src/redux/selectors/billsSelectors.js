@@ -16,7 +16,7 @@ export const getActiveBills = createSelector(
     ],
     (bills, searchName) => {
         // compare input to bill name.
-        return bills.filter((bill) => bill.name.toLowerCase().includes(searchName.toLowerCase()))
+        return bills.length > 0 ? bills.filter((bill) => bill.name.toLowerCase().includes(searchName.toLowerCase())) : []
     }
 )
 

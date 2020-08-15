@@ -9,7 +9,6 @@ import Loader from "../../components/Loader";
 import BillSummary from '../../components/BillSummary';
 
 import "./styles.scss";
-
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);

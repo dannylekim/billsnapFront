@@ -30,7 +30,7 @@ describe("SmallBillCard", () => {
             bill={fakeBills[0]}
             filterDateTime={jest.fn()}
             billIcons={jest.fn()}
-            activeBill={fakeBills[0]}
+            activeBillId={fakeBills[0].id}
           />
         );
       });
@@ -44,7 +44,7 @@ describe("SmallBillCard", () => {
           bill={fakeBills[1]}
           filterDateTime={jest.fn()}
           billIcons={jest.fn()}
-          activeBill={fakeBills[0]}
+          activeBillId={fakeBills[0].id}
         />
       );
       expect(wrapper.find("#non__active__bill")).toHaveLength(1);
@@ -56,7 +56,7 @@ describe("SmallBillCard", () => {
           bill={fakeBills[0]}
           filterDateTime={jest.fn()}
           billIcons={jest.fn()}
-          activeBill={fakeBills[0]}
+          activeBillId={fakeBills[0].id}
         />
       );
       expect(wrapper.find("#active__bill")).toHaveLength(1);

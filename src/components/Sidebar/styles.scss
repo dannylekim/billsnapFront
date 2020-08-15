@@ -52,7 +52,8 @@ div.sidebar__navitems {
       border-bottom-left-radius: 50px !important;
     }
 
-    &.active {
+    &.active, &.active:hover {
+      background-color: white;
       color: $secondary-color !important;
       border-top-right-radius: 0 !important;
       border-top-left-radius: 50px !important;
