@@ -7,12 +7,7 @@ import "./styles.scss";
 
 const SmallBillCard = ({ activeBillId, bill }) => (
   <div
-    className="bill__items card-body"
-    id={
-      typeof activeBillId === 'number' && activeBillId === bill.id
-        ? "active__bill"
-        : "non__active__bill"
-    }
+    className={`bill__items card-body ${(typeof activeBillId === 'number' && activeBillId === bill.id) && 'bill-active' }`}
   >
     {!!bill.created && (
       <div className="bill__items card-title text-muted">
