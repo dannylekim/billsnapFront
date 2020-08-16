@@ -17,7 +17,6 @@ export const CreateBillForm = ({
   itemBuffer,
   taxBuffer,
   accountBuffer,
-  tipBuffer
 }) => {
   return (
     <div>

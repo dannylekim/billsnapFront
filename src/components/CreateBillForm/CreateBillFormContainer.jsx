@@ -93,27 +93,6 @@ class CreateBillFormContainer extends Component {
   };
 
   /**
-   * @function handleCorrectTipFormat
-   */
-  handleCorrectTipFormat = () => {
-    if (this.state.tipFormat) {
-      this.setState((prev) => ({
-        addBillForm: {
-          ...prev.addBillForm,
-          tipPercent: undefined,
-        },
-      }));
-    } else  {
-      this.setState((prev) => ({
-        addBillForm: {
-          ...prev.addBillForm,
-          tipAmount: undefined,
-        },
-      }));
-    }
-  };
-
-  /**
    * @function handleSubmitClick
    * @description Handles the submission by calling the create bill endpoint.
    * handle the response with handleResponse function.
@@ -126,9 +105,8 @@ class CreateBillFormContainer extends Component {
         isLoading: true,
       });
 
-      this.handleCorrectTipFormat();
+      await this.handleCorrectTipFormat();
       
-      console.log(this.state.addBillForm);
       const newBill = await this.props.createNewBill(this.state.addBillForm);
       this.setState({
         isOpen: true,
@@ -205,6 +183,28 @@ class CreateBillFormContainer extends Component {
         break;
     }
   }
+
+    /**
+   * @function handleCorrectTipFormat
+   */
+  handleCorrectTipFormat = async () => {
+    if (this.state.tipFormat) {
+      console.log("removeing tip");
+      this.setState((prev) => ({
+        addBillForm: {
+          ...prev.addBillForm,
+          tipPercent: undefined,
+        },
+      }));
+    } else  {
+      this.setState((prev) => ({
+        addBillForm: {
+          ...prev.addBillForm,
+          tipAmount: undefined,
+        },
+      }));
+    }
+  };
 
   /**
    * Toggles the modal from open to close
