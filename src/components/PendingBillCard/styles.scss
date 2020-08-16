@@ -1,0 +1,56 @@
+@import "../../variables";
+
+div#active__bill {
+  background-color: rgba(241, 241, 241, 0.71);
+}
+
+.date {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.56);
+  font-size: 18px;
+}
+
+div.bill__items {
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+}
+
+.bill__name {
+  font-family: $primary-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  color: $primary-text-color;
+}
+
+.bill-icon {
+  margin-top: 0.5rem;
+}
+
+.separate-right {
+  margin-right: 1em;
+}
+
+.split__info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.money__info {
+  font-family: $primary-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  color: $primary-text-color;
+}
+
+.bill-balance {
+  color: #ffb400;
+}
+
+.responsible {
+  font-weight: bold;
+  font-family: $primary-font;
+  color: $tertiary-text-color;
+}
