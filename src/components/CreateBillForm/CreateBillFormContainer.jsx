@@ -12,8 +12,8 @@ class CreateBillFormContainer extends Component {
         company: "",
         items: [],
         accountsList: [],
-        tipAmount: undefined,
-        tipPercent: undefined,
+        tipAmount: 0,
+        tipPercent: 0,
         taxes: []
       },
       balance: 0,
@@ -21,9 +21,9 @@ class CreateBillFormContainer extends Component {
       hasErrors: {},
       errorMessage: "",
       isLoading: false,
-      itemBuffer: {name: null, cost: null},
-      taxBuffer: {name: null, percentage: null},
-      accountBuffer: null,
+      itemBuffer: {name: "", cost: 0},
+      taxBuffer: {name: "", percentage: 0},
+      accountBuffer: "",
       tipFormat: true
     };
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
@@ -33,6 +33,7 @@ class CreateBillFormContainer extends Component {
     this.onCategoryChange = this.onCategoryChange.bind(this);
     this.handleErrorResponse = this.handleErrorResponse.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleCorrectTipFormat = this.handleCorrectTipFormat.bind(this);
   }
 
   /**
@@ -48,22 +49,6 @@ class CreateBillFormContainer extends Component {
         [name]: value,
       },
     }));
-
-    if (name === "tipAmount") {
-      this.setState((prev) => ({
-        addBillForm: {
-          ...prev.addBillForm,
-          tipPercent: undefined,
-        },
-      }));
-    } else if (name === "tipPercent") {
-      this.setState((prev) => ({
-        addBillForm: {
-          ...prev.addBillForm,
-          tipAmount: undefined,
-        },
-      }));
-    }
   }
 
   /**
@@ -78,8 +63,8 @@ class CreateBillFormContainer extends Component {
       case "item":
         this.setState((prev) => ({
           itemBuffer: {
-            name: (name === "name") ? value : prev.itemBuffer.name,
-            cost: (name === "cost") ? value : prev.itemBuffer.cost
+            ...prev.itemBuffer,
+            [name]: value
           }
         }));
         break;
@@ -87,17 +72,16 @@ class CreateBillFormContainer extends Component {
       case "tax":
         this.setState((prev) => ({
           taxBuffer: {
-            name: (name === "name") ? value : prev.taxBuffer.name,
-            percentage: (name === "percentage") ? value : prev.taxBuffer.percentage
+            ...prev.taxBuffer,
+            [name]: value
           }
         }));
         break;
 
       case "tipFormat":
         this.setState({
-          tipFormat: !this.state.tipFormat
+          tipFormat: !this.state.tipFormat,
         });
-        document.getElementById("tipInputs").reset();
         break;
 
       case "account":
@@ -105,6 +89,27 @@ class CreateBillFormContainer extends Component {
           accountBuffer: value
         }));
         break;
+    }
+  };
+
+  /**
+   * @function handleCorrectTipFormat
+   */
+  handleCorrectTipFormat = () => {
+    if (this.state.tipFormat) {
+      this.setState((prev) => ({
+        addBillForm: {
+          ...prev.addBillForm,
+          tipPercent: undefined,
+        },
+      }));
+    } else  {
+      this.setState((prev) => ({
+        addBillForm: {
+          ...prev.addBillForm,
+          tipAmount: undefined,
+        },
+      }));
     }
   };
 
@@ -120,6 +125,10 @@ class CreateBillFormContainer extends Component {
       this.setState({
         isLoading: true,
       });
+
+      this.handleCorrectTipFormat();
+      
+      console.log(this.state.addBillForm);
       const newBill = await this.props.createNewBill(this.state.addBillForm);
       this.setState({
         isOpen: true,
@@ -143,12 +152,10 @@ class CreateBillFormContainer extends Component {
         const itemBuffer = this.state.itemBuffer;
         if (itemBuffer.name && itemBuffer.cost) {
           this.setState({
-            items: this.state.addBillForm.items.push({ ...itemBuffer })
+            items: this.state.addBillForm.items.push({ ...itemBuffer }),
+            balance: this.state.balance + itemBuffer.cost,
+            itemBuffer: { name: "", cost: 0 }
           });
-    
-          itemBuffer.name = null;
-          itemBuffer.cost = null;
-          document.getElementById("itemInputs").reset();
         }
         break;
 
@@ -156,12 +163,9 @@ class CreateBillFormContainer extends Component {
         const taxBuffer = this.state.taxBuffer;
         if (taxBuffer.name && taxBuffer.percentage) {
           this.setState({
-            taxes: this.state.addBillForm.taxes.push({ ...taxBuffer })
+            taxes: this.state.addBillForm.taxes.push({ ...taxBuffer }),
+            taxBuffer: {name: "", percentage: 0}
           });
-    
-          taxBuffer.name = null;
-          taxBuffer.percentage = null;
-          document.getElementById("taxInputs").reset();
         }
         break;
 
@@ -169,11 +173,9 @@ class CreateBillFormContainer extends Component {
         let accBuffer = this.state.accountBuffer;
         if (accBuffer) {
           this.setState({
-            accountsList: this.state.addBillForm.accountsList.push(accBuffer)
+            accountsList: this.state.addBillForm.accountsList.push(accBuffer),
+            accountBuffer: ""
           })
-
-          accBuffer = null;
-          document.getElementById("accountInputs").reset();
         }
         break;
     }
@@ -236,6 +238,9 @@ class CreateBillFormContainer extends Component {
               addBillForm={this.state.addBillForm}
               balance={this.state.balance}
               tipFormat={this.state.tipFormat}
+              itemBuffer={this.state.itemBuffer}
+              taxBuffer={this.state.taxBuffer}
+              accountBuffer={this.state.accountBuffer}
             />
           </ModalBody>
         </Modal>

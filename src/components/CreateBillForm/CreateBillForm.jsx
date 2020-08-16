@@ -13,7 +13,11 @@ export const CreateBillForm = ({
   errorMessage,
   addBillForm,
   balance = 0,
-  tipFormat
+  tipFormat,
+  itemBuffer,
+  taxBuffer,
+  accountBuffer,
+  tipBuffer
 }) => {
   return (
     <div>
@@ -37,7 +41,7 @@ export const CreateBillForm = ({
           <FormInput name="company" id="#company" placeholder="ex: OnlyFans"/>
         </FormGroup>
 
-        <FormGroup onChange={(event) => onCategoryChange(event, "item")}>
+        <FormGroup >
           <Container>
             <Row>
               <Col>Items</Col>
@@ -45,8 +49,8 @@ export const CreateBillForm = ({
               <Col />
             </Row>
             {addBillForm.items.map((item, key) => (
-              <div>
-                <Row key={key}>
+              <div key={key}>
+                <Row>
                   <Col> {item.name}</Col>
                   <Col> {item.cost}</Col>
                   <Col> 
@@ -56,26 +60,34 @@ export const CreateBillForm = ({
                 <hr />
               </div>
             ))}
-            <Form id="itemInputs">
               <Row>
                 <Col>
-                  <FormInput name="name" placeholder="ex: Goat cheese"/>
+                  <FormInput 
+                    onChange={(event) => onCategoryChange(event, "item")}
+                    name="name"
+                    value={itemBuffer.name}
+                    placeholder="ex: Goat cheese"/>
                 </Col>
                 <Col>
                   <InputGroup>
                     <InputGroupAddon type="prepend">
                       <InputGroupText>$</InputGroupText>
                     </InputGroupAddon>
-                    <FormInput name="cost" type="number" min="0" placeholder="ex: 37.43" />
+                    <FormInput 
+                      onChange={(event) => onCategoryChange(event, "item")} 
+                      name="cost" 
+                      type="number" 
+                      min="0" 
+                      value={itemBuffer.cost} 
+                      placeholder="ex: 37.43" />
                   </InputGroup>
                 </Col>
                 <Button onClick={() => handleAddClick("item")}>Add</Button>
               </Row>
-            </Form>
           </Container>
         </FormGroup>
         
-        <FormGroup onChange={(event) => onCategoryChange(event, "tax")}>
+        <FormGroup >
           <Container>
             <Row>
               <Col>Tax Name</Col>
@@ -83,8 +95,8 @@ export const CreateBillForm = ({
               <Col />
             </Row>
             {addBillForm.taxes.map((tax, key) => (
-              <div>
-                <Row key={key}>
+              <div key={key}>
+                <Row>
                   <Col> {tax.name}</Col>
                   <Col> {tax.percentage}</Col>
                   <Col> 
@@ -94,26 +106,35 @@ export const CreateBillForm = ({
                 <hr />
               </div>
             ))}
-            <Form id="taxInputs">
               <Row>
                 <Col>
-                  <FormInput name="name" placeholder="ex: TPS"/>
+                  <FormInput 
+                    onChange={(event) => onCategoryChange(event, "tax")}
+                    name="name"
+                    value={taxBuffer.name}
+                    placeholder="ex: TPS"/>
                 </Col>
                 <Col>
                   <InputGroup>
                     <InputGroupAddon type="prepend">
                       <InputGroupText>%</InputGroupText>
                     </InputGroupAddon>
-                    <FormInput name="percentage" type="number" min="0" placeholder="ex: 5" />
+                    <FormInput 
+                      onChange={(event) => onCategoryChange(event, "tax")}
+                      name="percentage" 
+                      value={taxBuffer.percentage}
+                      type="number" 
+                      min="0" 
+                      max="100"
+                      placeholder="ex: 5" />
                   </InputGroup>
                 </Col>
                 <Button onClick={() => handleAddClick("tax")}>Add</Button>
               </Row>
-            </Form>
           </Container>
         </FormGroup>
 
-        <FormGroup onChange={onFormChange}>
+        <FormGroup>
           <label htmlFor="#tip"> TIP </label>
           <FormRadio 
             inline 
@@ -124,36 +145,47 @@ export const CreateBillForm = ({
             checked={!tipFormat}
             onChange={(event) => onCategoryChange(event, "tipFormat")} >Percentage</FormRadio>
           
-          <Form id="tipInputs">
             {tipFormat ? (
               <InputGroup>
                 <InputGroupAddon type="prepend">
                   <InputGroupText> $</InputGroupText>
                 </InputGroupAddon>
-                <FormInput name="tipAmount" type="number" min="0" placeholder="ex: 3.69" />
+                <FormInput 
+                  onChange={onFormChange}
+                  name="tipAmount"
+                  value={addBillForm.tipAmount}
+                  type="number" 
+                  min="0" 
+                  placeholder="ex: 3.69" />
               </InputGroup>
             ) : (
               <InputGroup>
                 <InputGroupAddon type="prepend">
                   <InputGroupText>%</InputGroupText>
                 </InputGroupAddon>
-                <FormInput name="tipPercent" type="number" min="0" placeholder="ex: 25" />
+                <FormInput 
+                  onChange={onFormChange}
+                  name="tipPercent"
+                  value={addBillForm.tipPercent}
+                  type="number" 
+                  min="0"
+                  max="100"
+                  placeholder="ex: 25" />
               </InputGroup>
             )}
-          </Form>
         </FormGroup>
 
         <div>Total amount to split: {balance}</div>
         
-        <FormGroup onChange={(event) => onCategoryChange(event, "account")}>
+        <FormGroup >
           <Container>
             <Row>
               <Col>Invite Users</Col>
               <Col />
             </Row>
             {addBillForm.accountsList.map((email, key) => (
-              <div>
-                <Row key={key}>
+              <div key={key}>
+                <Row>
                   <Col> {email}</Col>
                   <Col> 
                     <div onClick={() => handleRemoveClick("account", key)}> - </div>
@@ -162,14 +194,16 @@ export const CreateBillForm = ({
                 <hr />
               </div>
             ))}
-            <Form id="accountInputs">
               <Row>
                 <Col>
-                  <FormInput name="email" placeholder="friend@email.com"/>
+                  <FormInput
+                    onChange={(event) => onCategoryChange(event, "account")}
+                    name="email"
+                    value={accountBuffer}
+                    placeholder="friend@email.com"/>
                 </Col>
                 <Button onClick={() => handleAddClick("account")}>Add</Button>
               </Row>
-            </Form>
           </Container>
         </FormGroup>
       </Form>
