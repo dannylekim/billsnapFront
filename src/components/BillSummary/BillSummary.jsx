@@ -11,20 +11,19 @@ class BillSummary extends Component {
         {activeBill.id ? (
           <>
             <h5>
-              {`Split by : ${activeBill.responsible.firstName} ${activeBill.responsible.lastName}`}
+              Split by : {activeBill.responsible.firstName} {activeBill.responsible.lastName}
             </h5>
-            <h5> {`Status : ${activeBill.status}`}</h5>
+            <h5>Status : {activeBill.status}</h5>
             <h5>
-              Amount Owed :{" "}
-              <span id='amount__owed'>{activeBill.balance} $</span>{" "}
+              Amount Owed :
+              <span id='amount__owed'> {activeBill.balance} $</span>{" "}
             </h5>
           </>
         ) : (
           <>
             <h5>
-              {" "}
-              Total Amount Owed :{" "}
-              <span id='amount__owed'> {amountToOwe} $</span>{" "}
+              Total Amount Owed :
+              <span id='amount__owed'> {amountToOwe} $</span>
             </h5>
             <h5> Total of bills : {billCount} </h5>
           </>

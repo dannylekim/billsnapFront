@@ -35,7 +35,7 @@ class Sidebar extends React.Component {
   }
 
   handleClick(link) {
-    if (this.state.activeState[link] != null) {
+    if (this.state.activeState[link]) {
       this.setState({
         activeState: {
           ...DEFAULT_ACTIVE_STATE,
@@ -60,7 +60,7 @@ class Sidebar extends React.Component {
         >
           <NavbarBrand className={"sideLogo"}>Billsnap Logo</NavbarBrand>
 
-          <div className='sidebar__navitems'>
+          <div className='sidebar__nav-items'>
             <NavItem>
               <NavLink
                 id='billSnap-SideBar__bills'

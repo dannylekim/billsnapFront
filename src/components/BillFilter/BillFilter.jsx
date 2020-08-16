@@ -77,9 +77,9 @@ const BillFilter = ({
   ];
 
   const extraFilterSelected =
-    filterToggles.dateOpened === true ||
-    filterToggles.statusOpened === true ||
-    filterToggles.categoryOpened === true;
+    filterToggles.dateOpened ||
+    filterToggles.statusOpened ||
+    filterToggles.categoryOpened;
   
   return (
     <div className='bill__filter__container' ref={wrapperRef}>
