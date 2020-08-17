@@ -2,8 +2,7 @@
 
 exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap shot 1`] = `
 <div
-  className="bill__items card-body"
-  id="active__bill"
+  className="bill__items card-body bill-active"
 >
   <div
     className="bill__items card-title text-muted"
@@ -58,6 +57,78 @@ exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap sho
          $
       </span>
     </div>
+  </div>
+</div>
+`;
+
+exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap shot if owner exists 1`] = `
+<div
+  className="bill__items card-body false"
+>
+  <div
+    className="bill__items card-title text-muted"
+  >
+    <span
+      className="float-right"
+      id="bill__created"
+    >
+      02/07
+    </span>
+  </div>
+  <div
+    className="bill__items card-text"
+  >
+    <div
+      id="bill__icon"
+    >
+      <svg
+        color="rgba(0, 0, 0, 0.96)"
+        fill="currentColor"
+        height={24}
+        size={24}
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": "rgba(0, 0, 0, 0.96)",
+          }
+        }
+        viewBox="0 0 512 512"
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M488 128h-8V80c0-44.8-99.2-80-224-80S32 35.2 32 80v48h-8c-13.25 0-24 10.74-24 24v80c0 13.25 10.75 24 24 24h8v160c0 17.67 14.33 32 32 32v32c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-32h192v32c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32v-32h6.4c16 0 25.6-12.8 25.6-25.6V256h8c13.25 0 24-10.75 24-24v-80c0-13.26-10.75-24-24-24zM112 400c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm16-112c-17.67 0-32-14.33-32-32V128c0-17.67 14.33-32 32-32h256c17.67 0 32 14.33 32 32v128c0 17.67-14.33 32-32 32H128zm272 112c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z"
+        />
+      </svg>
+    </div>
+    <div
+      className="bill__name__price"
+    >
+      <span
+        id="bill__name"
+      >
+        KFC
+         
+      </span>
+      <span
+        id="bill__balance"
+      >
+        151.00
+         $
+      </span>
+    </div>
+  </div>
+  <div
+    className="bill__items split__by"
+  >
+    <span
+      id="responsible"
+    >
+       Split by : 
+      Hello
+       
+    </span>
   </div>
 </div>
 `;

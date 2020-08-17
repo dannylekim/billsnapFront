@@ -34,8 +34,12 @@ class Sidebar extends React.Component {
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
   }
 
+  componentDidMount(){
+    this.state.activeState.dashboard === true && this.props.history.push(`/dashboard`);
+  }
+
   handleClick(link) {
-    if (this.state.activeState[link] != null) {
+    if (this.state.activeState[link] === false) {
       this.setState({
         activeState: {
           ...DEFAULT_ACTIVE_STATE,
@@ -60,7 +64,7 @@ class Sidebar extends React.Component {
         >
           <NavbarBrand className={"sideLogo"}>Billsnap Logo</NavbarBrand>
 
-          <div className='sidebar__navitems'>
+          <div className='sidebar__nav-items'>
             <NavItem>
               <NavLink
                 id='billSnap-SideBar__bills'

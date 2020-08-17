@@ -4,15 +4,12 @@ import SearchBar from "../SearchBar";
 describe("SearchBar", () => {
   describe("render", () => {
     let  mockSortAlphabetical,
-      mockSortingType,
       mockUpdateSearch,
       mockFetchBill;
     let wrapper, instance;
     beforeEach(() => {
       mockUpdateSearch = jest.fn((e) => e);
       mockFetchBill = jest.fn();
-      mockSortingType = jest.fn();
-      mockSortingType = "";
 
       wrapper = shallow(
         <SearchBar
@@ -62,7 +59,7 @@ describe("SearchBar", () => {
           target: { value: "hahahhahahahha" },
         };
 
-        wrapper.find("input.form-control.border-0").simulate("change", event);
+        wrapper.find("FormInput").simulate("change", event);
         expect(mockUpdateSearch).toBeCalledWith(event.target.value);
       });
 
@@ -81,9 +78,6 @@ describe("SearchBar", () => {
           expect(wrapper.state().toggle.short).toBeTruthy();
         });
 
-        // it("should trigger a Mock function when A to Z is clicked.", () => {
-        //   expect(wrapper.find(SimpleFilter)).toHaveLength(1);
-        // });
       });
 
       describe("long filter onClicks", () => {

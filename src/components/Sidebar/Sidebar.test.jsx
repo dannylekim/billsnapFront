@@ -1,12 +1,7 @@
 import React from "react";
 import Sidebar from "./Sidebar.jsx";
-import SidebarComponent, {DEFAULT_ACTIVE_STATE} from "../Sidebar";
+import {DEFAULT_ACTIVE_STATE} from "../Sidebar";
 import {NavLink} from "shards-react";
-import configureStore from "redux-mock-store";
-
-const mockStore = configureStore();
-
-const store = mockStore({});
 
 describe("Sidebar", () => {
   let wrapper;
@@ -42,11 +37,9 @@ describe("Sidebar", () => {
 
   describe("render", () => {
     describe("snapshots 📸", () => {
+  
       it("Sidebar should match snap shot", () => {
-        matches(<Sidebar />);
-      });
-      it("Sidebar should match snap shot if hide props is true", () => {
-        matches(<Sidebar hide />);
+        matches(<Sidebar history= {{ push: mockHistoryPush}}/>);
       });
 
       it("Sidebar should match snap shot is another row is active", () => {
@@ -115,11 +108,6 @@ describe("Sidebar", () => {
         wrapper.instance().handleClick("starlord");
 
         expect(wrapper.state('activeState')).toEqual(expectedState);
-      });
-      it("should change props if parameter does exist in this props", () => {
-        wrapper.instance().handleClick("contacts");
-        expect(wrapper.find(NavLink).at(0).prop("active")).toBeFalsy();
-        expect(wrapper.find(NavLink).at(2).prop("active")).toBeTruthy();
       });
     });
     describe("handleLogoutClick", () => {

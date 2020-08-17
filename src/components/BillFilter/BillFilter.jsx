@@ -77,9 +77,9 @@ const BillFilter = ({
   ];
 
   const extraFilterSelected =
-    filterToggles.dateOpened === true ||
-    filterToggles.statusOpened === true ||
-    filterToggles.categoryOpened === true;
+    filterToggles.dateOpened ||
+    filterToggles.statusOpened ||
+    filterToggles.categoryOpened;
   
   return (
     <div className='bill__filter__container' ref={wrapperRef}>
@@ -104,6 +104,7 @@ const BillFilter = ({
           {filterToggles.dateOpened === true && (
             <div className='date__filter'>
               <FormCheckbox
+                id="bill-snap__filter-date-start"
                 checked={dateFilters.startDate.selected}
                 onChange={() => dateCheckboxHandler("startDate")}>
                 Start date
@@ -112,6 +113,7 @@ const BillFilter = ({
                   : ""}
               </FormCheckbox>
               <FormCheckbox
+                id="bill-snap__filter-date-end"
                 checked={dateFilters.endDate.selected}
                 onChange={() => dateCheckboxHandler("endDate")}>
                 End date
@@ -132,6 +134,7 @@ const BillFilter = ({
           {filterToggles.statusOpened === true && (
             <div className='status__filter'>
               <FormCheckbox
+                id="bill-snap__filter-status-resolved"
                 checked={billStatusFilter.resolved}
                 onChange={() =>
                   handleStatusChange('resolved')
@@ -139,6 +142,7 @@ const BillFilter = ({
                 PAID
               </FormCheckbox>
               <FormCheckbox
+                id="bill-snap__filter-status-open"
                 checked={billStatusFilter.open}
                 onChange={() =>
                   handleStatusChange('open')
@@ -146,6 +150,7 @@ const BillFilter = ({
                 UNPAID
               </FormCheckbox>
               <FormCheckbox
+                id="bill-snap__filter-status-inprogress"
                 checked={billStatusFilter.in_progess}
                 onChange={() =>
                   handleStatusChange('in_progess')

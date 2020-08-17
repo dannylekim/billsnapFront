@@ -41,7 +41,7 @@ exports[`Dashboard render snapshots 📸 Dashboard should match snap shot when h
             </svg>
           </span>
           <input
-            className="form-control border-0"
+            className="form-control"
             onChange={[Function]}
             placeholder="Search bill"
             type="text"
@@ -133,18 +133,20 @@ exports[`Dashboard render snapshots 📸 Dashboard should match snap shot when h
         className="bill__summary"
       >
         <h5>
-          Split by : Bob Smith
+          Split by : 
+          Bob
+           
+          Smith
         </h5>
         <h5>
-           
-          Status : undefined
+          Status : 
         </h5>
         <h5>
           Amount Owed :
-           
           <span
             id="amount__owed"
           >
+             
              $
           </span>
            

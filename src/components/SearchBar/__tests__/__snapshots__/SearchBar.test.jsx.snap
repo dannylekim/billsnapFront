@@ -30,7 +30,7 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when l
       </svg>
     </span>
     <input
-      className="form-control border-0"
+      className="form-control"
       onChange={[Function]}
       placeholder="Search bill"
       type="text"
@@ -203,7 +203,7 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when s
       </svg>
     </span>
     <input
-      className="form-control border-0"
+      className="form-control"
       onChange={[Function]}
       placeholder="Search bill"
       type="text"
@@ -307,7 +307,7 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when s
       </svg>
     </span>
     <input
-      className="form-control border-0"
+      className="form-control"
       onChange={[Function]}
       placeholder="Search bill"
       type="text"
@@ -384,7 +384,7 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot withou
       </svg>
     </span>
     <input
-      className="form-control border-0"
+      className="form-control"
       onChange={[Function]}
       placeholder="Search bill"
       type="text"

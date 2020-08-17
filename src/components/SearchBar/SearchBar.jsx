@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import PropType from "prop-types";
 
 import { FaBars, FaSearch } from "react-icons/fa";
+import { Button, FormInput } from "shards-react";
 
 import BillFilter from "../BillFilter";
 import SimpleFilter from "../SimpleFilter";
 
 import "./styles.scss";
-import { Button } from "shards-react";
 
 class SearchBar extends Component {
   constructor(props) {
@@ -146,7 +146,7 @@ class SearchBar extends Component {
       case 'allBills':
         return this.props.fetchBills(`?${params}`);
       default:
-        break;
+        return;
     }
 
   }
@@ -160,6 +160,7 @@ class SearchBar extends Component {
     this.setState({
       currentSorting: sortingType,
     });
+    this.closeHandler();
     const sortingParams = this.constructor.getSortingParams(sortingType);
     const dateParams = this.getDateParams();
 
@@ -169,7 +170,7 @@ class SearchBar extends Component {
         const totalParams = `?${sortingParams}&${dateParams}&${filterParams}`;
         return this.props.fetchBills(`${totalParams}`);
       default:
-        break;
+        return;
     }
   };
 
@@ -264,9 +265,8 @@ class SearchBar extends Component {
           <span className='search__icon'>
             <FaSearch />
           </span>
-          <input
+          <FormInput
             type='text'
-            className='form-control border-0'
             onChange={this.onInputChangeHandler}
             placeholder='Search bill'
             value={this.props.billNameSearch}
