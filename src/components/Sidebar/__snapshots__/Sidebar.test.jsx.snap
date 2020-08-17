@@ -2,10 +2,11 @@
 
 exports[`Sidebar render snapshots 📸 Sidebar should match snap shot 1`] = `
 <nav
-  className="navbar"
+  className="billSnap-SideBar navbar"
+  style={Object {}}
 >
   <ul
-    className="billSnap-SideBar nav flex-column nav-tabs"
+    className="nav flex-column nav-tabs"
   >
     <a
       className="sideLogo navbar-brand"
@@ -13,7 +14,7 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot 1`] = `
       Billsnap Logo
     </a>
     <div
-      className="sidebar__navitems"
+      className="sidebar__nav-items"
     >
       <li
         className="nav-item"
@@ -206,12 +207,17 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot 1`] = `
 </nav>
 `;
 
-exports[`Sidebar render snapshots 📸 Sidebar should match snap shot 2`] = `
+exports[`Sidebar render snapshots 📸 Sidebar should match snap shot if hide props is true 1`] = `
 <nav
-  className="navbar"
+  className="billSnap-SideBar navbar"
+  style={
+    Object {
+      "display": "none",
+    }
+  }
 >
   <ul
-    className="billSnap-SideBar nav flex-column nav-tabs"
+    className="nav flex-column nav-tabs"
   >
     <a
       className="sideLogo navbar-brand"
@@ -219,13 +225,13 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot 2`] = `
       Billsnap Logo
     </a>
     <div
-      className="sidebar__navitems"
+      className="sidebar__nav-items"
     >
       <li
         className="nav-item"
       >
         <a
-          className="nav-link"
+          className="nav-link active"
           id="billSnap-SideBar__bills"
           onClick={[Function]}
         >
@@ -283,7 +289,7 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot 2`] = `
         className="nav-item"
       >
         <a
-          className="nav-link active"
+          className="nav-link"
           id="billSnap-SideBar__contacts"
           onClick={[Function]}
         >
@@ -412,12 +418,13 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot 2`] = `
 </nav>
 `;
 
-exports[`Sidebar render snapshots 📸 SidebarComponent should match snap shot 1`] = `
+exports[`Sidebar render snapshots 📸 Sidebar should match snap shot is another row is active 1`] = `
 <nav
-  className="navbar"
+  className="billSnap-SideBar navbar"
+  style={Object {}}
 >
   <ul
-    className="billSnap-SideBar nav flex-column nav-tabs"
+    className="nav flex-column nav-tabs"
   >
     <a
       className="sideLogo navbar-brand"
@@ -425,13 +432,13 @@ exports[`Sidebar render snapshots 📸 SidebarComponent should match snap shot 1
       Billsnap Logo
     </a>
     <div
-      className="sidebar__navitems"
+      className="sidebar__nav-items"
     >
       <li
         className="nav-item"
       >
         <a
-          className="nav-link active"
+          className="nav-link"
           id="billSnap-SideBar__bills"
           onClick={[Function]}
         >
@@ -489,7 +496,7 @@ exports[`Sidebar render snapshots 📸 SidebarComponent should match snap shot 1
         className="nav-item"
       >
         <a
-          className="nav-link"
+          className="nav-link active"
           id="billSnap-SideBar__contacts"
           onClick={[Function]}
         >

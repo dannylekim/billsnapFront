@@ -1,0 +1,53 @@
+@import "../../variables";
+
+#search__bill {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr auto;
+}
+
+#search__bill-options {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#search__bill-bar {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    border: 1px solid $light-gray-background;
+    box-sizing: border-box;
+    border-radius: 50px;
+    background: $light-gray-background;
+    display: flex;
+    align-content: space-between;
+}
+
+  span.search__icon {
+    width: 10%;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+    border: inherit;
+    background: inherit;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  span.search__filter {
+    width: 20%;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: 500;
+    font-size: 20px;
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+
+    span.simple__sort {
+      margin-left: 10px;
+    }
+  }
+
+  input.form-control {
+    border: inherit;
+    background: inherit;
+    box-shadow: none;
+  }

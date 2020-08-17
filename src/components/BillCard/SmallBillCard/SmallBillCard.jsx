@@ -1,16 +1,15 @@
 import React from "react";
+import PropType from "prop-types";
+
+import { filterDateTime } from '../../../helpers/DateTime';
+import { getBillIcons } from '../../../helpers/Components';
 import "./styles.scss";
 
-const SmallBillCard = ({ activeBill, bill, filterDateTime, billIcons }) => (
+const SmallBillCard = ({ activeBillId, bill }) => (
   <div
-    className="bill__items card-body"
-    id={
-      activeBill && activeBill.id === bill.id
-        ? "active__bill"
-        : "non__active__bill"
-    }
+    className={`bill__items card-body ${(typeof activeBillId === 'number' && activeBillId === bill.id) && 'bill-active' }`}
   >
-    {bill.created && (
+    {!!bill.created && (
       <div className="bill__items card-title text-muted">
         <span className="float-right" id="bill__created">
           {" "}
@@ -19,7 +18,7 @@ const SmallBillCard = ({ activeBill, bill, filterDateTime, billIcons }) => (
       </div>
     )}
     <div className="bill__items card-text">
-      <div id="bill__icon">{billIcons(bill.category)}</div>
+      <div id="bill__icon">{getBillIcons(bill.category)}</div>
       <div className="bill__name__price">
         <span id="bill__name">{bill.name} </span>
         <span id="bill__balance">
@@ -36,4 +35,10 @@ const SmallBillCard = ({ activeBill, bill, filterDateTime, billIcons }) => (
     )}
   </div>
 );
+
+SmallBillCard.propTypes = {
+  bill: PropType.shape({}), // array of bill object
+  activeBillId: PropType.number // bill selected
+}
+
 export default SmallBillCard;

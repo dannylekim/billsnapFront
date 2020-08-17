@@ -18,6 +18,18 @@ const fakeBills = [
     created: "02-07-2020 15:25:10 -0400",
     balance: 151.0,
   },
+  {
+    id: 50,
+    name: "KFC",
+    status: "OPEN",
+    category: "public-transport",
+    created: "02-07-2020 15:25:10 -0400",
+    balance: 151.0,
+    responsible: {
+      firstName: 'Hello',
+      lastName: 'Motto'
+    }
+  },
 ];
 
 describe("SmallBillCard", () => {
@@ -30,7 +42,18 @@ describe("SmallBillCard", () => {
             bill={fakeBills[0]}
             filterDateTime={jest.fn()}
             billIcons={jest.fn()}
-            activeBill={fakeBills[0]}
+            activeBillId={fakeBills[0].id}
+          />
+        );
+      });
+
+      it("SmallBillCard should match snap shot if owner exists", () => {
+        matches(
+          <SmallBillCard
+            bill={fakeBills[2]}
+            filterDateTime={jest.fn()}
+            billIcons={jest.fn()}
+            activeBillId={fakeBills[0].id}
           />
         );
       });
@@ -44,10 +67,10 @@ describe("SmallBillCard", () => {
           bill={fakeBills[1]}
           filterDateTime={jest.fn()}
           billIcons={jest.fn()}
-          activeBill={fakeBills[0]}
+          activeBillId={fakeBills[0].id}
         />
       );
-      expect(wrapper.find("#non__active__bill")).toHaveLength(1);
+      expect(wrapper.find(".bill-active")).toHaveLength(0);
     });
 
     it("should find an active bill", () => {
@@ -56,10 +79,10 @@ describe("SmallBillCard", () => {
           bill={fakeBills[0]}
           filterDateTime={jest.fn()}
           billIcons={jest.fn()}
-          activeBill={fakeBills[0]}
+          activeBillId={fakeBills[0].id}
         />
       );
-      expect(wrapper.find("#active__bill")).toHaveLength(1);
+      expect(wrapper.find(".bill-active")).toHaveLength(1);
     });
   });
 });

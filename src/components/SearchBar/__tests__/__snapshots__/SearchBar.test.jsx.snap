@@ -1,0 +1,404 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when long filter is visible 1`] = `
+<div
+  id="search__bill"
+>
+  <div
+    id="search__bill-bar"
+  >
+    <span
+      className="search__icon"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 512 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
+        />
+      </svg>
+    </span>
+    <input
+      className="form-control"
+      onChange={[Function]}
+      placeholder="Search bill"
+      type="text"
+      value=""
+    />
+    <span
+      className="search__filter"
+    >
+      <span
+        className="filter__bill"
+        onClick={[Function]}
+      >
+        <svg
+          fill="currentColor"
+          height={24}
+          size={24}
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 448 512"
+          width={24}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+          />
+        </svg>
+      </span>
+      <span
+        className="simple__sort"
+        onClick={[Function]}
+      >
+        Newest
+      </span>
+    </span>
+  </div>
+  <div
+    id="search__bill-options"
+  >
+    <div
+      className="bill__filter__container"
+    >
+      <div
+        className="filter__header"
+      >
+        <span
+          className="filter__header__title"
+        >
+          Filters 
+          allBills
+        </span>
+      </div>
+      <div
+        className="filter__selections__container"
+      >
+        <span
+          className="active badge badge-outline-primary badge-pill"
+          id="descending"
+          onClick={[Function]}
+        >
+          Newest
+        </span>
+        <span
+          className="badge badge-outline-primary badge-pill"
+          id="ascending"
+          onClick={[Function]}
+        >
+          Oldest
+        </span>
+        <span
+          className="badge badge-outline-primary badge-pill"
+          id="by__status"
+          onClick={[Function]}
+        >
+          Status
+        </span>
+        <span
+          className="badge badge-outline-primary badge-pill"
+          id="alphabetical__increasing"
+          onClick={[Function]}
+        >
+          A to Z
+        </span>
+        <span
+          className="badge badge-outline-primary badge-pill"
+          id="alphabetical__decreasing"
+          onClick={[Function]}
+        >
+          Z to A
+        </span>
+        <span
+          className="badge badge-outline-primary badge-pill"
+          id="by__category"
+          onClick={[Function]}
+        >
+          Category
+        </span>
+        <span
+          className="badge badge-outline-primary badge-pill"
+          id="by__date"
+          onClick={[Function]}
+        >
+          Date
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when short filter is visible 1`] = `
+<div
+  id="search__bill"
+>
+  <div
+    id="search__bill-bar"
+  >
+    <span
+      className="search__icon"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 512 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
+        />
+      </svg>
+    </span>
+    <input
+      className="form-control"
+      onChange={[Function]}
+      placeholder="Search bill"
+      type="text"
+      value=""
+    />
+    <span
+      className="search__filter"
+    >
+      <span
+        className="filter__bill"
+        onClick={[Function]}
+      >
+        <svg
+          fill="currentColor"
+          height={24}
+          size={24}
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 448 512"
+          width={24}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+          />
+        </svg>
+      </span>
+      <span
+        className="simple__sort"
+        onClick={[Function]}
+      >
+        Newest
+      </span>
+    </span>
+  </div>
+  <div
+    id="search__bill-options"
+  >
+    <div
+      className="quick__sorting__container"
+    >
+      <ul
+        className="sorting__content"
+      >
+        <li
+          className="sorting__titles"
+          onClick={[Function]}
+        >
+          A to Z
+        </li>
+        <li
+          className="sorting__titles"
+          onClick={[Function]}
+        >
+          Z to A
+        </li>
+        <li
+          className="sorting__titles"
+          onClick={[Function]}
+        >
+          Oldest
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when sorting type is set 1`] = `
+<div
+  id="search__bill"
+>
+  <div
+    id="search__bill-bar"
+  >
+    <span
+      className="search__icon"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 512 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
+        />
+      </svg>
+    </span>
+    <input
+      className="form-control"
+      onChange={[Function]}
+      placeholder="Search bill"
+      type="text"
+      value=""
+    />
+    <span
+      className="search__filter"
+    >
+      <span
+        className="filter__bill"
+        onClick={[Function]}
+      >
+        <svg
+          fill="currentColor"
+          height={24}
+          size={24}
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 448 512"
+          width={24}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+          />
+        </svg>
+      </span>
+      <span
+        className="simple__sort"
+        onClick={[Function]}
+      >
+        A to Z
+      </span>
+    </span>
+  </div>
+  <div
+    id="search__bill-options"
+  />
+</div>
+`;
+
+exports[`SearchBar render snapshots 📸 SearchBar should match snap shot without sorting type 1`] = `
+<div
+  id="search__bill"
+>
+  <div
+    id="search__bill-bar"
+  >
+    <span
+      className="search__icon"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 512 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"
+        />
+      </svg>
+    </span>
+    <input
+      className="form-control"
+      onChange={[Function]}
+      placeholder="Search bill"
+      type="text"
+      value=""
+    />
+    <span
+      className="search__filter"
+    >
+      <span
+        className="filter__bill"
+        onClick={[Function]}
+      >
+        <svg
+          fill="currentColor"
+          height={24}
+          size={24}
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 448 512"
+          width={24}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+          />
+        </svg>
+      </span>
+      <span
+        className="simple__sort"
+        onClick={[Function]}
+      >
+        Newest
+      </span>
+    </span>
+  </div>
+  <div
+    id="search__bill-options"
+  />
+</div>
+`;

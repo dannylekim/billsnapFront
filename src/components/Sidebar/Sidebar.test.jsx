@@ -1,9 +1,8 @@
 import React from "react";
-import Sidebar, {DEFAULT_ACTIVE_STATE} from "./Sidebar.jsx";
-import SidebarComponent from "../Sidebar";
+import Sidebar from "./Sidebar.jsx";
+import SidebarComponent, {DEFAULT_ACTIVE_STATE} from "../Sidebar";
 import {NavLink} from "shards-react";
 import configureStore from "redux-mock-store";
-import {Provider} from "react-redux";
 
 const mockStore = configureStore();
 
@@ -11,7 +10,11 @@ const store = mockStore({});
 
 describe("Sidebar", () => {
   let wrapper;
-  let handleMockFunction, mockSetUser,mockSetActiveState, mockFilterComponent;
+  let
+    mockSetUser,
+    mockSetActiveState,
+    mockFilterComponent,
+    mockHistoryPush;
 
   const STARTING_ACTIVE_STATE = {
     ...DEFAULT_ACTIVE_STATE,
@@ -21,32 +24,39 @@ describe("Sidebar", () => {
   mockSetActiveState = (activeState) => wrapper.setProps({activeState});
 
   beforeEach(() => {
-    handleMockFunction = jest.fn();
     mockSetUser = jest.fn();
     mockFilterComponent= jest.fn();
-    wrapper = shallow(<Sidebar setUser={mockSetUser} activeState={STARTING_ACTIVE_STATE} setActiveState={mockSetActiveState} filterComponentFromNav={mockFilterComponent}/>);
+    mockHistoryPush = jest.fn();
+    wrapper = shallow(
+      <Sidebar
+        setUser={mockSetUser}
+        activeState={STARTING_ACTIVE_STATE}
+        setActiveState={mockSetActiveState}
+        filterComponentFromNav={mockFilterComponent}
+        history= {{
+          push: mockHistoryPush
+        }}
+      />
+    );
   });
 
   describe("render", () => {
     describe("snapshots 📸", () => {
       it("Sidebar should match snap shot", () => {
-        matches(<Sidebar activeState={STARTING_ACTIVE_STATE} setActiveState={mockSetActiveState} filterComponentFromNav={mockFilterComponent}/>);
+        matches(<Sidebar />);
+      });
+      it("Sidebar should match snap shot if hide props is true", () => {
+        matches(<Sidebar hide />);
       });
 
-      it("SidebarComponent should match snap shot", () => {
-        matches(
-          <Provider store={store}>
-            <SidebarComponent setUser={mockSetUser} activeState={STARTING_ACTIVE_STATE} setActiveState={mockSetActiveState} filterComponentFromNav={mockFilterComponent}  />
-          </Provider>
-        );
-      });
-
-      it("Sidebar should match snap shot", () => {
-        const EXPECTED_STATE = {
+      it("Sidebar should match snap shot is another row is active", () => {
+        const activeState = {
           ...DEFAULT_ACTIVE_STATE,
           contacts: true,
         };
-        wrapper = shallow(<Sidebar setUser={mockSetUser} activeState={EXPECTED_STATE} setActiveState={mockSetActiveState} filterComponentFromNav={mockFilterComponent} />);
+        wrapper.setState({
+          activeState
+        })
         matches(wrapper);
       });
     });
@@ -89,14 +99,22 @@ describe("Sidebar", () => {
 
   describe("function", () => {
     describe("handleClick", () => {
-      it("should not change props if parameter does not exist in this props", () => {
+      it("should not change state if parameter does not exist as a activeState key", () => {
+        const expectedState = {
+          activeState: {
+            ...DEFAULT_ACTIVE_STATE,
+            settings: true,
+          }
+        }
+
+        const actualState = { ...expectedState };
+
+        wrapper.setState({ 
+          activeState: actualState
+        })
         wrapper.instance().handleClick("starlord");
-        expect(wrapper.find(NavLink).at(0).prop("active")).toBeTruthy();
-      });
-      it("should change props if parameter does exist in this props", () => {
-        wrapper.instance().handleClick("contacts");
-        expect(wrapper.find(NavLink).at(0).prop("active")).toBeFalsy();
-        expect(wrapper.find(NavLink).at(2).prop("active")).toBeTruthy();
+
+        expect(wrapper.state('activeState')).toEqual(expectedState);
       });
     });
     describe("handleLogoutClick", () => {
