@@ -1,26 +1,22 @@
 import React from "react";
 import Sidebar from "./Sidebar.jsx";
-import {DEFAULT_ACTIVE_STATE} from "../Sidebar";
-import {NavLink} from "shards-react";
+import { DEFAULT_ACTIVE_STATE } from "../Sidebar";
+import { NavLink } from "shards-react";
 
 describe("Sidebar", () => {
   let wrapper;
-  let
-    mockSetUser,
-    mockSetActiveState,
-    mockFilterComponent,
-    mockHistoryPush;
+  let mockSetUser, mockSetActiveState, mockFilterComponent, mockHistoryPush;
 
   const STARTING_ACTIVE_STATE = {
     ...DEFAULT_ACTIVE_STATE,
-    bills: true
+    bills: true,
   };
 
-  mockSetActiveState = (activeState) => wrapper.setProps({activeState});
+  mockSetActiveState = (activeState) => wrapper.setProps({ activeState });
 
   beforeEach(() => {
     mockSetUser = jest.fn();
-    mockFilterComponent= jest.fn();
+    mockFilterComponent = jest.fn();
     mockHistoryPush = jest.fn();
     wrapper = shallow(
       <Sidebar
@@ -28,8 +24,8 @@ describe("Sidebar", () => {
         activeState={STARTING_ACTIVE_STATE}
         setActiveState={mockSetActiveState}
         filterComponentFromNav={mockFilterComponent}
-        history= {{
-          push: mockHistoryPush
+        history={{
+          push: mockHistoryPush,
         }}
       />
     );
@@ -37,9 +33,8 @@ describe("Sidebar", () => {
 
   describe("render", () => {
     describe("snapshots 📸", () => {
-  
       it("Sidebar should match snap shot", () => {
-        matches(<Sidebar history= {{ push: mockHistoryPush}}/>);
+        matches(<Sidebar history={{ push: mockHistoryPush }} />);
       });
 
       it("Sidebar should match snap shot is another row is active", () => {
@@ -48,8 +43,8 @@ describe("Sidebar", () => {
           contacts: true,
         };
         wrapper.setState({
-          activeState
-        })
+          activeState,
+        });
         matches(wrapper);
       });
     });
@@ -97,17 +92,17 @@ describe("Sidebar", () => {
           activeState: {
             ...DEFAULT_ACTIVE_STATE,
             settings: true,
-          }
-        }
+          },
+        };
 
         const actualState = { ...expectedState };
 
-        wrapper.setState({ 
-          activeState: actualState
-        })
+        wrapper.setState({
+          activeState: actualState,
+        });
         wrapper.instance().handleClick("starlord");
 
-        expect(wrapper.state('activeState')).toEqual(expectedState);
+        expect(wrapper.state("activeState")).toEqual(expectedState);
       });
     });
     describe("handleLogoutClick", () => {
