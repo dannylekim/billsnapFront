@@ -89,7 +89,7 @@ describe("SearchBar", () => {
 
       describe("Functions", () => {
         const DEFAULT_STATE = {
-          currentSorting: "Newest",      
+          currentSorting: "Newest",
           dateFilters: {
             startDate: { selected: false, value: "" },
             endDate: { selected: false, value: "" },
@@ -259,7 +259,7 @@ describe("SearchBar", () => {
             expect(wrapper.state().dateFilters.startDate.value).toEqual("");
             expect(wrapper.state().dateFilters.endDate.value).toEqual(EXPECTED_DATE);
           });
-        });        
+        });
 
         describe("dateCheckboxHandler", () => {
           it("should switch selected value to the opposite after getting called on opposeite end", () => {

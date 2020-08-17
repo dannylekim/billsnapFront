@@ -41,7 +41,7 @@ describe("function", () => {
       ).toBe("3:25 AM");
     });
 
-    it("getBillIcons should return correct Icons", () => { 
+    it("getBillIcons should return correct Icons", () => {
       const color = "rgba(0, 0, 0, 0.96)";
       expect(getBillIcons("food")).toStrictEqual(
         <FaUtensils color={color} size={24} />
@@ -61,5 +61,5 @@ describe("function", () => {
       expect(getBillIcons("unknown")).toStrictEqual(
         <FaQuestion color={color} size={24} />
       );
-    })
+    });
 });

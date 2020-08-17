@@ -15,19 +15,18 @@ import "./styles.scss";
  * Load you page components here. We will render them via routes
  */
 
-export default ({hasUser}) => {
-  
+export default ({ hasUser }) => {
   return (
-    <div className='App'>
+    <div className="App">
       <BillSnapBackground showWave />
       <BrowserRouter>
         <Switch>
           <React.Fragment>
-            <div className='App__container'>
+            <div className="App__container">
               {hasUser === true && <Sidebar />}
-              <Route path='/' exact component={LandingPage} />
-              <Route path='/dashboard' exact component={Dashboard} />
-              <Route path='/profile' exact component={Profile} />
+              <Route path="/" exact component={LandingPage} />
+              <Route path="/dashboard" exact component={Dashboard} />
+              <Route path="/profile" exact component={Profile} />
             </div>
           </React.Fragment>
         </Switch>

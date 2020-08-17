@@ -90,15 +90,15 @@ class SearchBar extends Component {
     } = this.state;
 
     if (!!dateFilters.startDate.value) {
-      params = `start=${this.state.dateFilters.startDate.value}`; 
+      params = `start=${this.state.dateFilters.startDate.value}`;
     }
 
     if (!!dateFilters.startDate.value && !!dateFilters.endDate.value) {
-      params += `&`; 
+      params += `&`;
     }
 
     if (!!dateFilters.endDate.value) {
-      params += `end=${this.state.dateFilters.endDate.value}`; 
+      params += `end=${this.state.dateFilters.endDate.value}`;
     }
 
     return params

@@ -1,44 +1,42 @@
 import React from "react";
 import BillFilter from "../BillFilter";
-import {shallow} from "enzyme";
+import { shallow } from "enzyme";
 
 describe("BillFilter", () => {
   let wrapper;
-  let mockApplyFiltering = jest.fn(e=>e),
-      mockCloseHandler = jest.fn(),
-      mockDateCheckboxHandler = jest.fn(e => e),
-      mockFilterToggleChange = jest.fn(e=>e), 
-      mockHandleDateSelection = jest.fn(date => date),
-      mockHandleStatusChange = jest.fn(type => type);
+  const mockApplyFiltering = jest.fn((e) => e),
+    mockCloseHandler = jest.fn(),
+    mockDateCheckboxHandler = jest.fn((e) => e),
+    mockFilterToggleChange = jest.fn((e) => e),
+    mockHandleDateSelection = jest.fn((date) => date),
+    mockHandleStatusChange = jest.fn((type) => type);
   describe("render", () => {
     describe("snapshots 📸", () => {
-
-    
       it("BillFilter should match snap shot when category opened", () => {
         matches(
-         <BillFilter
-            activeTab = "allBills"
-            applyFiltering = {mockApplyFiltering}
-            currentSorting = "Newest"
+          <BillFilter
+            activeTab="allBills"
+            applyFiltering={mockApplyFiltering}
+            currentSorting="Newest"
             billStatusFilter={{
               resolved: false,
               open: false,
               in_progess: false,
             }}
-            closeHandler = {mockCloseHandler}
-            dateCheckboxHandler = {mockDateCheckboxHandler}
+            closeHandler={mockCloseHandler}
+            dateCheckboxHandler={mockDateCheckboxHandler}
             dateFilters={{
               startDate: { selected: false, value: "" },
               endDate: { selected: false, value: "" },
             }}
-            filterToggles= {{
+            filterToggles={{
               statusOpened: false,
               categoryOpened: true,
               dateOpened: false,
             }}
-            filterToggleChange = {mockFilterToggleChange}
-            handleDateSelection = {mockHandleDateSelection}
-            handleStatusChange = {mockHandleStatusChange}            
+            filterToggleChange={mockFilterToggleChange}
+            handleDateSelection={mockHandleDateSelection}
+            handleStatusChange={mockHandleStatusChange}
           />
         );
       });
@@ -46,32 +44,31 @@ describe("BillFilter", () => {
   });
 
   describe("component ", () => {
-
     it("should call onClicks of badge clicks", () => {
       wrapper = shallow(
         <BillFilter
-            activeTab = "allBills"
-            applyFiltering = {mockApplyFiltering}
-            currentSorting = "Newest"
-            billStatusFilter={{
-              resolved: false,
-              open: false,
-              in_progess: false,
-            }}
-            closeHandler = {mockCloseHandler}
-            dateCheckboxHandler = {mockDateCheckboxHandler}
-            dateFilters={{
-              startDate: { selected: true, value: "" },
-              endDate: { selected: false, value: "" },
-            }}
-            filterToggles= {{
-              statusOpened: false,
-              categoryOpened: false,
-              dateOpened: false,
-            }}
-            filterToggleChange = {mockFilterToggleChange}
-            handleDateSelection = {mockHandleDateSelection}
-            handleStatusChange = {mockHandleStatusChange}         
+          activeTab="allBills"
+          applyFiltering={mockApplyFiltering}
+          currentSorting="Newest"
+          billStatusFilter={{
+            resolved: false,
+            open: false,
+            in_progess: false,
+          }}
+          closeHandler={mockCloseHandler}
+          dateCheckboxHandler={mockDateCheckboxHandler}
+          dateFilters={{
+            startDate: { selected: true, value: "" },
+            endDate: { selected: false, value: "" },
+          }}
+          filterToggles={{
+            statusOpened: false,
+            categoryOpened: false,
+            dateOpened: false,
+          }}
+          filterToggleChange={mockFilterToggleChange}
+          handleDateSelection={mockHandleDateSelection}
+          handleStatusChange={mockHandleStatusChange}
         />
       );
       wrapper.find("Badge").at(0).simulate("click");
@@ -105,32 +102,31 @@ describe("BillFilter", () => {
       expect(mockFilterToggleChange).toBeCalledTimes(3);
     });
 
-
     it("should show the date value next to start date", () => {
       wrapper = shallow(
         <BillFilter
-            activeTab = "allBills"
-            applyFiltering = {mockApplyFiltering}
-            currentSorting = "Newest"
-            billStatusFilter={{
-              resolved: false,
-              open: false,
-              in_progess: false,
-            }}
-            closeHandler = {mockCloseHandler}
-            dateCheckboxHandler = {mockDateCheckboxHandler}
-            dateFilters={{
-              startDate: { selected: true, value: "2020-01-01" },
-              endDate: { selected: false, value: "" },
-            }}
-            filterToggles= {{
-              statusOpened: false,
-              categoryOpened: false,
-              dateOpened: true,
-            }}
-            filterToggleChange = {mockFilterToggleChange}
-            handleDateSelection = {mockHandleDateSelection}
-            handleStatusChange = {mockHandleStatusChange}         
+          activeTab="allBills"
+          applyFiltering={mockApplyFiltering}
+          currentSorting="Newest"
+          billStatusFilter={{
+            resolved: false,
+            open: false,
+            in_progess: false,
+          }}
+          closeHandler={mockCloseHandler}
+          dateCheckboxHandler={mockDateCheckboxHandler}
+          dateFilters={{
+            startDate: { selected: true, value: "2020-01-01" },
+            endDate: { selected: false, value: "" },
+          }}
+          filterToggles={{
+            statusOpened: false,
+            categoryOpened: false,
+            dateOpened: true,
+          }}
+          filterToggleChange={mockFilterToggleChange}
+          handleDateSelection={mockHandleDateSelection}
+          handleStatusChange={mockHandleStatusChange}
         />
       );
 
@@ -139,64 +135,31 @@ describe("BillFilter", () => {
       );
     });
 
-    it("should show the date value nex to end date", () => {
+    it("should show the date value next to end date", () => {
       wrapper = shallow(
         <BillFilter
-          activeTab = "allBills"
-          applyFiltering = {mockApplyFiltering}
-          currentSorting = "Newest"
+          activeTab="allBills"
+          applyFiltering={mockApplyFiltering}
+          currentSorting="Newest"
           billStatusFilter={{
             resolved: false,
             open: false,
             in_progess: false,
           }}
-          closeHandler = {mockCloseHandler}
-          dateCheckboxHandler = {mockDateCheckboxHandler}
+          closeHandler={mockCloseHandler}
+          dateCheckboxHandler={mockDateCheckboxHandler}
           dateFilters={{
             startDate: { selected: false, value: "" },
             endDate: { selected: true, value: "2020-01-01" },
           }}
-          filterToggles= {{
+          filterToggles={{
             statusOpened: false,
             categoryOpened: false,
             dateOpened: true,
           }}
-          filterToggleChange = {mockFilterToggleChange}
-          handleDateSelection = {mockHandleDateSelection}
-          handleStatusChange = {mockHandleStatusChange}      
-        />
-      );
-
-      expect(wrapper.find("FormCheckbox").at(1).render().text()).toBe(
-        "End date: 2020-01-01"
-      );
-    });
-
-    it("should show the date value nex to end date", () => {
-      wrapper = shallow(
-        <BillFilter
-          activeTab = "allBills"
-          applyFiltering = {mockApplyFiltering}
-          currentSorting = "Newest"
-          billStatusFilter={{
-            resolved: false,
-            open: false,
-            in_progess: false,
-          }}
-          closeHandler = {mockCloseHandler}
-          dateCheckboxHandler = {mockDateCheckboxHandler}
-          dateFilters={{
-            startDate: { selected: false, value: "" },
-            endDate: { selected: true, value: "2020-01-01" },
-          }}
-          filterToggles= {{
-            statusOpened: false,
-            categoryOpened: false,
-            dateOpened: true,
-          }}
-          filterToggleChange = {mockFilterToggleChange}
-          handleDateSelection = {mockHandleDateSelection}
-          handleStatusChange = {mockHandleStatusChange}      
+          filterToggleChange={mockFilterToggleChange}
+          handleDateSelection={mockHandleDateSelection}
+          handleStatusChange={mockHandleStatusChange}
         />
       );
 
@@ -208,28 +171,28 @@ describe("BillFilter", () => {
     it("should trigger mockDateCheckboxHandler and handleDateSelection", () => {
       wrapper = shallow(
         <BillFilter
-          activeTab = "allBills"
-          applyFiltering = {mockApplyFiltering}
-          currentSorting = "Newest"
+          activeTab="allBills"
+          applyFiltering={mockApplyFiltering}
+          currentSorting="Newest"
           billStatusFilter={{
             resolved: false,
             open: false,
             in_progess: false,
           }}
-          closeHandler = {mockCloseHandler}
-          dateCheckboxHandler = {mockDateCheckboxHandler}
+          closeHandler={mockCloseHandler}
+          dateCheckboxHandler={mockDateCheckboxHandler}
           dateFilters={{
             startDate: { selected: false, value: "" },
             endDate: { selected: false, value: "" },
           }}
-          filterToggles= {{
+          filterToggles={{
             statusOpened: false,
             categoryOpened: false,
             dateOpened: true,
           }}
-          filterToggleChange = {mockFilterToggleChange}
-          handleDateSelection = {mockHandleDateSelection}
-          handleStatusChange = {mockHandleStatusChange}      
+          filterToggleChange={mockFilterToggleChange}
+          handleDateSelection={mockHandleDateSelection}
+          handleStatusChange={mockHandleStatusChange}
         />
       );
 
@@ -238,48 +201,47 @@ describe("BillFilter", () => {
       wrapper.find("FormCheckbox").at(1).simulate("change");
       expect(mockDateCheckboxHandler).toBeCalledWith("endDate");
       const event = {
-        target: { value: "2020/01/04" }
+        target: { value: "2020/01/04" },
       };
       wrapper.find("FormInput").at(0).simulate("change", event.target.value);
       expect(mockHandleDateSelection).toBeCalledWith(event.target.value);
     });
-   
+
     it("should call mockHandleStatusChange 3 times on simulate change", () => {
       wrapper = shallow(
         <BillFilter
-          activeTab = "allBills"
-          applyFiltering = {mockApplyFiltering}
-          currentSorting = "Newest"
+          activeTab="allBills"
+          applyFiltering={mockApplyFiltering}
+          currentSorting="Newest"
           billStatusFilter={{
             resolved: false,
             open: false,
             in_progess: false,
           }}
-          closeHandler = {mockCloseHandler}
-          dateCheckboxHandler = {mockDateCheckboxHandler}
+          closeHandler={mockCloseHandler}
+          dateCheckboxHandler={mockDateCheckboxHandler}
           dateFilters={{
             startDate: { selected: false, value: "" },
             endDate: { selected: true, value: "2020-01-01" },
           }}
-          filterToggles= {{
+          filterToggles={{
             statusOpened: true,
             categoryOpened: false,
             dateOpened: false,
           }}
-          filterToggleChange = {mockFilterToggleChange}
-          handleDateSelection = {mockHandleDateSelection}
-          handleStatusChange = {mockHandleStatusChange}      
+          filterToggleChange={mockFilterToggleChange}
+          handleDateSelection={mockHandleDateSelection}
+          handleStatusChange={mockHandleStatusChange}
         />
       );
 
       wrapper.find("FormCheckbox").at(0).simulate("change");
-      expect(mockHandleStatusChange).toBeCalledWith('resolved');
+      expect(mockHandleStatusChange).toBeCalledWith("resolved");
       wrapper.find("FormCheckbox").at(1).simulate("change");
-      expect(mockHandleStatusChange).toBeCalledWith('open');
+      expect(mockHandleStatusChange).toBeCalledWith("open");
       wrapper.find("FormCheckbox").at(2).simulate("change");
-      expect(mockHandleStatusChange).toBeCalledWith('in_progess');
+      expect(mockHandleStatusChange).toBeCalledWith("in_progess");
       expect(mockHandleStatusChange).toBeCalledTimes(3);
-    })
-  
+    });
   });
 });
