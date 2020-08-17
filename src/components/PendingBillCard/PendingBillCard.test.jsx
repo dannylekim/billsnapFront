@@ -46,7 +46,7 @@ describe("PendingBillCard", () => {
                 getBillIconHandler={jest.fn()}
             />
         );
-        expect(wrapper.find("#non__active__bill")).toHaveLength(1);
+        expect(wrapper.find(".non__active__bill")).toHaveLength(1);
       });
 
       it("should find an active bill", () => {
@@ -60,7 +60,7 @@ describe("PendingBillCard", () => {
                 getBillIconHandler={jest.fn()}
             />
         );
-        expect(wrapper.find("#active__bill")).toHaveLength(1);
+        expect(wrapper.find(".active__bill")).toHaveLength(1);
       });
     });
   });

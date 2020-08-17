@@ -3,6 +3,7 @@ import {ACTIONS} from "../actions/billActions";
 const INTIAL_STATE = {
   count: 0, // keep track of count of bills
   bills: [],
+  pendingBills: []
 };
 
 const billReducers = (state = INTIAL_STATE, action) => {
@@ -18,6 +19,11 @@ const billReducers = (state = INTIAL_STATE, action) => {
         ...state,
         bills: action.bills,
       };
+    case ACTIONS.UPDATE_PENDING_BILLS:
+      return {
+        ...state,
+        pendingBills: action.pendingBills,
+      }
     default:
       return state;
   }

@@ -14,8 +14,7 @@ export const PendingBillCard = ({
   const thumbDownColor = "#000000";
   return (
     <div
-      className="card-body"
-      id={activeBillId === bill.id ? "active__bill" : "non__active__bill"}
+      className={activeBillId === bill.id ? "active__bill card-body" : "non__active__bill card-body"}
     >
       <div className="split__info">
         <div />
