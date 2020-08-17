@@ -70,11 +70,9 @@ export const updatePendingBill = (isAccepted, billId) => {
       }
 
       const pendingBills = state.pendingBills.filter(
-        (bill) => bill.id !== billId
+        (pendingBill) => pendingBill.id !== billId
       );
       dispatch(updatePendingBills(pendingBills));
-    } catch (err) {
-      throw err;
     } finally {
       dispatch(setBillLoading(false));
     }
