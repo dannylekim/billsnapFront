@@ -33,7 +33,7 @@ export default class Dashboard extends Component {
 
     return (
       <>
-        {localStorage.getItem("billSnap_token") ? (
+        {this.props.hasUser === true ? (
           <div className='dashboard__flexbox'>
             <div className='bill__wrapper'>
               <div className='bill__section'>

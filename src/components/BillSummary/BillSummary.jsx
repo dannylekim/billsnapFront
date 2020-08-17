@@ -8,7 +8,7 @@ class BillSummary extends Component {
 
     return (
       <div className='bill__summary'>
-        {activeBill.id ? (
+        {activeBill && activeBill.id ? (
           <>
             <h5>
               {`Split by : ${activeBill.responsible.firstName} ${activeBill.responsible.lastName}`}

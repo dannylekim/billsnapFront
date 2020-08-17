@@ -20,7 +20,7 @@ class BillDisplay extends Component {
     const BillsList = (billsVar) => {
       return (
         <div className="bill__container">
-          {billsVar.length > 0 ? (
+          {
             billsVar.map((bill, key) => (
               <div
                 className="bill__card card"
@@ -38,9 +38,7 @@ class BillDisplay extends Component {
                 )}
               </div>
             ))
-          ) : (
-            <p> {`No bills found titled: ${this.props.searchInput}`}</p>
-          )}
+          }
         </div>
       );
     };

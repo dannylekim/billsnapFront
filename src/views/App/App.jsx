@@ -15,7 +15,8 @@ import "./styles.scss";
  * Load you page components here. We will render them via routes
  */
 
-export default () => {
+export default ({hasUser}) => {
+  
   return (
     <div className='App'>
       <BillSnapBackground showWave />
@@ -23,8 +24,8 @@ export default () => {
         <Switch>
           <React.Fragment>
             <div className='App__container'>
+              {hasUser === true && <Sidebar />}
               <Route path='/' exact component={LandingPage} />
-              <Sidebar hide={ !(!!localStorage.getItem("billSnap_token")) } />
               <Route path='/dashboard' exact component={Dashboard} />
               <Route path='/profile' exact component={Profile} />
             </div>

@@ -19,7 +19,6 @@ exports[`BillDisplay render snapshots 📸 BillDisplay should match snap shot wh
           className="float-right"
           id="bill__created"
         >
-           
           05/03/2018
         </span>
       </div>
@@ -62,10 +61,8 @@ exports[`BillDisplay render snapshots 📸 BillDisplay should match snap shot wh
           <span
             id="bill__balance"
           >
-             
             12.00
              $
-             
           </span>
         </div>
       </div>
@@ -100,7 +97,6 @@ exports[`BillDisplay render snapshots 📸 BillDisplay should match snap shot wh
           className="float-right"
           id="bill__created"
         >
-           
           06/04/2018
         </span>
       </div>
@@ -143,10 +139,8 @@ exports[`BillDisplay render snapshots 📸 BillDisplay should match snap shot wh
           <span
             id="bill__balance"
           >
-             
             15.00
              $
-             
           </span>
         </div>
       </div>

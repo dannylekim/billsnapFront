@@ -79,34 +79,6 @@ class SearchBar extends Component {
     });
   };
 
-  //TO REMOVE
-  updateBills_TEST = (type) => {
-    this.setState((prev) => ({
-      sorting: { type, opened: false },
-      filterToggles: {
-        categoryOpened: false,
-        statusOpened: false,
-        dateOpened: false,
-      },
-      dateFilters: {
-        ...prev.dateFilters,
-        startDate: { ...prev.dateFilters.startDate, selected: false },
-        endDate: { ...prev.dateFilters.endDate, selected: false },
-      },
-    }));
-
-    if (type !== "A to Z" && type !== "Z to A") {
-      const startDate = `start=${this.state.dateFilters.startDate.value}`;
-      const endDate = `end=${this.state.dateFilters.endDate.value}`;
-
-      const filterQueryParam = {
-        Newest: `?${startDate}&${endDate}&sort_by=CREATED&order_by=DESC`,
-        Oldest: `?${startDate}&${endDate}&sort_by=CREATED&order_by=ASC`,
-      };
-      this.props.fetchBills(filterQueryParam[type]);
-    } else this.props.orderAlphabetical(type, this.props.bills);
-  };
-
   /**
    * Convert filtering data into REST params string
    */
@@ -120,8 +92,13 @@ class SearchBar extends Component {
     if (!!dateFilters.startDate.value) {
       params = `start=${this.state.dateFilters.startDate.value}`; 
     }
+
+    if (!!dateFilters.startDate.value && !!dateFilters.endDate.value) {
+      params += `&`; 
+    }
+
     if (!!dateFilters.endDate.value) {
-      params += `&end=${this.state.dateFilters.endDate.value}`; 
+      params += `end=${this.state.dateFilters.endDate.value}`; 
     }
 
     return params
@@ -194,7 +171,7 @@ class SearchBar extends Component {
       default:
         break;
     }
-  }
+  };
 
   /**
    * Change date state on handler event
@@ -274,7 +251,6 @@ class SearchBar extends Component {
   }
 
   onInputChangeHandler = (e) => {
-    // TODO
     const value = e.target.value;
     this.props.updateBillNameSearch(value);
   }
@@ -340,10 +316,7 @@ class SearchBar extends Component {
           )}
           {this.state.toggle.short && (
             <SimpleFilter
-              applyFilter={(e) => {
-                /** TODO change bill filter */
-                this.applySorting(e);
-              }}
+              applyFilter={this.applySorting}
               closeHandler={this.closeHandler}
               currentActive={this.state.currentSorting}
             />

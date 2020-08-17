@@ -20,7 +20,7 @@ describe("App", () => {
       createRegisterFormElements();
       ReactDOM.render(
         <Provider store={store}>
-          <App />
+          <App hasUser={true}/>
         </Provider>,
         div
       );
