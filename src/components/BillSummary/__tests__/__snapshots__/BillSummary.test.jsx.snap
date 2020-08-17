@@ -5,9 +5,7 @@ exports[`BillSummary render snapshots 📸 BillSummary should match snap shot wi
   className="bill__summary"
 >
   <h5>
-     
     Total Amount Owed :
-     
     <span
       id="amount__owed"
     >
@@ -15,7 +13,6 @@ exports[`BillSummary render snapshots 📸 BillSummary should match snap shot wi
       123
        $
     </span>
-     
   </h5>
   <h5>
      Total of bills : 
@@ -30,18 +27,21 @@ exports[`BillSummary render snapshots 📸 BillSummary should match snap shot wi
   className="bill__summary"
 >
   <h5>
-    Split by : Bob Ross
+    Split by : 
+    Bob
+     
+    Ross
   </h5>
   <h5>
-     
-    Status : OPENED
+    Status : 
+    OPENED
   </h5>
   <h5>
     Amount Owed :
-     
     <span
       id="amount__owed"
     >
+       
       20.2
        $
     </span>
@@ -55,16 +55,13 @@ exports[`BillSummary render snapshots 📸 BillSummary should match snap shot wi
   className="bill__summary"
 >
   <h5>
-     
     Total Amount Owed :
-     
     <span
       id="amount__owed"
     >
        
        $
     </span>
-     
   </h5>
   <h5>
      Total of bills : 

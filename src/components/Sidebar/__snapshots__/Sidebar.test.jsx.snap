@@ -14,7 +14,7 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot 1`] = `
       Billsnap Logo
     </a>
     <div
-      className="sidebar__navitems"
+      className="sidebar__nav-items"
     >
       <li
         className="nav-item"
@@ -225,7 +225,7 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot if hide pr
       Billsnap Logo
     </a>
     <div
-      className="sidebar__navitems"
+      className="sidebar__nav-items"
     >
       <li
         className="nav-item"
@@ -432,7 +432,7 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot is another
       Billsnap Logo
     </a>
     <div
-      className="sidebar__navitems"
+      className="sidebar__nav-items"
     >
       <li
         className="nav-item"

@@ -116,11 +116,6 @@ describe("Sidebar", () => {
 
         expect(wrapper.state('activeState')).toEqual(expectedState);
       });
-      it("should change props if parameter does exist in this props", () => {
-        wrapper.instance().handleClick("contacts");
-        expect(wrapper.find(NavLink).at(0).prop("active")).toBeFalsy();
-        expect(wrapper.find(NavLink).at(2).prop("active")).toBeTruthy();
-      });
     });
     describe("handleLogoutClick", () => {
       it("should clear local storage", () => {
