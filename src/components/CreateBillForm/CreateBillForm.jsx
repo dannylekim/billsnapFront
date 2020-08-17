@@ -8,11 +8,10 @@ export const CreateBillForm = ({
   handleAddClick,
   handleRemoveClick,
   onFormChange,
-  onCategoryChange,
   hasErrors,
   errorMessage,
   addBillForm,
-  balance = 0,
+  totalBalance = 0,
   tipFormat,
   itemBuffer,
   taxBuffer,
@@ -21,7 +20,7 @@ export const CreateBillForm = ({
   return (
     <div>
       <Form>
-        <FormGroup onChange={onFormChange}>
+        <FormGroup onChange={(event) => onFormChange(event, "details")}>
           <label htmlFor="#name"> BILL NAME </label>
           <FormInput name="name" id="#name" placeholder="ex: Bill #1"/>
           <Container>
@@ -62,7 +61,7 @@ export const CreateBillForm = ({
               <Row>
                 <Col>
                   <FormInput 
-                    onChange={(event) => onCategoryChange(event, "item")}
+                    onChange={(event) => onFormChange(event, "item")}
                     name="name"
                     value={itemBuffer.name}
                     placeholder="ex: Goat cheese"/>
@@ -73,7 +72,7 @@ export const CreateBillForm = ({
                       <InputGroupText>$</InputGroupText>
                     </InputGroupAddon>
                     <FormInput 
-                      onChange={(event) => onCategoryChange(event, "item")} 
+                      onChange={(event) => onFormChange(event, "item")} 
                       name="cost" 
                       type="number" 
                       min="0" 
@@ -108,7 +107,7 @@ export const CreateBillForm = ({
               <Row>
                 <Col>
                   <FormInput 
-                    onChange={(event) => onCategoryChange(event, "tax")}
+                    onChange={(event) => onFormChange(event, "tax")}
                     name="name"
                     value={taxBuffer.name}
                     placeholder="ex: TPS"/>
@@ -119,7 +118,7 @@ export const CreateBillForm = ({
                       <InputGroupText>%</InputGroupText>
                     </InputGroupAddon>
                     <FormInput 
-                      onChange={(event) => onCategoryChange(event, "tax")}
+                      onChange={(event) => onFormChange(event, "tax")}
                       name="percentage" 
                       value={taxBuffer.percentage}
                       type="number" 
@@ -138,11 +137,11 @@ export const CreateBillForm = ({
           <FormRadio 
             inline 
             checked={tipFormat} 
-            onChange={(event) => onCategoryChange(event, "tipFormat")} >Amount</FormRadio>
+            onChange={(event) => onFormChange(event, "tipFormat")} >Amount</FormRadio>
           <FormRadio 
             inline 
             checked={!tipFormat}
-            onChange={(event) => onCategoryChange(event, "tipFormat")} >Percentage</FormRadio>
+            onChange={(event) => onFormChange(event, "tipFormat")} >Percentage</FormRadio>
           
             {tipFormat ? (
               <InputGroup>
@@ -150,7 +149,7 @@ export const CreateBillForm = ({
                   <InputGroupText> $</InputGroupText>
                 </InputGroupAddon>
                 <FormInput 
-                  onChange={onFormChange}
+                  onChange={(event) => onFormChange(event, "details")}
                   name="tipAmount"
                   value={addBillForm.tipAmount}
                   type="number" 
@@ -163,7 +162,7 @@ export const CreateBillForm = ({
                   <InputGroupText>%</InputGroupText>
                 </InputGroupAddon>
                 <FormInput 
-                  onChange={onFormChange}
+                  onChange={(event) => onFormChange(event, "details")}
                   name="tipPercent"
                   value={addBillForm.tipPercent}
                   type="number" 
@@ -174,7 +173,7 @@ export const CreateBillForm = ({
             )}
         </FormGroup>
 
-        <div>Total amount to split: {balance}</div>
+        <div>Total amount to split: {totalBalance}</div>
         
         <FormGroup >
           <Container>
@@ -196,7 +195,7 @@ export const CreateBillForm = ({
               <Row>
                 <Col>
                   <FormInput
-                    onChange={(event) => onCategoryChange(event, "account")}
+                    onChange={(event) => onFormChange(event, "account")}
                     name="email"
                     value={accountBuffer}
                     placeholder="friend@email.com"/>

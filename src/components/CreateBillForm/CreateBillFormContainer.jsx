@@ -17,6 +17,7 @@ class CreateBillFormContainer extends Component {
         taxes: []
       },
       balance: 0,
+      totalBalance: 0,
       isOpen: false,
       hasErrors: {},
       errorMessage: "",
@@ -30,36 +31,37 @@ class CreateBillFormContainer extends Component {
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
     this.onFormChange = this.onFormChange.bind(this);
-    this.onCategoryChange = this.onCategoryChange.bind(this);
     this.handleErrorResponse = this.handleErrorResponse.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.handleCorrectTipFormat = this.handleCorrectTipFormat.bind(this);
+    this.calculateTax = this.calculateTax.bind(this);
   }
 
   /**
    * @function onFormChange for non calculating item
    * @description event handling function, handles the changes in the input fields.
-   * @param {Event} event
-   */
-  onFormChange = (event) => {
-    const { name, value } = event.target;
-    this.setState((prev) => ({
-      addBillForm: {
-        ...prev.addBillForm,
-        [name]: value,
-      },
-    }));
-  }
-
-  /**
-   *
-   *
    * @param event
-   * @param isAdd
+   * @param category
    */
-  onCategoryChange = (event, category) => {
-    const { name, value } = event.target;
+  onFormChange = (event, category) => {
+    let { name, value } = event.target;
+
+    value = (
+      name === "cost" ||
+      name === "percentage" ||
+      name === "tipAmount" ||
+      name === "tipPercent") ? Number(value) : value;
+
     switch (category) {
+      case "details":
+        this.setState((prev) => ({
+          addBillForm: {
+            ...prev.addBillForm,
+            [name]: value,
+          },
+        }), () => this.calculateTax());
+        break;
+
       case "item":
         this.setState((prev) => ({
           itemBuffer: {
@@ -81,7 +83,7 @@ class CreateBillFormContainer extends Component {
       case "tipFormat":
         this.setState({
           tipFormat: !this.state.tipFormat,
-        });
+        }, () => this.calculateTax());
         break;
 
       case "account":
@@ -133,7 +135,7 @@ class CreateBillFormContainer extends Component {
             items: this.state.addBillForm.items.push({ ...itemBuffer }),
             balance: this.state.balance + itemBuffer.cost,
             itemBuffer: { name: "", cost: 0 }
-          });
+          }, () => this.calculateTax());
         }
         break;
 
@@ -143,7 +145,7 @@ class CreateBillFormContainer extends Component {
           this.setState({
             taxes: this.state.addBillForm.taxes.push({ ...taxBuffer }),
             taxBuffer: {name: "", percentage: 0}
-          });
+          }, () => this.calculateTax());
         }
         break;
 
@@ -166,14 +168,18 @@ class CreateBillFormContainer extends Component {
     switch (category) {
       case "item":
         const items = this.state.addBillForm.items;
+        const newBalance = this.state.balance - items[index].cost;
         delete items[index];
-        this.setState({ items: items });
+        this.setState({ 
+          items: items,
+          balance: newBalance, 
+        }, () => this.calculateTax());
         break;
 
       case "tax":
         const taxes = this.state.addBillForm.taxes;
         delete taxes[index];
-        this.setState({ taxes: taxes });
+        this.setState({ taxes: taxes }, () => this.calculateTax());
         break;
 
       case "account":
@@ -189,7 +195,6 @@ class CreateBillFormContainer extends Component {
    */
   handleCorrectTipFormat = async () => {
     if (this.state.tipFormat) {
-      console.log("removeing tip");
       this.setState((prev) => ({
         addBillForm: {
           ...prev.addBillForm,
@@ -205,6 +210,26 @@ class CreateBillFormContainer extends Component {
       }));
     }
   };
+
+  /**
+   *  @function calculateTax
+   */
+  calculateTax = () => {
+    let tmpBalance = this.state.balance;
+    this.state.addBillForm.taxes.forEach((tax) => {
+      tmpBalance += this.state.balance * (tax.percentage / 100);
+    });
+
+    if (this.state.tipFormat) {
+      tmpBalance += this.state.addBillForm.tipAmount;
+    } else {
+      tmpBalance += tmpBalance * (this.state.addBillForm.tipPercent / 100);
+    }
+
+    this.setState({
+      totalBalance: tmpBalance,
+    });
+  }
 
   /**
    * Toggles the modal from open to close
@@ -232,11 +257,10 @@ class CreateBillFormContainer extends Component {
               handleAddClick={this.handleAddClick}
               handleRemoveClick={this.handleRemoveClick}
               onFormChange={this.onFormChange}
-              onCategoryChange={this.onCategoryChange}
               hasErrors={this.state.hasErrors}
               errorMessage={this.errorMessage}
               addBillForm={this.state.addBillForm}
-              balance={this.state.balance}
+              totalBalance={this.state.totalBalance}
               tipFormat={this.state.tipFormat}
               itemBuffer={this.state.itemBuffer}
               taxBuffer={this.state.taxBuffer}
