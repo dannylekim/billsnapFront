@@ -155,6 +155,7 @@ class SearchBar extends Component {
     this.setState({
       currentSorting: sortingType,
     });
+    this.closeHandler();
     const sortingParams = this.constructor.getSortingParams(sortingType);
     const dateParams = this.getDateParams();
 
@@ -261,7 +262,6 @@ class SearchBar extends Component {
           </span>
           <FormInput
             type='text'
-            className='form-control border-0'
             onChange={this.onInputChangeHandler}
             placeholder='Search bill'
             value={this.props.billNameSearch}
