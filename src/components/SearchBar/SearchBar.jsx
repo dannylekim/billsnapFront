@@ -141,7 +141,7 @@ class SearchBar extends Component {
       case 'allBills':
         return this.props.fetchBills(`?${params}`);
       default:
-        break;
+        return;
     }
 
   }
@@ -165,7 +165,7 @@ class SearchBar extends Component {
         const totalParams = `?${sortingParams}&${dateParams}&${filterParams}`;
         return this.props.fetchBills(`${totalParams}`);
       default:
-        break;
+        return;
     }
   }
 
