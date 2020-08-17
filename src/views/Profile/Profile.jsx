@@ -5,7 +5,7 @@ import { FaPencilAlt, FaPhone, FaEnvelope, FaMapMarkerAlt, FaBirthdayCake } from
 const capilizeFirstLetter = (name) =>
   name.charAt(0).toUpperCase() + name.slice(1);
 
-export default ({ history, userInfo,hasUsers }) => {
+export default ({ history, userInfo,hasUser }) => {
   const {
     firstName,
     middleName,
@@ -16,13 +16,13 @@ export default ({ history, userInfo,hasUsers }) => {
     email,
   } = userInfo;
   
-  const userFullName = hasUsers ? `${capilizeFirstLetter(firstName)} ${capilizeFirstLetter(
+  const userFullName = hasUser ? `${capilizeFirstLetter(firstName)} ${capilizeFirstLetter(
     middleName
   )} ${capilizeFirstLetter(lastName)}` : ""; 
 
   return (
     <>
-    {hasUsers ?
+    {hasUser ?
       <div className="profile__section">
         <div className="header__profile"> </div> 
         <img className="profile__avatar" src="./billSnapIcon.png" alt="avatar" />

@@ -22,7 +22,7 @@ describe("Profile", () => {
           <Provider store={store2}>
             <Profile
               userInfo={{ userInfo: {} }}
-              hasUsers={false}
+              hasUser={false}
               history={{ push: jest.fn() }}
             />
           </Provider>
@@ -34,7 +34,7 @@ describe("Profile", () => {
           <Provider store={store}>
             <Profile
               userInfo={mockUserInfo}
-              hasUsers={true}
+              hasUser={true}
               history={{ push: jest.fn() }}
             />
           </Provider>

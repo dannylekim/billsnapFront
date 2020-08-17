@@ -35,11 +35,12 @@ class Sidebar extends React.Component {
   }
 
   componentDidMount(){
-    this.state.activeState.dashboard === true && this.props.history.push(`/dashboard`);
+    this.state.activeState.dashboard && this.props.history.push(`/dashboard`);
   }
 
   handleClick(link) {
     if (this.state.activeState[link] === false) {
+
       this.setState({
         activeState: {
           ...DEFAULT_ACTIVE_STATE,

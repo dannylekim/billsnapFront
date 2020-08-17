@@ -88,7 +88,7 @@ const BillFilter = ({
       </div>
       <div className='filter__selections__container'>
         {filterBadges.map((badgeObject, key) => (
-          <span key={key}  className={badgeObject.title === currentSorting && 'active'}>
+          <span key={key} className={badgeObject.title === currentSorting && 'active'}>
             <Badge
               outline
               pill
