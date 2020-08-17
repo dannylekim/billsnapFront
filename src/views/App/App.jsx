@@ -23,8 +23,8 @@ export default ({ hasUser }) => {
         <Switch>
           <React.Fragment>
             <div className="App__container">
-              {hasUser === true && <Sidebar />}
               <Route path="/" exact component={LandingPage} />
+              {hasUser && <Sidebar />}
               <Route path="/dashboard" exact component={Dashboard} />
               <Route path="/profile" exact component={Profile} />
             </div>

@@ -89,15 +89,15 @@ class SearchBar extends Component {
       dateFilters,
     } = this.state;
 
-    if (!!dateFilters.startDate.value) {
+    if (dateFilters.startDate.value) {
       params = `start=${this.state.dateFilters.startDate.value}`;
     }
 
-    if (!!dateFilters.startDate.value && !!dateFilters.endDate.value) {
+    if (dateFilters.startDate.value && dateFilters.endDate.value) {
       params += `&`;
     }
 
-    if (!!dateFilters.endDate.value) {
+    if (dateFilters.endDate.value) {
       params += `end=${this.state.dateFilters.endDate.value}`;
     }
 
@@ -271,7 +271,7 @@ class SearchBar extends Component {
             placeholder='Search bill'
             value={this.props.billNameSearch}
           />
-          {!!this.props.billNameSearch && (
+          {this.props.billNameSearch && (
             <Button
               onClick={() => this.props.updateBillNameSearch()}
               theme="light"> 

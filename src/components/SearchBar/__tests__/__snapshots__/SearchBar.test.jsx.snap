@@ -36,6 +36,7 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when l
       type="text"
       value=""
     />
+    
     <span
       className="search__filter"
     >
@@ -209,6 +210,7 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when s
       type="text"
       value=""
     />
+    
     <span
       className="search__filter"
     >
@@ -313,6 +315,7 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when s
       type="text"
       value=""
     />
+    
     <span
       className="search__filter"
     >
@@ -390,6 +393,7 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot withou
       type="text"
       value=""
     />
+    
     <span
       className="search__filter"
     >

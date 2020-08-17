@@ -4,7 +4,7 @@ import {toggleLandingPageForm} from "../../redux/actions/applicationActions";
 
 const mapStateToProps = (state) => ({
   formType: state.application.showRegisterFirst ? "register" : "login",
-  hasUser: (state.users && Object.keys(state.users.userInfo).length > 0) ? true : false,
+  hasUser: (state.users && Object.keys(state.users.userInfo).length > 0),
 });
 
 const mapDispatchToProps = (dispatch) => ({

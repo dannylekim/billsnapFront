@@ -15,7 +15,7 @@ export default (props) => {
   return (
     <div className="page__landing">
       <Navbar />
-      {hasUser === false ? (
+      {!hasUser ? (
         <div className="page__content">
           <TitleContent />
           <div>

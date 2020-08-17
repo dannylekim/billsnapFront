@@ -33,7 +33,7 @@ export default class Dashboard extends Component {
 
     return (
       <>
-        {this.props.hasUser === true ? (
+        {this.props.hasUser ? (
           <div className='dashboard__flexbox'>
             <div className='bill__wrapper'>
               <div className='bill__section'>

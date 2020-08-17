@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 const mapStateToProps = (state) => ({
   userInfo: state.users.userInfo,
-  hasUser: Object.keys(state.users.userInfo).length > 0 ? true : false,
+  hasUser: Object.keys(state.users.userInfo).length > 0,
   isBillLoading: state.application.isBillLoading,
 });
 

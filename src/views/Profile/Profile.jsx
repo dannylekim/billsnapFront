@@ -5,7 +5,7 @@ import { FaPencilAlt, FaPhone, FaEnvelope, FaMapMarkerAlt, FaBirthdayCake } from
 const capilizeFirstLetter = (name) =>
   name.charAt(0).toUpperCase() + name.slice(1);
 
-export default ({ userInfo }) => {
+export default ({ history, userInfo,hasUsers }) => {
   const {
     firstName,
     middleName,
@@ -15,30 +15,35 @@ export default ({ userInfo }) => {
     location,
     email,
   } = userInfo;
-  const userFullName = `${capilizeFirstLetter(firstName)} ${capilizeFirstLetter(
+  
+  const userFullName = hasUsers ? `${capilizeFirstLetter(firstName)} ${capilizeFirstLetter(
     middleName
-  )} ${capilizeFirstLetter(lastName)}`; 
+  )} ${capilizeFirstLetter(lastName)}` : ""; 
 
   return (
-    <div className="profile__section">
-      <div className="header__profile"> </div> 
+    <>
+    {hasUsers ?
+      <div className="profile__section">
+        <div className="header__profile"> </div> 
+        <img className="profile__avatar" src="./billSnapIcon.png" alt="avatar" />
+        <div className="user__name">
+          <h1> {userFullName} </h1>
+          <button className="edit__profile">
+            <FaPencilAlt />
+          </button>
+        </div>
 
-      <img className="profile__avatar" src="./billSnapIcon.png" alt="avatar" />
-      <div className="user__name">
-        <h1> {userFullName} </h1>
-        <button className="edit__profile">
-          <FaPencilAlt />
-        </button>
+        <div className="profile__info">
+          <div className="profile__element"> <span> <FaPhone/> </span> {phoneNumber} </div>
+          <div className="profile__element"> <span> <FaMapMarkerAlt/> </span> {`${capilizeFirstLetter(location.city)}, ${capilizeFirstLetter(location.country)}`} </div>
+          <div className="profile__element"> <span> <FaEnvelope/> </span> {email} </div>
+          <div className="profile__element"> <span> <FaBirthdayCake/> </span> {birthDate} </div>
+        </div>
+        <hr className="end__profile"/>
       </div>
-
-      <div className="profile__info">
-        <div className="profile__element"> <span> <FaPhone/> </span> {phoneNumber} </div>
-        <div className="profile__element"> <span> <FaMapMarkerAlt/> </span> {`${capilizeFirstLetter(location.city)}, ${capilizeFirstLetter(location.country)}`} </div>
-        <div className="profile__element"> <span> <FaEnvelope/> </span> {email} </div>
-        <div className="profile__element"> <span> <FaBirthdayCake/> </span> {birthDate} </div>
-      </div>
-      <hr className="end__profile"/>
-
-    </div>
+      : 
+      history.push("/")
+      }
+    </>
   );
 };
