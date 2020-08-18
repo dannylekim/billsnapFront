@@ -1,5 +1,6 @@
 const { URL } = require("../../config");
 const { BILLSNAP_TOKEN, BILLS } = require("../../constants/constants");
+const HttpStatus = require("http-status-codes");
 /**
  * @function getBill
  * @description Function that calls the /bills route to return the bills associated to the user. With bearer token.
@@ -31,5 +32,14 @@ export const createBill = async (createBillParams) => {
     },
     body: JSON.stringify(createBillParams),
   });
-  return response.json();
+  return checkStatus(response);
 };
+
+
+async function checkStatus(response) {
+  const parsedResponse = await response.json();
+  if (response.status != HttpStatus.CREATED) {
+    throw parsedResponse;
+  }
+  return parsedResponse;
+}

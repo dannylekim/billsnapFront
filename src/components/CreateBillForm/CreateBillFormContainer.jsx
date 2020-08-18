@@ -242,7 +242,7 @@ class CreateBillFormContainer extends Component {
 
   handleErrorResponse = (response) => {
     console.log("wew")
-    console.log(response.errors)
+    console.log(response)
   };
 
   render() {
