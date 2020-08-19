@@ -1,0 +1,23 @@
+@import "../../variables";
+
+.split-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text__information {
+  font-family: $primary-font;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.71);
+}
+
+.small-input {
+  //must override shards-react
+  width: 15% !important;
+}
+
+.pay-button {
+  margin-top: 1em;
+}

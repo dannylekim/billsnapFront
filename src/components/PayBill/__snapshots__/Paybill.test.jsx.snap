@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PayBill render snapshots 📸 PayBill should match snap shot 1`] = `
+<div>
+  <div
+    className="split-info text__information"
+  >
+    <div>
+      Bill Name
+    </div>
+    <div />
+  </div>
+  <div
+    className="split-info text__information"
+  >
+    <div>
+      Amount left to pay
+    </div>
+    <input
+      className="small-input form-control"
+      step="0.01"
+      type="number"
+    />
+  </div>
+  <div
+    className="split-info"
+  >
+    <div />
+    <button
+      className="pay-button btn btn-outline-success btn-pill"
+      onClick={[Function]}
+    >
+      Pay Bill
+    </button>
+  </div>
+</div>
+`;
