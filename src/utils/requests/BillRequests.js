@@ -17,3 +17,28 @@ export const getBill = async (query_params = "") => {
     throw error;
   }
 };
+
+/**
+ * @function answer bill
+ * @description Function that calls the invitation route and accepts or declines the bill
+ * @param isAccepted true to accept, false otherwise
+ * @param billId the bill that we are answering
+ * @returns {Promise<any>} it will return the full bill if we've accepted, null otherwise
+ */
+export const answerPendingBill = async (isAccepted, billId) => {
+  const token = localStorage.getItem("billSnap_token");
+  const response = await fetch(`${URL}/invitations/${billId}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ answer: isAccepted }),
+  });
+
+  if (!response.ok) {
+    throw await response.json();
+  }
+
+  return response.json();
+};

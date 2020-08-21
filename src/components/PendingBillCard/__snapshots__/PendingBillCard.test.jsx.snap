@@ -2,8 +2,7 @@
 
 exports[`PendingBillCard render snapshots 📸 PendingBillCard should match snap shot 1`] = `
 <div
-  className="card-body"
-  id="active__bill"
+  className="active__bill card-body"
 >
   <div
     className="split__info"
