@@ -1,5 +1,5 @@
 import React from "react";
-import CreateBillBackground from "../CreateBillBackground.jsx";
+import CreateBillBackground from "./CreateBillBackground.jsx";
 
 describe("Background", () => {
     describe("render", () => {
