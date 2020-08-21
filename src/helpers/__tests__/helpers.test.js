@@ -1,5 +1,5 @@
 import React from "react";
-import { filterDateTime } from "../DateTime";
+import { filterDateTime, capilizeFirstLetter, userFullName } from "../Functions";
 import { getBillIcons } from "../Components";
 import {
   FaBus,
@@ -9,8 +9,16 @@ import {
   FaShoppingCart,
   FaUtensils,
 } from "react-icons/fa";
-
+//hasUser, firstName, middleName, lastName
 describe("function", () => {
+  it("userFullName should return full name", () => {
+    expect(userFullName(true, "bob", "charles", "smithsonian")).toBe("Bob Charles Smithsonian");
+    expect(userFullName(false, "bob", "charles", "smithsonian")).toBe("");
+  })
+  it("capilizeFirstLetter should capitilize name", () => {
+    expect(capilizeFirstLetter("bob")).toBe("Bob");
+  });
+
   it("filterDateTime should return correct format", () => {
     const today = new Date(new Date().setHours(0, 0, 0, 0));
     expect(filterDateTime("05-03-2017 15:25:10 -0400")).toBe("05/03/2017");

@@ -88,21 +88,24 @@ describe("Sidebar", () => {
   describe("function", () => {
     describe("handleClick", () => {
       it("should not change state if parameter does not exist as a activeState key", () => {
-        const expectedState = {
-          activeState: {
-            ...DEFAULT_ACTIVE_STATE,
-            settings: true,
-          },
+        const startingState = {
+          dashboard: false,
+          profile: false,
+          contacts: false,
+          settings: false,
+          help: false,
         };
-
-        const actualState = { ...expectedState };
-
         wrapper.setState({
-          activeState: actualState,
+          activeState: startingState,
         });
         wrapper.instance().handleClick("starlord");
+        expect(wrapper.state("activeState")).toEqual(startingState);
 
-        expect(wrapper.state("activeState")).toEqual(expectedState);
+        wrapper.instance().handleClick("profile");
+        expect(wrapper.state("activeState")).toEqual({
+          ...startingState,
+          profile: true,
+        });
       });
     });
     describe("handleLogoutClick", () => {

@@ -1,9 +1,7 @@
 import React from "react";
 import "./styles.scss";
 import { FaPencilAlt, FaPhone, FaEnvelope, FaMapMarkerAlt, FaBirthdayCake } from "react-icons/fa";
-
-const capilizeFirstLetter = (name) =>
-  name.charAt(0).toUpperCase() + name.slice(1);
+import {capilizeFirstLetter, userFullName} from "../../helpers/Functions";
 
 export default ({ history, userInfo,hasUser }) => {
   const {
@@ -15,10 +13,6 @@ export default ({ history, userInfo,hasUser }) => {
     location,
     email,
   } = userInfo;
-  
-  const userFullName = hasUser ? `${capilizeFirstLetter(firstName)} ${capilizeFirstLetter(
-    middleName
-  )} ${capilizeFirstLetter(lastName)}` : ""; 
 
   return (
     <>
@@ -27,7 +21,7 @@ export default ({ history, userInfo,hasUser }) => {
         <div className="header__profile"> </div> 
         <img className="profile__avatar" src="./billSnapIcon.png" alt="avatar" />
         <div className="user__name">
-          <h1> {userFullName} </h1>
+          <h1> {userFullName(hasUser, firstName, middleName, lastName)} </h1>
           <button className="edit__profile">
             <FaPencilAlt />
           </button>

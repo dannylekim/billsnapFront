@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when category opened 1`] = `
+exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when category toggle opened 1`] = `
 <div
   className="bill__filter__container"
 >
@@ -106,6 +106,336 @@ exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when
         placeholder="Restaurant"
         type="text"
       />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when date toggle is opened 1`] = `
+<div
+  className="bill__filter__container"
+>
+  <div
+    className="filter__header"
+  >
+    <span
+      className="filter__header__title"
+    >
+      Filters 
+      allBills
+    </span>
+  </div>
+  <div
+    className="filter__selections__container"
+  >
+    <span
+      className="active"
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="descending"
+        onClick={[Function]}
+      >
+        Newest
+      </span>
+    </span>
+    <span
+      className={false}
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="ascending"
+        onClick={[Function]}
+      >
+        Oldest
+      </span>
+    </span>
+    <span
+      className={false}
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="by__status"
+        onClick={[Function]}
+      >
+        Status
+      </span>
+    </span>
+    <span
+      className={false}
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="alphabetical__increasing"
+        onClick={[Function]}
+      >
+        A to Z
+      </span>
+    </span>
+    <span
+      className={false}
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="alphabetical__decreasing"
+        onClick={[Function]}
+      >
+        Z to A
+      </span>
+    </span>
+    <span
+      className={false}
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="by__category"
+        onClick={[Function]}
+      >
+        Category
+      </span>
+    </span>
+    <span
+      className={false}
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="by__date"
+        onClick={[Function]}
+      >
+        Date
+      </span>
+    </span>
+  </div>
+  <div
+    className="advanced__filter__selection"
+  >
+    <div
+      className="date__filter"
+    >
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="bill-snap__filter-date-start"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="bill-snap__filter-date-start"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          Start date
+          
+        </span>
+      </label>
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="bill-snap__filter-date-end"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="bill-snap__filter-date-end"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          End date
+          
+        </span>
+      </label>
+      <input
+        className="form-control"
+        disabled={true}
+        onChange={[Function]}
+        type="date"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BillFilter render snapshots 📸 BillFilter should match snap shot when status toggle is opened 1`] = `
+<div
+  className="bill__filter__container"
+>
+  <div
+    className="filter__header"
+  >
+    <span
+      className="filter__header__title"
+    >
+      Filters 
+      allBills
+    </span>
+  </div>
+  <div
+    className="filter__selections__container"
+  >
+    <span
+      className="active"
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="descending"
+        onClick={[Function]}
+      >
+        Newest
+      </span>
+    </span>
+    <span
+      className={false}
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="ascending"
+        onClick={[Function]}
+      >
+        Oldest
+      </span>
+    </span>
+    <span
+      className={false}
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="by__status"
+        onClick={[Function]}
+      >
+        Status
+      </span>
+    </span>
+    <span
+      className={false}
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="alphabetical__increasing"
+        onClick={[Function]}
+      >
+        A to Z
+      </span>
+    </span>
+    <span
+      className={false}
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="alphabetical__decreasing"
+        onClick={[Function]}
+      >
+        Z to A
+      </span>
+    </span>
+    <span
+      className={false}
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="by__category"
+        onClick={[Function]}
+      >
+        Category
+      </span>
+    </span>
+    <span
+      className={false}
+    >
+      <span
+        className="badge badge-outline-primary badge-pill"
+        id="by__date"
+        onClick={[Function]}
+      >
+        Date
+      </span>
+    </span>
+  </div>
+  <div
+    className="advanced__filter__selection"
+  >
+    <div
+      className="status__filter"
+    >
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="bill-snap__filter-status-resolved"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="bill-snap__filter-status-resolved"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          PAID
+        </span>
+      </label>
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="bill-snap__filter-status-open"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="bill-snap__filter-status-open"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          UNPAID
+        </span>
+      </label>
+      <label
+        className="custom-control custom-checkbox"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="bill-snap__filter-status-inprogress"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <label
+          aria-hidden="true"
+          className="custom-control-label"
+          id="bill-snap__filter-status-inprogress"
+          onClick={[Function]}
+        />
+        <span
+          className="custom-control-description"
+        >
+          ONGOING
+        </span>
+      </label>
     </div>
   </div>
 </div>

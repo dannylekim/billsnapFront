@@ -40,7 +40,6 @@ class Sidebar extends React.Component {
 
   handleClick(link) {
     if (this.state.activeState[link] === false) {
-
       this.setState({
         activeState: {
           ...DEFAULT_ACTIVE_STATE,
@@ -58,7 +57,7 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <Navbar className="billSnap-SideBar" style={ this.props.hide ? { display: 'none' } : {}}>
+      <Navbar className="billSnap-SideBar">
         <Nav
           tabs
           vertical={true}
@@ -126,7 +125,6 @@ Sidebar.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func
   }),
-  hide: PropTypes.bool,
   setUser: PropTypes.func,
 };
 

@@ -1,7 +1,7 @@
 import React from "react";
 import PropType from "prop-types";
 
-import { filterDateTime } from '../../../helpers/DateTime';
+import { filterDateTime } from '../../../helpers/Functions';
 import { getBillIcons } from '../../../helpers/Components';
 import "./styles.scss";
 

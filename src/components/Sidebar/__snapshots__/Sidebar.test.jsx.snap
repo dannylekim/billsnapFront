@@ -3,7 +3,6 @@
 exports[`Sidebar render snapshots 📸 Sidebar should match snap shot 1`] = `
 <nav
   className="billSnap-SideBar navbar"
-  style={Object {}}
 >
   <ul
     className="nav flex-column nav-tabs"
@@ -210,7 +209,6 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot 1`] = `
 exports[`Sidebar render snapshots 📸 Sidebar should match snap shot is another row is active 1`] = `
 <nav
   className="billSnap-SideBar navbar"
-  style={Object {}}
 >
   <ul
     className="nav flex-column nav-tabs"

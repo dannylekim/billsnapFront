@@ -12,33 +12,54 @@ describe("BillFilter", () => {
     mockHandleStatusChange = jest.fn((type) => type);
   describe("render", () => {
     describe("snapshots 📸", () => {
-      it("BillFilter should match snap shot when category opened", () => {
-        matches(
-          <BillFilter
-            activeTab="allBills"
-            applyFiltering={mockApplyFiltering}
-            currentSorting="Newest"
-            billStatusFilter={{
-              resolved: false,
-              open: false,
-              in_progess: false,
-            }}
-            closeHandler={mockCloseHandler}
-            dateCheckboxHandler={mockDateCheckboxHandler}
-            dateFilters={{
-              startDate: { selected: false, value: "" },
-              endDate: { selected: false, value: "" },
-            }}
-            filterToggles={{
-              statusOpened: false,
-              categoryOpened: true,
-              dateOpened: false,
-            }}
-            filterToggleChange={mockFilterToggleChange}
-            handleDateSelection={mockHandleDateSelection}
-            handleStatusChange={mockHandleStatusChange}
-          />
-        );
+      wrapper = shallow(
+        <BillFilter
+          activeTab="allBills"
+          applyFiltering={mockApplyFiltering}
+          currentSorting="Newest"
+          billStatusFilter={{
+            resolved: false,
+            open: false,
+            in_progess: false,
+          }}
+          closeHandler={mockCloseHandler}
+          dateCheckboxHandler={mockDateCheckboxHandler}
+          dateFilters={{
+            startDate: { selected: false, value: "" },
+            endDate: { selected: false, value: "" },
+          }}
+          filterToggles={{
+            statusOpened: false,
+            categoryOpened: true,
+            dateOpened: false,
+          }}
+          filterToggleChange={mockFilterToggleChange}
+          handleDateSelection={mockHandleDateSelection}
+          handleStatusChange={mockHandleStatusChange}
+        />
+      );
+      it("BillFilter should match snap shot when category toggle opened", () => {
+        matches(wrapper);
+      });
+      it("BillFilter should match snap shot when status toggle is opened", () => {
+        wrapper.setProps({
+          filterToggles: {
+            statusOpened: true,
+            categoryOpened: false,
+            dateOpened: false,
+          }
+        });
+        matches(wrapper);
+      });
+      it("BillFilter should match snap shot when date toggle is opened", () => {
+        wrapper.setProps({
+          filterToggles: {
+            statusOpened: false,
+            categoryOpened: false,
+            dateOpened: true,
+          }
+        });
+        matches(wrapper);
       });
     });
   });
@@ -73,7 +94,7 @@ describe("BillFilter", () => {
       );
     });
 
-    afterEach(()=> {
+    afterEach(() => {
       mockApplyFiltering.mockRestore();
       mockCloseHandler.mockRestore();
       mockDateCheckboxHandler.mockRestore();
