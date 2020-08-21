@@ -17,3 +17,21 @@ export const getBill = async (query_params = "") => {
     throw error;
   }
 };
+
+export const payBill = async (amountPaid, billId) => {
+  const token = localStorage.getItem("billSnap_token");
+  const response = await fetch(`${URL}/resolve/bills`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ id: billId, paymentAmount: amountPaid }),
+  });
+
+  if (!response.ok) {
+    throw await response.json();
+  }
+
+  return response.json();
+};
