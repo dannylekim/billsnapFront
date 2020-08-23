@@ -2,15 +2,22 @@
 
 .billSnap-SideBar {
   transition: 0.3s;
-  position: fixed;
   height: 100%;
   background-color: $secondary-color;
-  width: 302px;
+  width: 100%;
+  max-width: 302px;
   margin-left: 0;
   left: 0;
   top: 0;
   border-radius: 0 15px 15px 0;
   text-align: justify;
+  padding: 0px !important;
+  margin-bottom: 0px;
+  align-items: normal !important;
+
+  .nav {
+    width: inherit;
+  }
 }
 
 .sideLogo.navbar-brand {
@@ -24,7 +31,7 @@
   color: $primary-text-color;
 }
 
-div.sidebar__navitems {
+div.sidebar__nav-items {
   margin-top: 55px;
 
   .nav-item {
@@ -34,7 +41,7 @@ div.sidebar__navitems {
   .nav-link {
     padding: 15px 8px 15px 16px;
     text-decoration: none;
-    font-size: 30px;
+    font-size: 20px;
     border-color: transparent !important;
     color: $primary-text-color !important;
 
@@ -45,7 +52,8 @@ div.sidebar__navitems {
       border-bottom-left-radius: 50px !important;
     }
 
-    &.active {
+    &.active, &.active:hover {
+      background-color: white;
       color: $secondary-color !important;
       border-top-right-radius: 0 !important;
       border-top-left-radius: 50px !important;

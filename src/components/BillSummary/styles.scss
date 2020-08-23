@@ -1,0 +1,18 @@
+@import "../../variables";
+
+span#more__details {
+    text-decoration: underline;
+    color: $primary-text-color;
+    float: right;
+    margin-bottom: 15px;
+    margin-right: 32px;
+    right: 0;
+  }
+
+  h5 span#amount__owed {
+    color: $secondary-price-color;
+  }
+
+  div.bill__summary {
+    text-align: left;
+  }

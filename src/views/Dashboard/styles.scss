@@ -1,3 +1,5 @@
+@import "../../variables";
+
 div.dashboard__flexbox {
   display: flex;
   flex-wrap: nowrap;
@@ -6,9 +8,51 @@ div.dashboard__flexbox {
   margin: 0;
   padding: 0;
 
-  div.bill__display {
-    height: inherit;
-    width: calc(100% - 302px);
-    margin-top: 35px;
-  }
+    ul.nav.nav-tabs {
+      justify-content: start;
+      border-bottom: 1px solid $border-color;
+      margin-bottom: 15px;
+    }
+
+    button#add__bill__button {
+      margin-left: calc(100% - 140px);
+      margin-top: 10px;
+      margin-bottom: 10px;
+      border-radius: 17px;
+      font-weight: bold;
+      font-size: 20px;
+      border: 1px solid $secondary-color;
+      min-height: 40px;
+      width: 140px;
+    }
+
+    a.nav-link {
+      height: 50px;
+      width: 140px;
+      border-radius: 10px 10px 0 1px;
+      margin-left: 5px;
+      font-size: 16px;
+      border-bottom: 1px solid $border-color;
+    }
+
+    a.nav-link.active {
+      border: 1px solid $border-color;
+      border-bottom: none;
+      background: $card-color;
+      color: black;
+    }
+
+    button#add__bill__button,
+    a.nav-link {
+      justify-content: end;
+      background-color: $secondary-color;
+      color: $card-color;
+      box-sizing: border-box;
+      box-shadow: 4px 0 4px $card-shadow;
+      font-family: $primary-font;
+      font-style: normal;
+      font-weight: 300;
+      padding: 10px 0;
+    }
 }
+

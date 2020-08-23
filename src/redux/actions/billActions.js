@@ -4,6 +4,8 @@ import {setBillLoading} from "./applicationActions";
 export const ACTIONS = {
   ADD_BILLS: "ADD_BILLS",
   UPDATE_BILLS: "UPDATE_BILLS",
+  UPDATE_BILL_SEARCH_NAME: "UPDATE_BILL_SEARCH_NAME",
+  SET_ACTIVE_BILL: "SET_ACTIVE_BILL"
 };
 
 const addBill = (bills = []) => ({
@@ -15,6 +17,21 @@ const addBill = (bills = []) => ({
 const updateBill = (bills = []) => ({
   type: "UPDATE_BILLS",
   bills,
+});
+
+export const updateSearchBillName = (input = "") => ({
+  type: "UPDATE_BILL_SEARCH_NAME",
+  input,
+});
+
+export const setActiveBill = (bill) => ({
+  type: "SET_ACTIVE_BILL",
+  bill,
+});
+
+export const clearActiveBill = () => ({
+  type: "SET_ACTIVE_BILL",
+  bill: {},
 });
 
 export const orderAlphabetical = (alphabeticalType, bills) => async (

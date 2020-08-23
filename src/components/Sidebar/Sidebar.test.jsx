@@ -1,9 +1,8 @@
 import React from "react";
-import Sidebar, {DEFAULT_ACTIVE_STATE} from "./Sidebar.jsx";
-import SidebarComponent from "../Sidebar";
+import Sidebar from "./Sidebar.jsx";
+import SidebarComponent, {DEFAULT_ACTIVE_STATE} from "../Sidebar";
 import {NavLink} from "shards-react";
 import configureStore from "redux-mock-store";
-import {Provider} from "react-redux";
 
 const mockStore = configureStore();
 
@@ -11,12 +10,34 @@ const store = mockStore({});
 
 describe("Sidebar", () => {
   let wrapper;
-  let handleMockFunction, mockSetUser;
+  let
+    mockSetUser,
+    mockSetActiveState,
+    mockFilterComponent,
+    mockHistoryPush;
+
+  const STARTING_ACTIVE_STATE = {
+    ...DEFAULT_ACTIVE_STATE,
+    bills: true
+  };
+
+  mockSetActiveState = (activeState) => wrapper.setProps({activeState});
 
   beforeEach(() => {
-    handleMockFunction = jest.fn();
     mockSetUser = jest.fn();
-    wrapper = shallow(<Sidebar setUser={mockSetUser} />);
+    mockFilterComponent= jest.fn();
+    mockHistoryPush = jest.fn();
+    wrapper = shallow(
+      <Sidebar
+        setUser={mockSetUser}
+        activeState={STARTING_ACTIVE_STATE}
+        setActiveState={mockSetActiveState}
+        filterComponentFromNav={mockFilterComponent}
+        history= {{
+          push: mockHistoryPush
+        }}
+      />
+    );
   });
 
   describe("render", () => {
@@ -24,24 +45,18 @@ describe("Sidebar", () => {
       it("Sidebar should match snap shot", () => {
         matches(<Sidebar />);
       });
-
-      it("SidebarComponent should match snap shot", () => {
-        matches(
-          <Provider store={store}>
-            {" "}
-            <SidebarComponent setUser={mockSetUser} />
-          </Provider>
-        );
+      it("Sidebar should match snap shot if hide props is true", () => {
+        matches(<Sidebar hide />);
       });
 
-      it("Sidebar should match snap shot", () => {
-        const EXPECTED_STATE = {
+      it("Sidebar should match snap shot is another row is active", () => {
+        const activeState = {
           ...DEFAULT_ACTIVE_STATE,
           contacts: true,
         };
         wrapper.setState({
-          activeState: { ...EXPECTED_STATE },
-        });
+          activeState
+        })
         matches(wrapper);
       });
     });
@@ -84,31 +99,22 @@ describe("Sidebar", () => {
 
   describe("function", () => {
     describe("handleClick", () => {
-      it("should not change state if parameter does not exist in this state", () => {
-        const EXPECTED_STATE = {
-          ...DEFAULT_ACTIVE_STATE,
-          contacts: true,
-        };
-        wrapper.setState({
-          activeState: { ...EXPECTED_STATE },
-        });
+      it("should not change state if parameter does not exist as a activeState key", () => {
+        const expectedState = {
+          activeState: {
+            ...DEFAULT_ACTIVE_STATE,
+            settings: true,
+          }
+        }
+
+        const actualState = { ...expectedState };
+
+        wrapper.setState({ 
+          activeState: actualState
+        })
         wrapper.instance().handleClick("starlord");
-        expect(wrapper.state("activeState")).toEqual(EXPECTED_STATE);
-      });
-      it("should change state if parameter does exist in this state", () => {
-        const DEFAULT_STATE = {
-          ...DEFAULT_ACTIVE_STATE,
-          contacts: true,
-        };
-        const EXPECTED_STATE = {
-          ...DEFAULT_ACTIVE_STATE,
-          bills: true,
-        };
-        wrapper.setState({
-          activeState: { ...DEFAULT_STATE },
-        });
-        wrapper.instance().handleClick("bills");
-        expect(wrapper.state("activeState")).toEqual(EXPECTED_STATE);
+
+        expect(wrapper.state('activeState')).toEqual(expectedState);
       });
     });
     describe("handleLogoutClick", () => {
