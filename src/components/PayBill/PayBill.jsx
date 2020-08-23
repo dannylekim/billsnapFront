@@ -16,11 +16,12 @@ export default ({
     <div className="split-info text__information">
       <div>Amount left to pay</div>
       <FormInput
-        value={amountRemainingToPay}
-        onChange={onChangeHandler}
-        className="small-input"
-        step="0.01"
-        type="number"
+          name={"amountRemaining"}
+          value={amountRemainingToPay}
+          onChange={onChangeHandler}
+          className="small-input"
+          step="0.01"
+          type="number"
       />
     </div>
     <div className="split-info">
