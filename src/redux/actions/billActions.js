@@ -76,6 +76,24 @@ export const fetchMyBills = (query_param = "") => {
   };
 };
 
+export const fetchPendingBills = (
+  query_param = "?invitation_status=PENDING"
+) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setBillLoading(true));
+
+      const pendingBills = await getBill(query_param);
+
+      dispatch(updatePendingBills(pendingBills));
+    } catch (err) {
+      // maybe set bill fetch error?
+    } finally {
+      dispatch(setBillLoading(false));
+    }
+  };
+};
+
 export const updatePendingBill = (isAccepted, billId) => {
   return async (dispatch, state) => {
     try {

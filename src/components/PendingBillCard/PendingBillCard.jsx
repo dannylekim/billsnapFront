@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.scss";
 import {MdThumbDown, MdThumbUp} from "react-icons/md";
+import BillIcon from "../BillIcon";
 
 export const PendingBillCard = ({
   acceptBillInvitationHandler,
@@ -8,13 +9,16 @@ export const PendingBillCard = ({
   filterDateHandler,
   bill,
   activeBillId,
-  getBillIconHandler,
 }) => {
   const thumbUpColor = "#47e5b6";
   const thumbDownColor = "#000000";
   return (
     <div
-      className={activeBillId === bill.id ? "active__bill card-body" : "non__active__bill card-body"}
+      className={
+        activeBillId === bill.id
+          ? "active__bill card-body"
+          : "non__active__bill card-body"
+      }
     >
       <div className="split__info">
         <div />
@@ -22,8 +26,8 @@ export const PendingBillCard = ({
       </div>
       <div className="bill__items">
         <div className="split__info">
-          <div className="separate__right bill-icon">
-            {getBillIconHandler(bill.category)}
+          <div className="separate-right bill-icon">
+            <BillIcon category={bill.category} />
           </div>
           <div className="bill__name">
             <div>{bill.name}</div>
