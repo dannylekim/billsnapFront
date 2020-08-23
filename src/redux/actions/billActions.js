@@ -1,4 +1,4 @@
-import {answerPendingBill, getBill, getDetailedBill,} from "../../utils/requests/BillRequests";
+import {answerPendingBill, getBill, getDetailedBill, payBill} from "../../utils/requests/BillRequests";
 import {setActiveBillLoading, setBillLoading} from "./applicationActions";
 import {setActiveItemId} from "./itemAction";
 
@@ -128,3 +128,15 @@ export const setActiveBill = (bill) => {
     }
   };
 };
+
+export const payABill = (amountPaid, billId) => {
+  return async (dispatch, state) => {
+    const bill = await payBill(amountPaid, billId);
+
+    const updatedBills = state.bills.bills.filter(b => b.id !== bill.id);
+    updatedBills.push(bill);
+
+    dispatch(updateBill(updatedBills));
+  }
+
+}

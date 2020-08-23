@@ -1,4 +1,4 @@
-import {answerPendingBill, getBill, getDetailedBill} from "../BillRequests";
+import {answerPendingBill, getBill, getDetailedBill, payBill} from "../BillRequests";
 
 const { URL } = require("../../../config");
 
@@ -108,6 +108,66 @@ describe("BillRequests", () => {
       }
     });
   });
+
+  describe("payBill", () => {
+    afterEach(() => {
+      localStorage.clear();
+    });
+
+    const billId = 1;
+    const amountPaid = 10;
+
+    it("Should return an json object with the right method", async () => {
+      const token = "token";
+      localStorage.setItem("billSnap_token", token);
+
+      fetch = jest.fn((url, options) => {
+        if (options.method !== "POST") {
+          throw new Error("wrong method");
+        }
+
+        if (options.headers.Authorization !== `Bearer ${token}`) {
+          throw new Error("missing Authorization header");
+        }
+
+        if (url !== `${URL}/resolve/bills`) {
+          throw new Error("wrong url");
+        }
+
+        if (options.body !== JSON.stringify({ id: billId, paymentAmount: amountPaid })) {
+          throw new Error("wrong body");
+        }
+
+        return new Promise((resolve) => {
+          resolve({
+            ok: true,
+            json: jest.fn().mockResolvedValue({ data: {} }),
+          });
+        });
+      });
+
+      const res = await payBill(amountPaid, billId);
+
+      expect(res.data).toEqual({});
+    });
+
+    it("Should throw same json object if error", async () => {
+      fetch = jest.fn(() => {
+        return new Promise((resolve) => {
+          resolve({
+            ok: false,
+            json: jest.fn().mockResolvedValue({ data: {} }),
+          });
+        });
+      });
+
+      try {
+        await payBill(amountPaid, billId);
+      } catch (e) {
+        expect(() => expect(e.data).toEqual({}));
+      }
+    });
+  })
 
   describe("answerBill", () => {
     afterEach(() => {
