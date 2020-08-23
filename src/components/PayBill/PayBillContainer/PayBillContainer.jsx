@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import PayBill from "../PayBill";
 import {Button, Modal, ModalBody, ModalHeader} from "shards-react";
+import {MdPayment} from "react-icons/md"
 
 class PayBillContainer extends Component {
     constructor(props) {
@@ -43,7 +44,7 @@ class PayBillContainer extends Component {
     render() {
         return (
             <div>
-                <Button onClick={this.toggleModal}> </Button>
+                <Button theme="success" size="sm" pill onClick={this.toggleModal}> <MdPayment/> Pay Bill </Button>
                 <Modal size="sm" open={this.state.isOpen} toggle={this.toggleModal}>
                     <ModalHeader>
                         Payment Detail
