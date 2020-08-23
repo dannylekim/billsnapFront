@@ -1,4 +1,4 @@
-import {getBill} from "../../utils/requests/BillRequests";
+import {getBill, startBill} from "../../utils/requests/BillRequests";
 import {setBillLoading} from "./applicationActions";
 
 export const ACTIONS = {
@@ -50,5 +50,14 @@ export const fetchMyBills = (query_param = "") => {
     } finally {
       dispatch(setBillLoading(false));
     }
+  };
+};
+
+export const startABill = (billId) => {
+  return async(dispatch, state) => {
+    const bill = await startBill(billId);
+    const updatedBills = state.bills.bills.filter(b => b.id !== bill.id);
+    updatedBills.push(bill);
+    dispatch(updateBill(updatedBills));
   };
 };
