@@ -7,7 +7,7 @@ import Dashboard from "../Dashboard";
 import Profile from "../Profile";
 import Sidebar from "../../components/Sidebar";
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import BillSnapBackground from "../Background";
 import "./styles.scss";
 
@@ -15,16 +15,21 @@ import "./styles.scss";
  * Load you page components here. We will render them via routes
  */
 
-export default () => {
+export default (props) => {
+
+  if(localStorage.getItem("billSnap_token")){
+    props.getUser();
+  }
+
   return (
     <div className='App'>
-      <BillSnapBackground showWave />
+      <BillSnapBackground showWave={!props.isLoggedIn} />
       <BrowserRouter>
         <Switch>
           <React.Fragment>
             <div className='App__container'>
               <Route path='/' exact component={LandingPage} />
-              <Sidebar hide={ !(!!localStorage.getItem("billSnap_token")) } />
+              <Sidebar hide={!props.isLoggedIn } />
               <Route path='/dashboard' exact component={Dashboard} />
               <Route path='/profile' exact component={Profile} />
             </div>
