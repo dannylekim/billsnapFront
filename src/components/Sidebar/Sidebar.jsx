@@ -39,7 +39,7 @@ class Sidebar extends React.Component {
   }
 
   handleClick(link) {
-    if (!this.state.activeState[link]) {
+    if (this.state.activeState[link] === false) {
       this.setState({
         activeState: {
           ...DEFAULT_ACTIVE_STATE,

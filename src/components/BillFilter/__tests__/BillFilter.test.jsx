@@ -4,18 +4,21 @@ import { shallow } from "enzyme";
 
 describe("BillFilter", () => {
   let mockApplyFiltering;
-  let mockCloseFunction;
+  let mockCloseHandler;
   let mockDateCheckboxHandler;
   let mockFilterToggleChange;
   let mockHandleDateSelection;
   let mockHandleStatusChange;
   let wrapper;
-  const mockApplyFiltering = jest.fn((e) => e),
-    mockCloseHandler = jest.fn(),
-    mockDateCheckboxHandler = jest.fn((e) => e),
-    mockFilterToggleChange = jest.fn((e) => e),
-    mockHandleDateSelection = jest.fn((date) => date),
+
+  beforeEach(() => {
+    mockApplyFiltering = jest.fn((e) => e);
+    mockCloseHandler = jest.fn();
+    mockDateCheckboxHandler = jest.fn((e) => e);
+    mockFilterToggleChange = jest.fn((e) => e);
+    mockHandleDateSelection = jest.fn((date) => date);
     mockHandleStatusChange = jest.fn((type) => type);
+  });
   describe("render", () => {
     describe("snapshots 📸", () => {
       wrapper = shallow(
