@@ -17,7 +17,7 @@ import "./styles.scss";
 
 export default ({ hasUser }) => {
   return (
-    <div className="App">
+    <div className='App'>
       <BillSnapBackground showWave />
       <BrowserRouter>
         <Switch>

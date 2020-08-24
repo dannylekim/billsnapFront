@@ -3,6 +3,12 @@ import BillFilter from "../BillFilter";
 import { shallow } from "enzyme";
 
 describe("BillFilter", () => {
+  let mockApplyFiltering;
+  let mockCloseFunction;
+  let mockDateCheckboxHandler;
+  let mockFilterToggleChange;
+  let mockHandleDateSelection;
+  let mockHandleStatusChange;
   let wrapper;
   const mockApplyFiltering = jest.fn((e) => e),
     mockCloseHandler = jest.fn(),

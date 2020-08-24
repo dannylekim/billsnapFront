@@ -225,7 +225,7 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot is another
         className="nav-item"
       >
         <a
-          className="nav-link"
+          className="nav-link active"
           id="billSnap-SideBar__bills"
           onClick={[Function]}
         >
@@ -283,7 +283,7 @@ exports[`Sidebar render snapshots 📸 Sidebar should match snap shot is another
         className="nav-item"
       >
         <a
-          className="nav-link active"
+          className="nav-link"
           id="billSnap-SideBar__contacts"
           onClick={[Function]}
         >

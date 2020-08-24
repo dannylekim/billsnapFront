@@ -145,6 +145,9 @@ class SearchBar extends Component {
     switch(this.props.activeTab) {
       case 'allBills':
         return this.props.fetchBills(`?${params}`);
+      case 'pendingBills':
+        // TODO pending bill tasks
+        return;
       default:
         return;
     }

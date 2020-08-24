@@ -9,7 +9,7 @@ const SmallBillCard = ({ activeBillId, bill }) => (
   <div
     className={`bill__items card-body ${(typeof activeBillId === 'number' && activeBillId === bill.id) && 'bill-active' }`}
   >
-    {bill.created && (
+    {!!bill.created && (
       <div className="bill__items card-title text-muted">
         <span className="float-right" id="bill__created">
           {filterDateTime(bill.created)}
