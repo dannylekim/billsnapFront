@@ -1,9 +1,9 @@
 import React from "react";
 import PropType from "prop-types";
 
-import { filterDateTime } from '../../../helpers/DateTime';
-import { getBillIcons } from '../../../helpers/Components';
+import {filterDateTime} from '../../../helpers/DateTime';
 import "./styles.scss";
+import BillIcon from "../../BillIcon";
 
 const SmallBillCard = ({ activeBillId, bill }) => (
   <div
@@ -18,7 +18,9 @@ const SmallBillCard = ({ activeBillId, bill }) => (
       </div>
     )}
     <div className="bill__items card-text">
-      <div id="bill__icon">{getBillIcons(bill.category)}</div>
+      <div id="bill__icon">
+        <BillIcon category={bill.category} />
+      </div>
       <div className="bill__name__price">
         <span id="bill__name">{bill.name} </span>
         <span id="bill__balance">

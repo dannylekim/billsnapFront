@@ -1,15 +1,19 @@
 import PendingBillsContainer from "./PendingBillsContainer";
 import {connect} from "react-redux";
-import {updatePendingBill} from "../../redux/actions/billActions";
+import {fetchPendingBills, setActiveBill, updatePendingBill,} from "../../redux/actions/billActions";
+
+const mapStateToProps = (state) => ({
+  pendingBills: state.bills.pendingBills,
+  isBillLoading: state.application.isBillLoading,
+  activeBillId: state.bills.activeBill.id,
+  searchInput: state.bills.searchInput,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   updatePendingBill: (isAccepted, billId) =>
     dispatch(updatePendingBill(isAccepted, billId)),
-});
-
-const mapStateToProps = (state) => ({
-  pendingBills: state.bills.bills,
-  isBillLoading: state.application.isBillLoading,
+  fetchPendingBills: (queryParam) => dispatch(fetchPendingBills(queryParam)),
+  setActiveBill: (bill) => dispatch(setActiveBill(bill)),
 });
 
 export default connect(

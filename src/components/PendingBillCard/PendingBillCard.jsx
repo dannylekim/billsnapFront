@@ -9,11 +9,13 @@ export const PendingBillCard = ({
   filterDateHandler,
   bill,
   activeBillId,
+  activeBillHandler,
 }) => {
   const thumbUpColor = "#47e5b6";
   const thumbDownColor = "#000000";
   return (
     <div
+      onClick={activeBillHandler}
       className={
         activeBillId === bill.id
           ? "active__bill card-body"
