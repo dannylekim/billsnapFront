@@ -31,7 +31,7 @@ class PendingBillsContainer extends Component {
         <div className="bill__container">
           {pendingBillsList.length > 0 ? (
             pendingBillsList.map((pendingBill, key) => (
-              <div>
+              <div key={pendingBill.id}>
                 <PendingBillCard
                   filterDateHandler={filterDateTime}
                   declineBillInvitationHandler={() =>
@@ -43,7 +43,6 @@ class PendingBillsContainer extends Component {
                   activeBillHandler={setActiveBill}
                   activeBillId={activeBillId}
                   bill={pendingBill}
-                  key={key}
                 />
                 {key !== pendingBillsList.length - 1 && (
                   <hr className="card__separator" />
