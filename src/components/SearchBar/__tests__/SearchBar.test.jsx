@@ -1,7 +1,5 @@
 import React from "react";
 import SearchBar from "../SearchBar";
-import BillFilter from "../../BillFilter";
-import SimpleFilter from "../../SimpleFilter";
 
 describe("SearchBar", () => {
   describe("render", () => {
@@ -9,7 +7,8 @@ describe("SearchBar", () => {
       mockSortAlphabetical,
       mockSortingType,
       mockUpdateSearch,
-      mockFetchBill;
+      mockFetchBill,
+      mockFetchPendingBill;
     let wrapper, instance;
     beforeEach(() => {
       handleMockFunction = jest.fn();
@@ -17,14 +16,16 @@ describe("SearchBar", () => {
       mockFetchBill = jest.fn();
       mockSortingType = jest.fn();
       mockSortingType = "";
+      mockFetchPendingBill = jest.fn();
 
       wrapper = shallow(
         <SearchBar
           updateBillNameSearch={mockUpdateSearch}
+          fetchPendingBills={mockFetchPendingBill}
           fetchBills={mockFetchBill}
           orderAlphabetical={mockSortAlphabetical}
-          billNameSearch=''
-          activeTab='allBills'
+          billNameSearch=""
+          activeTab="allBills"
         />
       );
       instance = wrapper.instance();
@@ -72,8 +73,8 @@ describe("SearchBar", () => {
 
       it("should call updateBillNameSearch prop on button click.", () => {
         wrapper.setProps({
-          billNameSearch: 'hahahhahahahha'
-        })
+          billNameSearch: "hahahhahahahha",
+        });
 
         wrapper.find("Button").simulate("click");
         expect(mockUpdateSearch).toBeCalledWith();
@@ -84,10 +85,6 @@ describe("SearchBar", () => {
           wrapper.find("span.simple__sort").simulate("click");
           expect(wrapper.state().toggle.short).toBeTruthy();
         });
-
-        // it("should trigger a Mock function when A to Z is clicked.", () => {
-        //   expect(wrapper.find(SimpleFilter)).toHaveLength(1);
-        // });
       });
 
       describe("long filter onClicks", () => {
@@ -99,7 +96,7 @@ describe("SearchBar", () => {
 
       describe("Functions", () => {
         const DEFAULT_STATE = {
-          currentSorting: "Newest",      
+          currentSorting: "Newest",
           dateFilters: {
             startDate: { selected: false, value: "" },
             endDate: { selected: false, value: "" },
@@ -114,27 +111,35 @@ describe("SearchBar", () => {
             categoryOpened: false,
             dateOpened: false,
           },
-        }
+        };
 
         describe("getSortingParams", () => {
           it("should return correct case for Newest", () => {
-            expect(SearchBar.getSortingParams('Newest')).toEqual('sort_by=CREATED&order_by=DESC')
+            expect(SearchBar.getSortingParams("Newest")).toEqual(
+              "sort_by=CREATED&order_by=DESC"
+            );
           });
 
           it("should return correct case for Oldest", () => {
-            expect(SearchBar.getSortingParams('Oldest')).toEqual('sort_by=CREATED&order_by=ASC')
+            expect(SearchBar.getSortingParams("Oldest")).toEqual(
+              "sort_by=CREATED&order_by=ASC"
+            );
           });
 
           it("should return correct case for 'A to Z'", () => {
-            expect(SearchBar.getSortingParams('A to Z')).toEqual('sort_by=NAME&order_by=ASC')
+            expect(SearchBar.getSortingParams("A to Z")).toEqual(
+              "sort_by=NAME&order_by=ASC"
+            );
           });
 
           it("should return correct case for 'Z to A'", () => {
-            expect(SearchBar.getSortingParams('Z to A')).toEqual('sort_by=NAME&order_by=DESC')
+            expect(SearchBar.getSortingParams("Z to A")).toEqual(
+              "sort_by=NAME&order_by=DESC"
+            );
           });
 
           it("should return correct case for invalid type", () => {
-            expect(SearchBar.getSortingParams('Z 2 A')).toEqual('')
+            expect(SearchBar.getSortingParams("Z 2 A")).toEqual("");
           });
         });
 
@@ -165,7 +170,7 @@ describe("SearchBar", () => {
               toggle: {
                 short: true,
                 long: false,
-              }
+              },
             });
 
             wrapper.instance().closeHandler();
@@ -186,7 +191,7 @@ describe("SearchBar", () => {
             const BLANK_VALUE_EVENT = {
               preventDefault: jest.fn(),
               target: {
-                value: '',
+                value: "",
               },
             };
             wrapper.setState((prev) => ({
@@ -194,26 +199,26 @@ describe("SearchBar", () => {
                 ...prev.dateFilters,
                 startDate: {
                   selected: true,
-                  value: ''
+                  value: "",
                 },
                 endDate: {
                   selected: true,
-                  value: ''
-                }
-              }
+                  value: "",
+                },
+              },
             }));
 
             wrapper.instance().handleDateSelection(BLANK_VALUE_EVENT);
 
-            expect(wrapper.state().dateFilters.startDate.value).toEqual('');
-            expect(wrapper.state().dateFilters.endDate.value).toEqual('');
+            expect(wrapper.state().dateFilters.startDate.value).toEqual("");
+            expect(wrapper.state().dateFilters.endDate.value).toEqual("");
           });
 
           it("should not change date value if neither start/end date is selected", () => {
             wrapper.instance().handleDateSelection(event);
 
-            expect(wrapper.state().dateFilters.startDate.value).toEqual('');
-            expect(wrapper.state().dateFilters.endDate.value).toEqual('');
+            expect(wrapper.state().dateFilters.startDate.value).toEqual("");
+            expect(wrapper.state().dateFilters.endDate.value).toEqual("");
           });
 
           it("should not change date value if both start and end date are selected", () => {
@@ -222,18 +227,18 @@ describe("SearchBar", () => {
                 ...prev.dateFilters,
                 startDate: {
                   selected: true,
-                  value: ''
+                  value: "",
                 },
                 endDate: {
                   selected: true,
-                  value: ''
-                }
-              }
+                  value: "",
+                },
+              },
             }));
             wrapper.instance().handleDateSelection(event);
 
-            expect(wrapper.state().dateFilters.startDate.value).toEqual('');
-            expect(wrapper.state().dateFilters.endDate.value).toEqual('');
+            expect(wrapper.state().dateFilters.startDate.value).toEqual("");
+            expect(wrapper.state().dateFilters.endDate.value).toEqual("");
           });
 
           it("should change start date value if start date is selected", () => {
@@ -242,14 +247,16 @@ describe("SearchBar", () => {
                 ...prev.dateFilters,
                 startDate: {
                   selected: true,
-                  value: ''
-                }
-              }
+                  value: "",
+                },
+              },
             }));
 
             wrapper.instance().handleDateSelection(event);
 
-            expect(wrapper.state().dateFilters.startDate.value).toEqual(EXPECTED_DATE);
+            expect(wrapper.state().dateFilters.startDate.value).toEqual(
+              EXPECTED_DATE
+            );
             expect(wrapper.state().dateFilters.endDate.value).toEqual("");
           });
 
@@ -259,39 +266,41 @@ describe("SearchBar", () => {
                 ...prev.dateFilters,
                 endDate: {
                   selected: true,
-                  value: ''
-                }
-              }
+                  value: "",
+                },
+              },
             }));
 
             wrapper.instance().handleDateSelection(event);
 
             expect(wrapper.state().dateFilters.startDate.value).toEqual("");
-            expect(wrapper.state().dateFilters.endDate.value).toEqual(EXPECTED_DATE);
+            expect(wrapper.state().dateFilters.endDate.value).toEqual(
+              EXPECTED_DATE
+            );
           });
-        });        
+        });
 
         describe("dateCheckboxHandler", () => {
           it("should switch selected value to the opposite after getting called on opposeite end", () => {
             wrapper.setState({
               dateFilters: {
-                startDate: { 
+                startDate: {
                   selected: false,
-                  value: "" 
+                  value: "",
                 },
-                endDate: { 
-                  selected: false, 
-                  value: "" 
+                endDate: {
+                  selected: false,
+                  value: "",
                 },
               },
             });
 
-            wrapper.instance().dateCheckboxHandler('startDate');
+            wrapper.instance().dateCheckboxHandler("startDate");
 
             expect(wrapper.state().dateFilters.startDate.selected).toBeTruthy();
             expect(wrapper.state().dateFilters.endDate.selected).toBeFalsy();
 
-            wrapper.instance().dateCheckboxHandler('endDate');
+            wrapper.instance().dateCheckboxHandler("endDate");
 
             expect(wrapper.state().dateFilters.endDate.selected).toBeTruthy();
             expect(wrapper.state().dateFilters.startDate.selected).toBeFalsy();
@@ -304,16 +313,16 @@ describe("SearchBar", () => {
               statusOpened: false,
               categoryOpened: true,
               dateOpened: false,
-            }
+            };
             wrapper.setState({
               dateFilters: {
-                startDate: { 
+                startDate: {
                   selected: true,
-                  value: "" 
+                  value: "",
                 },
-                endDate: { 
-                  selected: false, 
-                  value: "" 
+                endDate: {
+                  selected: false,
+                  value: "",
                 },
               },
             });
@@ -322,7 +331,9 @@ describe("SearchBar", () => {
 
             expect(wrapper.state().dateFilters.startDate.selected).toBeFalsy();
             expect(wrapper.state().dateFilters.endDate.selected).toBeFalsy();
-            expect(wrapper.state().filterToggles).toEqual(EXPECTED_CATEGORY_FILTERS);
+            expect(wrapper.state().filterToggles).toEqual(
+              EXPECTED_CATEGORY_FILTERS
+            );
           });
         });
 
@@ -350,11 +361,12 @@ describe("SearchBar", () => {
               in_progess: true,
             };
 
-            wrapper.instance().statusFilterHandler('resolved');
-            wrapper.instance().statusFilterHandler('in_progess');
+            wrapper.instance().statusFilterHandler("resolved");
+            wrapper.instance().statusFilterHandler("in_progess");
 
-            expect(wrapper.state().statusFilter).toEqual(EXPECTED_STATUS_FILTER);
-
+            expect(wrapper.state().statusFilter).toEqual(
+              EXPECTED_STATUS_FILTER
+            );
           });
         });
 
@@ -362,36 +374,36 @@ describe("SearchBar", () => {
           it("should return REST params from states if only if start is defined", () => {
             wrapper.setState({
               dateFilters: {
-                startDate: { 
+                startDate: {
                   selected: false,
-                  value: "2020-04-20" 
+                  value: "2020-04-20",
                 },
-                endDate: { 
-                  selected: false, 
-                  value: "" 
+                endDate: {
+                  selected: false,
+                  value: "",
                 },
               },
             });
 
             const params = wrapper.instance().getDateParams();
-            expect(params).toEqual('start=2020-04-20');
+            expect(params).toEqual("start=2020-04-20");
           });
           it("should return REST params from states if both start and end are defined", () => {
             wrapper.setState({
               dateFilters: {
-                startDate: { 
+                startDate: {
                   selected: false,
-                  value: "2020-04-20" 
+                  value: "2020-04-20",
                 },
-                endDate: { 
-                  selected: false, 
-                  value: "2020-04-25" 
+                endDate: {
+                  selected: false,
+                  value: "2020-04-25",
                 },
               },
             });
 
             const params = wrapper.instance().getDateParams();
-            expect(params).toEqual('start=2020-04-20&end=2020-04-25');
+            expect(params).toEqual("start=2020-04-20&end=2020-04-25");
           });
         });
 
@@ -401,12 +413,12 @@ describe("SearchBar", () => {
               statusFilter: {
                 resolved: false,
                 open: false,
-                in_progess: false
+                in_progess: false,
               },
             });
 
             const params = wrapper.instance().getAllBillFilter();
-            expect(params).toEqual('');
+            expect(params).toEqual("");
           });
 
           it("should return filter REST params from states if 1 of the filter is true", () => {
@@ -414,12 +426,12 @@ describe("SearchBar", () => {
               statusFilter: {
                 resolved: false,
                 open: true,
-                in_progess: false
+                in_progess: false,
               },
             });
 
             const params = wrapper.instance().getAllBillFilter();
-            expect(params).toEqual('statuses=OPEN,');
+            expect(params).toEqual("statuses=OPEN,");
           });
 
           it("should return filter REST params from states if all of the filter are true", () => {
@@ -427,46 +439,60 @@ describe("SearchBar", () => {
               statusFilter: {
                 resolved: true,
                 open: true,
-                in_progess: true
+                in_progess: true,
               },
             });
 
             const params = wrapper.instance().getAllBillFilter();
-            expect(params).toEqual('statuses=RESOLVED,OPEN,IN_PROGRESS');
+            expect(params).toEqual("statuses=RESOLVED,OPEN,IN_PROGRESS");
           });
         });
 
         describe("applySorting", () => {
-          const mockValue = '🧢';
+          const mockValue = "🧢";
           const mockCloseHandler = jest.fn();
           const mockGetSortingParams = jest.fn().mockReturnValue(mockValue);
 
           beforeEach(() => {
             SearchBar.getSortingParams = mockGetSortingParams;
             wrapper.instance().closeHandler = mockCloseHandler;
-          })
-
-          afterEach(() => {
-            mockCloseHandler.mockRestore()
-            mockGetSortingParams.mockRestore()
           });
 
-          it("should call the appropriate funcitons with allBills params", () => {
-            const SAMPLE_PARAMS = '🚶‍♂️';
+          afterEach(() => {
+            mockCloseHandler.mockRestore();
+            mockGetSortingParams.mockRestore();
+          });
+
+          it("should call the appropriate functions with allBills params", () => {
+            const SAMPLE_PARAMS = "🚶‍♂️";
             wrapper.instance().applySorting(SAMPLE_PARAMS);
 
             const expectedParams = `?${mockValue}`;
-            
+
             expect(wrapper.state().currentSorting).toBe(SAMPLE_PARAMS);
             expect(mockCloseHandler).toHaveBeenCalled();
             expect(mockGetSortingParams).toHaveBeenCalled();
             expect(mockFetchBill).toHaveBeenCalledWith(expectedParams);
           });
 
+          it("should call the appropriate functions with allBills params for fetchPendingBills", () => {
+            const SAMPLE_PARAMS = "🚶‍♂️";
+            wrapper.setProps({ activeTab: "owedToYou" });
+            wrapper.instance().applySorting(SAMPLE_PARAMS);
+
+
+            const expectedParams = `?invitation_status=PENDING&${mockValue}`;
+
+            expect(wrapper.state().currentSorting).toBe(SAMPLE_PARAMS);
+            expect(mockCloseHandler).toHaveBeenCalled();
+            expect(mockGetSortingParams).toHaveBeenCalled();
+            expect(mockFetchPendingBill).toHaveBeenCalledWith(expectedParams);
+          });
+
           it("should not call any fetching if activeTab does not exist in switch case", () => {
-            const SAMPLE_PARAMS = '🚶‍♂️';
+            const SAMPLE_PARAMS = "🚶‍♂️";
             wrapper.setProps({
-              activeTab: '🔥'
+              activeTab: "🔥",
             });
 
             wrapper.instance().applySorting(SAMPLE_PARAMS);
@@ -480,8 +506,8 @@ describe("SearchBar", () => {
         });
 
         describe("applyFiltering", () => {
-          const mockValue = '🧢';
-          const mockDate = 'start=2021-03-03';
+          const mockValue = "🧢";
+          const mockDate = "start=2021-03-03";
 
           const mockCloseHandler = jest.fn();
           const mockGetSortingParams = jest.fn().mockReturnValue(mockValue);
@@ -491,32 +517,36 @@ describe("SearchBar", () => {
             SearchBar.getSortingParams = mockGetSortingParams;
             wrapper.instance().closeHandler = mockCloseHandler;
             wrapper.instance().getDateParams = mockGetDateParams;
-          })
-
-          afterEach(() => {
-            mockCloseHandler.mockRestore()
-            mockGetSortingParams.mockRestore()
-            mockGetDateParams.mockRestore()
           });
 
-          it("should call the appropriate funcitons with allBills params", () => {
-            const SAMPLE_PARAMS = '🚶‍♂️';
-            const TEST_PARAMS_FOR_FILTER = '🔥';
-            const TEST_PARAMS_FOR_DATES = '📆';
-            const mockGetAllBillFilter = jest.fn().mockReturnValue(TEST_PARAMS_FOR_FILTER);
-            mockGetDateParams = jest.fn().mockReturnValue(TEST_PARAMS_FOR_DATES);
+          afterEach(() => {
+            mockCloseHandler.mockRestore();
+            mockGetSortingParams.mockRestore();
+            mockGetDateParams.mockRestore();
+          });
+
+          it("should call the appropriate functions with allBills params", () => {
+            const SAMPLE_PARAMS = "🚶‍♂️";
+            const TEST_PARAMS_FOR_FILTER = "🔥";
+            const TEST_PARAMS_FOR_DATES = "📆";
+            const mockGetAllBillFilter = jest
+              .fn()
+              .mockReturnValue(TEST_PARAMS_FOR_FILTER);
+            mockGetDateParams = jest
+              .fn()
+              .mockReturnValue(TEST_PARAMS_FOR_DATES);
 
             wrapper.instance().getAllBillFilter = mockGetAllBillFilter;
             wrapper.instance().getDateParams = mockGetDateParams;
-            
+
             wrapper.setProps({
-              activeTab: 'allBills'
+              activeTab: "allBills",
             });
 
             wrapper.instance().applyFiltering(SAMPLE_PARAMS);
 
             const expectedParams = `?${mockValue}&${TEST_PARAMS_FOR_DATES}&${TEST_PARAMS_FOR_FILTER}`;
-            
+
             expect(wrapper.state().currentSorting).toBe(SAMPLE_PARAMS);
             expect(mockCloseHandler).toHaveBeenCalled();
             expect(mockGetSortingParams).toHaveBeenCalled();
@@ -527,21 +557,48 @@ describe("SearchBar", () => {
             expect(mockFetchBill).toHaveBeenCalledWith(expectedParams);
           });
 
-          it.skip("should call the appropriate funcitons with pendingBills params", () => {
-            // TO BE DONE when pendingBills is implemented
+          it("should call the appropriate functions with pendingBills params", () => {
+            const SAMPLE_PARAMS = "🚶‍️";
+            const TEST_PARAMS_FOR_FILTER = "🔥";
+            const TEST_PARAMS_FOR_DATES = "📆";
+            const mockGetAllBillFilter = jest
+                .fn()
+                .mockReturnValue(TEST_PARAMS_FOR_FILTER);
+            mockGetDateParams = jest
+                .fn()
+                .mockReturnValue(TEST_PARAMS_FOR_DATES);
+
+            wrapper.instance().getAllBillFilter = mockGetAllBillFilter;
+            wrapper.instance().getDateParams = mockGetDateParams;
+
+            wrapper.setProps({
+              activeTab: "owedToYou",
+            });
+
+            wrapper.instance().applyFiltering(SAMPLE_PARAMS);
+
+            const expectedParams = `?${mockValue}&${TEST_PARAMS_FOR_DATES}&${TEST_PARAMS_FOR_FILTER}&invitation_status=PENDING`;
+
+            expect(wrapper.state().currentSorting).toBe(SAMPLE_PARAMS);
+            expect(mockCloseHandler).toHaveBeenCalled();
+            expect(mockGetSortingParams).toHaveBeenCalled();
+            expect(mockGetDateParams).toHaveBeenCalled();
+
+            expect(mockGetAllBillFilter).toHaveBeenCalled();
+
+            expect(mockFetchPendingBill).toHaveBeenCalledWith(expectedParams);
           });
 
           it("should not call any fetch function when activeTab props is invalid", () => {
             wrapper.setProps({
-              activeTab: '💩'
+              activeTab: "💩",
             });
-            wrapper.instance().applyFiltering('');
+            wrapper.instance().applyFiltering("");
 
             /**
              * Add more fetchBills mock that have not been called
              */
             expect(mockFetchBill).not.toHaveBeenCalled();
-
           });
         });
       });
