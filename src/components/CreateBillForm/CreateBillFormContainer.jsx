@@ -2,6 +2,24 @@ import React, {Component} from "react";
 import {CreateBillForm} from "./CreateBillForm";
 import {Button, Modal, ModalBody, ModalHeader} from "shards-react";
 
+const DEFAULT_ERRORS = {
+  name: {hasError: false, message: ""},
+  paidBy: {hasError: false, message: ""},
+  category: {hasError: false, message: ""},
+  company: {hasError: false, message: ""},
+  items: {hasError: false, message: ""},
+  taxes: {hasError: false, message: ""},
+  tip: {hasError: false, message: ""},
+  account: {hasError: false, message: ""}
+};
+
+const DEFAULT_ALERT_MESSAGE = {
+  visible: false,
+  alertType: "danger",
+};
+
+const INPUT_LIST = ["name", "paidBy", "category", "company", "items", "taxes", "tip", "account"];
+
 class CreateBillFormContainer extends Component {
   constructor(props) {
     super(props);
@@ -19,13 +37,15 @@ class CreateBillFormContainer extends Component {
       balance: 0,
       totalBalance: 0,
       isOpen: false,
-      hasErrors: {},
+      hasErrors: DEFAULT_ERRORS,
       errorMessage: "",
+      alertMessage: DEFAULT_ALERT_MESSAGE,
       isLoading: false,
       itemBuffer: {name: "", cost: 0},
       taxBuffer: {name: "", percentage: 0},
       accountBuffer: "",
-      tipFormat: true
+      tipFormat: true,
+      inputList: INPUT_LIST
     };
     this.handleSubmitClick = this.handleSubmitClick.bind(this);
     this.handleAddClick = this.handleAddClick.bind(this);
@@ -35,7 +55,22 @@ class CreateBillFormContainer extends Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.handleCorrectTipFormat = this.handleCorrectTipFormat.bind(this);
     this.calculateTax = this.calculateTax.bind(this);
+    this.dismissAlert = this.dismissAlert.bind(this);
   }
+
+  /**
+   * @function dismissAlert
+   * @description dismisses the alert message. and closes tool tip.
+   */
+  dismissAlert = () => {
+    this.setState((prev) => ({
+      alertMessage: {
+        ...prev.alertMessage,
+        visible: false,
+      },
+      hasErrors: DEFAULT_ERRORS,
+    }));
+  };
 
   /**
    * @function onFormChange for non calculating item
@@ -123,6 +158,38 @@ class CreateBillFormContainer extends Component {
     }
   };
 
+  handleErrorResponse = (response) => {
+    if (response.status === "BAD_REQUEST") {
+      response.errors.forEach((error) => {
+        let fieldName = error.field;
+        if (error.field.includes("accountsList")) {
+          fieldName = "account";
+        }
+        this.setState((prev) => ({
+          hasErrors: {
+            ...prev.hasErrors,
+            [fieldName]: {
+              hasError: true,
+              message: error.message,
+            }
+          },
+        }));
+      });
+    }
+
+    if (response.status === "BAD_REQUEST" ||
+        response.status === "UNAUTHORIZED" ||
+        response.status === "NOT_FOUND") {
+      this.setState({
+        alertMessage: { visible: true, alertType: "danger" },
+      });
+    }
+
+    this.setState({
+      errorMessage: response.message,
+    });
+  };
+
   /**
    * @function handleItemAddClick
    */
@@ -185,7 +252,13 @@ class CreateBillFormContainer extends Component {
       case "account":
         const accounts = this.state.addBillForm.accountsList;
         delete accounts[index];
-        this.setState({ accountsList: accounts });
+        this.setState((prev) => ({ 
+          accountsList: accounts,
+          hasErrors: {
+            ...prev.hasErrors,
+            account: {hasError: false, message: ""}
+          }
+        }));
         break;
     }
   }
@@ -237,12 +310,20 @@ class CreateBillFormContainer extends Component {
   toggleModal = () => {
     this.setState((prev) => ({
       isOpen: !prev.isOpen,
-    }));
-  };
-
-  handleErrorResponse = (response) => {
-    console.log("wew")
-    console.log(response)
+      hasErrors: DEFAULT_ERRORS,
+      alertMessage: DEFAULT_ALERT_MESSAGE,
+      addBillForm: {
+        name: "",
+        category: "",
+        company: "",
+        items: [],
+        accountsList: [],
+        tipAmount: 0,
+        tipPercent: 0,
+        taxes: []
+      },
+      balance: 0
+    }), () => {this.calculateTax()});
   };
 
   render() {
@@ -251,20 +332,22 @@ class CreateBillFormContainer extends Component {
         <Button onClick={this.toggleModal}> + Add Bill</Button>
         <Modal size="lg" open={this.state.isOpen} toggle={this.toggleModal}>
           <ModalHeader>Bill details</ModalHeader>
-          <ModalBody>
+          <ModalBody className="modal__create">
             <CreateBillForm
               handleSubmitClick={this.handleSubmitClick}
               handleAddClick={this.handleAddClick}
               handleRemoveClick={this.handleRemoveClick}
               onFormChange={this.onFormChange}
               hasErrors={this.state.hasErrors}
-              errorMessage={this.errorMessage}
+              errorMessage={this.state.errorMessage}
+              alertMessage={this.state.alertMessage}
               addBillForm={this.state.addBillForm}
               totalBalance={this.state.totalBalance}
               tipFormat={this.state.tipFormat}
               itemBuffer={this.state.itemBuffer}
               taxBuffer={this.state.taxBuffer}
               accountBuffer={this.state.accountBuffer}
+              inputList={this.state.inputList}
             />
           </ModalBody>
         </Modal>

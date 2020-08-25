@@ -1,7 +1,20 @@
 import React from "react";
 import "./styles.scss";
 
-import {Button, Col, Container, Form, FormGroup, FormInput, Row, FormRadio, InputGroup, InputGroupAddon, InputGroupText} from "shards-react";
+import {
+  Button,
+  Col, 
+  Container, 
+  Form, 
+  FormGroup, 
+  FormInput, 
+  Row, 
+  FormRadio, 
+  InputGroup, 
+  InputGroupAddon, 
+  InputGroupText,
+  Alert,
+  Tooltip} from "shards-react";
 
 export const CreateBillForm = ({
   handleSubmitClick,
@@ -10,36 +23,55 @@ export const CreateBillForm = ({
   onFormChange,
   hasErrors,
   errorMessage,
+  alertMessage,
   addBillForm,
   totalBalance = 0,
   tipFormat,
   itemBuffer,
   taxBuffer,
   accountBuffer,
+  inputList
 }) => {
   return (
     <div>
+      {alertMessage.visible ? (
+        <Alert
+          className="mb-3"
+          // dismissible={dismissAlert}
+          open={alertMessage.visible}
+          theme={alertMessage.alertType}
+        >
+          {errorMessage}
+        </Alert>
+      ) : (
+        <div className="hidden__div" />
+      )}
+
       <Form>
         <FormGroup onChange={(event) => onFormChange(event, "details")}>
           <label htmlFor="#name"> BILL NAME </label>
-          <FormInput name="name" id="#name" placeholder="ex: Bill #1"/>
+          <FormInput 
+            name="name" 
+            id="name" 
+            placeholder="ex: Bill #1"
+            invalid={hasErrors["name"].hasError}/>
           <Container>
             <Row>
               <Col>
                 <label htmlFor="#paidBy"> PAID BY </label>
-                <FormInput name="paidBy" id="#paidBy" placeholder="ex: Danny"/>
+                <FormInput name="paidBy" id="paidBy" placeholder="ex: Danny"/>
               </Col>
               <Col>
                 <label htmlFor="#category"> CATEGORY </label>
-                <FormInput name="category" id="#category" placeholder="ex: Restaurant"/>
+                <FormInput name="category" id="category" placeholder="ex: Restaurant"/>
               </Col>
             </Row>
           </Container>
           <label htmlFor="#company"> COMPANY </label>
-          <FormInput name="company" id="#company" placeholder="ex: OnlyFans"/>
+          <FormInput name="company" id="company" placeholder="ex: OnlyFans"/>
         </FormGroup>
 
-        <FormGroup >
+        <FormGroup id="items">
           <Container>
             <Row>
               <Col>Items</Col>
@@ -85,7 +117,7 @@ export const CreateBillForm = ({
           </Container>
         </FormGroup>
         
-        <FormGroup >
+        <FormGroup id="taxes">
           <Container>
             <Row>
               <Col>Tax Name</Col>
@@ -150,6 +182,7 @@ export const CreateBillForm = ({
                 </InputGroupAddon>
                 <FormInput 
                   onChange={(event) => onFormChange(event, "details")}
+                  id="tip"
                   name="tipAmount"
                   value={addBillForm.tipAmount}
                   type="number" 
@@ -163,6 +196,7 @@ export const CreateBillForm = ({
                 </InputGroupAddon>
                 <FormInput 
                   onChange={(event) => onFormChange(event, "details")}
+                  id="tip"
                   name="tipPercent"
                   value={addBillForm.tipPercent}
                   type="number" 
@@ -196,6 +230,7 @@ export const CreateBillForm = ({
                 <Col>
                   <FormInput
                     onChange={(event) => onFormChange(event, "account")}
+                    id="account"
                     name="email"
                     value={accountBuffer}
                     placeholder="friend@email.com"/>
@@ -208,6 +243,17 @@ export const CreateBillForm = ({
       <Button size="md" pill onClick={handleSubmitClick} name="confirm">
         Confirm a
       </Button>
+
+      {inputList.map((field, key) => (
+        <Tooltip
+          key={key}
+          placement="top"
+          open={hasErrors[field].hasError}
+          target={`#${field}`}>
+          <span id="input_error"> {hasErrors[field].message} </span>
+        </Tooltip>
+      ))}
+
     </div>
   );
 };
