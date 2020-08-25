@@ -40,7 +40,7 @@ class PendingBillsContainer extends Component {
                   acceptBillInvitationHandler={() =>
                     this.handleAnswerBill(true, pendingBill.id)
                   }
-                  activeBillHandler={setActiveBill}
+                  activeBillHandler={() => setActiveBill(pendingBill)}
                   activeBillId={activeBillId}
                   bill={pendingBill}
                 />

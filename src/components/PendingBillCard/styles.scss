@@ -54,3 +54,21 @@ div.bill__items {
   font-family: $primary-font;
   color: $tertiary-text-color;
 }
+
+.icon__button {
+  opacity: 0.6 !important;
+  transition: 0.5s ease;
+}
+
+.accept{
+  fill: #47e5b6;
+}
+
+.decline {
+  fill: #000000;
+}
+
+.icon__button:hover{
+  opacity:1 !important;
+  transition: 0.5s ease;
+}

@@ -3,7 +3,7 @@ import React from "react";
 
 const BillIcon = ({category}) => {
   const color = "rgba(0, 0, 0, 0.96)";
-  switch (category) {
+  switch (category.toLowerCase()) {
     case "food":
       return <FaUtensils color={color} size={24} />;
     case "transport":

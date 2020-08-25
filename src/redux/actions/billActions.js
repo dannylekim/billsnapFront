@@ -95,16 +95,17 @@ export const fetchPendingBills = (
 };
 
 export const updatePendingBill = (isAccepted, billId) => {
-  return async (dispatch, state) => {
+  return async (dispatch, getState) => {
     try {
       dispatch(setBillLoading(true));
       const bill = await answerPendingBill(isAccepted, billId);
+      const state = getState();
 
       if (isAccepted) {
-        dispatch(updateBill([...state.bills, bill]));
+        dispatch(updateBill([...state.bills.bills, bill]));
       }
 
-      const pendingBills = state.pendingBills.filter(
+      const pendingBills = state.bills.pendingBills.filter(
         (pendingBill) => pendingBill.id !== billId
       );
       dispatch(updatePendingBills(pendingBills));

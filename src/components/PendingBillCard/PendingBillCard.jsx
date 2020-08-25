@@ -11,8 +11,6 @@ export const PendingBillCard = ({
   activeBillId,
   activeBillHandler,
 }) => {
-  const thumbUpColor = "#47e5b6";
-  const thumbDownColor = "#000000";
   return (
     <div
       onClick={activeBillHandler}
@@ -52,14 +50,14 @@ export const PendingBillCard = ({
             <div> Accept? </div>
             <div>
               <MdThumbUp
-                color={thumbUpColor}
+                className="icon__button accept"
                 size={20}
                 onClick={acceptBillInvitationHandler}
               />
             </div>
             <div>
               <MdThumbDown
-                color={thumbDownColor}
+                className="icon__button decline"
                 size={20}
                 onClick={declineBillInvitationHandler}
               />

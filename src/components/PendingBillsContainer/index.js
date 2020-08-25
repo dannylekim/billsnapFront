@@ -1,9 +1,10 @@
 import PendingBillsContainer from "./PendingBillsContainer";
 import {connect} from "react-redux";
 import {fetchPendingBills, setActiveBill, updatePendingBill,} from "../../redux/actions/billActions";
+import {getActivePendingBills} from "../../redux/selectors/billsSelectors";
 
 const mapStateToProps = (state) => ({
-  pendingBills: state.bills.pendingBills,
+  pendingBills: getActivePendingBills(state),
   isBillLoading: state.application.isBillLoading,
   activeBillId: state.bills.activeBill.id,
   searchInput: state.bills.searchInput,
