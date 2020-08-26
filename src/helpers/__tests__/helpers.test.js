@@ -1,5 +1,6 @@
 import React from "react";
-import { filterDateTime, capilizeFirstLetter, userFullName } from "../Functions";
+import { filterDateTime } from "../DateTime";
+import { capilizeFirstLetter, userFullName } from "../StringName";
 import { getBillIcons } from "../Components";
 import {
   FaBus,
