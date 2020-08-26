@@ -8,8 +8,9 @@ describe("SearchBar", () => {
       mockSortingType,
       mockUpdateSearch,
       mockFetchBill,
-      mockFetchPendingBill;
-    let wrapper, instance;
+      mockFetchPendingBill,
+      wrapper;
+
     beforeEach(() => {
       handleMockFunction = jest.fn();
       mockUpdateSearch = jest.fn((e) => e);
@@ -28,7 +29,6 @@ describe("SearchBar", () => {
           activeTab="allBills"
         />
       );
-      instance = wrapper.instance();
     });
 
     describe("snapshots 📸", () => {
@@ -144,7 +144,7 @@ describe("SearchBar", () => {
         });
 
         describe("clearFilter", () => {
-          it("should clear all the filterto default value", () => {
+          it("should clear all the filter to default value", () => {
             wrapper.setState((prev) => ({
               ...prev,
               statusFilter: { resolved: false, open: true, in_progess: false },
@@ -451,9 +451,10 @@ describe("SearchBar", () => {
         describe("applySorting", () => {
           const mockValue = "🧢";
           const mockCloseHandler = jest.fn();
-          const mockGetSortingParams = jest.fn().mockReturnValue(mockValue);
+          let mockGetSortingParams;
 
           beforeEach(() => {
+            mockGetSortingParams = jest.fn().mockReturnValue(mockValue);
             SearchBar.getSortingParams = mockGetSortingParams;
             wrapper.instance().closeHandler = mockCloseHandler;
           });
@@ -479,8 +480,6 @@ describe("SearchBar", () => {
             const SAMPLE_PARAMS = "🚶‍♂️";
             wrapper.setProps({ activeTab: "owedToYou" });
             wrapper.instance().applySorting(SAMPLE_PARAMS);
-
-
             const expectedParams = `?invitation_status=PENDING&${mockValue}`;
 
             expect(wrapper.state().currentSorting).toBe(SAMPLE_PARAMS);
@@ -510,10 +509,12 @@ describe("SearchBar", () => {
           const mockDate = "start=2021-03-03";
 
           const mockCloseHandler = jest.fn();
-          const mockGetSortingParams = jest.fn().mockReturnValue(mockValue);
-          let mockGetDateParams = jest.fn().mockReturnValue(mockDate);
+          let mockGetSortingParams;
+          let mockGetDateParams;
 
           beforeEach(() => {
+            mockGetSortingParams = jest.fn().mockReturnValue(mockValue);
+            mockGetDateParams = jest.fn().mockReturnValue(mockDate);
             SearchBar.getSortingParams = mockGetSortingParams;
             wrapper.instance().closeHandler = mockCloseHandler;
             wrapper.instance().getDateParams = mockGetDateParams;
@@ -562,11 +563,11 @@ describe("SearchBar", () => {
             const TEST_PARAMS_FOR_FILTER = "🔥";
             const TEST_PARAMS_FOR_DATES = "📆";
             const mockGetAllBillFilter = jest
-                .fn()
-                .mockReturnValue(TEST_PARAMS_FOR_FILTER);
+              .fn()
+              .mockReturnValue(TEST_PARAMS_FOR_FILTER);
             mockGetDateParams = jest
-                .fn()
-                .mockReturnValue(TEST_PARAMS_FOR_DATES);
+              .fn()
+              .mockReturnValue(TEST_PARAMS_FOR_DATES);
 
             wrapper.instance().getAllBillFilter = mockGetAllBillFilter;
             wrapper.instance().getDateParams = mockGetDateParams;
