@@ -54,23 +54,8 @@ class CreateBillFormContainer extends Component {
     this.handleErrorResponse = this.handleErrorResponse.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.handleCorrectTipFormat = this.handleCorrectTipFormat.bind(this);
-    this.calculateTax = this.calculateTax.bind(this);
-    this.dismissAlert = this.dismissAlert.bind(this);
+    this.calculateExtraFees = this.calculateExtraFees.bind(this);
   }
-
-  /**
-   * @function dismissAlert
-   * @description dismisses the alert message. and closes tool tip.
-   */
-  dismissAlert = () => {
-    this.setState((prev) => ({
-      alertMessage: {
-        ...prev.alertMessage,
-        visible: false,
-      },
-      hasErrors: DEFAULT_ERRORS,
-    }));
-  };
 
   /**
    * @function onFormChange for non calculating item
@@ -94,7 +79,7 @@ class CreateBillFormContainer extends Component {
             ...prev.addBillForm,
             [name]: value,
           },
-        }), () => this.calculateTax());
+        }), () => this.calculateExtraFees());
         break;
 
       case "item":
@@ -118,7 +103,7 @@ class CreateBillFormContainer extends Component {
       case "tipFormat":
         this.setState({
           tipFormat: !this.state.tipFormat,
-        }, () => this.calculateTax());
+        }, () => this.calculateExtraFees());
         break;
 
       case "account":
@@ -152,12 +137,17 @@ class CreateBillFormContainer extends Component {
     } catch (error) {
       this.handleErrorResponse(error);
     } finally {
-      this.setState({
+      this.setState((prev) => ({
         isLoading: false,
-      });
+        isOpen: !prev.isOpen,
+      }));
     }
   };
 
+  /**
+   * @function handleErrorResponse
+   * @description Handles error after server response
+   */
   handleErrorResponse = (response) => {
     if (response.status === "BAD_REQUEST") {
       response.errors.forEach((error) => {
@@ -191,7 +181,9 @@ class CreateBillFormContainer extends Component {
   };
 
   /**
-   * @function handleItemAddClick
+   * @function handleAddClick
+   * @description Handles add click when adding items, taxes or accounts.
+   * @param category
    */
   handleAddClick = (category) => {
     switch (category) {
@@ -202,7 +194,7 @@ class CreateBillFormContainer extends Component {
             items: this.state.addBillForm.items.push({ ...itemBuffer }),
             balance: this.state.balance + itemBuffer.cost,
             itemBuffer: { name: "", cost: 0 }
-          }, () => this.calculateTax());
+          }, () => this.calculateExtraFees());
         }
         break;
 
@@ -212,7 +204,7 @@ class CreateBillFormContainer extends Component {
           this.setState({
             taxes: this.state.addBillForm.taxes.push({ ...taxBuffer }),
             taxBuffer: {name: "", percentage: 0}
-          }, () => this.calculateTax());
+          }, () => this.calculateExtraFees());
         }
         break;
 
@@ -230,28 +222,34 @@ class CreateBillFormContainer extends Component {
 
     /**
    * @function handleItemRemoveClick
+   * @description Handles remove click when removing items, taxes or accounts.
+   * @param category
+   * @param index
    */
   handleRemoveClick = (category, index) => {
     switch (category) {
       case "item":
         const items = this.state.addBillForm.items;
         const newBalance = this.state.balance - items[index].cost;
-        delete items[index];
+        items.splice(index, 1);
+
         this.setState({ 
           items: items,
           balance: newBalance, 
-        }, () => this.calculateTax());
+        }, () => this.calculateExtraFees());
         break;
 
       case "tax":
         const taxes = this.state.addBillForm.taxes;
-        delete taxes[index];
-        this.setState({ taxes: taxes }, () => this.calculateTax());
+        taxes.splice(index, 1);
+
+        this.setState({ taxes: taxes }, () => this.calculateExtraFees());
         break;
 
       case "account":
         const accounts = this.state.addBillForm.accountsList;
-        delete accounts[index];
+        accounts.splice(index, 1);
+
         this.setState((prev) => ({ 
           accountsList: accounts,
           hasErrors: {
@@ -263,8 +261,9 @@ class CreateBillFormContainer extends Component {
     }
   }
 
-    /**
+  /**
    * @function handleCorrectTipFormat
+   * @description remove tip percent when it's tip format, and vice versa.
    */
   handleCorrectTipFormat = async () => {
     if (this.state.tipFormat) {
@@ -285,9 +284,10 @@ class CreateBillFormContainer extends Component {
   };
 
   /**
-   *  @function calculateTax
+   * @function calculateExtraFees
+   * @description calculate extra fees when modifying items, taxes or tips
    */
-  calculateTax = () => {
+  calculateExtraFees = () => {
     let tmpBalance = this.state.balance;
     this.state.addBillForm.taxes.forEach((tax) => {
       tmpBalance += this.state.balance * (tax.percentage / 100);
@@ -300,12 +300,13 @@ class CreateBillFormContainer extends Component {
     }
 
     this.setState({
-      totalBalance: tmpBalance,
+      totalBalance: tmpBalance.toFixed(2),
     });
   }
 
   /**
-   * Toggles the modal from open to close
+   * @function toggleModal
+   * @description Toggles the modal from open to close
    */
   toggleModal = () => {
     this.setState((prev) => ({
@@ -323,7 +324,7 @@ class CreateBillFormContainer extends Component {
         taxes: []
       },
       balance: 0
-    }), () => {this.calculateTax()});
+    }), () => {this.calculateExtraFees()});
   };
 
   render() {

@@ -34,18 +34,11 @@ export const CreateBillForm = ({
 }) => {
   return (
     <div>
-      {alertMessage.visible ? (
-        <Alert
-          className="mb-3"
-          // dismissible={dismissAlert}
-          open={alertMessage.visible}
-          theme={alertMessage.alertType}
-        >
-          {errorMessage}
-        </Alert>
-      ) : (
-        <div className="hidden__div" />
-      )}
+      <Alert
+        open={alertMessage.visible}
+        theme={alertMessage.alertType}>
+        {errorMessage}
+      </Alert>
 
       <Form>
         <FormGroup onChange={(event) => onFormChange(event, "details")}>
@@ -57,14 +50,15 @@ export const CreateBillForm = ({
             invalid={hasErrors["name"].hasError}/>
           <Container>
             <Row>
-              <Col>
+              <Col className="display__left" lg="5">
                 <label htmlFor="#paidBy"> PAID BY </label>
                 <FormInput name="paidBy" id="paidBy" placeholder="ex: Danny"/>
               </Col>
-              <Col>
+              <Col lg="5">
                 <label htmlFor="#category"> CATEGORY </label>
                 <FormInput name="category" id="category" placeholder="ex: Restaurant"/>
               </Col>
+              <Col lg="1"/>
             </Row>
           </Container>
           <label htmlFor="#company"> COMPANY </label>
@@ -74,24 +68,24 @@ export const CreateBillForm = ({
         <FormGroup id="items">
           <Container>
             <Row>
-              <Col>Items</Col>
-              <Col>Price</Col>
+              <Col className="display__left"><label><strong>Items</strong></label></Col>
+              <Col><label>PRICE</label></Col>
               <Col />
             </Row>
             {addBillForm.items.map((item, key) => (
               <div key={key}>
-                <Row>
-                  <Col> {item.name}</Col>
+                <Row className="element__display">
+                  <Col className="display__left"> {item.name}</Col>
                   <Col> {item.cost}</Col>
                   <Col> 
-                    <div onClick={() => handleRemoveClick("item", key)}> - </div>
+                    <div className="remove__button" onClick={() => handleRemoveClick("item", key)}> - </div>
                   </Col>
                 </Row>
                 <hr />
               </div>
             ))}
               <Row>
-                <Col>
+                <Col className="display__left">
                   <FormInput 
                     onChange={(event) => onFormChange(event, "item")}
                     name="name"
@@ -112,68 +106,31 @@ export const CreateBillForm = ({
                       placeholder="ex: 37.43" />
                   </InputGroup>
                 </Col>
-                <Button onClick={() => handleAddClick("item")}>Add</Button>
-              </Row>
-          </Container>
-        </FormGroup>
-        
-        <FormGroup id="taxes">
-          <Container>
-            <Row>
-              <Col>Tax Name</Col>
-              <Col>Percentage</Col>
-              <Col />
-            </Row>
-            {addBillForm.taxes.map((tax, key) => (
-              <div key={key}>
-                <Row>
-                  <Col> {tax.name}</Col>
-                  <Col> {tax.percentage}</Col>
-                  <Col> 
-                    <div onClick={() => handleRemoveClick("tax", key)}> - </div>
-                  </Col>
-                </Row>
-                <hr />
-              </div>
-            ))}
-              <Row>
                 <Col>
-                  <FormInput 
-                    onChange={(event) => onFormChange(event, "tax")}
-                    name="name"
-                    value={taxBuffer.name}
-                    placeholder="ex: TPS"/>
+                  <Button onClick={() => handleAddClick("item")}>Add</Button>
                 </Col>
-                <Col>
-                  <InputGroup>
-                    <InputGroupAddon type="prepend">
-                      <InputGroupText>%</InputGroupText>
-                    </InputGroupAddon>
-                    <FormInput 
-                      onChange={(event) => onFormChange(event, "tax")}
-                      name="percentage" 
-                      value={taxBuffer.percentage}
-                      type="number" 
-                      min="0" 
-                      max="100"
-                      placeholder="ex: 5" />
-                  </InputGroup>
-                </Col>
-                <Button onClick={() => handleAddClick("tax")}>Add</Button>
               </Row>
           </Container>
         </FormGroup>
 
         <FormGroup>
-          <label htmlFor="#tip"> TIP </label>
-          <FormRadio 
-            inline 
-            checked={tipFormat} 
-            onChange={(event) => onFormChange(event, "tipFormat")} >Amount</FormRadio>
-          <FormRadio 
-            inline 
-            checked={!tipFormat}
-            onChange={(event) => onFormChange(event, "tipFormat")} >Percentage</FormRadio>
+          <Container>
+            <Row>
+              <Col lg="4">
+                <label htmlFor="#tip"> <strong>TIP</strong></label>
+              </Col>
+              <Col lg="5">
+                <FormRadio 
+                  inline 
+                  checked={tipFormat} 
+                  onChange={(event) => onFormChange(event, "tipFormat")} >Amount</FormRadio>
+                <FormRadio 
+                  inline 
+                  checked={!tipFormat}
+                  onChange={(event) => onFormChange(event, "tipFormat")} >Percentage</FormRadio>
+              </Col>
+            </Row>
+          </Container>
           
             {tipFormat ? (
               <InputGroup>
@@ -206,28 +163,84 @@ export const CreateBillForm = ({
               </InputGroup>
             )}
         </FormGroup>
-
-        <div>Total amount to split: {totalBalance}</div>
         
-        <FormGroup >
+        <FormGroup id="taxes">
           <Container>
             <Row>
-              <Col>Invite Users</Col>
+              <Col className="display__left"><label><strong>Tax Name</strong></label></Col>
+              <Col><label>PERCENTAGE</label></Col>
               <Col />
             </Row>
-            {addBillForm.accountsList.map((email, key) => (
+            {addBillForm.taxes.map((tax, key) => (
               <div key={key}>
-                <Row>
-                  <Col> {email}</Col>
+                <Row className="element__display">
+                  <Col className="display__left"> {tax.name}</Col>
+                  <Col> {tax.percentage}</Col>
                   <Col> 
-                    <div onClick={() => handleRemoveClick("account", key)}> - </div>
+                    <div className="remove__button" onClick={() => handleRemoveClick("tax", key)}> - </div>
                   </Col>
                 </Row>
                 <hr />
               </div>
             ))}
               <Row>
+                <Col className="display__left">
+                  <FormInput 
+                    onChange={(event) => onFormChange(event, "tax")}
+                    name="name"
+                    value={taxBuffer.name}
+                    placeholder="ex: TPS"/>
+                </Col>
                 <Col>
+                  <InputGroup>
+                    <InputGroupAddon type="prepend">
+                      <InputGroupText>%</InputGroupText>
+                    </InputGroupAddon>
+                    <FormInput 
+                      onChange={(event) => onFormChange(event, "tax")}
+                      name="percentage" 
+                      value={taxBuffer.percentage}
+                      type="number" 
+                      min="0" 
+                      max="100"
+                      placeholder="ex: 5" />
+                  </InputGroup>
+                </Col>
+                <Col>
+                  <Button onClick={() => handleAddClick("tax")}>Add</Button>
+                </Col>
+              </Row>
+          </Container>
+        </FormGroup>
+
+        <Container className="balance">
+          <Row>
+            <Col lg="4"><strong>Total amount to split:</strong></Col>
+            <Col lg="8">
+              <span id="balance__amount">{totalBalance} $</span>
+            </Col>
+          </Row>
+        </Container>
+        
+        <FormGroup >
+          <Container>
+            <Row>
+              <Col lg="4"><strong>Invite Users</strong></Col>
+              <Col lg="8"/>
+            </Row>
+            {addBillForm.accountsList.map((email, key) => (
+              <div key={key}>
+                <Row className="element__display">
+                  <Col className="display__left"> {email}</Col>
+                  <Col> 
+                    <div className="remove__button" onClick={() => handleRemoveClick("account", key)}> - </div>
+                  </Col>
+                </Row>
+                <hr />
+              </div>
+            ))}
+              <Row>
+                <Col lg="8" className="display__left">
                   <FormInput
                     onChange={(event) => onFormChange(event, "account")}
                     id="account"
@@ -235,13 +248,15 @@ export const CreateBillForm = ({
                     value={accountBuffer}
                     placeholder="friend@email.com"/>
                 </Col>
-                <Button onClick={() => handleAddClick("account")}>Add</Button>
+                <Col lg="4">
+                  <Button onClick={() => handleAddClick("account")}>Add</Button>
+                </Col>
               </Row>
           </Container>
         </FormGroup>
       </Form>
       <Button size="md" pill onClick={handleSubmitClick} name="confirm">
-        Confirm a
+        Confirm
       </Button>
 
       {inputList.map((field, key) => (
