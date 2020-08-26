@@ -2,6 +2,8 @@ import {answerPendingBill, getBill} from "../BillRequests";
 
 const { URL } = require("../../../config");
 
+const MISSING_AUTH_HEADER = "missing Authorization header";
+
 function createMockAnswerBill(token, billId, accepted) {
   fetch = jest.fn((url, options) => {
     if (options.method !== "POST") {
@@ -9,7 +11,8 @@ function createMockAnswerBill(token, billId, accepted) {
     }
 
     if (options.headers.Authorization !== `Bearer ${token}`) {
-      throw new Error("missing Authorization header");
+
+      throw new Error(MISSING_AUTH_HEADER);
     }
 
     if (url !== `${URL}/invitations/${billId}`) {
@@ -78,7 +81,7 @@ describe("BillRequests", () => {
 
       fetch = jest.fn((url, options) => {
         if (options.headers.Authorization !== `Bearer ${token}`) {
-          throw new Error("missing Authorization header");
+          throw new Error(MISSING_AUTH_HEADER);
         }
 
         return new Promise((resolve) => {
@@ -90,7 +93,7 @@ describe("BillRequests", () => {
       try {
         await getBill();
       } catch (e) {
-        expect(() => expect(e.message).toBe("missing Authorization header"));
+        expect(() => expect(e.message).toBe(MISSING_AUTH_HEADER));
       }
     });
 

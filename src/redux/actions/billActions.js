@@ -77,13 +77,13 @@ export const fetchMyBills = (query_param = "") => {
 };
 
 export const fetchPendingBills = (
-  query_param = "?invitation_status=PENDING"
+  queryParam = "?invitation_status=PENDING"
 ) => {
   return async (dispatch) => {
     try {
       dispatch(setBillLoading(true));
 
-      const pendingBills = await getBill(query_param);
+      const pendingBills = await getBill(queryParam);
 
       dispatch(updatePendingBills(pendingBills));
     } catch (err) {

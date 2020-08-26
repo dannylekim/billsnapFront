@@ -26,7 +26,6 @@ export const getBill = async (query_params = "") => {
  * @returns {Promise<any>} it will return the full bill if we've accepted, null otherwise
  */
 export const answerPendingBill = async (isAccepted, billId) => {
-  console.log(isAccepted + "" + billId);
   const token = localStorage.getItem("billSnap_token");
   const response = await fetch(`${URL}/invitations/${billId}`, {
     method: "POST",

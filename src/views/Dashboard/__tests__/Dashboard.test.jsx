@@ -25,9 +25,7 @@ describe("Dashboard", () => {
       });
 
       it("Dashboard should match snap shot on notifications tab", () => {
-        let wrapper;
-
-        wrapper = shallow(<Dashboard history={{ push: jest.fn() }} />);
+        const wrapper = shallow(<Dashboard history={{ push: jest.fn() }} />);
 
         wrapper.setState((prev) => ({
           ...prev,
@@ -38,9 +36,7 @@ describe("Dashboard", () => {
       });
 
       it("Dashboard should match snap shot on nothing", () => {
-        let wrapper;
-
-        wrapper = shallow(<Dashboard history={{ push: jest.fn() }} />);
+        const wrapper = shallow(<Dashboard history={{ push: jest.fn() }} />);
 
         wrapper.setState((prev) => ({
           ...prev,

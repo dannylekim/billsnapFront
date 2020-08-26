@@ -56,17 +56,14 @@ class PendingBillsContainer extends Component {
       );
     };
 
-    return (
-      <>
-        {isBillLoading ? (
-          <Loader />
-        ) : pendingBills.length > 0 ? (
-          PendingBillsList(pendingBills)
-        ) : (
-          <p> No Bills Found</p>
-        )}
-      </>
-    );
+    const displayPendingBillsList =
+      pendingBills.length > 0 ? (
+        PendingBillsList(pendingBills)
+      ) : (
+        <p> No Bills Found</p>
+      );
+
+    return <>{isBillLoading ? <Loader /> : displayPendingBillsList}</>;
   }
 }
 
