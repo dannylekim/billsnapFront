@@ -36,8 +36,7 @@ class PayBillContainer extends Component {
     };
 
     payBillHandler = () => {
-        //this.props.payABill(this.state.amountRemaining, this.props.bill.id);
-        alert(this.state.amountRemaining + " " + this.props.bill.id)
+        this.props.payABill(this.state.amountRemaining, this.props.bill.id);
         this.toggleModal();
     }
 

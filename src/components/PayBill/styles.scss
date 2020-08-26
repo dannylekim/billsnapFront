@@ -16,9 +16,20 @@
 .small-input {
   //must override shards-react
   width: 25% !important;
-  padding: 0 !important
+  padding: 0 !important;
+  background: #ffffff !important;
 }
 
 .pay-button {
   margin-top: 1em;
+}
+
+.modal-content {
+  width: 150% !important;
+  background: #F1F1F1 !important;
+  margin-top: 24em !important;
+}
+
+.modal-title {
+  font-weight: bold;
 }
