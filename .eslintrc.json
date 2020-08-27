@@ -1,0 +1,10 @@
+{
+"overrides": [
+    {
+      "files": ["*.test.js","*.test.jsx"],
+      "rules": {
+        "no-native-reassign": "off"
+      }
+    }
+  ]
+}
