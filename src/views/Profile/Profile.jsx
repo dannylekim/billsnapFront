@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.scss";
 import { FaPencilAlt, FaPhone, FaEnvelope, FaMapMarkerAlt, FaBirthdayCake } from "react-icons/fa";
-import {capilizeFirstLetter, userFullName} from "../../helpers/Functions";
+import {capilizeFirstLetter, userFullName} from "../../helpers/StringName";
 
 export default ({ history, userInfo,hasUser }) => {
   const {
