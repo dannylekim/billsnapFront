@@ -1,8 +1,8 @@
 import BillDisplay from "./BillDisplay.jsx";
 
 import {connect} from "react-redux";
-import {fetchMyBills, orderAlphabetical, setActiveBill} from "../../redux/actions/billActions";
-import { getActiveBills } from "../../redux/selectors/billsSelectors";
+import {fetchMyBills, setActiveBill} from "../../redux/actions/billActions";
+import {getActiveBills} from "../../redux/selectors/billsSelectors";
 
 const mapStateToProps = (state) => ({
   bills: getActiveBills(state),
@@ -13,8 +13,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchBills: (queryParam = "") => dispatch(fetchMyBills(queryParam)),
-  orderAlphabetical: (alphabeticalType, bills) =>
-    dispatch(orderAlphabetical(alphabeticalType, bills)),
   setActiveBill: (bill) => dispatch(setActiveBill(bill))
 });
 

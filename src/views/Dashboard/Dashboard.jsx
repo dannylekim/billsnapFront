@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Button, Nav, NavItem, NavLink } from "shards-react";
+import React, {Component} from "react";
+import {Button, Nav, NavItem, NavLink} from "shards-react";
 
 import navItems from "../../constants/BillDisplayNav.json";
 
@@ -9,6 +9,8 @@ import Loader from "../../components/Loader";
 import BillSummary from '../../components/BillSummary';
 
 import "./styles.scss";
+import PendingBillsContainer from "../../components/PendingBillsContainer";
+
 export default class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,7 @@ export default class Dashboard extends Component {
       case "allBills":
         return <BillDisplay />;
       case "owedToYou":
-        return "TODO";
+        return <PendingBillsContainer/>;
       default:
         return <Loader />;
     }

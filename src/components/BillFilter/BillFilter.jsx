@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import { Badge, FormCheckbox, FormInput } from "shards-react";
+import React, {useRef} from "react";
+import {Badge, FormCheckbox, FormInput} from "shards-react";
 
-import { useOutsideAlerter } from "../../helpers/ClickEvent";
+import {useOutsideAlerter} from "../../helpers/ClickEvent";
 import "./styles.scss";
 
 /**
@@ -90,7 +90,7 @@ const BillFilter = ({
         {filterBadges.map((badgeObject, key) => (
           <Badge
             key={key}
-            className={badgeObject.title === currentSorting && 'active'}
+            className={badgeObject.title === currentSorting ? 'active' : ''}
             outline
             pill
             id={badgeObject.id}

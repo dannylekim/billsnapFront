@@ -1,7 +1,7 @@
 import SearchBar from './SearchBar';
 import {connect} from "react-redux";
 
-import {fetchMyBills, updateSearchBillName} from "../../redux/actions/billActions";
+import {fetchMyBills, fetchPendingBills, updateSearchBillName} from "../../redux/actions/billActions";
 
 const mapStateToProps = (state) => ({
     billNameSearch: state.bills.searchInput,
@@ -9,6 +9,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     fetchBills: (queryParam = "") => dispatch(fetchMyBills(queryParam)),
+    fetchPendingBills: (queryParam = "?invitation_status=PENDING") => dispatch(fetchPendingBills(queryParam)),
     updateBillNameSearch: (input = "") => dispatch(updateSearchBillName(input)),
 });
 

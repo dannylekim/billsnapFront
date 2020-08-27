@@ -1,16 +1,9 @@
+import {FaBus, FaCar, FaQuestion, FaShoppingBag, FaShoppingCart, FaUtensils,} from "react-icons/fa/index";
 import React from "react";
-import {
-  FaBus,
-  FaCar,
-  FaQuestion,
-  FaShoppingBag,
-  FaShoppingCart,
-  FaUtensils,
-} from "react-icons/fa";
 
-export const getBillIcons = (category) => {
+const BillIcon = ({category}) => {
   const color = "rgba(0, 0, 0, 0.96)";
-  switch (category) {
+  switch (category.toLowerCase()) {
     case "food":
       return <FaUtensils color={color} size={24} />;
     case "transport":
@@ -25,3 +18,5 @@ export const getBillIcons = (category) => {
       return <FaQuestion color={color} size={24} />;
   }
 };
+
+export default BillIcon;

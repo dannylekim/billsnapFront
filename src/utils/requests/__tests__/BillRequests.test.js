@@ -1,6 +1,36 @@
-import {getBill} from "../BillRequests";
+import {answerPendingBill, getBill} from "../BillRequests";
 
 const { URL } = require("../../../config");
+
+const MISSING_AUTH_HEADER = "missing Authorization header";
+
+function createMockAnswerBill(token, billId, accepted) {
+  fetch = jest.fn((url, options) => {
+    if (options.method !== "POST") {
+      throw new Error("wrong method");
+    }
+
+    if (options.headers.Authorization !== `Bearer ${token}`) {
+
+      throw new Error(MISSING_AUTH_HEADER);
+    }
+
+    if (url !== `${URL}/invitations/${billId}`) {
+      throw new Error("wrong url");
+    }
+
+    if (options.body !== JSON.stringify({ answer: accepted })) {
+      throw new Error("wrong body");
+    }
+
+    return new Promise((resolve) => {
+      resolve({
+        ok: true,
+        json: jest.fn().mockResolvedValue({ data: {} }),
+      });
+    });
+  });
+}
 
 describe("BillRequests", () => {
   describe("getBill", () => {
@@ -51,7 +81,7 @@ describe("BillRequests", () => {
 
       fetch = jest.fn((url, options) => {
         if (options.headers.Authorization !== `Bearer ${token}`) {
-          throw new Error("missing Authorization header");
+          throw new Error(MISSING_AUTH_HEADER);
         }
 
         return new Promise((resolve) => {
@@ -63,7 +93,7 @@ describe("BillRequests", () => {
       try {
         await getBill();
       } catch (e) {
-        expect(() => expect(e.message).toBe("missing Authorization header"));
+        expect(() => expect(e.message).toBe(MISSING_AUTH_HEADER));
       }
     });
 
@@ -76,6 +106,53 @@ describe("BillRequests", () => {
         await getBill();
       } catch (e) {
         expect(() => expect(e.message).toBe("error"));
+      }
+    });
+  });
+
+  describe("answerBill", () => {
+    afterEach(() => {
+      localStorage.clear();
+    });
+
+    beforeEach(() => {
+      localStorage.setItem("billSnap_token", token);
+    });
+
+    const billId = 1;
+    const accepted = true;
+    const token = "token";
+
+    it("Should return an json object with the right method", async () => {
+      createMockAnswerBill(token, billId, accepted);
+
+      const res = await answerPendingBill(accepted, billId);
+
+      expect(res.data).toEqual({});
+    });
+
+    it("Should return null with the right method", async () => {
+      createMockAnswerBill(token, billId, false);
+
+      const res = await answerPendingBill(false, billId);
+
+      expect(res).toEqual(null);
+    });
+
+    it("Should throw same json object if error", async () => {
+      fetch = jest.fn(() => {
+        return new Promise((resolve) => {
+          resolve({
+            ok: false,
+            json: jest.fn().mockResolvedValue({ data: {} }),
+          });
+        });
+      });
+
+      try {
+        await answerPendingBill(accepted, billId);
+      } catch (e) {
+        expect(() => expect(e.data).toEqual({}));
       }
     });
   });
