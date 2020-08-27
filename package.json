@@ -90,7 +90,15 @@
       "mount": "readonly",
       "matches": "readonly",
       "localStorage": "readonly"
-    }
+    },
+    "overrides": [
+      {
+        "files": ["*.test.js","*.test.jsx"],
+        "rules": {
+          "no-native-reassign": "off"
+        }
+      }
+    ]
   },
   "browserslist": {
     "production": [
