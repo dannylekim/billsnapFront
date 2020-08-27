@@ -5,6 +5,8 @@ import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {createRegisterFormElements} from "../../../constants/FormElements";
 
+jest.mock("../../Dashboard", () => "Dashboard")
+
 const mockStore = configureStore();
 
 const store = mockStore({
@@ -25,6 +27,25 @@ describe("App", () => {
         div
       );
       ReactDOM.unmountComponentAtNode(div);
+    });
+  });
+
+  describe("functional", () => {
+    afterEach(() => {
+      localStorage.clear();
+    });
+
+    it("should call getUser if token exists", () => {
+      const mockGetUser = jest.fn();
+      localStorage.setItem("billSnap_token", "token");
+
+      mount(
+        <Provider store={store}>
+          <App getUser={mockGetUser} />
+        </Provider>
+      );
+
+      expect(mockGetUser).toHaveBeenCalled();
     });
   });
 });

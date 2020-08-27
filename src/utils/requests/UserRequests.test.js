@@ -1,7 +1,9 @@
-import {login, register} from "./UserRequests";
+import {getAccount, login, register} from "./UserRequests";
 import sinonStubPromise from "sinon-stub-promise";
 import sinon from "sinon";
 import assert from "assert";
+
+const { URL } = require("../../config");
 
 const loginInput = {
   email: "test@email.com",
@@ -114,6 +116,59 @@ describe("UserRequests", () => {
       window.fetch.returns(mockApiResponse(badResponse));
 
       assert.rejects(async () => await register(registerInput), Error);
+    });
+  });
+
+  describe("getAccount", () => {
+    afterEach(() => {
+      localStorage.clear();
+    });
+
+    it("Should return an json object with the right method", async () => {
+      const token = "token";
+      localStorage.setItem("billSnap_token", token);
+
+      fetch = jest.fn((url, options) => {
+        if (options.method !== "GET") {
+          throw new Error("wrong method");
+        }
+
+        if (options.headers.Authorization !== `Bearer ${token}`) {
+          throw new Error("missing Authorization header");
+        }
+
+        if (url !== `${URL}/account`) {
+          throw new Error("wrong url");
+        }
+
+        return new Promise((resolve) => {
+          resolve({
+            ok: true,
+            json: jest.fn().mockResolvedValue({ data: {} }),
+          });
+        });
+      });
+
+      const res = await getAccount();
+
+      expect(res.data).toEqual({});
+    });
+
+    it("Should throw same json object if error", async () => {
+      fetch = jest.fn(() => {
+        return new Promise((resolve) => {
+          resolve({
+            ok: false,
+            json: jest.fn().mockResolvedValue({ data: {} }),
+          });
+        });
+      });
+
+      try {
+        await getAccount();
+      } catch (e) {
+        expect(() => expect(e.data).toEqual({}));
+      }
     });
   });
 });

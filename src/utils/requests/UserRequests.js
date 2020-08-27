@@ -42,6 +42,22 @@ export const register = async (entries) => {
   return checkStatus(response);
 };
 
+export const getAccount = async () => {
+  const token = localStorage.getItem("billSnap_token");
+  const response = await fetch(`${URL}/account`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw await response.json();
+  }
+
+  return response.json();
+};
+
 async function checkStatus(response) {
   const parsedResponse = await response.json();
   return { ...parsedResponse, statusCode: response.status };
