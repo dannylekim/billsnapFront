@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import { Badge, FormCheckbox, FormInput } from "shards-react";
+import React, {useRef} from "react";
+import {Badge, FormCheckbox, FormInput} from "shards-react";
 
-import { useOutsideAlerter } from "../../helpers/ClickEvent";
+import {useOutsideAlerter} from "../../helpers/ClickEvent";
 import "./styles.scss";
 
 /**
@@ -88,15 +88,15 @@ const BillFilter = ({
       </div>
       <div className='filter__selections__container'>
         {filterBadges.map((badgeObject, key) => (
-          <span key={key} className={badgeObject.title === currentSorting && 'active'}>
-            <Badge
-              outline
-              pill
-              id={badgeObject.id}
-              onClick={badgeObject.onClick}>
-              {badgeObject.title}
-            </Badge>
-          </span>
+          <Badge
+            key={key}
+            className={badgeObject.title === currentSorting ? 'active' : ''}
+            outline
+            pill
+            id={badgeObject.id}
+            onClick={badgeObject.onClick}>
+            {badgeObject.title}
+          </Badge>
         ))}
       </div>
       {extraFilterSelected && (

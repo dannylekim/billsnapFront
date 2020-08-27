@@ -1,85 +1,50 @@
 import React from "react";
 import Dashboard from "../Dashboard";
-import BillDisplay from "../../BillDisplay";
-import Loader from "../../../components/Loader";
-import { shallow } from "enzyme";
 
-import configureStore from "redux-mock-store";
-import { Provider } from "react-redux";
-
-const mockStore = configureStore();
-
-const store = mockStore({
-  application: {},
-  bills: {
-    bills: [],
-    activeBill: { id: 1, responsible: { firstName: "Bob", lastName: "Smith" } },
-  },
-});
+jest.mock("../../BillDisplay", () => "BillDisplay");
+jest.mock(
+  "../../../components/PendingBillsContainer",
+  () => "PendingBillsContainer"
+);
+jest.mock("../../../components/BillSummary", () => "BillSummary");
+jest.mock("../../../components/SearchBar", () => "SearchBar");
 
 describe("Dashboard", () => {
   describe("render", () => {
+    beforeEach(() => {
+      localStorage.setItem("billSnap_token", "token");
+    });
+
+    afterEach(() => {
+      localStorage.clear();
+    });
+
     describe("snapshots 📸", () => {
-      it("Dashboard should match snap shot when has NO user", () => {
-        matches(
-          <Provider store={store}>
-            <Dashboard hasUser={false} history={{ push: jest.fn() }} />
-          </Provider>
-        );
+      it("Dashboard should match snap shot", () => {
+        matches(<Dashboard history={{ push: jest.fn() }} />);
       });
 
-      it("Dashboard should match snap shot when has user", () => {
-        matches(
-          <Provider store={store}>
-            <Dashboard hasUser={true} history={{ push: jest.fn() }} />
-          </Provider>
-        );
-      });
-    });
+      it("Dashboard should match snap shot on notifications tab", () => {
+        const wrapper = shallow(<Dashboard history={{ push: jest.fn() }} />);
 
-    describe("component", () => {
-      const wrapper = shallow(
-        <Dashboard hasUser={true} history={{ push: jest.fn() }} />
-      );
-      it("should call setState on Click", () => {
-        wrapper.find("NavLink").at(1).simulate("click");
-        expect(wrapper.state().currentActiveTab).toBe("owedToYou");
-      });
-    });
+        wrapper.setState((prev) => ({
+          ...prev,
+          currentActiveTab: "owedToYou",
+        }));
 
-    describe("function", () => {
-      const wrapper = shallow(
-        <Dashboard hasUser={true} history={{ push: jest.fn() }} />
-      );
-      it("displayTab should return proper Components", () => {
-        expect(wrapper.instance().displayTab("allBills")).toStrictEqual(
-          <BillDisplay />
-        );
-        expect(wrapper.instance().displayTab("owedToYou")).toBe("TODO");
-        expect(wrapper.instance().displayTab("blahblah")).toStrictEqual(
-          <Loader />
-        );
+        matches(wrapper);
+      });
+
+      it("Dashboard should match snap shot on nothing", () => {
+        const wrapper = shallow(<Dashboard history={{ push: jest.fn() }} />);
+
+        wrapper.setState((prev) => ({
+          ...prev,
+          currentActiveTab: "",
+        }));
+
+        matches(wrapper);
       });
     });
   });
 });
-
-/**
- *  it("should change selectedBill on click.", () => {
-        wrapper.find("div.bill__card.card").at(0).simulate("click");
-        expect(wrapper.state().selectedBill.bill).toBe(mockBills[0]);
-        wrapper.find("div.bill__card.card").at(1).simulate("click");
-        expect(wrapper.state().selectedBill.bill).toBe(mockBills[1]);
-      });
-  
-      it("should change activeTab on click.", () => {
-        expect(wrapper.state().currentActiveTab).toBe("allBills");
-        wrapper.find("NavLink").at(1).simulate("click");
-        expect(wrapper.state().currentActiveTab).toBe("owedToYou");
-      });
-  
-      it("should call mock function on all bills", () => {
-        wrapper.find("NavItem").at(0).simulate("click");
-        expect(mockFetch).toHaveBeenCalled();
-      });
- */

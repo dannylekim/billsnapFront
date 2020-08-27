@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropType from "prop-types";
 
-import { FaBars, FaSearch } from "react-icons/fa";
-import { Button, FormInput } from "shards-react";
+import {FaBars, FaSearch} from "react-icons/fa";
+import {Button, FormInput} from "shards-react";
 
 import BillFilter from "../BillFilter";
 import SimpleFilter from "../SimpleFilter";
@@ -13,7 +13,7 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentSorting: "Newest",      
+      currentSorting: "Newest",
       dateFilters: {
         startDate: { selected: false, value: "" },
         endDate: { selected: false, value: "" },
@@ -38,19 +38,19 @@ class SearchBar extends Component {
    * Convert sorting type into REST params string
    */
   static getSortingParams = (type) => {
-    switch(type) {
+    switch (type) {
       case "Newest":
         return `sort_by=CREATED&order_by=DESC`;
       case "Oldest":
         return `sort_by=CREATED&order_by=ASC`;
       case "A to Z":
-        return 'sort_by=NAME&order_by=ASC';
+        return "sort_by=NAME&order_by=ASC";
       case "Z to A":
-        return 'sort_by=NAME&order_by=DESC';
+        return "sort_by=NAME&order_by=DESC";
       default:
-        return '';
+        return "";
     }
-  }
+  };
 
   clearFilter = () => {
     this.setState({
@@ -64,8 +64,8 @@ class SearchBar extends Component {
         endDate: { selected: false, value: "" },
       },
       statusFilter: { resolved: false, open: false, in_progess: false },
-    })
-  }
+    });
+  };
 
   /**
    * Close all opened filterToggles/sorting popups
@@ -83,11 +83,9 @@ class SearchBar extends Component {
    * Convert filtering data into REST params string
    */
   getDateParams = () => {
-    let params = '';
+    let params = "";
 
-    const {
-      dateFilters,
-    } = this.state;
+    const { dateFilters } = this.state;
 
     if (dateFilters.startDate.value) {
       params = `start=${this.state.dateFilters.startDate.value}`;
@@ -101,35 +99,31 @@ class SearchBar extends Component {
       params += `end=${this.state.dateFilters.endDate.value}`;
     }
 
-    return params
-  }
+    return params;
+  };
 
   getAllBillFilter = () => {
-    const {
-      resolved,
-      open,
-      in_progess
-    } = this.state.statusFilter;
+    const { resolved, open, in_progess } = this.state.statusFilter;
 
     // If none of the filters are on, skip
     if (!resolved && !open && !in_progess) {
-      return '';
-    } 
+      return "";
+    }
 
-    let params = 'statuses=';
+    let params = "statuses=";
 
     if (resolved) {
-      params += 'RESOLVED,';
+      params += "RESOLVED,";
     }
     if (open) {
-      params += 'OPEN,';
+      params += "OPEN,";
     }
     if (in_progess) {
-      params += 'IN_PROGRESS';
+      params += "IN_PROGRESS";
     }
 
     return params;
-  }
+  };
 
   /**
    * Get the REST sorting params and immediately fetch bills according to activeTab
@@ -142,22 +136,20 @@ class SearchBar extends Component {
 
     const params = this.constructor.getSortingParams(type);
 
-    switch(this.props.activeTab) {
-      case 'allBills':
+    switch (this.props.activeTab) {
+      case "allBills":
         return this.props.fetchBills(`?${params}`);
-      case 'pendingBills':
-        // TODO pending bill tasks
-        return;
+      case "owedToYou":
+        return this.props.fetchPendingBills(`?invitation_status=PENDING&${params}`);
       default:
         return;
     }
-
-  }
+  };
 
   /**
    * Similar to applySorting() above, however the bill filtering params will also be included in the REST call.
-   * 
-   * @param {String} sortingType 
+   *
+   * @param {String} sortingType
    */
   applyFiltering = (sortingType) => {
     this.setState({
@@ -166,12 +158,18 @@ class SearchBar extends Component {
     this.closeHandler();
     const sortingParams = this.constructor.getSortingParams(sortingType);
     const dateParams = this.getDateParams();
+    let filterParams;
+    let totalParams;
 
-    switch(this.props.activeTab) {
-      case 'allBills':
-        const filterParams = this.getAllBillFilter();
-        const totalParams = `?${sortingParams}&${dateParams}&${filterParams}`;
+    switch (this.props.activeTab) {
+      case "allBills":
+        filterParams = this.getAllBillFilter();
+        totalParams = `?${sortingParams}&${dateParams}&${filterParams}`;
         return this.props.fetchBills(`${totalParams}`);
+      case "owedToYou":
+        filterParams = this.getAllBillFilter();
+        totalParams = `?${sortingParams}&${dateParams}&${filterParams}&invitation_status=PENDING`;
+        return this.props.fetchPendingBills(`${totalParams}`);
       default:
         return;
     }
@@ -215,22 +213,22 @@ class SearchBar extends Component {
    * Date checkbox handler to enable date modification. It can only be start XOR end.
    */
   dateCheckboxHandler = (startOrEnd, selected = true) => {
-    const oppositeDate = startOrEnd === 'startDate' ? 'endDate' : 'startDate';
+    const oppositeDate = startOrEnd === "startDate" ? "endDate" : "startDate";
     this.setState((prev) => ({
       dateFilters: {
         ...prev.dateFilters,
         [startOrEnd]: {
           ...prev.dateFilters[startOrEnd],
-          selected
+          selected,
         },
         [oppositeDate]: {
           ...prev.dateFilters[oppositeDate],
-          selected: !selected
-        }
-      }
+          selected: !selected,
+        },
+      },
     }));
-  }
-  
+  };
+
   /**
    * Switch focus between status, category XOR date filter.
    */
@@ -242,66 +240,75 @@ class SearchBar extends Component {
         startDate: { ...prev.dateFilters.startDate, selected: false },
         endDate: { ...prev.dateFilters.endDate, selected: false },
       },
-    }))
-  }
+    }));
+  };
 
   statusFilterHandler = (status) => {
     this.setState((prev) => ({
       statusFilter: {
         ...prev.statusFilter,
-        [status]: !prev.statusFilter[status]
-      }
+        [status]: !prev.statusFilter[status],
+      },
     }));
-  }
+  };
 
   onInputChangeHandler = (e) => {
     const value = e.target.value;
     this.props.updateBillNameSearch(value);
-  }
+  };
 
   render() {
-    const { dateFilters, filterToggles, statusFilter, currentSorting } = this.state;
+    const {
+      dateFilters,
+      filterToggles,
+      statusFilter,
+      currentSorting,
+    } = this.state;
 
     return (
-      <div id='search__bill'>
-        <div id='search__bill-bar'>
-          <span className='search__icon'>
+      <div id="search__bill">
+        <div id="search__bill-bar">
+          <span className="search__icon">
             <FaSearch />
           </span>
           <FormInput
-            type='text'
+            type="text"
             onChange={this.onInputChangeHandler}
-            placeholder='Search bill'
+            placeholder="Search bill"
             value={this.props.billNameSearch}
           />
           {this.props.billNameSearch && (
             <Button
               onClick={() => this.props.updateBillNameSearch()}
-              theme="light"> 
+              theme="light"
+            >
               Clear
-            </Button>)}
-          <span className='search__filter'>
+            </Button>
+          )}
+          <span className="search__filter">
             <span
-              className='filter__bill'
+              className="filter__bill"
               onClick={() =>
                 this.setState((prev) => ({
                   toggle: { ...prev.toggle, long: true },
                 }))
-              }>
+              }
+            >
               <FaBars size={24} />
             </span>
             <span
-              className='simple__sort'
+              className="simple__sort"
               onClick={() =>
                 this.setState((prev) => ({
                   toggle: { ...prev.toggle, short: true },
                 }))
-              }>
+              }
+            >
               {currentSorting}
             </span>
           </span>
         </div>
-        <div id='search__bill-options'>
+        <div id="search__bill-options">
           {this.state.toggle.long && (
             <BillFilter
               activeTab={this.props.activeTab}

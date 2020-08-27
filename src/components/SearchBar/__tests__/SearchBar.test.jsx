@@ -3,15 +3,22 @@ import SearchBar from "../SearchBar";
 
 describe("SearchBar", () => {
   describe("render", () => {
-    let mockSortAlphabetical, mockUpdateSearch, mockFetchBill;
-    let wrapper, instance;
+    let mockSortAlphabetical,
+      mockUpdateSearch,
+      mockFetchBill,
+      mockFetchPendingBill,
+      wrapper,
+      instance;
+
     beforeEach(() => {
       mockUpdateSearch = jest.fn((e) => e);
       mockFetchBill = jest.fn();
+      mockFetchPendingBill = jest.fn();
 
       wrapper = shallow(
         <SearchBar
           updateBillNameSearch={mockUpdateSearch}
+          fetchPendingBills={mockFetchPendingBill}
           fetchBills={mockFetchBill}
           orderAlphabetical={mockSortAlphabetical}
           billNameSearch=""
@@ -134,7 +141,7 @@ describe("SearchBar", () => {
         });
 
         describe("clearFilter", () => {
-          it("should clear all the filterto default value", () => {
+          it("should clear all the filter to default value", () => {
             wrapper.setState((prev) => ({
               ...prev,
               statusFilter: { resolved: false, open: true, in_progess: false },
@@ -285,7 +292,7 @@ describe("SearchBar", () => {
               },
             });
 
-            instance.dateCheckboxHandler("startDate");
+            wrapper.instance().dateCheckboxHandler("startDate");
 
             expect(wrapper.state().dateFilters.startDate.selected).toBeTruthy();
             expect(wrapper.state().dateFilters.endDate.selected).toBeFalsy();
@@ -437,19 +444,8 @@ describe("SearchBar", () => {
               },
             });
 
-            let params = instance.getAllBillFilter();
+            const params = wrapper.instance().getAllBillFilter();
             expect(params).toEqual("statuses=OPEN,");
-
-            wrapper.setState({
-              statusFilter: {
-                resolved: true,
-                open: false,
-                in_progess: false,
-              },
-            });
-
-            params = instance.getAllBillFilter();
-            expect(params).toEqual("statuses=RESOLVED,");
           });
 
           it("should return filter REST params from states if all of the filter are true", () => {
@@ -469,9 +465,10 @@ describe("SearchBar", () => {
         describe("applySorting", () => {
           const mockValue = "🧢";
           const mockCloseHandler = jest.fn();
-          const mockGetSortingParams = jest.fn().mockReturnValue(mockValue);
+          let mockGetSortingParams;
 
           beforeEach(() => {
+            mockGetSortingParams = jest.fn().mockReturnValue(mockValue);
             SearchBar.getSortingParams = mockGetSortingParams;
             instance.closeHandler = mockCloseHandler;
           });
@@ -491,6 +488,18 @@ describe("SearchBar", () => {
             expect(mockCloseHandler).toHaveBeenCalled();
             expect(mockGetSortingParams).toHaveBeenCalled();
             expect(mockFetchBill).toHaveBeenCalledWith(expectedParams);
+          });
+
+          it("should call the appropriate functions with allBills params for fetchPendingBills", () => {
+            const SAMPLE_PARAMS = "🚶‍♂️";
+            wrapper.setProps({ activeTab: "owedToYou" });
+            wrapper.instance().applySorting(SAMPLE_PARAMS);
+            const expectedParams = `?invitation_status=PENDING&${mockValue}`;
+
+            expect(wrapper.state().currentSorting).toBe(SAMPLE_PARAMS);
+            expect(mockCloseHandler).toHaveBeenCalled();
+            expect(mockGetSortingParams).toHaveBeenCalled();
+            expect(mockFetchPendingBill).toHaveBeenCalledWith(expectedParams);
           });
 
           it("should not call any fetching if activeTab does not exist in switch case", () => {
@@ -514,10 +523,12 @@ describe("SearchBar", () => {
           const mockDate = "start=2021-03-03";
 
           const mockCloseHandler = jest.fn();
-          const mockGetSortingParams = jest.fn().mockReturnValue(mockValue);
-          let mockGetDateParams = jest.fn().mockReturnValue(mockDate);
+          let mockGetSortingParams;
+          let mockGetDateParams;
 
           beforeEach(() => {
+            mockGetSortingParams = jest.fn().mockReturnValue(mockValue);
+            mockGetDateParams = jest.fn().mockReturnValue(mockDate);
             SearchBar.getSortingParams = mockGetSortingParams;
             instance.closeHandler = mockCloseHandler;
             instance.getDateParams = mockGetDateParams;
@@ -560,8 +571,36 @@ describe("SearchBar", () => {
             expect(mockFetchBill).toHaveBeenCalledWith(expectedParams);
           });
 
-          it.skip("should call the appropriate funcitons with pendingBills params", () => {
-            // TO BE DONE when pendingBills is implemented
+          it("should call the appropriate functions with pendingBills params", () => {
+            const SAMPLE_PARAMS = "🚶‍️";
+            const TEST_PARAMS_FOR_FILTER = "🔥";
+            const TEST_PARAMS_FOR_DATES = "📆";
+            const mockGetAllBillFilter = jest
+              .fn()
+              .mockReturnValue(TEST_PARAMS_FOR_FILTER);
+            mockGetDateParams = jest
+              .fn()
+              .mockReturnValue(TEST_PARAMS_FOR_DATES);
+
+            wrapper.instance().getAllBillFilter = mockGetAllBillFilter;
+            wrapper.instance().getDateParams = mockGetDateParams;
+
+            wrapper.setProps({
+              activeTab: "owedToYou",
+            });
+
+            wrapper.instance().applyFiltering(SAMPLE_PARAMS);
+
+            const expectedParams = `?${mockValue}&${TEST_PARAMS_FOR_DATES}&${TEST_PARAMS_FOR_FILTER}&invitation_status=PENDING`;
+
+            expect(wrapper.state().currentSorting).toBe(SAMPLE_PARAMS);
+            expect(mockCloseHandler).toHaveBeenCalled();
+            expect(mockGetSortingParams).toHaveBeenCalled();
+            expect(mockGetDateParams).toHaveBeenCalled();
+
+            expect(mockGetAllBillFilter).toHaveBeenCalled();
+
+            expect(mockFetchPendingBill).toHaveBeenCalledWith(expectedParams);
           });
 
           it("should not call any fetch function when activeTab props is invalid", () => {

@@ -1,9 +1,13 @@
 import App from "./App.jsx";
 import {connect} from "react-redux";
-import {getHasUser} from "../../redux/selectors/userSelectors";
+import {loadUser} from "../../redux/actions/userActions";
 
 const mapStateToProps = (state) => ({
-    hasUser: getHasUser(state),
+    isLoggedIn: Object.keys(state.users.userInfo).length > 0
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+    getUser: () => dispatch(loadUser()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

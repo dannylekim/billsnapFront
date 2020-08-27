@@ -1,10 +1,10 @@
 import {ACTIONS} from "../actions/userActions";
 
-const INTIAL_STATE = {
+const INITIAL_STATE = {
   userInfo: {},
 };
 
-const userReducers = (state = INTIAL_STATE, action) => {
+const userReducers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ACTIONS.SET_USER:
       return {

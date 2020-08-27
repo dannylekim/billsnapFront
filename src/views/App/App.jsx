@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 /**
  * Load you page components here. We will render them via routes
  */
@@ -7,7 +7,7 @@ import Dashboard from "../Dashboard";
 import Profile from "../Profile";
 import Sidebar from "../../components/Sidebar";
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import BillSnapBackground from "../Background";
 import "./styles.scss";
 
@@ -15,16 +15,22 @@ import "./styles.scss";
  * Load you page components here. We will render them via routes
  */
 
-export default ({ hasUser }) => {
+export default ({ getUser, isLoggedIn }) => {
+  useEffect(() => {
+    if (localStorage.getItem("billSnap_token")) {
+      getUser();
+    }
+  });
+
   return (
-    <div className='App'>
-      <BillSnapBackground showWave />
+    <div className="App">
+      <BillSnapBackground showWave={!isLoggedIn} />
       <BrowserRouter>
         <Switch>
           <React.Fragment>
             <div className="App__container">
               <Route path="/" exact component={LandingPage} />
-              {hasUser && <Sidebar />}
+              <Sidebar hide={!isLoggedIn} />
               <Route path="/dashboard" exact component={Dashboard} />
               <Route path="/profile" exact component={Profile} />
             </div>
