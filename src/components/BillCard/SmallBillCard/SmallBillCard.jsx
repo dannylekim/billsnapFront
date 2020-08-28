@@ -1,44 +1,43 @@
 import React from "react";
+import "./styles.scss";
+import {filterDateTime} from "../../../helpers/DateTime";
+import BillIcon from "../../BillIcon";
 import PropType from "prop-types";
 
-import {filterDateTime} from '../../../helpers/DateTime';
-import "./styles.scss";
-import BillIcon from "../../BillIcon";
-
-const SmallBillCard = ({ activeBillId, bill }) => (
-  <div
-    className={`bill__items card-body ${(typeof activeBillId === 'number' && activeBillId === bill.id) && 'bill-active' }`}
-  >
-    {!!bill.created && (
-      <div className="bill__items card-title text-muted">
-        <span className="float-right" id="bill__created">
-          {filterDateTime(bill.created)}
-        </span>
+const SmallBillCard = ({ bill, activeBillId }) => {
+  return (
+    <div
+      className={
+        activeBillId === bill.id
+          ? "active__bill card-body"
+          : "non__active__bill card-body"
+      }
+    >
+      <div className="split__info">
+        <div />
+        <div className="date">{filterDateTime(bill.created)}</div>
       </div>
-    )}
-    <div className="bill__items card-text">
-      <div id="bill__icon">
-        <BillIcon category={bill.category} />
-      </div>
-      <div className="bill__name__price">
-        <span id="bill__name">{bill.name} </span>
-        <span id="bill__balance">
-          {parseFloat(bill.balance).toFixed(2)} $
-        </span>
+      <div className="bill__items">
+        <div className="split__info">
+          <div className="separate-right bill-icon">
+            <BillIcon category={bill.category} />
+          </div>
+          <div className="bill_name text__format">
+            <div>{bill.name}</div>
+            <div className="responsible">
+              Split by : {bill.responsible.firstName}
+            </div>
+          </div>
+        </div>
+        <div className="bill_balance text__format">{bill.balance}$</div>
       </div>
     </div>
-
-    {bill.responsible && (
-      <div className="bill__items split__by">
-        <span id="responsible"> Split by : {bill.responsible.firstName} </span>
-      </div>
-    )}
-  </div>
-);
+  );
+};
 
 SmallBillCard.propTypes = {
   bill: PropType.shape({}), // array of bill object
-  activeBillId: PropType.number // bill selected
-}
+  activeBillId: PropType.number, // bill selected
+};
 
 export default SmallBillCard;

@@ -1,11 +1,11 @@
-import Dashboard from "./Dashboard";
 import {connect} from "react-redux";
-import {isUserLogged} from "../../redux/selectors/userSelectors";
+import Dashboard from "./Dashboard";
 
 const mapStateToProps = (state) => ({
-  userInfo: state.users.userInfo,
-  hasUser: isUserLogged(state),
-  isBillLoading: state.application.isBillLoading,
+  activeBill:
+    Object.keys(state.bills.activeBill).length > 0
+      ? state.bills.activeBill
+      : undefined,
 });
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, null)(Dashboard);
