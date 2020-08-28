@@ -8,8 +8,6 @@ import * as serviceWorker from "./serviceWorker";
 import * as Sentry from "@sentry/browser";
 
 import store from "./redux/store";
-import {persistStore} from "redux-persist";
-import {PersistGate} from "redux-persist/integration/react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
@@ -19,15 +17,9 @@ if (process.env.SENTRY_DSN) {
   Sentry.init({ dsn: process.env.SENTRY_DSN });
 }
 
-const persistor = persistStore(store);
-
-!localStorage.getItem("billSnap_token") && persistor.purge();
-
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate persistor={persistor}>
       <App />
-    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

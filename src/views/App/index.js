@@ -1,9 +1,10 @@
 import App from "./App.jsx";
 import {connect} from "react-redux";
 import {loadUser} from "../../redux/actions/userActions";
+import {isUserLogged} from "../../redux/selectors/userSelectors";
 
 const mapStateToProps = (state) => ({
-    isLoggedIn: Object.keys(state.users.userInfo).length > 0
+    isLoggedIn: isUserLogged(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
