@@ -1,10 +1,10 @@
 import Dashboard from "./Dashboard";
 import {connect} from "react-redux";
-import {getHasUser} from "../../redux/selectors/userSelectors";
+import {isUserLogged} from "../../redux/selectors/userSelectors";
 
 const mapStateToProps = (state) => ({
   userInfo: state.users.userInfo,
-  hasUser: getHasUser(state),
+  hasUser: isUserLogged(state),
   isBillLoading: state.application.isBillLoading,
 });
 

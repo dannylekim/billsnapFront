@@ -1,5 +1,5 @@
 import React from "react";
-import Profile from "../../Profile";
+import Profile from "../Profile";
 import { mockUserInfo } from "../constant/mockObjects";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";

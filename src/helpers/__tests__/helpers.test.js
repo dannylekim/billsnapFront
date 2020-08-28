@@ -1,20 +1,9 @@
-import React from "react";
 import { filterDateTime } from "../DateTime";
-import { capilizeFirstLetter, userFullName } from "../StringName";
-import { getBillIcons } from "../Components";
-import {
-  FaBus,
-  FaCar,
-  FaQuestion,
-  FaShoppingBag,
-  FaShoppingCart,
-  FaUtensils,
-} from "react-icons/fa";
-//hasUser, firstName, middleName, lastName
+import { capilizeFirstLetter, formatUserFullName } from "../StringName";
+
 describe("function", () => {
-  it("userFullName should return full name", () => {
-    expect(userFullName(true, "bob", "charles", "smithsonian")).toBe("Bob Charles Smithsonian");
-    expect(userFullName(false, "bob", "charles", "smithsonian")).toBe("");
+  it("formatUserFullName should return full name", () => {
+    expect(formatUserFullName("bob", "charles", "smithsonian")).toBe("Bob Charles Smithsonian");
   })
   it("capilizeFirstLetter should capitilize name", () => {
     expect(capilizeFirstLetter("bob")).toBe("Bob");
@@ -45,27 +34,5 @@ describe("function", () => {
         }-${today.getFullYear()} 3:25:10 -0400`
       )
     ).toBe("3:25 AM");
-  });
-
-  it("getBillIcons should return correct Icons", () => {
-    const color = "rgba(0, 0, 0, 0.96)";
-    expect(getBillIcons("food")).toStrictEqual(
-      <FaUtensils color={color} size={24} />
-    );
-    expect(getBillIcons("transport")).toStrictEqual(
-      <FaCar color={color} size={24} />
-    );
-    expect(getBillIcons("public-transport")).toStrictEqual(
-      <FaBus color={color} size={24} />
-    );
-    expect(getBillIcons("grocery")).toStrictEqual(
-      <FaShoppingCart color={color} size={24} />
-    );
-    expect(getBillIcons("shopping")).toStrictEqual(
-      <FaShoppingBag color={color} size={24} />
-    );
-    expect(getBillIcons("unknown")).toStrictEqual(
-      <FaQuestion color={color} size={24} />
-    );
   });
 });

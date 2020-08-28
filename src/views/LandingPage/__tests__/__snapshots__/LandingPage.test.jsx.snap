@@ -93,101 +93,14 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot lo
       </div>
     </div>
     <div>
-      <div
-        className="login__container"
-      >
-        <div>
-          <div
-            className="login__form"
-          >
-            <div
-              className="hidden__div"
-            />
-            <img
-              alt="character logo"
-              className="character__icon__image"
-              src="./billSnapIcon.png"
-            />
-            <form
-              className=""
-            >
-              <div
-                className="form__inputs"
-              >
-                <div
-                  className="form-group"
-                  onChange={[Function]}
-                >
-                  <input
-                    autoComplete="username"
-                    className="register__login__inputs form-control"
-                    id="email"
-                    name="email"
-                    placeholder="Email"
-                    type="email"
-                  />
-                </div>
-                <div
-                  className="form-group"
-                  onChange={[Function]}
-                >
-                  <input
-                    autoComplete="new-password"
-                    className="register__login__inputs form-control"
-                    id="password"
-                    name="password"
-                    placeholder="Password"
-                    type="password"
-                  />
-                </div>
-              </div>
-              <div
-                className="forgot__password__login"
-              >
-                <a
-                  className="forgot__password"
-                  href="/#"
-                >
-                  Forgot Password?
-                </a>
-                <button
-                  className="login_register__submit__button btn btn-primary btn-md btn-pill"
-                  name="submit"
-                  onClick={[Function]}
-                  type="button"
-                >
-                  Log in
-                </button>
-              </div>
-            </form>
-          </div>
-          <div>
-            <div
-              className="form__seperator"
-            >
-              <hr
-                className="form__horizontal__line"
-              />
-              Or
-              <hr
-                className="form__horizontal__line"
-              />
-            </div>
-            <div>
-              <h6>
-                New to Billsnap?
-              </h6>
-              <button
-                className="form__toggle btn btn-primary"
-                onClick={[Function]}
-                type="button"
-              >
-                👋 Create account
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <LoginForm
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        setFormType={[Function]}
+      />
     </div>
   </div>
 </div>
@@ -286,132 +199,14 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot re
       </div>
     </div>
     <div>
-      <div
-        className="register__container"
-      >
-        <div
-          className="register__container"
-        >
-          <div
-            className="hidden__div"
-          />
-          <img
-            alt="character logo"
-            className="character__icon__image"
-            src="./billSnapIcon.png"
-          />
-          <form
-            className=""
-          >
-            <div
-              className="form__inputs"
-            >
-              <div
-                className="form-group"
-                onChange={[Function]}
-              >
-                <input
-                  autoComplete="first-name"
-                  className="register__login__inputs form-control"
-                  id="firstName"
-                  name="firstName"
-                  placeholder="First name"
-                  type="text"
-                />
-              </div>
-              <div
-                className="form-group"
-                onChange={[Function]}
-              >
-                <input
-                  autoComplete="last-name"
-                  className="register__login__inputs form-control"
-                  id="lastName"
-                  name="lastName"
-                  placeholder="Last name"
-                  type="text"
-                />
-              </div>
-              <div
-                className="form-group"
-                onChange={[Function]}
-              >
-                <input
-                  autoComplete="username"
-                  className="register__login__inputs form-control"
-                  id="email"
-                  name="email"
-                  placeholder="Email"
-                  type="email"
-                />
-              </div>
-              <div
-                className="form-group"
-                onChange={[Function]}
-              >
-                <input
-                  autoComplete="new-password"
-                  className="register__login__inputs form-control"
-                  id="password"
-                  name="password"
-                  placeholder="Password"
-                  type="password"
-                />
-              </div>
-              <div
-                className="form-group"
-                onChange={[Function]}
-              >
-                <input
-                  autoComplete="new-password"
-                  className="register__login__inputs form-control"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  placeholder="Confirm password"
-                  type="password"
-                />
-              </div>
-            </div>
-            <div
-              className="form-group"
-            >
-              <button
-                className="login_register__submit__button btn btn-primary btn-md btn-pill"
-                name="submit"
-                onClick={[Function]}
-                type="button"
-              >
-                Sign Up
-              </button>
-            </div>
-          </form>
-          <div>
-            <div
-              className="form__seperator"
-            >
-              <hr
-                className="form__horizontal__line"
-              />
-              Or
-              <hr
-                className="form__horizontal__line"
-              />
-            </div>
-            <div>
-              <h6>
-                Have an account?
-              </h6>
-              <button
-                className="form__toggle btn btn-primary"
-                onClick={[Function]}
-                type="button"
-              >
-                👋 Log in to your account
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <RegisterForm
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        setFormType={[Function]}
+      />
     </div>
   </div>
 </div>
@@ -476,5 +271,49 @@ exports[`LandingPage render snapshots 📸 LandingPage should match snap shot wh
       </li>
     </ul>
   </nav>
+  <div
+    className="page__content"
+  >
+    <div
+      className="title"
+    >
+      <div
+        className="title__row"
+      >
+        <h3
+          className="title__title"
+        >
+          Welcome to Billsnap
+        </h3>
+      </div>
+      <div
+        className="title__row title__text"
+      >
+        <p>
+          BillSnap is all about snapping away full bills into dust. The goal is to facilitate the process of splitting bills with roommates, friends & family.
+        </p>
+      </div>
+      <div
+        className="title__row"
+      >
+        <button
+          className="title__button btn btn-primary btn-md btn-pill"
+          onClick={[Function]}
+        >
+          How it works
+        </button>
+      </div>
+    </div>
+    <div>
+      <LoginForm
+        history={
+          Object {
+            "push": [MockFunction],
+          }
+        }
+        setFormType={[Function]}
+      />
+    </div>
+  </div>
 </div>
 `;

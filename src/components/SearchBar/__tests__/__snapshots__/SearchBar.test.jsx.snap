@@ -92,81 +92,53 @@ exports[`SearchBar render snapshots 📸 SearchBar should match snap shot when l
         className="filter__selections__container"
       >
         <span
-          className="active"
+          className="active badge badge-outline-primary badge-pill"
+          id="descending"
+          onClick={[Function]}
         >
-          <span
-            className="badge badge-outline-primary badge-pill"
-            id="descending"
-            onClick={[Function]}
-          >
-            Newest
-          </span>
+          Newest
         </span>
         <span
-          className={false}
+          className="badge badge-outline-primary badge-pill"
+          id="ascending"
+          onClick={[Function]}
         >
-          <span
-            className="badge badge-outline-primary badge-pill"
-            id="ascending"
-            onClick={[Function]}
-          >
-            Oldest
-          </span>
+          Oldest
         </span>
         <span
-          className={false}
+          className="badge badge-outline-primary badge-pill"
+          id="by__status"
+          onClick={[Function]}
         >
-          <span
-            className="badge badge-outline-primary badge-pill"
-            id="by__status"
-            onClick={[Function]}
-          >
-            Status
-          </span>
+          Status
         </span>
         <span
-          className={false}
+          className="badge badge-outline-primary badge-pill"
+          id="alphabetical__increasing"
+          onClick={[Function]}
         >
-          <span
-            className="badge badge-outline-primary badge-pill"
-            id="alphabetical__increasing"
-            onClick={[Function]}
-          >
-            A to Z
-          </span>
+          A to Z
         </span>
         <span
-          className={false}
+          className="badge badge-outline-primary badge-pill"
+          id="alphabetical__decreasing"
+          onClick={[Function]}
         >
-          <span
-            className="badge badge-outline-primary badge-pill"
-            id="alphabetical__decreasing"
-            onClick={[Function]}
-          >
-            Z to A
-          </span>
+          Z to A
         </span>
         <span
-          className={false}
+          className="badge badge-outline-primary badge-pill"
+          id="by__category"
+          onClick={[Function]}
         >
-          <span
-            className="badge badge-outline-primary badge-pill"
-            id="by__category"
-            onClick={[Function]}
-          >
-            Category
-          </span>
+          Category
         </span>
         <span
-          className={false}
+          className="badge badge-outline-primary badge-pill"
+          id="by__date"
+          onClick={[Function]}
         >
-          <span
-            className="badge badge-outline-primary badge-pill"
-            id="by__date"
-            onClick={[Function]}
-          >
-            Date
-          </span>
+          Date
         </span>
       </div>
     </div>

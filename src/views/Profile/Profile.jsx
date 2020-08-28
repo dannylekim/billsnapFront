@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.scss";
 import { FaPencilAlt, FaPhone, FaEnvelope, FaMapMarkerAlt, FaBirthdayCake } from "react-icons/fa";
-import {capilizeFirstLetter, userFullName} from "../../helpers/StringName";
+import {capilizeFirstLetter, formatUserFullName} from "../../helpers/StringName";
 
 export default ({ history, userInfo,hasUser }) => {
   const {
@@ -21,7 +21,7 @@ export default ({ history, userInfo,hasUser }) => {
         <div className="header__profile"> </div> 
         <img className="profile__avatar" src="./billSnapIcon.png" alt="avatar" />
         <div className="user__name">
-          <h1> {userFullName(hasUser, firstName, middleName, lastName)} </h1>
+          <h1> { formatUserFullName(firstName, middleName, lastName)} </h1>
           <button className="edit__profile">
             <FaPencilAlt />
           </button>

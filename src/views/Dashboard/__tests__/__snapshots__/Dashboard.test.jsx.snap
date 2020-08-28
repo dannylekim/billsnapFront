@@ -61,6 +61,8 @@ exports[`Dashboard render snapshots 📸 Dashboard should match snap shot 1`] = 
 </div>
 `;
 
+exports[`Dashboard render snapshots 📸 Dashboard should match snap shot if no user logged 1`] = `null`;
+
 exports[`Dashboard render snapshots 📸 Dashboard should match snap shot on nothing 1`] = `
 <div
   className="dashboard__flexbox"

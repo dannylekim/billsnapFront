@@ -1,8 +1,12 @@
 import React from "react";
-import LandingPage from "../../LandingPage";
+import LandingPage from "../LandingPage";
 import {createRegisterFormElements} from "../../../constants/FormElements";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+
+jest.mock("../../LoginForm", () => "LoginForm");
+jest.mock("../../RegisterForm", () => "RegisterForm");
+
 
 const mockStore = configureStore();
 

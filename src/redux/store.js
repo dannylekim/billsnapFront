@@ -31,15 +31,15 @@ if (process.env.NODE_ENV === "development") {
   middlewares.push(logger);
 }
 
-const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ['application', 'users'],
-  throttle: 500,
-};
+// const persistConfig = {
+//   key: "root",
+//   storage,
+//   whitelist: ['application', 'users'],
+//   throttle: 500,
+// };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(persistedReducer, applyMiddleware(...middlewares));
+const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 export default store;

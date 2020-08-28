@@ -10,6 +10,7 @@ import Sidebar from "../../components/Sidebar";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import BillSnapBackground from "../Background";
 import "./styles.scss";
+import {isExpired} from "../../helpers/JwtHelper";
 
 /**
  * Load you page components here. We will render them via routes
@@ -17,7 +18,8 @@ import "./styles.scss";
 
 export default ({ getUser, isLoggedIn }) => {
   useEffect(() => {
-    if (localStorage.getItem("billSnap_token")) {
+    const token = localStorage.getItem("billSnap_token");
+    if (token && !isExpired(token)) {
       getUser();
     }
   });
