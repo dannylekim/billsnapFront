@@ -11,7 +11,13 @@ export const setBillLoading = (isBillLoading) => ({
   isBillLoading,
 });
 
+export const setActiveBillLoading = (isActiveBillLoading) => ({
+  type: ACTIONS.SET_BILL_LOADING_STATUS,
+  isActiveBillLoading,
+});
+
 export const ACTIONS = {
   TOGGLE_LANDING_PAGE_FORM: "TOGGLE_LANDING_PAGE_FORM",
   SET_BILL_LOADING_STATUS: "SET_BILL_LOADING_STATUS",
+  SET_ACTIVE_BILL_LOADING_STATUS: "SET_ACTIVE_BILL_LOADING_STATUS",
 };
