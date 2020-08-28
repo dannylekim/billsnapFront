@@ -6,10 +6,11 @@ import navItems from "../../constants/BillDisplayNav.json";
 import BillDisplay from "../BillDisplay";
 import SearchBar from "../../components/SearchBar";
 import Loader from "../../components/Loader";
-import BillSummary from '../../components/BillSummary';
+import BillSummary from "../../components/BillSummary";
 
 import "./styles.scss";
 import PendingBillsContainer from "../../components/PendingBillsContainer";
+import LargeBillCard from "../../components/BillCard/LargeBillCard";
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ export default class Dashboard extends Component {
       case "allBills":
         return <BillDisplay />;
       case "owedToYou":
-        return <PendingBillsContainer/>;
+        return <PendingBillsContainer />;
       default:
         return <Loader />;
     }
@@ -32,15 +33,16 @@ export default class Dashboard extends Component {
 
   render() {
     const { currentActiveTab } = this.state;
+    const { activeBill } = this.props;
 
     return (
       <>
         {this.props.hasUser ? (
-          <div className='dashboard__flexbox'>
-            <div className='bill__wrapper'>
-              <div className='bill__section'>
+          <div className="dashboard__flexbox">
+            <div className="bill__wrapper">
+              <div className="bill__section">
                 <SearchBar activeTab={currentActiveTab} />
-                <Button id='add__bill__button'> {"+ Add bill"} </Button>
+                <Button id="add__bill__button"> {"+ Add bill"} </Button>
                 <Nav tabs>
                   {navItems.map((item, key) => (
                     <NavItem key={key}>
@@ -48,20 +50,22 @@ export default class Dashboard extends Component {
                         active={this.state.currentActiveTab === item.name}
                         onClick={() =>
                           this.setState({ currentActiveTab: item.name })
-                        }>
+                        }
+                      >
                         {item.title}
                       </NavLink>
                     </NavItem>
                   ))}
                 </Nav>
 
-                <div className='bill__list__section'>
+                <div className="bill__list__section">
                   {this.displayTab(this.state.currentActiveTab)}
                 </div>
               </div>
-              <div className='specific__bill__section'>
-				  <BillSummary />
-			  </div>
+              <div className="specific__bill__section">
+                <BillSummary />
+                {activeBill && <LargeBillCard selectedBill={activeBill} />}
+              </div>
             </div>
           </div>
         ) : (

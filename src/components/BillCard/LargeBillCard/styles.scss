@@ -1,10 +1,9 @@
 @import "../../../variables";
 
 div.large__bill {
-  height: 600px;
-  width: 80%;
-  margin-left: auto;
-  margin-right: 32px;
+  height: 80%;
+  margin-left: 1em;
+  margin-right: 1em;
   margin-top: 50px;
   background: $card-color;
   box-shadow: 0 7.5px 60px rgba(90, 97, 105, 0.25);
@@ -18,13 +17,30 @@ div.large__bill {
   color: $primary-text-color;
 }
 
-div.inner__bill_container {
+.inner__bill__dimensions {
   height: 81.09%;
   width: 87.1%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 40px;
+}
+
+div.inner__bill_container {
+  height: 100%;
+  width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.59);
   box-sizing: border-box;
   border-radius: 26px;
+}
+
+.split_between {
+  display:flex;
+  justify-content: space-between;
+}
+
+.space-top {
+  margin-top: 2em;
+}
+
+.bill_name {
+  font-weight: bold;
 }
