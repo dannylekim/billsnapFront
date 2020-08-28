@@ -17,6 +17,10 @@
   .nav {
     width: inherit;
   }
+
+  &.hidden {
+    display: none;
+  }
 }
 
 .sideLogo.navbar-brand {
