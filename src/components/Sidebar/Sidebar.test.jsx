@@ -1,31 +1,22 @@
 import React from "react";
 import Sidebar from "./Sidebar.jsx";
-import SidebarComponent, {DEFAULT_ACTIVE_STATE} from "../Sidebar";
-import {NavLink} from "shards-react";
-import configureStore from "redux-mock-store";
-
-const mockStore = configureStore();
-
-const store = mockStore({});
+import { DEFAULT_ACTIVE_STATE } from "../Sidebar";
+import { NavLink } from "shards-react";
 
 describe("Sidebar", () => {
   let wrapper;
-  let
-    mockSetUser,
-    mockSetActiveState,
-    mockFilterComponent,
-    mockHistoryPush;
+  let mockSetUser, mockSetActiveState, mockFilterComponent, mockHistoryPush;
 
   const STARTING_ACTIVE_STATE = {
     ...DEFAULT_ACTIVE_STATE,
-    bills: true
+    bills: true,
   };
 
-  mockSetActiveState = (activeState) => wrapper.setProps({activeState});
+  mockSetActiveState = (activeState) => wrapper.setProps({ activeState });
 
   beforeEach(() => {
     mockSetUser = jest.fn();
-    mockFilterComponent= jest.fn();
+    mockFilterComponent = jest.fn();
     mockHistoryPush = jest.fn();
     wrapper = shallow(
       <Sidebar
@@ -33,8 +24,8 @@ describe("Sidebar", () => {
         activeState={STARTING_ACTIVE_STATE}
         setActiveState={mockSetActiveState}
         filterComponentFromNav={mockFilterComponent}
-        history= {{
-          push: mockHistoryPush
+        history={{
+          push: mockHistoryPush,
         }}
       />
     );
@@ -43,10 +34,7 @@ describe("Sidebar", () => {
   describe("render", () => {
     describe("snapshots 📸", () => {
       it("Sidebar should match snap shot", () => {
-        matches(<Sidebar />);
-      });
-      it("Sidebar should match snap shot if hide props is true", () => {
-        matches(<Sidebar hide />);
+        matches(<Sidebar history={{ push: mockHistoryPush }} />);
       });
 
       it("Sidebar should match snap shot is another row is active", () => {
@@ -55,8 +43,8 @@ describe("Sidebar", () => {
           contacts: true,
         };
         wrapper.setState({
-          activeState
-        })
+          activeState,
+        });
         matches(wrapper);
       });
     });
@@ -100,21 +88,24 @@ describe("Sidebar", () => {
   describe("function", () => {
     describe("handleClick", () => {
       it("should not change state if parameter does not exist as a activeState key", () => {
-        const expectedState = {
-          activeState: {
-            ...DEFAULT_ACTIVE_STATE,
-            settings: true,
-          }
-        }
-
-        const actualState = { ...expectedState };
-
-        wrapper.setState({ 
-          activeState: actualState
-        })
+        const startingState = {
+          dashboard: false,
+          profile: false,
+          contacts: false,
+          settings: false,
+          help: false,
+        };
+        wrapper.setState({
+          activeState: startingState,
+        });
         wrapper.instance().handleClick("starlord");
+        expect(wrapper.state("activeState")).toEqual(startingState);
 
-        expect(wrapper.state('activeState')).toEqual(expectedState);
+        wrapper.instance().handleClick("profile");
+        expect(wrapper.state("activeState")).toEqual({
+          ...startingState,
+          profile: true,
+        });
       });
     });
     describe("handleLogoutClick", () => {

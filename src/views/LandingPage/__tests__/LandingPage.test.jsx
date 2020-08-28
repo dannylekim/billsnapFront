@@ -1,8 +1,12 @@
 import React from "react";
-import LandingPage from "../../LandingPage";
+import LandingPage from "../LandingPage";
 import {createRegisterFormElements} from "../../../constants/FormElements";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+
+jest.mock("../../LoginForm", () => "LoginForm");
+jest.mock("../../RegisterForm", () => "RegisterForm");
+
 
 const mockStore = configureStore();
 
@@ -11,6 +15,9 @@ const store = mockStore({
     showRegisterFirst: true,
     isBillLoading: false,
   },
+  users:{
+    userInfo: {}
+  }
 });
 
 const store2 = mockStore({
@@ -18,6 +25,19 @@ const store2 = mockStore({
     showRegisterFirst: false,
     isBillLoading: false,
   },
+  users:{
+    userInfo: {}
+  }
+});
+
+const store3 = mockStore({
+  application: {
+    showRegisterFirst: false,
+    isBillLoading: false,
+  },
+  users:{
+    userInfo: {firstName:"Bob"}
+  }
 });
 
 describe("LandingPage", () => {
@@ -28,11 +48,19 @@ describe("LandingPage", () => {
 
   describe("render", () => {
     describe("snapshots 📸", () => {
+      it("LandingPage should match snap shot when user already logged in i.e: redirect", () => {
+        matches(
+          <Provider store={store3}>
+            <LandingPage toggleFormType={mockFn} history={{ push: jest.fn() }} />
+          </Provider>
+        );
+      });
+
       it("LandingPage should match snap shot register", () => {
         createRegisterFormElements();
         matches(
           <Provider store={store}>
-            <LandingPage formType={"register"} toggleFormType={mockFn} />
+            <LandingPage formType={"register"} toggleFormType={mockFn} history={{ push: jest.fn() }} />
           </Provider>
         );
       });
@@ -40,8 +68,7 @@ describe("LandingPage", () => {
         createRegisterFormElements();
         matches(
           <Provider store={store2}>
-            {" "}
-            <LandingPage formType={"login"} toggleFormType={mockFn} />
+            <LandingPage formType={"login"} toggleFormType={mockFn} history={{ push: jest.fn() }} />
           </Provider>
         );
       });

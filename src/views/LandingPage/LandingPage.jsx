@@ -10,12 +10,12 @@ import "./styles.scss";
  */
 
 export default (props) => {
-  const { history, toggleFormType, formType } = props;
+  const { history, toggleFormType, formType, hasUser } = props;
 
   return (
     <div className="page__landing">
       <Navbar />
-      {!localStorage.getItem("billSnap_token") ? (
+      {!hasUser ? (
         <div className="page__content">
           <TitleContent />
           <div>

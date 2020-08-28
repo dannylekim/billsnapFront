@@ -1,7 +1,6 @@
 import React from "react";
 import BillDisplay from "../BillDisplay";
 import {shallow} from "enzyme";
-import {FaBus, FaCar, FaQuestion, FaShoppingBag, FaShoppingCart, FaUtensils,} from "react-icons/fa";
 
 jest.mock("../../../utils/requests/BillRequests", () => {
   return {
@@ -101,6 +100,18 @@ describe("BillDisplay", () => {
             searchInput={""}
           />
         );
+      });
+    });
+
+    describe("component", () => {
+
+      it("componentDidMount should call fetchBill", () => {
+        expect(mockFetch).toHaveBeenCalledTimes(1);
+      })
+
+      it("should call setActiveBill on bill card onclick", () => {
+        wrapper.find(".bill__card.card").at(0).simulate("click");
+        expect(mockSetActiveBill).toHaveBeenCalledTimes(1);
       });
     });
   });

@@ -21,11 +21,15 @@ describe("Dashboard", () => {
 
     describe("snapshots 📸", () => {
       it("Dashboard should match snap shot", () => {
+        matches(<Dashboard history={{ push: jest.fn() }} hasUser={true} />);
+      });
+
+      it("Dashboard should match snap shot if no user logged", () => {
         matches(<Dashboard history={{ push: jest.fn() }} />);
       });
 
       it("Dashboard should match snap shot on notifications tab", () => {
-        const wrapper = shallow(<Dashboard history={{ push: jest.fn() }} />);
+        const wrapper = shallow(<Dashboard history={{ push: jest.fn() }} hasUser={true} />);
 
         wrapper.setState((prev) => ({
           ...prev,
@@ -36,7 +40,7 @@ describe("Dashboard", () => {
       });
 
       it("Dashboard should match snap shot on nothing", () => {
-        const wrapper = shallow(<Dashboard history={{ push: jest.fn() }} />);
+        const wrapper = shallow(<Dashboard history={{ push: jest.fn() }} hasUser={true}/>);
 
         wrapper.setState((prev) => ({
           ...prev,

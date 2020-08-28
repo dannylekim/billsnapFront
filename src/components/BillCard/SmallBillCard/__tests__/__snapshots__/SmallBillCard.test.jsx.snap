@@ -11,7 +11,6 @@ exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap sho
       className="float-right"
       id="bill__created"
     >
-       
       28/07
     </span>
   </div>
@@ -54,10 +53,8 @@ exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap sho
       <span
         id="bill__balance"
       >
-         
         253.89
          $
-         
       </span>
     </div>
   </div>
@@ -75,7 +72,6 @@ exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap sho
       className="float-right"
       id="bill__created"
     >
-       
       02/07
     </span>
   </div>
@@ -118,10 +114,8 @@ exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap sho
       <span
         id="bill__balance"
       >
-         
         151.00
          $
-         
       </span>
     </div>
   </div>

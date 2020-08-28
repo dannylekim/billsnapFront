@@ -12,7 +12,6 @@ const SmallBillCard = ({ activeBillId, bill }) => (
     {!!bill.created && (
       <div className="bill__items card-title text-muted">
         <span className="float-right" id="bill__created">
-          {" "}
           {filterDateTime(bill.created)}
         </span>
       </div>
@@ -24,8 +23,7 @@ const SmallBillCard = ({ activeBillId, bill }) => (
       <div className="bill__name__price">
         <span id="bill__name">{bill.name} </span>
         <span id="bill__balance">
-          {" "}
-          {parseFloat(bill.balance).toFixed(2)} ${" "}
+          {parseFloat(bill.balance).toFixed(2)} $
         </span>
       </div>
     </div>

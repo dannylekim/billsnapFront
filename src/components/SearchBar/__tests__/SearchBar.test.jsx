@@ -3,20 +3,16 @@ import SearchBar from "../SearchBar";
 
 describe("SearchBar", () => {
   describe("render", () => {
-    let handleMockFunction,
-      mockSortAlphabetical,
-      mockSortingType,
+    let mockSortAlphabetical,
       mockUpdateSearch,
       mockFetchBill,
       mockFetchPendingBill,
-      wrapper;
+      wrapper,
+      instance;
 
     beforeEach(() => {
-      handleMockFunction = jest.fn();
       mockUpdateSearch = jest.fn((e) => e);
       mockFetchBill = jest.fn();
-      mockSortingType = jest.fn();
-      mockSortingType = "";
       mockFetchPendingBill = jest.fn();
 
       wrapper = shallow(
@@ -29,6 +25,7 @@ describe("SearchBar", () => {
           activeTab="allBills"
         />
       );
+      instance = wrapper.instance();
     });
 
     describe("snapshots 📸", () => {
@@ -159,7 +156,7 @@ describe("SearchBar", () => {
               },
             }));
 
-            wrapper.instance().clearFilter();
+            instance.clearFilter();
             expect(wrapper.state()).toEqual(DEFAULT_STATE);
           });
         });
@@ -173,7 +170,7 @@ describe("SearchBar", () => {
               },
             });
 
-            wrapper.instance().closeHandler();
+            instance.closeHandler();
             expect(wrapper.state()).toEqual(DEFAULT_STATE);
           });
         });
@@ -208,14 +205,14 @@ describe("SearchBar", () => {
               },
             }));
 
-            wrapper.instance().handleDateSelection(BLANK_VALUE_EVENT);
+            instance.handleDateSelection(BLANK_VALUE_EVENT);
 
             expect(wrapper.state().dateFilters.startDate.value).toEqual("");
             expect(wrapper.state().dateFilters.endDate.value).toEqual("");
           });
 
           it("should not change date value if neither start/end date is selected", () => {
-            wrapper.instance().handleDateSelection(event);
+            instance.handleDateSelection(event);
 
             expect(wrapper.state().dateFilters.startDate.value).toEqual("");
             expect(wrapper.state().dateFilters.endDate.value).toEqual("");
@@ -235,7 +232,7 @@ describe("SearchBar", () => {
                 },
               },
             }));
-            wrapper.instance().handleDateSelection(event);
+            instance.handleDateSelection(event);
 
             expect(wrapper.state().dateFilters.startDate.value).toEqual("");
             expect(wrapper.state().dateFilters.endDate.value).toEqual("");
@@ -252,7 +249,7 @@ describe("SearchBar", () => {
               },
             }));
 
-            wrapper.instance().handleDateSelection(event);
+            instance.handleDateSelection(event);
 
             expect(wrapper.state().dateFilters.startDate.value).toEqual(
               EXPECTED_DATE
@@ -271,7 +268,7 @@ describe("SearchBar", () => {
               },
             }));
 
-            wrapper.instance().handleDateSelection(event);
+            instance.handleDateSelection(event);
 
             expect(wrapper.state().dateFilters.startDate.value).toEqual("");
             expect(wrapper.state().dateFilters.endDate.value).toEqual(
@@ -300,7 +297,7 @@ describe("SearchBar", () => {
             expect(wrapper.state().dateFilters.startDate.selected).toBeTruthy();
             expect(wrapper.state().dateFilters.endDate.selected).toBeFalsy();
 
-            wrapper.instance().dateCheckboxHandler("endDate");
+            instance.dateCheckboxHandler("endDate");
 
             expect(wrapper.state().dateFilters.endDate.selected).toBeTruthy();
             expect(wrapper.state().dateFilters.startDate.selected).toBeFalsy();
@@ -327,7 +324,7 @@ describe("SearchBar", () => {
               },
             });
 
-            wrapper.instance().filterToggleChange(EXPECTED_CATEGORY_FILTERS);
+            instance.filterToggleChange(EXPECTED_CATEGORY_FILTERS);
 
             expect(wrapper.state().dateFilters.startDate.selected).toBeFalsy();
             expect(wrapper.state().dateFilters.endDate.selected).toBeFalsy();
@@ -347,7 +344,7 @@ describe("SearchBar", () => {
               },
             };
 
-            wrapper.instance().onInputChangeHandler(event);
+            instance.onInputChangeHandler(event);
 
             expect(mockUpdateSearch).toHaveBeenCalledWith(TEST_STRING);
           });
@@ -361,8 +358,8 @@ describe("SearchBar", () => {
               in_progess: true,
             };
 
-            wrapper.instance().statusFilterHandler("resolved");
-            wrapper.instance().statusFilterHandler("in_progess");
+            instance.statusFilterHandler("resolved");
+            instance.statusFilterHandler("in_progess");
 
             expect(wrapper.state().statusFilter).toEqual(
               EXPECTED_STATUS_FILTER
@@ -375,7 +372,7 @@ describe("SearchBar", () => {
             wrapper.setState({
               dateFilters: {
                 startDate: {
-                  selected: false,
+                  selected: true,
                   value: "2020-04-20",
                 },
                 endDate: {
@@ -384,25 +381,42 @@ describe("SearchBar", () => {
                 },
               },
             });
-
-            const params = wrapper.instance().getDateParams();
+            const params = instance.getDateParams();
             expect(params).toEqual("start=2020-04-20");
           });
-          it("should return REST params from states if both start and end are defined", () => {
+
+          it("should return REST params from states if only if end is defined", () => {
             wrapper.setState({
               dateFilters: {
                 startDate: {
                   selected: false,
+                  value: "",
+                },
+                endDate: {
+                  selected: true,
+                  value: "2020-04-20",
+                },
+              },
+            });
+            const params = instance.getDateParams();
+            expect(params).toEqual("end=2020-04-20");
+          });
+
+          it("should return REST params from states if both start and end are defined", () => {
+            wrapper.setState({
+              dateFilters: {
+                startDate: {
+                  selected: true,
                   value: "2020-04-20",
                 },
                 endDate: {
-                  selected: false,
+                  selected: true,
                   value: "2020-04-25",
                 },
               },
             });
 
-            const params = wrapper.instance().getDateParams();
+            const params = instance.getDateParams();
             expect(params).toEqual("start=2020-04-20&end=2020-04-25");
           });
         });
@@ -417,7 +431,7 @@ describe("SearchBar", () => {
               },
             });
 
-            const params = wrapper.instance().getAllBillFilter();
+            const params = instance.getAllBillFilter();
             expect(params).toEqual("");
           });
 
@@ -443,7 +457,7 @@ describe("SearchBar", () => {
               },
             });
 
-            const params = wrapper.instance().getAllBillFilter();
+            const params = instance.getAllBillFilter();
             expect(params).toEqual("statuses=RESOLVED,OPEN,IN_PROGRESS");
           });
         });
@@ -456,7 +470,7 @@ describe("SearchBar", () => {
           beforeEach(() => {
             mockGetSortingParams = jest.fn().mockReturnValue(mockValue);
             SearchBar.getSortingParams = mockGetSortingParams;
-            wrapper.instance().closeHandler = mockCloseHandler;
+            instance.closeHandler = mockCloseHandler;
           });
 
           afterEach(() => {
@@ -464,9 +478,9 @@ describe("SearchBar", () => {
             mockGetSortingParams.mockRestore();
           });
 
-          it("should call the appropriate functions with allBills params", () => {
+          it("should call the appropriate funcitons with allBills params", () => {
             const SAMPLE_PARAMS = "🚶‍♂️";
-            wrapper.instance().applySorting(SAMPLE_PARAMS);
+            instance.applySorting(SAMPLE_PARAMS);
 
             const expectedParams = `?${mockValue}`;
 
@@ -494,7 +508,7 @@ describe("SearchBar", () => {
               activeTab: "🔥",
             });
 
-            wrapper.instance().applySorting(SAMPLE_PARAMS);
+            instance.applySorting(SAMPLE_PARAMS);
 
             /**
              *
@@ -516,8 +530,8 @@ describe("SearchBar", () => {
             mockGetSortingParams = jest.fn().mockReturnValue(mockValue);
             mockGetDateParams = jest.fn().mockReturnValue(mockDate);
             SearchBar.getSortingParams = mockGetSortingParams;
-            wrapper.instance().closeHandler = mockCloseHandler;
-            wrapper.instance().getDateParams = mockGetDateParams;
+            instance.closeHandler = mockCloseHandler;
+            instance.getDateParams = mockGetDateParams;
           });
 
           afterEach(() => {
@@ -537,19 +551,18 @@ describe("SearchBar", () => {
               .fn()
               .mockReturnValue(TEST_PARAMS_FOR_DATES);
 
-            wrapper.instance().getAllBillFilter = mockGetAllBillFilter;
-            wrapper.instance().getDateParams = mockGetDateParams;
+            instance.getAllBillFilter = mockGetAllBillFilter;
+            instance.getDateParams = mockGetDateParams;
 
             wrapper.setProps({
               activeTab: "allBills",
             });
 
-            wrapper.instance().applyFiltering(SAMPLE_PARAMS);
+            instance.applyFiltering(SAMPLE_PARAMS);
 
             const expectedParams = `?${mockValue}&${TEST_PARAMS_FOR_DATES}&${TEST_PARAMS_FOR_FILTER}`;
 
             expect(wrapper.state().currentSorting).toBe(SAMPLE_PARAMS);
-            expect(mockCloseHandler).toHaveBeenCalled();
             expect(mockGetSortingParams).toHaveBeenCalled();
             expect(mockGetDateParams).toHaveBeenCalled();
 
@@ -594,7 +607,7 @@ describe("SearchBar", () => {
             wrapper.setProps({
               activeTab: "💩",
             });
-            wrapper.instance().applyFiltering("");
+            instance.applyFiltering("");
 
             /**
              * Add more fetchBills mock that have not been called

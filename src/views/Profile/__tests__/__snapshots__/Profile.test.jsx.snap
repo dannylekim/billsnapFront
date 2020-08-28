@@ -174,3 +174,5 @@ exports[`Profile render snapshots 📸 Profile should match snap shot 1`] = `
   />
 </div>
 `;
+
+exports[`Profile render snapshots 📸 Profile should match snap shot when no users 1`] = `null`;

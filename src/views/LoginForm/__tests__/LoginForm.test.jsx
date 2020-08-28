@@ -247,8 +247,9 @@ describe("LoginForm", () => {
 
         expect(mockDismissAlert).toBeCalledTimes(1);
         expect(login).toBeCalledTimes(1);
-        expect(mockPushFunction).toBeCalledTimes(0);
         expect(setState).toBeCalledTimes(3);
+        expect(mockPushFunction).toBeCalledTimes(0);
+
       });
 
       it("should follow steps on passing request with no token", async () => {

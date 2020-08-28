@@ -1,9 +1,7 @@
 import React from "react";
 import BillSummary from "../BillSummary";
-import {shallow} from "enzyme";
 
 describe("BillSummary", () => {
-  let wrapper;
   describe("render", () => {
     describe("snapshots 📸", () => {
       it("BillSummary should match snap shot with empty bill", () => {
