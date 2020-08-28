@@ -37,6 +37,10 @@ describe("Sidebar", () => {
         matches(<Sidebar history={{ push: mockHistoryPush }} />);
       });
 
+      it("Sidebar should match snap shot if hide prop is true", () => {
+        matches(<Sidebar history={{ push: mockHistoryPush }} hide={true}/>);
+      });
+
       it("Sidebar should match snap shot is another row is active", () => {
         const activeState = {
           ...DEFAULT_ACTIVE_STATE,

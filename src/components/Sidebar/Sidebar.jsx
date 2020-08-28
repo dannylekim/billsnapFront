@@ -57,7 +57,7 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <Navbar className={`billSnap-SideBar ${this.props.hide && 'hidden'}`}>
+      <Navbar className={`billSnap-SideBar ${this.props.hide ? 'hidden' : ''}`}>
         <Nav
           tabs
           vertical={true}
