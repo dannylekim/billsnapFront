@@ -30,7 +30,13 @@ div.inner__bill_container {
   border: 1px solid rgba(0, 0, 0, 0.59);
   box-sizing: border-box;
   border-radius: 26px;
+  overflow-y: auto;
 }
+
+div.inner__bill_container::-webkit-scrollbar {
+  width: 0;
+}
+
 
 .split_between {
   display:flex;
@@ -41,6 +47,47 @@ div.inner__bill_container {
   margin-top: 2em;
 }
 
-.bill_name {
+.embolden {
   font-weight: bold;
+}
+
+.sub_items_text {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.sub-text {
+  color: $secondary-text-color
+}
+
+.account__icons__container {
+  display: flex;
+}
+
+.accounts__icons {
+  display: flex;
+  position: relative;
+  margin-right: 1em;
+}
+
+.user_icon {
+  justify-content: center;
+}
+
+.status_icon {
+  position:absolute;
+  right: -12px;
+  bottom: 0;
+  z-index: 1;
+}
+
+.icon__name {
+  font-size: 15px;
+  text-align: left;
+  margin-left: .4em;
+  font-weight: bold;
+}
+
+.total_balance {
+  margin-top: 3em;
 }

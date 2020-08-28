@@ -33,11 +33,11 @@ export default class Dashboard extends Component {
 
   render() {
     const { currentActiveTab } = this.state;
-    const { activeBill } = this.props;
+    const { activeBill, hasUser, isActiveBillLoading } = this.props;
 
     return (
       <>
-        {this.props.hasUser ? (
+        {hasUser ? (
           <div className="dashboard__flexbox">
             <div className="bill__wrapper">
               <div className="bill__section">
@@ -64,7 +64,11 @@ export default class Dashboard extends Component {
               </div>
               <div className="specific__bill__section">
                 <BillSummary />
-                {activeBill && <LargeBillCard selectedBill={activeBill} />}
+                {isActiveBillLoading ? (
+                  <Loader />
+                ) : (
+                  activeBill && <LargeBillCard bill={activeBill} />
+                )}
               </div>
             </div>
           </div>

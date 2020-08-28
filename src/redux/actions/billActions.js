@@ -1,12 +1,12 @@
-import {answerPendingBill, getBill} from "../../utils/requests/BillRequests";
-import {setBillLoading} from "./applicationActions";
+import {answerPendingBill, getBill, getDetailedBill,} from "../../utils/requests/BillRequests";
+import {setActiveBillLoading, setBillLoading} from "./applicationActions";
 
 export const ACTIONS = {
   ADD_BILLS: "ADD_BILLS",
   UPDATE_BILLS: "UPDATE_BILLS",
   UPDATE_PENDING_BILLS: "UPDATE_PENDING_BILLS",
   UPDATE_BILL_SEARCH_NAME: "UPDATE_BILL_SEARCH_NAME",
-  SET_ACTIVE_BILL: "SET_ACTIVE_BILL"
+  SET_ACTIVE_BILL: "SET_ACTIVE_BILL",
 };
 
 const addBill = (bills = []) => ({
@@ -30,7 +30,7 @@ export const updateSearchBillName = (input = "") => ({
   input,
 });
 
-export const setActiveBill = (bill) => ({
+export const setActiveBillAction = (bill) => ({
   type: "SET_ACTIVE_BILL",
   bill,
 });
@@ -111,6 +111,18 @@ export const updatePendingBill = (isAccepted, billId) => {
       dispatch(updatePendingBills(pendingBills));
     } finally {
       dispatch(setBillLoading(false));
+    }
+  };
+};
+
+export const setActiveBill = (bill) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setActiveBillLoading(true));
+      const detailedBill = await getDetailedBill(bill.id);
+      dispatch(setActiveBillAction(detailedBill));
+    } finally {
+      dispatch(setActiveBillLoading(false));
     }
   };
 };
