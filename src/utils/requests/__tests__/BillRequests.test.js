@@ -1,4 +1,4 @@
-import {answerPendingBill, getBill} from "../BillRequests";
+import {answerPendingBill, getBill, getDetailedBill} from "../BillRequests";
 
 const { URL } = require("../../../config");
 
@@ -11,7 +11,6 @@ function createMockAnswerBill(token, billId, accepted) {
     }
 
     if (options.headers.Authorization !== `Bearer ${token}`) {
-
       throw new Error(MISSING_AUTH_HEADER);
     }
 
@@ -151,6 +150,63 @@ describe("BillRequests", () => {
 
       try {
         await answerPendingBill(accepted, billId);
+      } catch (e) {
+        expect(() => expect(e.data).toEqual({}));
+      }
+    });
+  });
+
+  describe("getDetailedBill", () => {
+    afterEach(() => {
+      localStorage.clear();
+    });
+
+    beforeEach(() => {
+      localStorage.setItem("billSnap_token", token);
+    });
+
+    const billId = 1;
+    const token = "token";
+
+    it("Should return an json object with the right method", async () => {
+      fetch = jest.fn((url, options) => {
+        if (options.method !== "GET") {
+          throw new Error("wrong method");
+        }
+
+        if (options.headers.Authorization !== `Bearer ${token}`) {
+          throw new Error(MISSING_AUTH_HEADER);
+        }
+
+        if (url !== `${URL}/bills/${billId}`) {
+          throw new Error("wrong url");
+        }
+
+        return new Promise((resolve) => {
+          resolve({
+            ok: true,
+            json: jest.fn().mockResolvedValue({ data: {} }),
+          });
+        });
+      });
+
+      const res = await getDetailedBill(billId);
+
+      expect(res.data).toEqual({});
+    });
+
+    it("Should throw same json object if error", async () => {
+      fetch = jest.fn(() => {
+        return new Promise((resolve) => {
+          resolve({
+            ok: false,
+            json: jest.fn().mockResolvedValue({ data: {} }),
+          });
+        });
+      });
+
+      try {
+        await getDetailedBill(billId);
       } catch (e) {
         expect(() => expect(e.data).toEqual({}));
       }
