@@ -188,3 +188,452 @@ exports[`Dashboard render snapshots 📸 Dashboard should match snap shot on not
   </div>
 </div>
 `;
+
+exports[`Dashboard render snapshots 📸 Dashboard should match snapshot with a large bill card 1`] = `
+<div
+  className="dashboard__flexbox"
+>
+  <div
+    className="bill__wrapper"
+  >
+    <div
+      className="bill__section"
+    >
+      <SearchBar
+        activeTab="allBills"
+      />
+      <button
+        className="btn btn-primary"
+        id="add__bill__button"
+        onClick={[Function]}
+      >
+         
+        + Add bill
+         
+      </button>
+      <ul
+        className="nav nav-tabs"
+      >
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link active"
+            onClick={[Function]}
+          >
+            All bills
+          </a>
+        </li>
+        <li
+          className="nav-item"
+        >
+          <a
+            className="nav-link"
+            onClick={[Function]}
+          >
+            Notifications
+          </a>
+        </li>
+      </ul>
+      <div
+        className="bill__list__section"
+      >
+        <BillDisplay />
+      </div>
+    </div>
+    <div
+      className="specific__bill__section"
+    >
+      <BillSummary />
+      <div
+        className="large__bill card"
+      >
+        <div
+          className="inner__bill__dimensions"
+        >
+          <div
+            className="split_between space-top"
+          >
+            <div>
+              Bill # 
+              38
+            </div>
+            <div
+              className="embolden"
+            >
+              YEBOI
+            </div>
+          </div>
+          <div
+            className="inner__bill_container"
+          >
+            <div
+              className="card-body"
+            >
+              <div
+                className="split_between"
+              >
+                <div />
+                <div
+                  className="sub-text"
+                >
+                  09-12-2019 00:46:00 -0500
+                </div>
+              </div>
+              <div
+                className="split_between"
+              >
+                <div />
+                <div
+                  className="sub-text"
+                >
+                  Category: 
+                  string
+                </div>
+              </div>
+              <br />
+              <div
+                className="split_between"
+              >
+                <div
+                  className="sub-text"
+                >
+                  Items:
+                </div>
+                <div />
+              </div>
+              <div
+                className="split_between embolden"
+              >
+                <div>
+                  <div
+                    className="split_between"
+                  >
+                    <div
+                      className="sub_items_text"
+                    >
+                      BIGGEST LAD
+                    </div>
+                    <div
+                      className="popout__button"
+                    >
+                      <svg
+                        fill="currentColor"
+                        height={15}
+                        onClick={[Function]}
+                        size={15}
+                        stroke="currentColor"
+                        strokeWidth="0"
+                        style={
+                          Object {
+                            "color": undefined,
+                          }
+                        }
+                        viewBox="0 0 24 24"
+                        width={15}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  2000.00
+                   $
+                </div>
+              </div>
+              <div
+                className="split_between embolden"
+              >
+                <div>
+                  <div
+                    className="split_between"
+                  >
+                    <div
+                      className="sub_items_text"
+                    >
+                      Bigger String
+                    </div>
+                    <div
+                      className="popout__button"
+                    >
+                      <svg
+                        fill="currentColor"
+                        height={15}
+                        onClick={[Function]}
+                        size={15}
+                        stroke="currentColor"
+                        strokeWidth="0"
+                        style={
+                          Object {
+                            "color": undefined,
+                          }
+                        }
+                        viewBox="0 0 24 24"
+                        width={15}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  300.00
+                   $
+                </div>
+              </div>
+              <div
+                className="split_between embolden"
+              >
+                <div>
+                  <div
+                    className="split_between"
+                  >
+                    <div
+                      className="sub_items_text"
+                    >
+                      ENLARGEN
+                    </div>
+                    <div
+                      className="popout__button"
+                    >
+                      <svg
+                        fill="currentColor"
+                        height={15}
+                        onClick={[Function]}
+                        size={15}
+                        stroke="currentColor"
+                        strokeWidth="0"
+                        style={
+                          Object {
+                            "color": undefined,
+                          }
+                        }
+                        viewBox="0 0 24 24"
+                        width={15}
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  1500.00
+                   $
+                </div>
+              </div>
+              <div
+                className="split_between"
+              >
+                <div
+                  className="sub-text"
+                >
+                  Tips:
+                </div>
+                <div
+                  className="embolden"
+                >
+                  15.00
+                   $
+                </div>
+              </div>
+              <div
+                className="split_between"
+              >
+                <div
+                  className="sub-text"
+                >
+                  Taxes:
+                </div>
+                <div
+                  className="embolden"
+                >
+                  570.00
+                   $
+                </div>
+              </div>
+              <div
+                className="split_between embolden total_balance"
+              >
+                <div>
+                  Total Balance
+                </div>
+                <div>
+                  4385.00
+                   $
+                </div>
+              </div>
+              <div
+                className="account__icons__container"
+              >
+                <div>
+                  <div
+                    className="accounts__icons"
+                  >
+                    <svg
+                      fill="currentColor"
+                      height={50}
+                      size={50}
+                      stroke="currentColor"
+                      strokeWidth="0"
+                      style={
+                        Object {
+                          "color": undefined,
+                        }
+                      }
+                      viewBox="0 0 24 24"
+                      width={50}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+                      />
+                    </svg>
+                    <svg
+                      className="status_icon"
+                      color="#47E5B6"
+                      fill="currentColor"
+                      height={40}
+                      size={40}
+                      stroke="currentColor"
+                      strokeWidth="0"
+                      style={
+                        Object {
+                          "color": "#47E5B6",
+                        }
+                      }
+                      viewBox="0 0 24 24"
+                      width={40}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"
+                      />
+                    </svg>
+                  </div>
+                  <p
+                    className="icon__name"
+                  >
+                    string
+                  </p>
+                </div>
+                <div>
+                  <div
+                    className="accounts__icons"
+                  >
+                    <svg
+                      fill="currentColor"
+                      height={50}
+                      size={50}
+                      stroke="currentColor"
+                      strokeWidth="0"
+                      style={
+                        Object {
+                          "color": undefined,
+                        }
+                      }
+                      viewBox="0 0 24 24"
+                      width={50}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+                      />
+                    </svg>
+                    <svg
+                      className="status_icon"
+                      color="#47E5B6"
+                      fill="currentColor"
+                      height={40}
+                      size={40}
+                      stroke="currentColor"
+                      strokeWidth="0"
+                      style={
+                        Object {
+                          "color": "#47E5B6",
+                        }
+                      }
+                      viewBox="0 0 24 24"
+                      width={40}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"
+                      />
+                    </svg>
+                  </div>
+                  <p
+                    className="icon__name"
+                  >
+                    string
+                  </p>
+                </div>
+                <div>
+                  <div
+                    className="accounts__icons"
+                  >
+                    <svg
+                      fill="currentColor"
+                      height={50}
+                      size={50}
+                      stroke="currentColor"
+                      strokeWidth="0"
+                      style={
+                        Object {
+                          "color": undefined,
+                        }
+                      }
+                      viewBox="0 0 24 24"
+                      width={50}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"
+                      />
+                    </svg>
+                    <svg
+                      className="status_icon"
+                      color="#47E5B6"
+                      fill="currentColor"
+                      height={40}
+                      size={40}
+                      stroke="currentColor"
+                      strokeWidth="0"
+                      style={
+                        Object {
+                          "color": "#47E5B6",
+                        }
+                      }
+                      viewBox="0 0 24 24"
+                      width={40}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"
+                      />
+                    </svg>
+                  </div>
+                  <p
+                    className="icon__name"
+                  >
+                    string
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
