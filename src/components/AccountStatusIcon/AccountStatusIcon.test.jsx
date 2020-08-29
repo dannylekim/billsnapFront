@@ -19,6 +19,12 @@ describe("AccountStatusIcon", () => {
           <AccountStatusIcon sizeMultiplier={3} status="DECLINED" name="TEST" />
         );
       });
+
+      it("AccountStatusIcon must match snapshot for invalid status", () => {
+        matches(
+          <AccountStatusIcon sizeMultiplier={3} status="INVALID" name="TEST" />
+        );
+      });
     });
   });
 });
