@@ -35,6 +35,8 @@ export default class Dashboard extends Component {
     const { currentActiveTab } = this.state;
     const { activeBill, hasUser, isActiveBillLoading } = this.props;
 
+    const displayLargeCard = activeBill && <LargeBillCard bill={activeBill} />;
+
     return (
       <>
         {hasUser ? (
@@ -64,11 +66,7 @@ export default class Dashboard extends Component {
               </div>
               <div className="specific__bill__section">
                 <BillSummary />
-                {isActiveBillLoading ? (
-                  <Loader />
-                ) : (
-                  activeBill && <LargeBillCard bill={activeBill} />
-                )}
+                {isActiveBillLoading ? <Loader /> : displayLargeCard}
               </div>
             </div>
           </div>
