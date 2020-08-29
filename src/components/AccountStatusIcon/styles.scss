@@ -1,0 +1,29 @@
+@import "../../variables";
+
+.user_icon {
+  justify-content: center;
+}
+
+.status_icon {
+  position: absolute;
+  right: -12px;
+  bottom: 0;
+  z-index: 1;
+}
+
+.accounts__icons {
+  display: flex;
+  position: relative;
+  margin-right: 1em;
+}
+
+.icon__name {
+  font-size: 15px;
+  text-align: left;
+  margin-left: 0.4em;
+  font-weight: bold;
+  font-family: $primary-font;
+  color: $primary-text-color;
+  font-style: normal;
+  margin-top: -1em;
+}
