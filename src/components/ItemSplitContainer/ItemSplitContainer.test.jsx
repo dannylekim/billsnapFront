@@ -192,6 +192,27 @@ describe("ItemSplitContainer", () => {
         const itemInformation = wrapper.state().itemInformation;
         expect(itemInformation).toEqual(expectedResult);
       });
+
+      it("should return true after first toggle", () => {
+        const wrapper = shallow(
+          <ItemSplitContainer selectedItemId={selectedItemId} bill={testBill} />
+        );
+
+        wrapper.instance().toggleModal();
+        const open = wrapper.state().isOpen;
+        expect(open).toBeTruthy();
+      });
+
+      it("should return false to 2 toggles", () => {
+        const wrapper = shallow(
+          <ItemSplitContainer selectedItemId={selectedItemId} bill={testBill} />
+        );
+
+        wrapper.instance().toggleModal();
+        wrapper.instance().toggleModal();
+        const open = wrapper.state().isOpen;
+        expect(open).toBeFalsy();
+      });
     });
   });
 });
