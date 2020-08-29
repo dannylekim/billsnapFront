@@ -37,7 +37,7 @@ const getStatusIcons = (status, sizeMultiplier) => {
         />
       );
     default:
-      break;
+      return <span />;
   }
 };
 
