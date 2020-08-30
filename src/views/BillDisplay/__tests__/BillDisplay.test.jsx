@@ -8,6 +8,11 @@ jest.mock("../../../utils/requests/BillRequests", () => {
   };
 });
 
+jest.mock(
+    "../../../components/StartBillContainer",
+    () => "StartBillContainer"
+);
+
 describe("BillDisplay", () => {
   let wrapper, instance;
   let mockFetch = jest.fn(),

@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import "./styles.scss";
-import Loader from "../Loader/Loader";
 import StartBillButton from "../StartBillButton/StartBillButton";
 
 class StartBillContainer extends Component {
@@ -13,27 +12,25 @@ class StartBillContainer extends Component {
         this.props.startABill(billId);
     }
 
-    userIsBillResponsible() {
-        return this.props.userEmail === this.props.bill.responsible.email;
+    billCanBeStarted() {
+        return this.props.userEmail === this.props.bill.responsible.email
+            && this.props.bill.status === "OPEN";
     }
 
     render() {
-        const {
-            activeBillId,
-            isBillLoading
-        } = this.props;
+        const {bill} = this.props;
 
         const StartActiveBill = billId => {
             return (
                 <div className="button__container">
-                    <StartBillButton onClick={this.handleStartBill(billId)}></StartBillButton>
+                    <StartBillButton onClickHandler={() => this.handleStartBill(billId)}/>
                 </div>
             )
         }
 
-        const displayStartBillButton = this.userIsBillResponsible() ? (StartActiveBill(activeBillId)) : (<div/>);
+        const displayStartBillButton = this.billCanBeStarted() ? (StartActiveBill(bill.id)) : (<div/>);
 
-        return <>{isBillLoading ? <Loader/> : displayStartBillButton}</>;
+        return <>{displayStartBillButton}</>;
     }
 
 }

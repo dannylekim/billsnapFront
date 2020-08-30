@@ -2,7 +2,9 @@
 
 exports[`StartBillButton render snapshots 📸 StartBillButton should match snap shot 1`] = `
 <button
-  className="startBill__button btn btn-primary btn-md btn-pill"
+  className="startBill__button btn btn-primary btn-sm btn-pill"
   onClick={[Function]}
-/>
+>
+  Start Bill
+</button>
 `;
