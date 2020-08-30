@@ -19,8 +19,12 @@ import {isExpired} from "../../helpers/JwtHelper";
 export default ({ getUser, isLoggedIn }) => {
   useEffect(() => {
     const token = localStorage.getItem("billSnap_token");
-    if (token && !isExpired(token)) {
-      getUser();
+    if (token) {
+      if (!isExpired(token)) {
+        getUser();
+      } else {
+        localStorage.removeItem("billSnap_token");
+      }
     }
   });
 
