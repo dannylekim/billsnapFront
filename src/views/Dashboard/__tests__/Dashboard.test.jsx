@@ -8,6 +8,7 @@ jest.mock(
 );
 jest.mock("../../../components/BillSummary", () => "BillSummary");
 jest.mock("../../../components/SearchBar", () => "SearchBar");
+jest.mock("../../../components/ItemSplitContainer", () => "ItemSplitContainer")
 
 
 const testActiveBill = {

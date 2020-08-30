@@ -10,48 +10,13 @@ class ItemSplitContainer extends Component {
     super(props);
     this.state = {
       isOpen: false,
-      itemInformation: {},
     };
 
     this.toggleModal = this.toggleModal.bind(this);
   }
 
-  static getSelectedItem = (info, selectedItemId) => {
-    return info.items.find((item) => item.itemId === selectedItemId);
-  };
-
-  componentDidMount() {
-    const { selectedItemId, bill } = this.props;
-    const selectedItem = bill.items.find((item) => item.id === selectedItemId);
-
-    const itemInformation = {
-      name: selectedItem.name,
-      cost: selectedItem.cost,
-      accounts: [],
-    };
-
-    bill.informationPerAccount
-      .filter((info) => {
-        return this.constructor.getSelectedItem(info, selectedItemId);
-      })
-      .forEach((involvedInformationPerAccount) => {
-        itemInformation.accounts.push({
-          status: involvedInformationPerAccount.invitationStatus,
-          firstName: involvedInformationPerAccount.account.firstName,
-          percentage: this.constructor.getSelectedItem(
-            involvedInformationPerAccount,
-            selectedItemId
-          ).percentage,
-        });
-      });
-
-    this.setState((prev) => ({
-      ...prev,
-      itemInformation: itemInformation,
-    }));
-  }
-
   toggleModal() {
+    this.props.setActiveItemId(this.props.selectedItemId);
     this.setState((prev) => ({
       ...prev,
       isOpen: !this.state.isOpen,
@@ -59,7 +24,8 @@ class ItemSplitContainer extends Component {
   }
 
   render() {
-    const { isOpen, itemInformation } = this.state;
+    const { isOpen } = this.state;
+    const { itemInformation } = this.props;
 
     return (
       <div className="popout__button">
@@ -69,7 +35,7 @@ class ItemSplitContainer extends Component {
           toggle={this.toggleModal}
           className="scroll__bar__modal"
         >
-          <ItemSplit itemInformation={itemInformation} />
+          {itemInformation && <ItemSplit itemInformation={itemInformation} />}
           <div className="send__right">
             <Button
               pill

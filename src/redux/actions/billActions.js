@@ -1,5 +1,6 @@
 import {answerPendingBill, getBill, getDetailedBill,} from "../../utils/requests/BillRequests";
 import {setActiveBillLoading, setBillLoading} from "./applicationActions";
+import {setActiveItemId} from "./itemAction";
 
 export const ACTIONS = {
   ADD_BILLS: "ADD_BILLS",
@@ -118,6 +119,7 @@ export const updatePendingBill = (isAccepted, billId) => {
 export const setActiveBill = (bill) => {
   return async (dispatch) => {
     try {
+      dispatch(setActiveItemId(-1));
       dispatch(setActiveBillLoading(true));
       const detailedBill = await getDetailedBill(bill.id);
       dispatch(setActiveBillAction(detailedBill));

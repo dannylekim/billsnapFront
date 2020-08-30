@@ -1,6 +1,8 @@
 import React from "react";
 import LargeBillCard from "./LargeBillCard";
 
+jest.mock("../../../components/ItemSplitContainer", () => "ItemSplitContainer");
+
 const sampleBill = {
   id: 100,
   name: "long bill",
