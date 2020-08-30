@@ -20,7 +20,7 @@ const DEFAULT_ALERT_MESSAGE = {
 
 const INPUT_LIST = ["name", "paidBy", "category", "company", "items", "taxes", "tip", "account"];
 
-class CreateBillFormContainer extends Component {
+export class CreateBillFormContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -136,6 +136,9 @@ class CreateBillFormContainer extends Component {
       return newBill;
     } catch (error) {
       this.handleErrorResponse(error);
+      this.setState({
+        isLoading: false,
+      });
     } finally {
       this.setState((prev) => ({
         isLoading: false,
@@ -296,7 +299,7 @@ class CreateBillFormContainer extends Component {
     if (this.state.tipFormat) {
       tmpBalance += this.state.addBillForm.tipAmount;
     } else {
-      tmpBalance += tmpBalance * (this.state.addBillForm.tipPercent / 100);
+      tmpBalance += this.state.balance * (this.state.addBillForm.tipPercent / 100);
     }
 
     this.setState({
