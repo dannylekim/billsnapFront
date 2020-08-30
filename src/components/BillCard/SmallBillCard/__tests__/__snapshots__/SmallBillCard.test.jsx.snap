@@ -70,7 +70,7 @@ exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap sho
 
 exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap shot if owner exists 1`] = `
 <div
-  className="active__bill card-body"
+  className="bill-active card-body"
 >
   <div
     className="split__info"

@@ -5,10 +5,6 @@ import "./styles.scss";
 import ItemSplit from "../ItemSplit";
 import {Button, Modal} from "shards-react";
 
-function getSelectedItem(info, selectedItemId) {
-  return info.items.find((item) => item.itemId === selectedItemId);
-}
-
 class ItemSplitContainer extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +15,10 @@ class ItemSplitContainer extends Component {
 
     this.toggleModal = this.toggleModal.bind(this);
   }
+
+  static getSelectedItem = (info, selectedItemId) => {
+    return info.items.find((item) => item.itemId === selectedItemId);
+  };
 
   componentDidMount() {
     const { selectedItemId, bill } = this.props;
@@ -32,13 +32,13 @@ class ItemSplitContainer extends Component {
 
     bill.informationPerAccount
       .filter((info) => {
-        return getSelectedItem(info, selectedItemId);
+        return this.constructor.getSelectedItem(info, selectedItemId);
       })
       .forEach((involvedInformationPerAccount) => {
         itemInformation.accounts.push({
           status: involvedInformationPerAccount.invitationStatus,
           firstName: involvedInformationPerAccount.account.firstName,
-          percentage: getSelectedItem(
+          percentage: this.constructor.getSelectedItem(
             involvedInformationPerAccount,
             selectedItemId
           ).percentage,

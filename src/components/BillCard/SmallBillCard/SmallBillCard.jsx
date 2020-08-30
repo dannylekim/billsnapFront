@@ -9,7 +9,7 @@ const SmallBillCard = ({ bill, activeBillId }) => {
     <div
       className={
         activeBillId === bill.id
-          ? "active__bill card-body"
+          ? "bill-active card-body"
           : "non__active__bill card-body"
       }
     >
