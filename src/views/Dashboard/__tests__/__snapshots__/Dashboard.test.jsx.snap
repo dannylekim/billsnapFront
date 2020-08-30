@@ -314,30 +314,201 @@ exports[`Dashboard render snapshots 📸 Dashboard should match snapshot with a 
                     >
                       BIGGEST LAD
                     </div>
-                    <div
-                      className="popout__button"
-                    >
-                      <svg
-                        fill="currentColor"
-                        height={15}
-                        onClick={[Function]}
-                        size={15}
-                        stroke="currentColor"
-                        strokeWidth="0"
-                        style={
-                          Object {
-                            "color": undefined,
-                          }
+                    <ItemSplitContainer
+                      bill={
+                        Object {
+                          "balance": "4385.00",
+                          "category": "string",
+                          "company": "string",
+                          "created": "09-12-2019 00:46:00 -0500",
+                          "creator": Object {
+                            "birthDate": "2020-07-25",
+                            "email": "test@Password123.com",
+                            "firstName": "string",
+                            "gender": "MALE",
+                            "id": 23,
+                            "lastName": "string",
+                            "location": Object {
+                              "address": "string",
+                              "city": "string",
+                              "country": "string",
+                              "description": "string",
+                              "name": "string",
+                              "postalCode": "string",
+                              "state": "string",
+                            },
+                            "middleName": "string",
+                            "phoneNumber": "string",
+                          },
+                          "id": 38,
+                          "informationPerAccount": Array [
+                            Object {
+                              "account": Object {
+                                "birthDate": "2020-07-25",
+                                "email": "test@Password123.com",
+                                "firstName": "string",
+                                "gender": "MALE",
+                                "id": 23,
+                                "lastName": "string",
+                                "location": Object {
+                                  "address": "string",
+                                  "city": "string",
+                                  "country": "string",
+                                  "description": "string",
+                                  "name": "string",
+                                  "postalCode": "string",
+                                  "state": "string",
+                                },
+                                "middleName": "string",
+                                "phoneNumber": "string",
+                              },
+                              "amountPaid": null,
+                              "amountRemaining": "4073.45",
+                              "invitationStatus": "ACCEPTED",
+                              "items": Array [
+                                Object {
+                                  "cost": 2000,
+                                  "itemId": 89,
+                                  "name": "BIGGEST LAD",
+                                  "percentage": 100,
+                                },
+                                Object {
+                                  "cost": 300,
+                                  "itemId": 52,
+                                  "name": "Bigger String",
+                                  "percentage": 60,
+                                },
+                                Object {
+                                  "cost": 1500,
+                                  "itemId": 51,
+                                  "name": "ENLARGEN",
+                                  "percentage": 90,
+                                },
+                              ],
+                              "paidStatus": null,
+                              "subTotal": "3530.00",
+                              "taxes": "529.50",
+                              "tip": "13.95",
+                              "total": "4073.45",
+                            },
+                            Object {
+                              "account": Object {
+                                "birthDate": "2020-07-25",
+                                "email": "many@bills.com",
+                                "firstName": "string",
+                                "gender": "MALE",
+                                "id": 53,
+                                "lastName": "string",
+                                "location": Object {
+                                  "address": "string",
+                                  "city": "string",
+                                  "country": "string",
+                                  "description": "string",
+                                  "name": "string",
+                                  "postalCode": "string",
+                                  "state": "string",
+                                },
+                                "middleName": "string",
+                                "phoneNumber": "string",
+                              },
+                              "amountPaid": "0.00",
+                              "amountRemaining": "0.00",
+                              "invitationStatus": "ACCEPTED",
+                              "items": Array [],
+                              "paidStatus": null,
+                              "subTotal": "0.00",
+                              "taxes": "0.00",
+                              "tip": "0.00",
+                              "total": "0.00",
+                            },
+                            Object {
+                              "account": Object {
+                                "birthDate": null,
+                                "email": "test2@Password123.com",
+                                "firstName": "string",
+                                "gender": null,
+                                "id": 24,
+                                "lastName": "string",
+                                "location": null,
+                                "middleName": null,
+                                "phoneNumber": null,
+                              },
+                              "amountPaid": null,
+                              "amountRemaining": "311.55",
+                              "invitationStatus": "ACCEPTED",
+                              "items": Array [
+                                Object {
+                                  "cost": 300,
+                                  "itemId": 52,
+                                  "name": "Bigger String",
+                                  "percentage": 40,
+                                },
+                                Object {
+                                  "cost": 1500,
+                                  "itemId": 51,
+                                  "name": "ENLARGEN",
+                                  "percentage": 10,
+                                },
+                              ],
+                              "paidStatus": null,
+                              "subTotal": "270.00",
+                              "taxes": "40.50",
+                              "tip": "1.05",
+                              "total": "311.55",
+                            },
+                          ],
+                          "items": Array [
+                            Object {
+                              "cost": "2000.00",
+                              "id": 89,
+                              "name": "BIGGEST LAD",
+                            },
+                            Object {
+                              "cost": "300.00",
+                              "id": 52,
+                              "name": "Bigger String",
+                            },
+                            Object {
+                              "cost": "1500.00",
+                              "id": 51,
+                              "name": "ENLARGEN",
+                            },
+                          ],
+                          "name": "YEBOI",
+                          "responsible": Object {
+                            "birthDate": "2020-07-25",
+                            "email": "test@Password123.com",
+                            "firstName": "string",
+                            "gender": "MALE",
+                            "id": 23,
+                            "lastName": "string",
+                            "location": Object {
+                              "address": "string",
+                              "city": "string",
+                              "country": "string",
+                              "description": "string",
+                              "name": "string",
+                              "postalCode": "string",
+                              "state": "string",
+                            },
+                            "middleName": "string",
+                            "phoneNumber": "string",
+                          },
+                          "splitBy": "ITEM",
+                          "status": "OPEN",
+                          "taxes": Array [
+                            Object {
+                              "id": 12,
+                              "name": "string",
+                              "percentage": 15,
+                            },
+                          ],
+                          "totalTip": "15.00",
+                          "updated": "25-07-2020 00:50:04 -0400",
                         }
-                        viewBox="0 0 24 24"
-                        width={15}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-                        />
-                      </svg>
-                    </div>
+                      }
+                      selectedItemId={89}
+                    />
                   </div>
                 </div>
                 <div>
@@ -357,30 +528,201 @@ exports[`Dashboard render snapshots 📸 Dashboard should match snapshot with a 
                     >
                       Bigger String
                     </div>
-                    <div
-                      className="popout__button"
-                    >
-                      <svg
-                        fill="currentColor"
-                        height={15}
-                        onClick={[Function]}
-                        size={15}
-                        stroke="currentColor"
-                        strokeWidth="0"
-                        style={
-                          Object {
-                            "color": undefined,
-                          }
+                    <ItemSplitContainer
+                      bill={
+                        Object {
+                          "balance": "4385.00",
+                          "category": "string",
+                          "company": "string",
+                          "created": "09-12-2019 00:46:00 -0500",
+                          "creator": Object {
+                            "birthDate": "2020-07-25",
+                            "email": "test@Password123.com",
+                            "firstName": "string",
+                            "gender": "MALE",
+                            "id": 23,
+                            "lastName": "string",
+                            "location": Object {
+                              "address": "string",
+                              "city": "string",
+                              "country": "string",
+                              "description": "string",
+                              "name": "string",
+                              "postalCode": "string",
+                              "state": "string",
+                            },
+                            "middleName": "string",
+                            "phoneNumber": "string",
+                          },
+                          "id": 38,
+                          "informationPerAccount": Array [
+                            Object {
+                              "account": Object {
+                                "birthDate": "2020-07-25",
+                                "email": "test@Password123.com",
+                                "firstName": "string",
+                                "gender": "MALE",
+                                "id": 23,
+                                "lastName": "string",
+                                "location": Object {
+                                  "address": "string",
+                                  "city": "string",
+                                  "country": "string",
+                                  "description": "string",
+                                  "name": "string",
+                                  "postalCode": "string",
+                                  "state": "string",
+                                },
+                                "middleName": "string",
+                                "phoneNumber": "string",
+                              },
+                              "amountPaid": null,
+                              "amountRemaining": "4073.45",
+                              "invitationStatus": "ACCEPTED",
+                              "items": Array [
+                                Object {
+                                  "cost": 2000,
+                                  "itemId": 89,
+                                  "name": "BIGGEST LAD",
+                                  "percentage": 100,
+                                },
+                                Object {
+                                  "cost": 300,
+                                  "itemId": 52,
+                                  "name": "Bigger String",
+                                  "percentage": 60,
+                                },
+                                Object {
+                                  "cost": 1500,
+                                  "itemId": 51,
+                                  "name": "ENLARGEN",
+                                  "percentage": 90,
+                                },
+                              ],
+                              "paidStatus": null,
+                              "subTotal": "3530.00",
+                              "taxes": "529.50",
+                              "tip": "13.95",
+                              "total": "4073.45",
+                            },
+                            Object {
+                              "account": Object {
+                                "birthDate": "2020-07-25",
+                                "email": "many@bills.com",
+                                "firstName": "string",
+                                "gender": "MALE",
+                                "id": 53,
+                                "lastName": "string",
+                                "location": Object {
+                                  "address": "string",
+                                  "city": "string",
+                                  "country": "string",
+                                  "description": "string",
+                                  "name": "string",
+                                  "postalCode": "string",
+                                  "state": "string",
+                                },
+                                "middleName": "string",
+                                "phoneNumber": "string",
+                              },
+                              "amountPaid": "0.00",
+                              "amountRemaining": "0.00",
+                              "invitationStatus": "ACCEPTED",
+                              "items": Array [],
+                              "paidStatus": null,
+                              "subTotal": "0.00",
+                              "taxes": "0.00",
+                              "tip": "0.00",
+                              "total": "0.00",
+                            },
+                            Object {
+                              "account": Object {
+                                "birthDate": null,
+                                "email": "test2@Password123.com",
+                                "firstName": "string",
+                                "gender": null,
+                                "id": 24,
+                                "lastName": "string",
+                                "location": null,
+                                "middleName": null,
+                                "phoneNumber": null,
+                              },
+                              "amountPaid": null,
+                              "amountRemaining": "311.55",
+                              "invitationStatus": "ACCEPTED",
+                              "items": Array [
+                                Object {
+                                  "cost": 300,
+                                  "itemId": 52,
+                                  "name": "Bigger String",
+                                  "percentage": 40,
+                                },
+                                Object {
+                                  "cost": 1500,
+                                  "itemId": 51,
+                                  "name": "ENLARGEN",
+                                  "percentage": 10,
+                                },
+                              ],
+                              "paidStatus": null,
+                              "subTotal": "270.00",
+                              "taxes": "40.50",
+                              "tip": "1.05",
+                              "total": "311.55",
+                            },
+                          ],
+                          "items": Array [
+                            Object {
+                              "cost": "2000.00",
+                              "id": 89,
+                              "name": "BIGGEST LAD",
+                            },
+                            Object {
+                              "cost": "300.00",
+                              "id": 52,
+                              "name": "Bigger String",
+                            },
+                            Object {
+                              "cost": "1500.00",
+                              "id": 51,
+                              "name": "ENLARGEN",
+                            },
+                          ],
+                          "name": "YEBOI",
+                          "responsible": Object {
+                            "birthDate": "2020-07-25",
+                            "email": "test@Password123.com",
+                            "firstName": "string",
+                            "gender": "MALE",
+                            "id": 23,
+                            "lastName": "string",
+                            "location": Object {
+                              "address": "string",
+                              "city": "string",
+                              "country": "string",
+                              "description": "string",
+                              "name": "string",
+                              "postalCode": "string",
+                              "state": "string",
+                            },
+                            "middleName": "string",
+                            "phoneNumber": "string",
+                          },
+                          "splitBy": "ITEM",
+                          "status": "OPEN",
+                          "taxes": Array [
+                            Object {
+                              "id": 12,
+                              "name": "string",
+                              "percentage": 15,
+                            },
+                          ],
+                          "totalTip": "15.00",
+                          "updated": "25-07-2020 00:50:04 -0400",
                         }
-                        viewBox="0 0 24 24"
-                        width={15}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-                        />
-                      </svg>
-                    </div>
+                      }
+                      selectedItemId={52}
+                    />
                   </div>
                 </div>
                 <div>
@@ -400,30 +742,201 @@ exports[`Dashboard render snapshots 📸 Dashboard should match snapshot with a 
                     >
                       ENLARGEN
                     </div>
-                    <div
-                      className="popout__button"
-                    >
-                      <svg
-                        fill="currentColor"
-                        height={15}
-                        onClick={[Function]}
-                        size={15}
-                        stroke="currentColor"
-                        strokeWidth="0"
-                        style={
-                          Object {
-                            "color": undefined,
-                          }
+                    <ItemSplitContainer
+                      bill={
+                        Object {
+                          "balance": "4385.00",
+                          "category": "string",
+                          "company": "string",
+                          "created": "09-12-2019 00:46:00 -0500",
+                          "creator": Object {
+                            "birthDate": "2020-07-25",
+                            "email": "test@Password123.com",
+                            "firstName": "string",
+                            "gender": "MALE",
+                            "id": 23,
+                            "lastName": "string",
+                            "location": Object {
+                              "address": "string",
+                              "city": "string",
+                              "country": "string",
+                              "description": "string",
+                              "name": "string",
+                              "postalCode": "string",
+                              "state": "string",
+                            },
+                            "middleName": "string",
+                            "phoneNumber": "string",
+                          },
+                          "id": 38,
+                          "informationPerAccount": Array [
+                            Object {
+                              "account": Object {
+                                "birthDate": "2020-07-25",
+                                "email": "test@Password123.com",
+                                "firstName": "string",
+                                "gender": "MALE",
+                                "id": 23,
+                                "lastName": "string",
+                                "location": Object {
+                                  "address": "string",
+                                  "city": "string",
+                                  "country": "string",
+                                  "description": "string",
+                                  "name": "string",
+                                  "postalCode": "string",
+                                  "state": "string",
+                                },
+                                "middleName": "string",
+                                "phoneNumber": "string",
+                              },
+                              "amountPaid": null,
+                              "amountRemaining": "4073.45",
+                              "invitationStatus": "ACCEPTED",
+                              "items": Array [
+                                Object {
+                                  "cost": 2000,
+                                  "itemId": 89,
+                                  "name": "BIGGEST LAD",
+                                  "percentage": 100,
+                                },
+                                Object {
+                                  "cost": 300,
+                                  "itemId": 52,
+                                  "name": "Bigger String",
+                                  "percentage": 60,
+                                },
+                                Object {
+                                  "cost": 1500,
+                                  "itemId": 51,
+                                  "name": "ENLARGEN",
+                                  "percentage": 90,
+                                },
+                              ],
+                              "paidStatus": null,
+                              "subTotal": "3530.00",
+                              "taxes": "529.50",
+                              "tip": "13.95",
+                              "total": "4073.45",
+                            },
+                            Object {
+                              "account": Object {
+                                "birthDate": "2020-07-25",
+                                "email": "many@bills.com",
+                                "firstName": "string",
+                                "gender": "MALE",
+                                "id": 53,
+                                "lastName": "string",
+                                "location": Object {
+                                  "address": "string",
+                                  "city": "string",
+                                  "country": "string",
+                                  "description": "string",
+                                  "name": "string",
+                                  "postalCode": "string",
+                                  "state": "string",
+                                },
+                                "middleName": "string",
+                                "phoneNumber": "string",
+                              },
+                              "amountPaid": "0.00",
+                              "amountRemaining": "0.00",
+                              "invitationStatus": "ACCEPTED",
+                              "items": Array [],
+                              "paidStatus": null,
+                              "subTotal": "0.00",
+                              "taxes": "0.00",
+                              "tip": "0.00",
+                              "total": "0.00",
+                            },
+                            Object {
+                              "account": Object {
+                                "birthDate": null,
+                                "email": "test2@Password123.com",
+                                "firstName": "string",
+                                "gender": null,
+                                "id": 24,
+                                "lastName": "string",
+                                "location": null,
+                                "middleName": null,
+                                "phoneNumber": null,
+                              },
+                              "amountPaid": null,
+                              "amountRemaining": "311.55",
+                              "invitationStatus": "ACCEPTED",
+                              "items": Array [
+                                Object {
+                                  "cost": 300,
+                                  "itemId": 52,
+                                  "name": "Bigger String",
+                                  "percentage": 40,
+                                },
+                                Object {
+                                  "cost": 1500,
+                                  "itemId": 51,
+                                  "name": "ENLARGEN",
+                                  "percentage": 10,
+                                },
+                              ],
+                              "paidStatus": null,
+                              "subTotal": "270.00",
+                              "taxes": "40.50",
+                              "tip": "1.05",
+                              "total": "311.55",
+                            },
+                          ],
+                          "items": Array [
+                            Object {
+                              "cost": "2000.00",
+                              "id": 89,
+                              "name": "BIGGEST LAD",
+                            },
+                            Object {
+                              "cost": "300.00",
+                              "id": 52,
+                              "name": "Bigger String",
+                            },
+                            Object {
+                              "cost": "1500.00",
+                              "id": 51,
+                              "name": "ENLARGEN",
+                            },
+                          ],
+                          "name": "YEBOI",
+                          "responsible": Object {
+                            "birthDate": "2020-07-25",
+                            "email": "test@Password123.com",
+                            "firstName": "string",
+                            "gender": "MALE",
+                            "id": 23,
+                            "lastName": "string",
+                            "location": Object {
+                              "address": "string",
+                              "city": "string",
+                              "country": "string",
+                              "description": "string",
+                              "name": "string",
+                              "postalCode": "string",
+                              "state": "string",
+                            },
+                            "middleName": "string",
+                            "phoneNumber": "string",
+                          },
+                          "splitBy": "ITEM",
+                          "status": "OPEN",
+                          "taxes": Array [
+                            Object {
+                              "id": 12,
+                              "name": "string",
+                              "percentage": 15,
+                            },
+                          ],
+                          "totalTip": "15.00",
+                          "updated": "25-07-2020 00:50:04 -0400",
                         }
-                        viewBox="0 0 24 24"
-                        width={15}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
-                        />
-                      </svg>
-                    </div>
+                      }
+                      selectedItemId={51}
+                    />
                   </div>
                 </div>
                 <div>
