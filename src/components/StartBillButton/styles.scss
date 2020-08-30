@@ -1,0 +1,15 @@
+@import "../../variables";
+
+button.startBill__button.btn.btn-primary {
+  font-family: $primary-font;
+  font-size: 15px;
+  font-weight: bold;
+  background: #007BFF;
+  //border: 1px solid #3bd0a3;
+  //box-shadow: 0 2px 0 #17c671;
+}
+
+button.startBill__button.btn.btn-primary:hover {
+  background: #1586FF;
+  //border: 1px solid #38b58f;
+}
