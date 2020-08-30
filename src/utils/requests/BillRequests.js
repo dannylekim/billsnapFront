@@ -46,3 +46,25 @@ export const answerPendingBill = async (isAccepted, billId) => {
 
   return response.json();
 };
+
+/**
+ * Get detailed information on a bill
+ *
+ * @param billId id of the bill to get more information on
+ * @returns {Promise<any>} the full bill
+ */
+export const getDetailedBill = async (billId) => {
+  const token = localStorage.getItem("billSnap_token");
+  const response = await fetch(`${URL}/bills/${billId}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw await response.json();
+  }
+
+  return response.json();
+};

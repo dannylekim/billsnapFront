@@ -1,0 +1,38 @@
+@import "../../variables";
+
+.confirm__button {
+  width: 25%;
+  margin: 0 4.5em 2em;
+}
+
+.send__right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+//we want to specifically target just this modal
+div.popout__button div div .modal-content{
+  width: 85% !important;
+}
+
+.popout__button {
+  line-height: 1em;
+  margin-left: 2px;
+  opacity: 0.6 !important;
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.popout__button:hover{
+  opacity:1 !important;
+  transition: 0.5s ease;
+}
+
+.scroll__bar__modal {
+  overflow-y: auto;
+  height: 80%;
+}
+
+.scroll__bar__modal::-webkit-scrollbar {
+  width: 0;
+}

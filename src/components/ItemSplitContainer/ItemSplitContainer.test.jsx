@@ -1,16 +1,7 @@
 import React from "react";
-import Dashboard from "../Dashboard";
+import ItemSplitContainer from "./ItemSplitContainer";
 
-jest.mock("../../BillDisplay", () => "BillDisplay");
-jest.mock(
-  "../../../components/PendingBillsContainer",
-  () => "PendingBillsContainer"
-);
-jest.mock("../../../components/BillSummary", () => "BillSummary");
-jest.mock("../../../components/SearchBar", () => "SearchBar");
-
-
-const testActiveBill = {
+const testBill = {
   id: 38,
   name: "YEBOI",
   creator: {
@@ -158,51 +149,70 @@ const testActiveBill = {
   taxes: [{ name: "string", percentage: 15, id: 12 }],
 };
 
-describe("Dashboard", () => {
+const expectedResult = {
+  name: "Bigger String",
+  cost: "300.00",
+  accounts: [
+    { status: "ACCEPTED", firstName: "string", percentage: 60 },
+    { status: "ACCEPTED", firstName: "string", percentage: 40 },
+  ],
+};
+
+describe("ItemSplitContainer", () => {
   describe("render", () => {
-    beforeEach(() => {
-      localStorage.setItem("billSnap_token", "token");
-    });
+    const selectedItemId = 52;
 
-    afterEach(() => {
-      localStorage.clear();
-    });
-
-    describe("snapshots 📸", () => {
-      it("Dashboard should match snap shot", () => {
-        matches(<Dashboard history={{ push: jest.fn() }} hasUser={true} />);
+    describe("snapshot 📸", () => {
+      it("should match closed snapshot", () => {
+        matches(
+          <ItemSplitContainer selectedItemId={selectedItemId} bill={testBill} />
+        );
       });
 
-      it("Dashboard should match snap shot if no user logged", () => {
-        matches(<Dashboard history={{ push: jest.fn() }} />);
-      });
-
-      it("Dashboard should match snap shot on notifications tab", () => {
-        const wrapper = shallow(<Dashboard history={{ push: jest.fn() }} hasUser={true} />);
+      it("should match open snapshot", () => {
+        const wrapper = shallow(
+          <ItemSplitContainer selectedItemId={selectedItemId} bill={testBill} />
+        );
 
         wrapper.setState((prev) => ({
           ...prev,
-          currentActiveTab: "owedToYou",
+          isOpen: true,
         }));
 
         matches(wrapper);
       });
+    });
 
-      it("Dashboard should match snap shot on nothing", () => {
-        const wrapper = shallow(<Dashboard history={{ push: jest.fn() }} hasUser={true}/>);
+    describe("component", () => {
+      it("should return expectedResult in state", () => {
+        const wrapper = shallow(
+          <ItemSplitContainer selectedItemId={selectedItemId} bill={testBill} />
+        );
 
-        wrapper.setState((prev) => ({
-          ...prev,
-          currentActiveTab: "",
-        }));
-
-        matches(wrapper);
+        const itemInformation = wrapper.state().itemInformation;
+        expect(itemInformation).toEqual(expectedResult);
       });
 
-      it("Dashboard should match snapshot with a large bill card", () => {
-        const wrapper = shallow(<Dashboard history={{ push: jest.fn() }} hasUser={true} activeBill={testActiveBill}/>);
-        matches(wrapper)
-      })
+      it("should return true after first toggle", () => {
+        const wrapper = shallow(
+          <ItemSplitContainer selectedItemId={selectedItemId} bill={testBill} />
+        );
+
+        wrapper.instance().toggleModal();
+        const open = wrapper.state().isOpen;
+        expect(open).toBeTruthy();
+      });
+
+      it("should return false to 2 toggles", () => {
+        const wrapper = shallow(
+          <ItemSplitContainer selectedItemId={selectedItemId} bill={testBill} />
+        );
+
+        wrapper.instance().toggleModal();
+        wrapper.instance().toggleModal();
+        const open = wrapper.state().isOpen;
+        expect(open).toBeFalsy();
+      });
     });
   });
 });

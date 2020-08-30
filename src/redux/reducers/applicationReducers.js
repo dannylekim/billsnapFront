@@ -1,11 +1,12 @@
 import {ACTIONS} from "../actions/applicationActions";
 
-const INTIAL_STATE = {
+const INITIAL_STATE = {
   showRegisterFirst: true,
   isBillLoading: false,
+  isActiveBillLoading: false,
 };
 
-const applicationReducers = (state = INTIAL_STATE, action) => {
+const applicationReducers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ACTIONS.TOGGLE_LANDING_PAGE_FORM:
       return {
@@ -16,6 +17,11 @@ const applicationReducers = (state = INTIAL_STATE, action) => {
       return {
         ...state,
         isBillLoading: action.isBillLoading,
+      };
+    case ACTIONS.SET_ACTIVE_BILL_LOADING_STATUS:
+      return {
+        ...state,
+        isActiveBillLoading: action.isActiveBillLoading,
       };
     default:
       return state;

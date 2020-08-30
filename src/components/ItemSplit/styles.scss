@@ -1,0 +1,38 @@
+@import "../../variables.scss";
+
+hr.card__separator {
+  background-color: rgba(0, 0, 0, 0.63);
+  width: 80.67%;
+  margin: 1em auto;
+}
+
+.one__liner {
+  display: flex;
+  margin-top: 1em;
+}
+
+.grow__line {
+  flex-grow: 2;
+}
+
+.modal__text {
+  font-weight: 500;
+  text-align: left;
+  line-height: 2em;
+  font-family: $primary-font;
+  font-style: normal;
+  color: $secondary-text-color
+}
+
+.embolden {
+  font-weight: bold
+}
+
+.modal__body {
+  height: 60%;
+  overflow-y: auto;
+}
+
+.center {
+  text-align: center;
+}
