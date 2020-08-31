@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {CreateBillForm} from "./CreateBillForm";
 import {Button, Modal, ModalBody, ModalHeader} from "shards-react";
 
-const DEFAULT_ERRORS = {
+export const DEFAULT_ERRORS = {
   name: {hasError: false, message: ""},
   paidBy: {hasError: false, message: ""},
   category: {hasError: false, message: ""},
@@ -13,12 +13,12 @@ const DEFAULT_ERRORS = {
   account: {hasError: false, message: ""}
 };
 
-const DEFAULT_ALERT_MESSAGE = {
+export const DEFAULT_ALERT_MESSAGE = {
   visible: false,
   alertType: "danger",
 };
 
-const INPUT_LIST = ["name", "paidBy", "category", "company", "items", "taxes", "tip", "account"];
+export const INPUT_LIST = ["name", "paidBy", "category", "company", "items", "taxes", "tip", "account"];
 
 export class CreateBillFormContainer extends Component {
   constructor(props) {

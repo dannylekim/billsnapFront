@@ -3,14 +3,14 @@ import ReactDOM from "react-dom";
 import {CreateBillFormContainer} from "../CreateBillFormContainer.jsx";
 import {shallow} from "enzyme";
 
-// describe("CreateBillFormContainer", () => {
-//     describe("render", () => {
-//       it("renders without crashing", () => {
-//         const div = document.createElement("div");
-//         ReactDOM.render(<CreateBillFormContainer />, div);
-//       });
-//     });
-// });
+describe("CreateBillFormContainer", () => {
+    describe("render", () => {
+      it("renders without crashing", () => {
+        const div = document.createElement("div");
+        ReactDOM.render(<CreateBillFormContainer />, div);
+      });
+    });
+});
   
 describe("CreateBillFormContainer", () => {
     let wrapper;
@@ -51,15 +51,13 @@ describe("CreateBillFormContainer", () => {
         mockCreateNewBill.mockRestore();
     });
 
-    // describe("render", () => {
-    //     describe("snapshots 📸", () => {
-    //         it("CreateBillFormContainer should match snap shot", () => {
-    //             matches(<CreateBillFormContainer />);
-    //         });
-    //     });
-
-    //     describe("components", () => {});
-    // });
+    describe("render", () => {
+        describe("snapshots 📸", () => {
+            it("CreateBillFormContainer should match snap shot", () => {
+                matches(<CreateBillFormContainer />);
+            });
+        });
+    });
 
     describe("functions", () => {
 

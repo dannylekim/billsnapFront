@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateBillFormContainer render snapshots 📸 CreateBillFormContainer should match snap shot 1`] = `
+<div>
+  <button
+    className="btn btn-primary"
+    onClick={[Function]}
+    type="button"
+  >
+     + Add Bill
+  </button>
+</div>
+`;
