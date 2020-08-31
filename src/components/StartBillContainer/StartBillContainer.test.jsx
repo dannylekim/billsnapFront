@@ -34,8 +34,12 @@ describe("StartBillContainer", () => {
     });
 
     describe("snapshots 📸", () => {
-        it("StartBillContainer should match snap shot", () => {
+        it("StartBillContainer should match snap shot when user is not bill responsible", () => {
             matches(<StartBillContainer bill={bill}/>);
+        });
+
+        it("StartBillContainer should match snap shot when user is bill responsible", () => {
+            matches(<StartBillContainer bill={bill} userEmail={userEmail}/>);
         });
     });
 });
