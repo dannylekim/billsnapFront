@@ -130,8 +130,9 @@ export const setActiveBill = (bill) => {
 };
 
 export const startABill = (billId) => {
-  return async(dispatch, state) => {
+  return async (dispatch, getState) => {
     const bill = await startBill(billId);
+    const state = getState();
     const updatedBills = state.bills.bills.filter(b => b.id !== bill.id);
     updatedBills.push(bill);
     dispatch(updateBill(updatedBills));
