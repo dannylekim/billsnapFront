@@ -3,15 +3,15 @@ import "./styles.scss";
 
 import {
   Button,
-  Col, 
-  Container, 
-  Form, 
-  FormGroup, 
-  FormInput, 
-  Row, 
-  FormRadio, 
-  InputGroup, 
-  InputGroupAddon, 
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  FormInput,
+  Row,
+  FormRadio,
+  InputGroup,
+  InputGroupAddon,
   InputGroupText,
   Alert,
   Tooltip} from "shards-react";
@@ -43,9 +43,9 @@ export const CreateBillForm = ({
       <Form>
         <FormGroup onChange={(event) => onFormChange(event, "details")}>
           <label htmlFor="#name"> BILL NAME </label>
-          <FormInput 
-            name="name" 
-            id="name" 
+          <FormInput
+            name="name"
+            id="name"
             placeholder="ex: Bill #1"
             invalid={hasErrors["name"].hasError}/>
           <Container>
@@ -77,7 +77,7 @@ export const CreateBillForm = ({
                 <Row className="element__display">
                   <Col className="display__left"> {item.name}</Col>
                   <Col> {item.cost}</Col>
-                  <Col> 
+                  <Col>
                     <div className="remove__button" onClick={() => handleRemoveClick("item", key)}> - </div>
                   </Col>
                 </Row>
@@ -86,7 +86,7 @@ export const CreateBillForm = ({
             ))}
               <Row>
                 <Col className="display__left">
-                  <FormInput 
+                  <FormInput
                     onChange={(event) => onFormChange(event, "item")}
                     name="name"
                     value={itemBuffer.name}
@@ -97,12 +97,12 @@ export const CreateBillForm = ({
                     <InputGroupAddon type="prepend">
                       <InputGroupText>$</InputGroupText>
                     </InputGroupAddon>
-                    <FormInput 
-                      onChange={(event) => onFormChange(event, "item")} 
-                      name="cost" 
-                      type="number" 
-                      min="0" 
-                      value={itemBuffer.cost} 
+                    <FormInput
+                      onChange={(event) => onFormChange(event, "item")}
+                      name="cost"
+                      type="number"
+                      min="0"
+                      value={itemBuffer.cost}
                       placeholder="ex: 37.43" />
                   </InputGroup>
                 </Col>
@@ -120,30 +120,30 @@ export const CreateBillForm = ({
                 <label htmlFor="#tip"> <strong>TIP</strong></label>
               </Col>
               <Col lg="5">
-                <FormRadio 
-                  inline 
-                  checked={tipFormat} 
+                <FormRadio
+                  inline
+                  checked={tipFormat}
                   onChange={(event) => onFormChange(event, "tipFormat")} >Amount</FormRadio>
-                <FormRadio 
-                  inline 
+                <FormRadio
+                  inline
                   checked={!tipFormat}
                   onChange={(event) => onFormChange(event, "tipFormat")} >Percentage</FormRadio>
               </Col>
             </Row>
           </Container>
-          
+
             {tipFormat ? (
               <InputGroup>
                 <InputGroupAddon type="prepend">
                   <InputGroupText> $</InputGroupText>
                 </InputGroupAddon>
-                <FormInput 
+                <FormInput
                   onChange={(event) => onFormChange(event, "details")}
                   id="tip"
                   name="tipAmount"
                   value={addBillForm.tipAmount}
-                  type="number" 
-                  min="0" 
+                  type="number"
+                  min="0"
                   placeholder="ex: 3.69" />
               </InputGroup>
             ) : (
@@ -151,19 +151,19 @@ export const CreateBillForm = ({
                 <InputGroupAddon type="prepend">
                   <InputGroupText>%</InputGroupText>
                 </InputGroupAddon>
-                <FormInput 
+                <FormInput
                   onChange={(event) => onFormChange(event, "details")}
                   id="tip"
                   name="tipPercent"
                   value={addBillForm.tipPercent}
-                  type="number" 
+                  type="number"
                   min="0"
                   max="100"
                   placeholder="ex: 25" />
               </InputGroup>
             )}
         </FormGroup>
-        
+
         <FormGroup id="taxes">
           <Container>
             <Row>
@@ -176,7 +176,7 @@ export const CreateBillForm = ({
                 <Row className="element__display">
                   <Col className="display__left"> {tax.name}</Col>
                   <Col> {tax.percentage}</Col>
-                  <Col> 
+                  <Col>
                     <div className="remove__button" onClick={() => handleRemoveClick("tax", key)}> - </div>
                   </Col>
                 </Row>
@@ -185,7 +185,7 @@ export const CreateBillForm = ({
             ))}
               <Row>
                 <Col className="display__left">
-                  <FormInput 
+                  <FormInput
                     onChange={(event) => onFormChange(event, "tax")}
                     name="name"
                     value={taxBuffer.name}
@@ -196,12 +196,12 @@ export const CreateBillForm = ({
                     <InputGroupAddon type="prepend">
                       <InputGroupText>%</InputGroupText>
                     </InputGroupAddon>
-                    <FormInput 
+                    <FormInput
                       onChange={(event) => onFormChange(event, "tax")}
-                      name="percentage" 
+                      name="percentage"
                       value={taxBuffer.percentage}
-                      type="number" 
-                      min="0" 
+                      type="number"
+                      min="0"
                       max="100"
                       placeholder="ex: 5" />
                   </InputGroup>
@@ -221,7 +221,7 @@ export const CreateBillForm = ({
             </Col>
           </Row>
         </Container>
-        
+
         <FormGroup >
           <Container>
             <Row>
@@ -232,7 +232,7 @@ export const CreateBillForm = ({
               <div key={key}>
                 <Row className="element__display">
                   <Col className="display__left"> {email}</Col>
-                  <Col> 
+                  <Col>
                     <div className="remove__button" onClick={() => handleRemoveClick("account", key)}> - </div>
                   </Col>
                 </Row>

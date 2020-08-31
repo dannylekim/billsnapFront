@@ -128,7 +128,7 @@ export class CreateBillFormContainer extends Component {
       });
 
       await this.handleCorrectTipFormat();
-      
+
       const newBill = await this.props.createNewBill(this.state.addBillForm);
       this.setState({
         isOpen: true,
@@ -145,6 +145,7 @@ export class CreateBillFormContainer extends Component {
         isOpen: !prev.isOpen,
       }));
     }
+    return undefined;
   };
 
   /**
@@ -212,7 +213,7 @@ export class CreateBillFormContainer extends Component {
         break;
 
       case "account":
-        let accBuffer = this.state.accountBuffer;
+        const accBuffer = this.state.accountBuffer;
         if (accBuffer) {
           this.setState({
             accountsList: this.state.addBillForm.accountsList.push(accBuffer),
@@ -236,9 +237,9 @@ export class CreateBillFormContainer extends Component {
         const newBalance = this.state.balance - items[index].cost;
         items.splice(index, 1);
 
-        this.setState({ 
+        this.setState({
           items: items,
-          balance: newBalance, 
+          balance: newBalance,
         }, () => this.calculateExtraFees());
         break;
 
@@ -253,7 +254,7 @@ export class CreateBillFormContainer extends Component {
         const accounts = this.state.addBillForm.accountsList;
         accounts.splice(index, 1);
 
-        this.setState((prev) => ({ 
+        this.setState((prev) => ({
           accountsList: accounts,
           hasErrors: {
             ...prev.hasErrors,

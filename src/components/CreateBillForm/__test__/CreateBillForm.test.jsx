@@ -39,7 +39,7 @@ describe("CreateBillForm", () => {
 
     describe("snapshots 📸", () => {
         it("CreateBillFormContainer should match snap shot", () => {
-            matches(<CreateBillForm 
+            matches(<CreateBillForm
                 handleSubmitClick={jest.fn}
                 handleAddClick={jest.fn}
                 handleRemoveClick={jest.fn}

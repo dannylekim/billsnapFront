@@ -21,7 +21,7 @@ const billReducers = (state = INITIAL_STATE, action) => {
     case ACTIONS.CREATE_BILL:
 
       //make a new version of the previous bills as to not mutate state and add the newly created bill onto it.
-      let billsList = state.bills.slice();
+      const billsList = state.bills.slice();
       billsList.push(action.bill);
 
       return {

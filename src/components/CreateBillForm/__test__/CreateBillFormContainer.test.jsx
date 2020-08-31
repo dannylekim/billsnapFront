@@ -11,7 +11,7 @@ describe("CreateBillFormContainer", () => {
       });
     });
 });
-  
+
 describe("CreateBillFormContainer", () => {
     let wrapper;
     let mockOnFormChange,
@@ -23,7 +23,6 @@ describe("CreateBillFormContainer", () => {
         mockCalculateExtraFees,
         mockToggleModal,
         mockCreateNewBill;
-    
 
     beforeEach(() => {
         mockOnFormChange = jest.fn();
@@ -65,7 +64,7 @@ describe("CreateBillFormContainer", () => {
             const eventTarget = {
                 target: { name: "name", value: "bill name" }
             }
-            
+
             wrapper.instance().calculateExtraFees = mockCalculateExtraFees;
             wrapper.instance().onFormChange(eventTarget, "details");
 
@@ -77,7 +76,7 @@ describe("CreateBillFormContainer", () => {
             const eventTarget = {
                 target: { name: "cost", value: "10" }
             }
-            
+
             wrapper.instance().onFormChange(eventTarget, "item");
 
             expect(wrapper.state().itemBuffer.cost).toEqual(Number("10"));
@@ -87,7 +86,7 @@ describe("CreateBillFormContainer", () => {
             const eventTarget = {
                 target: { name: "percentage", value: "10" }
             }
-            
+
             wrapper.instance().onFormChange(eventTarget, "tax");
 
             expect(wrapper.state().taxBuffer.percentage).toEqual(Number("10"));
@@ -106,8 +105,9 @@ describe("CreateBillFormContainer", () => {
         });
 
         it("onFormChange should change state when it's account", () => {
+            const email = "test@email.com";
             const eventTarget = {
-                target: { name: "account", value: "test@email.com" }
+                target: { name: "account", value: email }
             }
 
             wrapper.instance().onFormChange(eventTarget, "account");
@@ -117,7 +117,7 @@ describe("CreateBillFormContainer", () => {
 
         it("handleSubmitClick should return a bill", async () => {
             const paramEvent = {
-                preventDefault: () => {}
+                preventDefault: () => {/**Fake function for test */}
             }
 
             mockCreateNewBill = jest.fn().mockImplementation(() => {
@@ -134,7 +134,7 @@ describe("CreateBillFormContainer", () => {
 
         it("handleSubmitClick should throw an error and call handleErrorResponse", async () => {
             const paramEvent = {
-                preventDefault: () => {}
+                preventDefault: () => {/**Fake function for test */}
             }
 
             mockCreateNewBill = jest.fn().mockImplementation(() => {
@@ -258,7 +258,7 @@ describe("CreateBillFormContainer", () => {
             wrapper.state().taxBuffer = {...taxBuffer};
             wrapper.instance().calculateExtraFees = mockCalculateExtraFees;
             wrapper.instance().handleAddClick("tax");
-            
+
             expect(wrapper.state().addBillForm.taxes[0]).toEqual(taxBuffer);
             expect(wrapper.state().taxBuffer).toEqual({name: "", percentage: 0});
             expect(mockCalculateExtraFees).toBeCalledTimes(1);
@@ -287,7 +287,7 @@ describe("CreateBillFormContainer", () => {
 
             wrapper.state().accountBuffer = accountBuffer;
             wrapper.instance().handleAddClick("account");
-            
+
             expect(wrapper.state().addBillForm.accountsList[0]).toEqual(accountBuffer);
             expect(wrapper.state().accountBuffer).toEqual("");
         });
@@ -297,7 +297,7 @@ describe("CreateBillFormContainer", () => {
 
             wrapper.state().accountBuffer = accountBuffer;
             wrapper.instance().handleAddClick("account");
-            
+
             expect(wrapper.state().addBillForm.accountsList.length).toEqual(0);
         });
 
@@ -308,7 +308,7 @@ describe("CreateBillFormContainer", () => {
             wrapper.state().addBillForm.items.push(item);
             wrapper.state().balance = item.cost;
             wrapper.instance().handleRemoveClick("item", 0);
-            
+
             expect(wrapper.state().addBillForm.items.length).toEqual(0);
             expect(wrapper.state().balance).toEqual(0);
             expect(mockCalculateExtraFees).toBeCalledTimes(1);
@@ -320,7 +320,7 @@ describe("CreateBillFormContainer", () => {
             wrapper.instance().calculateExtraFees = mockCalculateExtraFees;
             wrapper.state().addBillForm.taxes.push(tax);
             wrapper.instance().handleRemoveClick("tax", 0);
-            
+
             expect(wrapper.state().addBillForm.taxes.length).toEqual(0);
             expect(mockCalculateExtraFees).toBeCalledTimes(1);
         });
@@ -331,7 +331,7 @@ describe("CreateBillFormContainer", () => {
             wrapper.state().hasErrors.account.hasError = true;
             wrapper.state().hasErrors.account.message = "message";
             wrapper.instance().handleRemoveClick("account", 0);
-            
+
             expect(wrapper.state().addBillForm.accountsList.length).toEqual(0);
             expect(wrapper.state().hasErrors.account.hasError).toBe(false);
             expect(wrapper.state().hasErrors.account.message).toEqual("");
@@ -342,7 +342,7 @@ describe("CreateBillFormContainer", () => {
             wrapper.state().addBillForm.tipPercent = 10;
             wrapper.state().tipFormat = true;
             wrapper.instance().handleCorrectTipFormat();
-            
+
             expect(wrapper.state().addBillForm.tipPercent).toEqual(undefined);
         });
 
@@ -351,7 +351,7 @@ describe("CreateBillFormContainer", () => {
             wrapper.state().addBillForm.tipPercent = 10;
             wrapper.state().tipFormat = false;
             wrapper.instance().handleCorrectTipFormat();
-            
+
             expect(wrapper.state().addBillForm.tipAmount).toEqual(undefined);
         });
 
@@ -389,7 +389,7 @@ describe("CreateBillFormContainer", () => {
 
             wrapper.instance().calculateExtraFees = mockCalculateExtraFees;
             wrapper.instance().toggleModal();
-            
+
             expect(wrapper.state().addBillForm).toEqual(addBillForm);
             expect(wrapper.state().balance).toEqual(0);
             expect(mockCalculateExtraFees).toBeCalledTimes(1);
