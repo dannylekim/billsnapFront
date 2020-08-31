@@ -27,8 +27,18 @@ export const createBill = async (createBillParams) => {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json"
     },
     body: JSON.stringify(createBillParams),
   });
-  return response.json();
+  return checkStatus(response);
 };
+
+
+async function checkStatus(response) {
+  const parsedResponse = await response.json();
+  if (parsedResponse.status !== "CREATED") {
+    throw parsedResponse;
+  }
+  return parsedResponse;
+}

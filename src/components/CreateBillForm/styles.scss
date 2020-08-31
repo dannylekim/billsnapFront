@@ -1,0 +1,30 @@
+@import "../../variables.scss";
+
+div.modal__create {
+    overflow-y: auto;
+    height: 50em;
+}
+
+.display__left {
+    padding: 0 !important;
+}
+
+span#balance__amount {
+    color: $secondary-price-color;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.balance {
+    padding: 30px 0;
+}
+
+.element__display {
+    align-items: center;
+}
+
+.remove__button {
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import Sidebar from "../../components/Sidebar";
 import BillDisplay from "../BillDisplay";
 import "./styles.scss";
+import CreateBillFormContainer from "../../components/CreateBillForm";
 
 export default (props) => {
   return (
@@ -12,6 +13,7 @@ export default (props) => {
             <Sidebar />
           </div>
           <div className="bill__display">
+            <CreateBillFormContainer/>
             <BillDisplay />
           </div>
         </div>
