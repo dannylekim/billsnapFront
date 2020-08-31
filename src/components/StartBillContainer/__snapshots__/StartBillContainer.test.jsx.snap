@@ -14,4 +14,4 @@ exports[`StartBillContainer snapshots 📸 StartBillContainer should match snap 
 </div>
 `;
 
-exports[`StartBillContainer snapshots 📸 StartBillContainer should match snap shot when user is not bill responsible 1`] = `<div />`;
+exports[`StartBillContainer snapshots 📸 StartBillContainer should match snap shot when user is not bill responsible 1`] = `null`;

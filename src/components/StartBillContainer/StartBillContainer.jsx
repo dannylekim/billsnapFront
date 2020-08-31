@@ -28,7 +28,7 @@ class StartBillContainer extends Component {
             )
         }
 
-        const displayStartBillButton = this.billCanBeStarted() ? (StartActiveBill(bill.id)) : (<div/>);
+        const displayStartBillButton = this.billCanBeStarted() ? (StartActiveBill(bill.id)) : null;
 
         return <>{displayStartBillButton}</>;
     }
