@@ -32,4 +32,10 @@ describe("StartBillContainer", () => {
             expect(mockStartBill).toHaveBeenCalledWith(bill.id);
         });
     });
+
+    describe("snapshots 📸", () => {
+        it("StartBillContainer should match snap shot", () => {
+            matches(<StartBillContainer bill={bill}/>);
+        });
+    });
 });
