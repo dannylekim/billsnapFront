@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StartBillButton render snapshots 📸 StartBillButton should match snap shot 1`] = `
+<button
+  className="startBill__button btn btn-primary btn-sm btn-pill"
+  onClick={[Function]}
+>
+  Start Bill
+</button>
+`;

@@ -3,6 +3,7 @@ import "./styles.scss";
 import {filterDateTime} from "../../../helpers/DateTime";
 import BillIcon from "../../BillIcon";
 import PropType from "prop-types";
+import StartBillContainer from "../../StartBillContainer";
 
 const SmallBillCard = ({ bill, activeBillId }) => {
   return (
@@ -20,7 +21,7 @@ const SmallBillCard = ({ bill, activeBillId }) => {
       <div className="bill__items">
         <div className="split__info">
           <div className="separate-right bill-icon">
-            <BillIcon category={bill.category} />
+            <BillIcon category={bill.category}/>
           </div>
           <div className="bill_name text__format">
             <div>{bill.name}</div>
@@ -29,7 +30,10 @@ const SmallBillCard = ({ bill, activeBillId }) => {
             </div>
           </div>
         </div>
-        <div className="bill_balance text__format">{bill.balance}$</div>
+        <div className="right__side">
+          <div className="bill_balance text__format">{bill.balance}$</div>
+          <StartBillContainer bill={bill}/>
+        </div>
       </div>
     </div>
   );

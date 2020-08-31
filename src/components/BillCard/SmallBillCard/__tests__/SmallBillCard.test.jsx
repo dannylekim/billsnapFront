@@ -1,6 +1,11 @@
 import React from "react";
 import SmallBillCard from "../SmallBillCard.jsx";
 
+jest.mock(
+    "../../../../components/StartBillContainer",
+    () => "StartBillContainer"
+);
+
 const fakeBills = [
   {
     id: 48,

@@ -59,10 +59,30 @@ exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap sho
       </div>
     </div>
     <div
-      className="bill_balance text__format"
+      className="right__side"
     >
-      253.89
-      $
+      <div
+        className="bill_balance text__format"
+      >
+        253.89
+        $
+      </div>
+      <StartBillContainer
+        bill={
+          Object {
+            "balance": 253.89,
+            "category": "food",
+            "created": "28-07-2020 14:25:10 -0400",
+            "id": 48,
+            "name": "Mcdonald",
+            "responsible": Object {
+              "firstName": "Hello",
+              "lastName": "Motto",
+            },
+            "status": "OPEN",
+          }
+        }
+      />
     </div>
   </div>
 </div>
@@ -127,10 +147,30 @@ exports[`SmallBillCard render snapshots 📸 SmallBillCard should match snap sho
       </div>
     </div>
     <div
-      className="bill_balance text__format"
+      className="right__side"
     >
-      253.89
-      $
+      <div
+        className="bill_balance text__format"
+      >
+        253.89
+        $
+      </div>
+      <StartBillContainer
+        bill={
+          Object {
+            "balance": 253.89,
+            "category": "food",
+            "created": "28-07-2020 14:25:10 -0400",
+            "id": 48,
+            "name": "Mcdonald",
+            "responsible": Object {
+              "firstName": "Hello",
+              "lastName": "Motto",
+            },
+            "status": "OPEN",
+          }
+        }
+      />
     </div>
   </div>
 </div>

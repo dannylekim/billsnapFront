@@ -66,10 +66,37 @@ exports[`BillDisplay render snapshots 📸 BillDisplay should match snap shot wh
           </div>
         </div>
         <div
-          className="bill_balance text__format"
+          className="right__side"
         >
-          12
-          $
+          <div
+            className="bill_balance text__format"
+          >
+            12
+            $
+          </div>
+          <StartBillContainer
+            bill={
+              Object {
+                "balance": 12,
+                "category": "string",
+                "created": "05-03-2018 15:25:10 -0400",
+                "id": 1,
+                "name": "BILL MOCK 1",
+                "responsible": Object {
+                  "birthDate": null,
+                  "email": "someEmail@email.com",
+                  "firstName": "Bob",
+                  "gender": null,
+                  "id": 1,
+                  "lastName": "Smith",
+                  "location": null,
+                  "middleName": null,
+                  "phoneNumber": null,
+                },
+                "status": "OPEN",
+              }
+            }
+          />
         </div>
       </div>
     </div>
@@ -139,10 +166,37 @@ exports[`BillDisplay render snapshots 📸 BillDisplay should match snap shot wh
           </div>
         </div>
         <div
-          className="bill_balance text__format"
+          className="right__side"
         >
-          15
-          $
+          <div
+            className="bill_balance text__format"
+          >
+            15
+            $
+          </div>
+          <StartBillContainer
+            bill={
+              Object {
+                "balance": 15,
+                "category": "string",
+                "created": "06-04-2018 15:25:10 -0400",
+                "id": 2,
+                "name": "BILL MOCK 2",
+                "responsible": Object {
+                  "birthDate": null,
+                  "email": "someEmail@email.com",
+                  "firstName": "Bob",
+                  "gender": null,
+                  "id": 1,
+                  "lastName": "Smith",
+                  "location": null,
+                  "middleName": null,
+                  "phoneNumber": null,
+                },
+                "status": "OPEN",
+              }
+            }
+          />
         </div>
       </div>
     </div>
