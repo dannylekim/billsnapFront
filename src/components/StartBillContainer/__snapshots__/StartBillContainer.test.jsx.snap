@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StartBillContainer snapshots 📸 StartBillContainer should match snap shot 1`] = `<div />`;
-
 exports[`StartBillContainer snapshots 📸 StartBillContainer should match snap shot when user is bill responsible 1`] = `
 <div
   className="button__container"
